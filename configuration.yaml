@@ -1,0 +1,97 @@
+# Configuration
+homeassistant:
+  customize: !include customize.yaml
+default_config:
+frontend:
+  themes: !include_dir_merge_named themes
+http:
+  login_attempts_threshold: 10
+  ip_ban_enabled: false
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 192.168.1.5
+    - 192.168.1.1
+mqtt:
+  broker: 192.168.1.4
+  username: !secret mqtt_user
+  password: !secret mqtt_pw
+
+# Logs
+recorder:
+  purge_keep_days: 5
+  commit_interval: 5
+  exclude:
+    domains:
+      - automation
+      - updater
+      - group
+      - weather
+    entities:
+      - sun.sun
+      - sensor.time
+      - sensor.date
+      - sensor.current_version
+      - sensor.latest_version
+      - sensor.myipopendnscom
+      - binary_sensor.motion
+    entity_globs:
+      - sensor.dark_sky_*
+      - sensor.leeds_*
+
+logbook:
+  exclude:
+    entities:
+      - sensor.uptime
+      - sensor.since_last_boot
+      - sensor.time
+    domains:
+     - group
+     - automation
+     - updater
+
+logger:
+  default: error
+  logs:
+    homeassistant.components.sensor.command_line: critical
+    homeassistant.components.device_tracker.nmap_tracker: critical
+    homeassistant.components.switch.command_line: critical
+    homeassistant.loader: info
+    homeassistant.components.mqtt: debug
+    homeassistant.components.rest.switch: critical
+    homeassistant.components.plex: critical
+    homeassistant.components.sky_hub: critical
+
+# Main Components
+alarm_control_panel: !include_dir_merge_list configs/alarm_control_panel
+automation: !include automations.yaml
+binary_sensor: !include_dir_merge_list configs/binary_sensor
+device_tracker: !include_dir_merge_list configs/device_tracker
+google_assistant: !include configs/google_assistant.yaml
+group: !include groups.yaml
+light: !include_dir_merge_list configs/light
+media_player: !include_dir_merge_list configs/media_player
+notify: !include configs/notify.yaml
+plant: !include configs/plant.yaml
+remote: !include configs/remote.yaml
+scene: !include scenes.yaml
+script: !include scripts.yaml
+sensor: !include_dir_merge_list configs/sensor
+shell_command: !include configs/shell_command.yaml
+switch: !include_dir_merge_list configs/switch
+timer: !include configs/timer.yaml
+webostv: !include configs/webostv.yaml
+
+# Additional Components
+tts:
+  - platform: google_translate
+wake_on_lan:
+joaoapps_join:
+- name: android
+  api_key: !secret join_api
+  device_id: group.android
+
+# Custom Components
+breaking_changes:
+# browser_mod:
+#   disable:
+#     - all

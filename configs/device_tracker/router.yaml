@@ -1,0 +1,17 @@
+# - platform: linksys_smart
+#   host: 192.168.1.1
+#   consider_home: 180
+#   new_device_defaults:
+#     track_new_devices: no
+# - platform: ddwrt
+#   host: 192.168.1.1
+#   username: !secret ddwrt_user
+#   password: !secret ddwrt_pass
+#   consider_home: 180
+#   new_device_defaults:
+#     track_new_devices: no
+- platform: sky_hub
+  host: 192.168.1.1
+  consider_home: 180
+  new_device_defaults:
+    track_new_devices: no

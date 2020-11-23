@@ -1,0 +1,67 @@
+default:
+  entities:
+    - group.lounge
+    - group.bedroom
+    - group.office
+    - input_boolean.night_mode
+
+lounge:
+  name: Lounge
+  icon: mdi:sofa
+  entities:
+    - light.big_lamp
+    - light.small_lamp
+    - light.tv_lamp
+    - light.backlight
+    # - switch.tv
+    # - switch.tplink
+    # - light.christmas_tree
+    # - light.shelf_lights
+    - media_player.tv
+    - media_player.lounge_speaker
+
+bedroom:
+  name: Bedroom
+  icon: mdi:bed-empty
+  entities:
+    - media_player.bedroom_speaker
+    - switch.tplink
+
+office:
+  name: Office
+  icon: mdi:desktop-tower-monitor
+  entities:
+    - switch.pc_power
+    - switch.nas_power
+    - switch.ikea_plug
+    - switch.extension_lead
+
+hamenu:
+  name: HAMenu
+  entities:
+    - switch.pc_power
+    - switch.nas_power
+    - switch.tplink
+    - switch.ikea_plug
+    - switch.extension_lead
+    - switch.transmission_turtle_mode
+    - input_boolean.night_mode
+    - input_boolean.guest_mode
+
+timer:
+  name: Timer
+  entities:
+    - switch.tplink
+    - timer.fan_timer
+    - input_number.fan_timer
+
+all_lights:
+  name: Lights
+  icon: mdi:lightbulb-on-outline
+  entities:
+    # - light.christmas_tree
+    # - light.shelf_lights
+    - light.big_lamp
+    - light.small_lamp
+    - light.tv_lamp
+    - light.backlight

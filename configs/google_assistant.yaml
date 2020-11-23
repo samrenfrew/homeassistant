@@ -1,0 +1,120 @@
+  project_id: !secret ga_project
+  expose_by_default: false
+  service_account: !include service-account.json
+  report_state: true
+  exposed_domains:
+    - switch
+    - light
+    - input_boolean
+    - media_player
+    - scene
+    - alarm_control_panel
+    - sensor
+  entity_config:
+    switch.extension_lead:
+      expose: true
+      name: Lounge Plug
+      room: Lounge
+    switch.tplink:
+      expose: true
+      name: Fan
+      room: Bedroom
+      aliases:
+        - Fan
+    switch.ikea_plug:
+      expose: true
+      name: Spare Bedroom Plug
+      room: Spare Room
+      aliases:
+        - Guest Plug
+        - Makeup Plug
+    switch.pc_power:
+      expose: true
+      name: Computer
+      room: Spare Room
+    switch.nas_power:
+      expose: true
+      name: Server
+      room: Spare Room
+    # light.christmas_tree:
+    #   expose: true
+    #   name: Christmas Tree
+    #   aliases:
+    #     - Xmas Tree
+    #   room: Lounge
+    # light.shelf_lights:
+    #   expose: true
+    #   name: Shelf Lights
+    #   aliases:
+    #     - Coloured Lights
+    #   room: Lounge
+    # light.computer:
+    #   expose: true
+    #   aliases:
+    #     - Computer Light
+    #   name: PC Light
+    #   room: Spare Room
+    light.backlight:
+      expose: true
+      name: Backlight
+      room: Lounge
+    light.big_lamp:
+      expose: true
+      name: Big Lamp
+      room: Lounge
+      aliases:
+        - Big Lamp
+        - Right Lamp
+    light.small_lamp:
+      expose: true
+      name: Small Lamp
+      room: Lounge
+      aliases:
+        - Small Lamp
+        - Little Lamp
+        - Wavy Lamp
+        - Wiggly Lamp
+        - Left Lamp
+    light.tv_lamp:
+      expose: true
+      name: TV Lamp
+      room: Lounge
+      aliases:
+        - TV Lamp
+        - Telly Lamp
+        - Tele Lamp
+    media_player.tv:
+      expose: true
+      name: TV
+      aliases:
+        - TV
+        - Telly
+        - Television
+        - Tele
+      room: Lounge
+    input_boolean.night_mode:
+      expose: true
+      name: Night Mode
+      room: Flat
+    input_boolean.guest_mode:
+      expose: true
+      name: Guest Mode
+      room: Flat
+    scene.movie:
+      expose: true
+      room: Lounge
+    scene.evening:
+      expose: true
+      room: Lounge
+    alarm_control_panel.alarm:
+      expose: true
+      room: Flat
+    sensor.feels_like_temperature:
+      expose: true
+      name: Temperature
+      room: Flat
+      aliases:
+        - Indoor Temperature
+    sensor.humidity:
+      expose: true
+      room: Flat

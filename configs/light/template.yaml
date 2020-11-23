@@ -1,0 +1,20 @@
+# - platform: template
+#   lights:
+#     shelf_lights:
+#       entity_id: switch.tplink
+#       value_template: "{{ is_state('switch.tplink', 'on') }}"
+#       turn_on:
+#         service: switch.turn_on
+#         entity_id: switch.tplink
+#       turn_off:
+#         service: switch.turn_off
+#         entity_id: switch.tplink
+#     christmas_tree:
+#       entity_id: switch.extension_lead
+#       value_template: "{{ is_state('switch.extension_lead', 'on') }}"
+#       turn_on:
+#         service: switch.turn_on
+#         entity_id: switch.extension_lead
+#       turn_off:
+#         service: switch.turn_off
+#         entity_id: switch.extension_lead

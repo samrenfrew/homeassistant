@@ -1,0 +1,81 @@
+night_mode_notification:
+  alias: Night Mode Notification
+  sequence:
+  - data:
+      data:
+        actions:
+        - action: enable_night_mode
+          title: Enable Night Mode
+        - action: remind_me
+          title: Remind in 30 mins
+        - action: ignore
+          title: Ignore
+        tag: night-time
+      message: '{% set a = state_attr(''sensor.sam_phone_next_alarm'', ''Time in Milliseconds'')
+        / 1000 | int %} {% set d = (a | timestamp_custom(''%j'') | int) - (now().strftime("%s")
+        | int | timestamp_custom(''%j'', False) | int) %}   {% if d == 1 %} Your alarm
+        is set for {{(a | timestamp_custom(''%H'') | int)}}{{ a | timestamp_custom(":%M%p")
+        | replace('':00'', '''') | lower }} {% else %} You have no alarm set for tomorrow
+        {% endif %}
+
+        '
+      title: Time to start winding down for bed
+    service: notify.mobile_app_sam_phone
+  mode: single
+light_popup:
+  alias: Light Popup
+  icon: mdi:cast
+  mode: single
+  sequence:
+  - data_template:
+      card:
+        entity: '{{ input_light }}'
+        full_width_sliders: true
+        header: ' '
+        hide_header: true
+        persist_features: true
+        type: custom:light-entity-card
+      style:
+        --ha-card-border-radius: 15px
+        border-radius: 15px
+        font-family: Helvetica Neue
+        font-weight: bold
+      title: Light
+    service: browser_mod.popup
+nas_server:
+  alias: Server Control
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: switch.nas_power
+        state: 'on'
+      sequence:
+      - choose:
+        - conditions:
+          - condition: numeric_state
+            entity_id: sensor.plex_nas
+            above: '0'
+          sequence:
+          - service: notify.mobile_app_sam_phone
+            data:
+              data:
+                actions:
+                - action: turn_server_off
+                  title: Turn Off
+                icon: https://assets.materialup.com/uploads/147cc4e7-d765-4e1d-a329-cb51e3dd7b9c/preview.jpg
+                requireInteraction: false
+                tag: server
+                url: /
+              message: Turn the server off anyway?
+              title: Plex is currently streaming
+        default:
+        - service: switch.turn_off
+          data: {}
+          entity_id: switch.nas_power
+    default:
+    - service: switch.turn_on
+      data: {}
+      entity_id: switch.nas_power
+  mode: restart
+  icon: mdi:nas

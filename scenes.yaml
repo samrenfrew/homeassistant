@@ -1,0 +1,128 @@
+- id: '1590181233310'
+  name: Movie
+  entities:
+    light.backlight:
+      brightness: 255
+      effect: solid
+      effect_list:
+      - bpm
+      - candy cane
+      - confetti
+      - cyclon rainbow
+      - dots
+      - fire
+      - glitter
+      - juggle
+      - lightning
+      - noise
+      - police all
+      - police one
+      - rainbow
+      - rainbow with glitter
+      - ripple
+      - sinelon
+      - solid
+      - twinkle
+      friendly_name: Backlight
+      hs_color:
+      - 240
+      - 57.647
+      icon: mdi:monitor-multiple
+      rgb_color:
+      - 108
+      - 108
+      - 255
+      state: 'on'
+      supported_features: 61
+      xy_color:
+      - 0.193
+      - 0.129
+    light.big_lamp:
+      friendly_name: Big Lamp
+      icon: mdi:floor-lamp
+      max_mireds: 454
+      min_mireds: 250
+      state: 'off'
+      supported_features: 35
+    light.small_lamp:
+      friendly_name: Small Lamp
+      icon: mdi:lamp
+      max_mireds: 454
+      min_mireds: 250
+      state: 'off'
+      supported_features: 35
+    light.tv_lamp:
+      brightness: 44
+      color_temp: 367
+      friendly_name: TV Lamp
+      icon: mdi:desk-lamp
+      max_mireds: 454
+      min_mireds: 250
+      state: 'on'
+      supported_features: 35
+- id: '1590181391128'
+  name: Evening
+  entities:
+    light.backlight:
+      brightness: 255
+      effect: solid
+      effect_list:
+      - bpm
+      - candy cane
+      - confetti
+      - cyclon rainbow
+      - dots
+      - fire
+      - glitter
+      - juggle
+      - lightning
+      - noise
+      - police all
+      - police one
+      - rainbow
+      - rainbow with glitter
+      - ripple
+      - sinelon
+      - solid
+      - twinkle
+      friendly_name: Backlight
+      hs_color:
+      - 29.863
+      - 85.882
+      icon: mdi:monitor-multiple
+      rgb_color:
+      - 255
+      - 145
+      - 36
+      state: 'on'
+      supported_features: 61
+      xy_color:
+      - 0.581
+      - 0.388
+    light.big_lamp:
+      brightness: 133
+      color_temp: 377
+      friendly_name: Big Lamp
+      icon: mdi:floor-lamp
+      max_mireds: 454
+      min_mireds: 250
+      state: 'on'
+      supported_features: 35
+    light.small_lamp:
+      brightness: 97
+      color_temp: 377
+      friendly_name: Small Lamp
+      icon: mdi:lamp
+      max_mireds: 454
+      min_mireds: 250
+      state: 'on'
+      supported_features: 35
+    light.tv_lamp:
+      brightness: 61
+      color_temp: 377
+      friendly_name: TV Lamp
+      icon: mdi:desk-lamp
+      max_mireds: 454
+      min_mireds: 250
+      state: 'on'
+      supported_features: 35
