@@ -373,8 +373,8 @@ switch.nas_power:
 sensor.plex_nas:
   icon: mdi:plex
 light.shelf_lights:
-  friendly_name: Shelf Lights
-  icon: mdi:car-parking-lights
+  friendly_name: Office Lights
+  icon: mdi:string-lights
 light.christmas_tree:
   friendly_name: Christmas Tree
   icon: mdi:pine-tree
@@ -416,3 +416,6 @@ sensor.bathroom_humidity:
   friendly_name: Spare Room Humidity
 sensor.bathroom_temperature:
   friendly_name: Spare Room Temperature
+light.bed_lights:
+  friendly_name: Bed Lights
+  icon: mdi:string-lights

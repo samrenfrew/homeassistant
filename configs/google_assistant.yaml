@@ -7,27 +7,24 @@
     - light
     - input_boolean
     - media_player
-    - scene
-    - alarm_control_panel
-    - sensor
   entity_config:
-    switch.extension_lead:
-      expose: true
-      name: Lounge Plug
-      room: Lounge
-    switch.tplink:
-      expose: true
-      name: Fan
-      room: Bedroom
-      aliases:
-        - Fan
-    switch.ikea_plug:
-      expose: true
-      name: Spare Bedroom Plug
-      room: Spare Room
-      aliases:
-        - Guest Plug
-        - Makeup Plug
+    # switch.extension_lead:
+    #   expose: true
+    #   name: Lounge Plug
+    #   room: Lounge
+    # switch.tplink:
+    #   expose: true
+    #   name: Fan
+    #   room: Bedroom
+    #   aliases:
+    #     - Fan
+    # switch.ikea_plug:
+    #   expose: true
+    #   name: Spare Bedroom Plug
+    #   room: Spare Room
+    #   aliases:
+    #     - Guest Plug
+    #     - Makeup Plug
     switch.pc_power:
       expose: true
       name: Computer
@@ -36,24 +33,26 @@
       expose: true
       name: Server
       room: Spare Room
-    # light.christmas_tree:
-    #   expose: true
-    #   name: Christmas Tree
-    #   aliases:
-    #     - Xmas Tree
-    #   room: Lounge
-    # light.shelf_lights:
-    #   expose: true
-    #   name: Shelf Lights
-    #   aliases:
-    #     - Coloured Lights
-    #   room: Lounge
-    # light.computer:
-    #   expose: true
-    #   aliases:
-    #     - Computer Light
-    #   name: PC Light
-    #   room: Spare Room
+    light.christmas_tree:
+      expose: true
+      name: Christmas Tree
+      aliases:
+        - Xmas Tree
+        - Tree
+      room: Lounge
+    light.shelf_lights:
+      expose: true
+      name: Office Lights
+      aliases:
+        - Grotto Lights
+        - Spare Room Lights
+      room: Spare Room
+    light.bed_lights:
+      expose: true
+      name: Bed Lights
+      aliases:
+        - Coloured Lights
+      room: Bedroom
     light.backlight:
       expose: true
       name: Backlight
@@ -99,22 +98,4 @@
     input_boolean.guest_mode:
       expose: true
       name: Guest Mode
-      room: Flat
-    scene.movie:
-      expose: true
-      room: Lounge
-    scene.evening:
-      expose: true
-      room: Lounge
-    alarm_control_panel.alarm:
-      expose: true
-      room: Flat
-    sensor.feels_like_temperature:
-      expose: true
-      name: Temperature
-      room: Flat
-      aliases:
-        - Indoor Temperature
-    sensor.humidity:
-      expose: true
       room: Flat

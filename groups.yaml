@@ -59,8 +59,9 @@ all_lights:
   name: Lights
   icon: mdi:lightbulb-on-outline
   entities:
-    # - light.christmas_tree
-    # - light.shelf_lights
+    - light.christmas_tree
+    - light.shelf_lights
+    - light.bed_lights
     - light.big_lamp
     - light.small_lamp
     - light.tv_lamp

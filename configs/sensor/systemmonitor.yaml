@@ -11,3 +11,4 @@
     - type: processor_use
     - type: last_boot
     - type: memory_use_percent
+    - type: processor_temperature
