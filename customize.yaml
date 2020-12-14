@@ -419,3 +419,8 @@ sensor.bathroom_temperature:
 light.bed_lights:
   friendly_name: Bed Lights
   icon: mdi:string-lights
+light.spotlight:
+  icon: mdi:spotlight-beam
+binary_sensor.lounge_motion:
+  friendly_name: Lounge Motion
+  icon: mdi:motion-sensor

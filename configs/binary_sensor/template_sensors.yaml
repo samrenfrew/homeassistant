@@ -12,4 +12,4 @@
       delay_off:
         minutes: 10
       value_template: >-
-          {{ is_state('binary_sensor.motion', 'on') }}
+          {{ is_state('binary_sensor.lounge_motion', 'on') }}

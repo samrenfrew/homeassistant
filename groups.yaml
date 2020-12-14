@@ -66,3 +66,11 @@ all_lights:
     - light.small_lamp
     - light.tv_lamp
     - light.backlight
+
+motion:
+  name: Motion
+  icon: mdi:motion-sensor
+  entities:
+    - binary_sensor.lounge_motion
+    - binary_sensor.bedroom_motion
+    - binary_sensor.office_motion

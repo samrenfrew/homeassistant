@@ -11,7 +11,7 @@
 #Motion Sensor
 - platform: mqtt
   state_topic: "sensor/node"
-  name: "Motion"
+  name: lounge_motion
   device_class: motion
   value_template: '{{ value_json.motion }}'
   payload_on: "on"
