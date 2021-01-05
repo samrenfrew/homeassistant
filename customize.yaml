@@ -296,7 +296,7 @@ light.small_lamp:
 light.tv_lamp:
   icon: mdi:desk-lamp
 light.backlight:
-  icon: mdi:monitor-multiple
+  icon: mdi:television-ambient-light
 input_number.computer_light_speed:
   icon: mdi:gauge
 sensor.latest_version:
@@ -424,3 +424,7 @@ light.spotlight:
 binary_sensor.lounge_motion:
   friendly_name: Lounge Motion
   icon: mdi:motion-sensor
+switch.humidifier:
+  friendly_name: Humidifier
+  icon: mdi:air-humidifier
+  device_class: switch

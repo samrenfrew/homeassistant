@@ -8,16 +8,16 @@
     - input_boolean
     - media_player
   entity_config:
-    # switch.extension_lead:
-    #   expose: true
-    #   name: Lounge Plug
-    #   room: Lounge
-    # switch.tplink:
-    #   expose: true
-    #   name: Fan
-    #   room: Bedroom
-    #   aliases:
-    #     - Fan
+    switch.extension_lead:
+      expose: true
+      name: Extension Lead
+      room: Spare Room
+    switch.humidifier:
+      expose: true
+      name: Humidifier
+      room: Spare Room
+      aliases:
+        - Humidity
     # switch.ikea_plug:
     #   expose: true
     #   name: Spare Bedroom Plug
@@ -33,25 +33,26 @@
       expose: true
       name: Server
       room: Spare Room
-    light.christmas_tree:
-      expose: true
-      name: Christmas Tree
-      aliases:
-        - Xmas Tree
-        - Tree
-      room: Lounge
-    light.shelf_lights:
-      expose: true
-      name: Office Lights
-      aliases:
-        - Grotto Lights
-        - Spare Room Lights
-      room: Spare Room
+    # light.christmas_tree:
+    #   expose: true
+    #   name: Christmas Tree
+    #   aliases:
+    #     - Xmas Tree
+    #     - Tree
+    #   room: Lounge
+    # light.shelf_lights:
+    #   expose: true
+    #   name: Office Lights
+    #   aliases:
+    #     - Grotto Lights
+    #     - Spare Room Lights
+    #   room: Spare Room
     light.bed_lights:
       expose: true
       name: Bed Lights
       aliases:
         - Coloured Lights
+        - Christmas Lights
       room: Bedroom
     light.backlight:
       expose: true
@@ -82,6 +83,12 @@
         - TV Lamp
         - Telly Lamp
         - Tele Lamp
+    light.spotlight:
+      expose: true
+      name: Bedroom Light
+      room: Lounge
+      aliases:
+        - Spotlight
     media_player.tv:
       expose: true
       name: TV

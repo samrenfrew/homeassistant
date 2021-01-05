@@ -1,25 +1,25 @@
 - platform: mqtt
   state_topic: "sensor/node"
-  name: "Light Level"
+  name: "Lounge Light Level"
   unit_of_measurement: "lx"
   device_class: illuminance
   value_template: '{{ value_json.ldr }}'
 
-- platform: mqtt
-  state_topic: "sensor/node"
-  name: "Temperature"
-  unit_of_measurement: "°C"
-  device_class: temperature
-  value_template: >-
-      {%- if value_json.temperature|float > 1 -%}
-      {{ value_json.temperature | round(1) }}
-      {%- else -%}
-      nan
-      {%- endif -%}
+# - platform: mqtt
+#   state_topic: "sensor/node"
+#   name: "Lounge Real Temperature"
+#   unit_of_measurement: "°C"
+#   device_class: temperature
+#   value_template: >-
+#       {%- if value_json.temperature|float > 1 -%}
+#       {{ value_json.temperature | round(1) }}
+#       {%- else -%}
+#       nan
+#       {%- endif -%}
 
 - platform: mqtt
   state_topic: "sensor/node"
-  name: "Feels Like Temperature"
+  name: "Lounge Temperature"
   unit_of_measurement: "°C"
   device_class: temperature
   value_template: >-
@@ -31,7 +31,7 @@
 
 - platform: mqtt
   state_topic: "sensor/node"
-  name: "Humidity"
+  name: "Lounge Humidity"
   unit_of_measurement: "%"
   device_class: humidity
   value_template: >-
