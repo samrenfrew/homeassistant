@@ -1,11 +1,11 @@
-- platform: template
-  switches:
-    humidifier:
-      entity_id: switch.tplink
-      value_template: "{{ is_state('switch.tplink', 'on') }}"
-      turn_on:
-        service: switch.turn_on
-        entity_id: switch.tplink
-      turn_off:
-        service: switch.turn_off
-        entity_id: switch.tplink
+# - platform: template
+#   switches:
+#     humidifier:
+#       entity_id: switch.tplink
+#       value_template: "{{ is_state('switch.tplink', 'on') }}"
+#       turn_on:
+#         service: switch.turn_on
+#         entity_id: switch.tplink
+#       turn_off:
+#         service: switch.turn_off
+#         entity_id: switch.tplink

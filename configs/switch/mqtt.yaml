@@ -7,3 +7,12 @@
   payload_off: "OFF"
   optimistic: false
   retain: false
+- platform: mqtt
+  name: "Humidifier"
+  state_topic: "stat/humidifier/POWER"
+  command_topic: "cmnd/humidifier/power"
+  qos: 0
+  payload_on: "ON"
+  payload_off: "OFF"
+  optimistic: false
+  retain: false
