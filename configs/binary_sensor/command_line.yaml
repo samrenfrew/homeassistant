@@ -1,9 +1,9 @@
-- platform: command_line
-  command: netstat -na | grep "1883" | grep "LISTEN" > /dev/null && (echo "Running") || (echo "Not running")
-  name: 'MQTT'
-  device_class: moving
-  payload_on: "Running"
-  payload_off: "Not running"
+# - platform: command_line
+#   command: netstat -na | grep "1883" | grep "LISTEN" > /dev/null && (echo "Running") || (echo "Not running")
+#   name: 'MQTT'
+#   device_class: moving
+#   payload_on: "Running"
+#   payload_off: "Not running"
 
 - platform: command_line
   command: netstat -na | grep "5555" | grep "LISTEN" > /dev/null && (echo "Running") || (echo "Not running")
@@ -27,7 +27,7 @@
   payload_off: "Not connected"
 #
 - platform: command_line
-  command: netstat -na | grep "445 " | grep "ESTABLISHED" > /dev/null && (echo "Connected") || (echo "Not connected")
+  command: netstat -na | grep "445 " | grep "192.168." | grep "ESTABLISHED" > /dev/null && (echo "Connected") || (echo "Not connected")
   name: 'Samba Connected'
   device_class: moving
   payload_on: "Connected"
