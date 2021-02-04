@@ -34,4 +34,7 @@
   - service: switch.turn_on
     data: {}
     entity_id: switch.transmission_turtle_mode
+  - service: switch.turn_off
+    data: {}
+    entity_id: switch.humidifier
   mode: restart

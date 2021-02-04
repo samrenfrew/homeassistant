@@ -42,11 +42,12 @@ hamenu:
     - switch.pc_power
     - switch.nas_power
     - switch.tplink
-    - switch.ikea_plug
+    # - switch.ikea_plug
     - switch.extension_lead
     - switch.transmission_turtle_mode
+    - switch.humidifier
     - input_boolean.night_mode
-    - input_boolean.guest_mode
+    # - input_boolean.guest_mode
 
 timer:
   name: Timer
