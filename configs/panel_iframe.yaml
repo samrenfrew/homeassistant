@@ -1,0 +1,24 @@
+  movies:
+    title: 'Movies'
+    url: 'https://media.samrenfrew.duckdns.org/movies'
+    icon: mdi:movie-open
+  tv:
+    title: 'TV'
+    url: 'https://media.samrenfrew.duckdns.org/tv'
+    icon: mdi:television-shimmer
+  downloads:
+    title: 'Downloads'
+    url: 'https://downloads.samrenfrew.duckdns.org/'
+    icon: mdi:cloud-download
+  requests:
+    title: 'Requests'
+    url: 'https://media.samrenfrew.duckdns.org/request'
+    icon: mdi:movie-star
+  search:
+    title: 'Search'
+    url: 'https://media.samrenfrew.duckdns.org/search'
+    icon: mdi:movie-search-outline
+  subs:
+    title: 'Subtitles'
+    url: 'https://media.samrenfrew.duckdns.org/subs/'
+    icon: mdi:subtitles

@@ -30,9 +30,6 @@
     entity_id: switch.extension_lead
   - service: switch.turn_on
     data: {}
-    entity_id: switch.ikea_plug
-  - service: switch.turn_on
-    data: {}
     entity_id: switch.transmission_turtle_mode
   - service: switch.turn_off
     data: {}
