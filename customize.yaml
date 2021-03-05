@@ -428,3 +428,15 @@ switch.humidifier:
   friendly_name: Humidifier
   icon: mdi:air-humidifier
   device_class: switch
+sensor.plant_battery:
+  friendly_name: Plant Battery
+sensor.plant_brightness:
+  friendly_name: Plant Brightness
+sensor.plant_conductivity:
+  friendly_name: Plant Conductivity
+sensor.plant_moisture:
+  friendly_name: Plant Moisture
+sensor.plant_temperature:
+  friendly_name: Plant Temperature
+sensor.plant_timestamp:
+  friendly_name: Plant Updated

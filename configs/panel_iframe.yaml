@@ -5,7 +5,7 @@
   tv:
     title: 'TV'
     url: 'https://media.samrenfrew.duckdns.org/tv'
-    icon: mdi:television-shimmer
+    icon: mdi:television
   downloads:
     title: 'Downloads'
     url: 'https://downloads.samrenfrew.duckdns.org/'
@@ -13,7 +13,7 @@
   requests:
     title: 'Requests'
     url: 'https://media.samrenfrew.duckdns.org/request'
-    icon: mdi:movie-star
+    icon: mdi:plus-box-multiple
   search:
     title: 'Search'
     url: 'https://media.samrenfrew.duckdns.org/search'

@@ -24,8 +24,10 @@ bedroom:
   name: Bedroom
   icon: mdi:bed-empty
   entities:
+    - light.spotlight
+    - light.bed_lights
     - media_player.bedroom_speaker
-    - switch.tplink
+    #- switch.tplink
 
 office:
   name: Office
