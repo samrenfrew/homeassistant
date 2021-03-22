@@ -94,3 +94,47 @@ morning_alarm:
     entity_id: light.spotlight
   mode: single
   icon: mdi:alarm
+computer:
+  alias: Computer
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: switch.pc_power
+        state: 'on'
+      sequence:
+      - service: notify.mobile_app_sam_phone
+        data:
+          title: Computer is on
+          message: Do you want to turn the computer off?
+          data:
+            tag: computer
+            icon: https://samrenfrew.duckdns.org/static/icons/favicon-192x192.png
+            requireInteraction: false
+            actions:
+            - action: turn_computer_off
+              title: Turn Off
+            - action: dismiss
+              title: Dismiss
+    - conditions:
+      - condition: state
+        entity_id: switch.pc_power
+        state: 'off'
+      sequence:
+      - service: notify.mobile_app_sam_phone
+        data:
+          data:
+            tag: computer
+            icon: https://samrenfrew.duckdns.org/static/icons/favicon-192x192.png
+            url: /lovelace/home
+            requireInteraction: false
+            actions:
+            - action: turn_computer_on
+              title: Turn On
+            - action: dismiss
+              title: Dismiss
+          message: Do you want to turn the computer on?
+          title: Computer is off
+    default: []
+  mode: single
+  icon: mdi:desktop-classic
