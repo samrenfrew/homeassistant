@@ -13,6 +13,7 @@ lounge:
     - light.small_lamp
     - light.tv_lamp
     - light.backlight
+    - light.bed_lights
     # - switch.tv
     # - switch.tplink
     # - light.christmas_tree
@@ -25,7 +26,6 @@ bedroom:
   icon: mdi:bed-empty
   entities:
     - light.spotlight
-    - light.bed_lights
     - media_player.bedroom_speaker
     #- switch.tplink
 

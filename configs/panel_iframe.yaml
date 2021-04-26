@@ -1,24 +1,16 @@
   movies:
     title: 'Movies'
-    url: 'https://media.samrenfrew.duckdns.org/movies'
+    url: 'https://media.samrenfrew.co.uk/movies'
     icon: mdi:movie-open
   tv:
     title: 'TV'
-    url: 'https://media.samrenfrew.duckdns.org/tv'
+    url: 'https://media.samrenfrew.co.uk/tv'
     icon: mdi:television
   downloads:
     title: 'Downloads'
-    url: 'https://downloads.samrenfrew.duckdns.org/'
+    url: 'https://downloads.samrenfrew.co.uk/'
     icon: mdi:cloud-download
-  requests:
-    title: 'Requests'
-    url: 'https://media.samrenfrew.duckdns.org/request'
-    icon: mdi:plus-box-multiple
   search:
     title: 'Search'
-    url: 'https://media.samrenfrew.duckdns.org/search'
+    url: 'https://media.samrenfrew.co.uk/search'
     icon: mdi:movie-search-outline
-  subs:
-    title: 'Subtitles'
-    url: 'https://media.samrenfrew.duckdns.org/subs/'
-    icon: mdi:subtitles

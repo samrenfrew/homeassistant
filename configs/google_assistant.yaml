@@ -1,4 +1,4 @@
-  project_id: !secret ga_project
+  project_id: !secret ga_assistant
   expose_by_default: false
   service_account: !include service-account.json
   report_state: true
@@ -49,10 +49,11 @@
     #   room: Spare Room
     light.bed_lights:
       expose: true
-      name: Bed Lights
+      name: Chair Lamp
       aliases:
-        - Coloured Lights
-        - Christmas Lights
+        - Other Lamp
+        - Chair Light
+        - Reading Light
       room: Bedroom
     light.backlight:
       expose: true
@@ -86,7 +87,7 @@
     light.spotlight:
       expose: true
       name: Bedroom Light
-      room: Lounge
+      room: Bedroom
       aliases:
         - Spotlight
     media_player.tv:

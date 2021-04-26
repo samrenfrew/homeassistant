@@ -35,3 +35,19 @@
     data: {}
     entity_id: switch.humidifier
   mode: restart
+- id: '1619165147921'
+  alias: Door open
+  description: ''
+  trigger:
+  - type: opened
+    platform: device
+    device_id: d0c8bd8b1c2ae297782db08a526849c9
+    entity_id: binary_sensor.door_sensor
+    domain: binary_sensor
+  condition: []
+  action:
+  - service: notify.mobile_app_sam_phone
+    data:
+      title: Door opened
+      message: Door has been opened
+  mode: single
