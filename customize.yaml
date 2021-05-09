@@ -95,10 +95,6 @@ sensor.ady_status: {}
 sensor.sam_status: {}
 switch.tplink:
   device_class: outlet
-  friendly_name: Fan
-  icon: mdi:fan
-  templates:
-    icon: if (state === 'on') return 'mdi:fan'; else return 'mdi:fan-off';
 sensor.time_to_home:
   friendly_name: Drive Home
   icon: mdi:home-map-marker
@@ -328,7 +324,6 @@ device_tracker.adriennes_mbp:
   icon: mdi:laptop-mac
 switch.ikea_plug:
   device_class: outlet
-  friendly_name: Guest Plug
   icon: mdi:power-socket-uk
 device_tracker.adriennes_ipad:
   friendly_name: Ady's iPad
@@ -446,3 +441,6 @@ binary_sensor.door_sensor:
 binary_sensor.office_window_sensor:
   friendly_name: Office Window
   device_class: window
+light.chair_lamp:
+  icon: mdi:sofa-single-outline
+  friendly_name: Chair Lamp

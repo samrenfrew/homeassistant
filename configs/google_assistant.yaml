@@ -47,14 +47,14 @@
     #     - Grotto Lights
     #     - Spare Room Lights
     #   room: Spare Room
-    light.bed_lights:
+    light.chair_lamp:
       expose: true
       name: Chair Lamp
       aliases:
         - Other Lamp
         - Chair Light
         - Reading Light
-      room: Bedroom
+      room: Lounge
     light.backlight:
       expose: true
       name: Backlight
