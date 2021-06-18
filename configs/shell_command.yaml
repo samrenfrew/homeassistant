@@ -1,7 +1,7 @@
 ## SHELL COMMANDS
-  shutdown_pc: 'curl -m 3 --http0.9 192.168.1.2:8/forcepoweroff'
-  restart_pc: 'curl -m 3 --http0.9 192.168.1.2:8/reboot'
-  sleep_pc: 'curl -m 3 --http0.9 192.168.1.2:8/suspend'
+  shutdown_pc: 'curl -m 3 --http0.9 192.168.1.2:10/shutdown'
+  restart_pc: ''
+  sleep_pc: 'curl -m 3 --http0.9 192.168.1.2:10/sleep'
   shutdown_nas: !secret shutdown_nas
   restart_ha: 'ha core restart'
   ha_start: 'curl http://192.168.1.4:1880/hastart'

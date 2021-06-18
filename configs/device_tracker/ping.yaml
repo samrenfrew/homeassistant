@@ -3,7 +3,7 @@
   count: 5
   hosts:
     adrienne_vinces_ipad: 192.168.1.12
-    adriennes_mbp: 192.168.1.13
+    adriennes_mbp: 192.168.1.7
     adrienne_vinces_iphone: 192.168.1.11
     sam_phone: 192.168.1.10
-    sams_mbp: 192.168.1.6
+    sams_mbp: 192.168.1.3
