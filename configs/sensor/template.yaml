@@ -1,5 +1,11 @@
 - platform: template
   sensors:
+    tplink_power:
+      friendly_name: "TP-Link Power"
+      unit_of_measurement: 'W'
+      value_template: >-
+          {{ state_attr('switch.tplink', 'current_power_w') }}
+      device_class: power
     humidifier:
       friendly_name: "Humidifier"
       icon_template: mdi:water-percent

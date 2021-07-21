@@ -5,15 +5,12 @@ clear:
   text-light-color: '#BAC0C6'                                                     # Light grey text
   accent-color: '#00a1ff'                                                         # Blue
   background-color: '#F7F8F9'                                                     # Light grey background
-  background-color-2: '#F4F5F6'                                                   # Light grey background
+  background-color-2: '#F7F8F9'                                                   # Light grey background
   background-card-color: '#F7F8F9'                                  # White background
   border-color: '#E8E8E8'                                                   # Light grey border
 
   # Header
-  primary-color: '#636B75'                                              # Background
-  text-primary-color: '#FFF'                                                      # Text
-  # app-header-background-color: '#636B75'
-  # app-header-text-color: '#F7F8F9'
+  primary-color: '#636B75'
   app-header-background-color: '#F7F8F9'
   app-header-text-color: '#636B75'
   paper-tabs-selection-bar-color: var(--accent-color)'
@@ -23,7 +20,7 @@ clear:
 
   # UI
   paper-card-header-color: 'var(--text-color)'                                    # Title in settings
-  primary-background-color: 'var(--background-color)'  
+  primary-background-color: 'var(--background-color)'
   iron-icon-fill-color: 'var(--text-color)'
   iron-icon-stroke-color: 'var(--text-color)'
 
@@ -69,39 +66,63 @@ clear:
 
   card-mod-theme: clear
   card-mod-more-info-yaml: |
+    .: |
+      app-toolbar {
+        background: var(--card-header) !important;
+      }
+      mwc-icon-button {
+        margin-top: -3px;
+        color: #9e9e9e;
+      }
+      .main-title {
+        margin-top: 5px;
+        font-family: SF Text;
+        letter-spacing: 0.005em;
+      }
     $: |
       .mdc-dialog__scrim {
-        backdrop-filter: blur(10px);
-        -webkit-backdrop-filter: blur(10px);
-        background:none !important;
+        backdrop-filter: blur(20px) brightness(70%);
+        -webkit-backdrop-filter: blur(20px) brightness(70%);
       }
-      .mdc-dialog__surface {
-        background:var(--background-color) !important;
-        border-radius:10px !important;
-        box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
+      .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+        background: var(--card-color);
+        box-shadow: none;
+        border-radius: 1em;
       }
-      ha-paper-dialog {
-        border-radius:10px;
-      }
-      ::-webkit-scrollbar {
-        display: none;
-      }
-    ha-header-bar:
-      $: |
-        :host {
-            border-bottom:0 !important;
-        }
-        .mdc-top-app-bar {
-            background:none !important;
-        }
-        .mdc-top-app-bar__title {
-            opacity:0;
-        }
-    mwc-tab-bar:
-      $: |
-        :host {
-            border-bottom:0 !important;
-        }
+  # card-mod-more-info-yaml: |
+  #   $: |
+  #     .mdc-dialog__scrim {
+  #       backdrop-filter: blur(10px);
+  #       -webkit-backdrop-filter: blur(10px);
+  #       background:none !important;
+  #     }
+  #     .mdc-dialog__surface {
+  #       background:var(--background-color) !important;
+  #       border-radius:10px !important;
+  #       box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
+  #     }
+  #     ha-paper-dialog {
+  #       border-radius:10px;
+  #     }
+  #     ::-webkit-scrollbar {
+  #       display: none;
+  #     }
+  #   ha-header-bar:
+  #     $: |
+  #       :host {
+  #           border-bottom:0 !important;
+  #       }
+  #       .mdc-top-app-bar {
+  #           background:none !important;
+  #       }
+  #       .mdc-top-app-bar__title {
+  #           opacity:0;
+  #       }
+  #   mwc-tab-bar:
+  #     $: |
+  #       :host {
+  #           border-bottom:0 !important;
+  #       }
 
   ## Header
   card-mod-root-yaml: |
