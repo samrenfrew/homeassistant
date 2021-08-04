@@ -64,6 +64,8 @@ clear:
   hacs-status-pending-restart: 'var(--text-light-color)'                          # Restart Icon
   hacs-status-pending-update: 'var(--accent-color)'
 
+  dialog-backdrop-filter: blur(10px)
+
   card-mod-theme: clear
   card-mod-more-info-yaml: |
     .: |

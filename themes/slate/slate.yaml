@@ -96,6 +96,7 @@ slate:
   st-mode-background: 'var(--primary-background-color)'
   # fix white on white markdown code sections (eg. the addons infos)
   markdown-code-background-color: 'var(--secondary-background-color)'
+  dialog-backdrop-filter: blur(5px)
 
   # Shadows
   #ha-card-box-shadow: 'none'
