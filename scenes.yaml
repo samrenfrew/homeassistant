@@ -2,127 +2,189 @@
   name: Movie
   entities:
     light.backlight:
-      brightness: 255
-      effect: solid
+      min_mireds: 153
+      max_mireds: 500
       effect_list:
-      - bpm
-      - candy cane
-      - confetti
-      - cyclon rainbow
-      - dots
-      - fire
-      - glitter
-      - juggle
-      - lightning
-      - noise
-      - police all
-      - police one
-      - rainbow
-      - rainbow with glitter
-      - ripple
-      - sinelon
-      - solid
-      - twinkle
-      friendly_name: Backlight
+      - colorloop
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 76
       hs_color:
       - 240
-      - 57.647
-      icon: mdi:monitor-multiple
+      - 100
       rgb_color:
-      - 108
-      - 108
+      - 0
+      - 0
       - 255
-      state: 'on'
-      supported_features: 61
       xy_color:
-      - 0.193
-      - 0.129
-    light.big_lamp:
-      friendly_name: Big Lamp
-      icon: mdi:floor-lamp
-      max_mireds: 454
-      min_mireds: 250
-      state: 'off'
-      supported_features: 35
-    light.small_lamp:
-      friendly_name: Small Lamp
-      icon: mdi:lamp
-      max_mireds: 454
-      min_mireds: 250
-      state: 'off'
-      supported_features: 35
-    light.tv_lamp:
-      brightness: 44
-      color_temp: 367
-      friendly_name: TV Lamp
-      icon: mdi:desk-lamp
-      max_mireds: 454
-      min_mireds: 250
+      - 0.136
+      - 0.04
+      off_brightness:
+      friendly_name: TV Backlight
+      supported_features: 63
+      icon: mdi:television-ambient-light
       state: 'on'
-      supported_features: 35
+    light.big_lamp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      off_brightness:
+      friendly_name: Big Lamp
+      supported_features: 43
+      icon: mdi:floor-lamp
+      state: 'off'
+    light.small_lamp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      off_brightness:
+      friendly_name: Small Lamp
+      supported_features: 43
+      icon: mdi:lamp
+      state: 'off'
+    light.tv_lamp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      off_brightness:
+      friendly_name: TV Lamp
+      supported_features: 43
+      icon: mdi:desk-lamp
+      state: 'off'
+    light.chair_lamp:
+      supported_color_modes:
+      - onoff
+      friendly_name: Chair Lamp
+      supported_features: 0
+      icon: mdi:sofa-single-outline
+      state: 'off'
+  icon: mdi:movie-open
 - id: '1590181391128'
   name: Evening
   entities:
+    light.big_lamp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 133
+      color_temp: 454
+      off_brightness:
+      friendly_name: Big Lamp
+      supported_features: 43
+      icon: mdi:floor-lamp
+      state: 'on'
+    light.small_lamp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 97
+      color_temp: 454
+      off_brightness:
+      friendly_name: Small Lamp
+      supported_features: 43
+      icon: mdi:lamp
+      state: 'on'
+    light.tv_lamp:
+      min_mireds: 250
+      max_mireds: 454
+      supported_color_modes:
+      - color_temp
+      color_mode: color_temp
+      brightness: 61
+      color_temp: 454
+      off_brightness:
+      friendly_name: TV Lamp
+      supported_features: 43
+      icon: mdi:desk-lamp
+      state: 'on'
     light.backlight:
-      brightness: 255
-      effect: solid
+      min_mireds: 153
+      max_mireds: 500
       effect_list:
-      - bpm
-      - candy cane
-      - confetti
-      - cyclon rainbow
-      - dots
-      - fire
-      - glitter
-      - juggle
-      - lightning
-      - noise
-      - police all
-      - police one
-      - rainbow
-      - rainbow with glitter
-      - ripple
-      - sinelon
-      - solid
-      - twinkle
-      friendly_name: Backlight
+      - colorloop
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 254
       hs_color:
-      - 29.863
-      - 85.882
-      icon: mdi:monitor-multiple
+      - 35.932
+      - 69.412
       rgb_color:
       - 255
-      - 145
-      - 36
-      state: 'on'
-      supported_features: 61
+      - 183
+      - 77
       xy_color:
-      - 0.581
-      - 0.388
-    light.big_lamp:
-      brightness: 133
-      color_temp: 377
-      friendly_name: Big Lamp
-      icon: mdi:floor-lamp
-      max_mireds: 454
-      min_mireds: 250
+      - 0.513
+      - 0.413
+      off_brightness:
+      friendly_name: TV Backlight
+      supported_features: 63
+      icon: mdi:television-ambient-light
       state: 'on'
-      supported_features: 35
-    light.small_lamp:
-      brightness: 97
-      color_temp: 377
-      friendly_name: Small Lamp
-      icon: mdi:lamp
-      max_mireds: 454
-      min_mireds: 250
+- id: '1628548050102'
+  name: Relax
+  entities:
+    light.backlight:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 254
+      hs_color:
+      - 35.932
+      - 69.412
+      rgb_color:
+      - 255
+      - 183
+      - 77
+      xy_color:
+      - 0.513
+      - 0.413
+      off_brightness:
+      friendly_name: TV Backlight
+      supported_features: 63
+      icon: mdi:television-ambient-light
       state: 'on'
-      supported_features: 35
-    light.tv_lamp:
-      brightness: 61
-      color_temp: 377
-      friendly_name: TV Lamp
-      icon: mdi:desk-lamp
-      max_mireds: 454
-      min_mireds: 250
+  icon: mdi:beach
+- id: '1628548084428'
+  name: Reading
+  entities:
+    light.backlight:
+      min_mireds: 153
+      max_mireds: 500
+      effect_list:
+      - colorloop
+      supported_color_modes:
+      - color_temp
+      - hs
+      color_mode: hs
+      brightness: 254
+      hs_color:
+      - 38.88
+      - 49.02
+      rgb_color:
+      - 255
+      - 210
+      - 129
+      xy_color:
+      - 0.447
+      - 0.406
+      off_brightness:
+      friendly_name: TV Backlight
+      supported_features: 63
+      icon: mdi:television-ambient-light
       state: 'on'
-      supported_features: 35

@@ -59,6 +59,10 @@
       expose: true
       name: Backlight
       room: Lounge
+    light.computer:
+      expose: true
+      name: Computer Light
+      room: Spare Room
     light.big_lamp:
       expose: true
       name: Big Lamp
@@ -68,22 +72,20 @@
         - Right Lamp
     light.small_lamp:
       expose: true
-      name: Small Lamp
-      room: Lounge
-      aliases:
-        - Small Lamp
-        - Little Lamp
-        - Wavy Lamp
-        - Wiggly Lamp
-        - Left Lamp
-    light.tv_lamp:
-      expose: true
       name: TV Lamp
       room: Lounge
       aliases:
         - TV Lamp
         - Telly Lamp
         - Tele Lamp
+    light.tv_lamp:
+      expose: true
+      name: Small Lamp
+      room: Lounge
+      aliases:
+        - Small Lamp
+        - Little Lamp
+        - Left Lamp
     light.spotlight:
       expose: true
       name: Bedroom Light

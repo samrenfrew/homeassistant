@@ -444,3 +444,11 @@ binary_sensor.office_window_sensor:
 light.chair_lamp:
   icon: mdi:sofa-single-outline
   friendly_name: Chair Lamp
+switch.syncthing:
+  icon: hass:sync-circle
+switch.filebrowser:
+  icon: hass:file-search-outline
+switch.mqtt:
+  icon: hass:wifi-arrow-left-right
+switch.bazarr:
+  icon: hass:subtitles

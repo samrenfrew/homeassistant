@@ -51,3 +51,14 @@
       title: Door opened
       message: Door has been opened
   mode: single
+- id: '1633069327926'
+  alias: Speedtest
+  description: ''
+  trigger:
+  - platform: time_pattern
+    minutes: '0'
+    hours: '*'
+  condition: []
+  action:
+  - service: speedtestdotnet.speedtest
+  mode: single
