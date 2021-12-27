@@ -33,13 +33,13 @@
       expose: true
       name: Server
       room: Spare Room
-    # light.christmas_tree:
-    #   expose: true
-    #   name: Christmas Tree
-    #   aliases:
-    #     - Xmas Tree
-    #     - Tree
-    #   room: Lounge
+    light.christmas_tree:
+      expose: true
+      name: Christmas Tree
+      aliases:
+        - Xmas Tree
+        - Tree
+      room: Lounge
     # light.shelf_lights:
     #   expose: true
     #   name: Office Lights

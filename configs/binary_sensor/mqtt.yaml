@@ -9,10 +9,10 @@
 #   device_class: plug
 
 #Motion Sensor
-- platform: mqtt
-  state_topic: "sensor/node"
-  name: lounge_motion
-  device_class: motion
-  value_template: '{{ value_json.motion }}'
-  payload_on: "on"
-  payload_off: "off"
+# - platform: mqtt
+#   state_topic: "sensor/node"
+#   name: lounge_motion
+#   device_class: motion
+#   value_template: '{{ value_json.motion }}'
+#   payload_on: "on"
+#   payload_off: "off"

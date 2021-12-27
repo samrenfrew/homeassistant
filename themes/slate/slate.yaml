@@ -105,6 +105,14 @@ slate:
   ha-card-background: none
   # paper-card-background-color: rgba(0, 0, 0, 0.00)
   card-mod-theme: slate
+  card-mod-card: |
+    ha-card.media-player {
+      margin:0 10px 5px;
+      border-radius:15px;
+      overflow:hidden !important;
+      background: none;
+      font-family: "Roman-55", "Helvetica Neue";
+    }
   card-mod-more-info-yaml: |
     $: |
       .mdc-dialog__scrim {

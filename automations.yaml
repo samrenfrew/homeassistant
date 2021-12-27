@@ -62,3 +62,19 @@
   action:
   - service: speedtestdotnet.speedtest
   mode: single
+- id: '1637237249300'
+  alias: Turn Lights On
+  description: ''
+  trigger:
+  - device_id: 256caebf10d88041fcc86f6a97b42bcd
+    domain: zha
+    platform: device
+    type: remote_button_short_press
+    subtype: remote_button_short_press
+  condition: []
+  action:
+  - type: toggle
+    device_id: dca4679ce3dc03d1077e271896fbb74b
+    entity_id: light.backlight
+    domain: light
+  mode: single

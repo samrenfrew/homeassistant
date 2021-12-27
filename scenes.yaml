@@ -57,10 +57,13 @@
       icon: mdi:desk-lamp
       state: 'off'
     light.chair_lamp:
+      min_mireds: 250
+      max_mireds: 454
       supported_color_modes:
-      - onoff
+      - color_temp
+      off_brightness:
       friendly_name: Chair Lamp
-      supported_features: 0
+      supported_features: 43
       icon: mdi:sofa-single-outline
       state: 'off'
   icon: mdi:movie-open

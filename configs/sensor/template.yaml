@@ -12,8 +12,40 @@
       unit_of_measurement: '%'
       value_template: >-
           {%- if is_state('input_select.humidifier_location', 'Office') == true -%}
-            {{ states('sensor.aq_1_humidity') }}
+            {{ states('sensor.office_humidity') }}
           {%- else -%}
             {{ states('sensor.lounge_humidity') }}
           {%- endif -%}
       device_class: humidity
+    flat_temperature:
+      friendly_name: "Flat Temperature"
+      device_class: temperature
+      unit_of_measurement: "°C"
+      value_template: >
+        {% set bedroom = states('sensor.bedroom_temperature') | float(states('sensor.flat_temperature')) %}
+        {% set lounge = states('sensor.lounge_temperature') | float(states('sensor.flat_temperature')) %}
+        {% set office = states('sensor.office_temperature') | float(states('sensor.flat_temperature')) %}
+        {% set hallway = states('sensor.hallway_temperature') | float(states('sensor.flat_temperature')) %}
+
+        {{ ((bedroom + lounge + office + hallway) / 4) | round(1) }}
+    flat_humidity:
+      friendly_name: "Flat Humidity"
+      device_class: humidity
+      unit_of_measurement: "%"
+      value_template: >
+        {% set bedroom = states('sensor.bedroom_humidity') | float(states('sensor.flat_humidity')) %}
+        {% set lounge = states('sensor.lounge_humidity') | float(states('sensor.flat_humidity')) %}
+        {% set office = states('sensor.office_humidity') | float(states('sensor.flat_humidity')) %}
+        {% set hallway = states('sensor.hallway_humidity') | float(states('sensor.flat_humidity')) %}
+
+        {{ ((bedroom + lounge + office + hallway) / 4) | round(1) }}
+    speedtest_download:
+      friendly_name: "Speedtest Download"
+      unit_of_measurement: "Mbit/s"
+      value_template: >
+        {{ state_attr("sensor.speedtest_ping", "download") | round(2) }}
+    speedtest_upload:
+      friendly_name: "Speedtest Upload"
+      unit_of_measurement: "Mbit/s"
+      value_template: >
+        {{ state_attr("sensor.speedtest_ping", "upload") | round(2) }}

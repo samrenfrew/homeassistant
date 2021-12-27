@@ -4,6 +4,8 @@ homeassistant:
 default_config:
 frontend:
   themes: !include_dir_merge_named themes
+  extra_module_url:
+    - /hacsfiles/lovelace-card-mod/card-mod.js
 http:
   login_attempts_threshold: 10
   ip_ban_enabled: false
@@ -102,6 +104,7 @@ joaoapps_join:
 - name: android
   api_key: !secret join_api
   device_id: group.android
+# adaptive_lighting: !include configs/adaptive_lighting.yaml
 
 # Custom Components
 breaking_changes:

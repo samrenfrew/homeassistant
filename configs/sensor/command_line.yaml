@@ -6,3 +6,15 @@
 - platform: command_line
   name: Current Version
   command: "cat /config/.HA_VERSION"
+- platform: command_line
+  name: Speedtest Ping
+  command: "python3 /config/speedtest/speedtest-cli-2ha.py"
+  value_template: "{{ value_json.ping | round(1) }}"
+  command_timeout: 30
+  scan_interval: 3600
+  unit_of_measurement: ms
+  json_attributes:
+    - 'download'
+    - 'upload'
+    - 'server_name'
+    - 'isp'

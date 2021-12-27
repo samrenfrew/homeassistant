@@ -67,64 +67,72 @@ clear:
   dialog-backdrop-filter: blur(10px)
 
   card-mod-theme: clear
-  card-mod-more-info-yaml: |
-    .: |
-      app-toolbar {
-        background: var(--card-header) !important;
-      }
-      mwc-icon-button {
-        margin-top: -3px;
-        color: #9e9e9e;
-      }
-      .main-title {
-        margin-top: 5px;
-        font-family: SF Text;
-        letter-spacing: 0.005em;
-      }
-    $: |
-      .mdc-dialog__scrim {
-        backdrop-filter: blur(20px) brightness(70%);
-        -webkit-backdrop-filter: blur(20px) brightness(70%);
-      }
-      .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
-        background: var(--card-color);
-        box-shadow: none;
-        border-radius: 1em;
-      }
-  # card-mod-more-info-yaml: |
+  card-mod-card: |
+    ha-card.media-player {
+      margin:0 10px 5px;
+      border-radius:15px;
+      overflow:hidden !important;
+      background: none;
+      font-family: "Roman-55", "Helvetica Neue";
+    }
+  # card-mod-more-info: |
+  #   .: |
+  #     app-toolbar {
+  #       background: var(--card-header) !important;
+  #     }
+  #     mwc-icon-button {
+  #       margin-top: -3px;
+  #       color: #9e9e9e;
+  #     }
+  #     .main-title {
+  #       margin-top: 5px;
+  #       font-family: "Roman-55", "Helvetica Neue";
+  #       letter-spacing: 0.005em;
+  #     }
   #   $: |
   #     .mdc-dialog__scrim {
-  #       backdrop-filter: blur(10px);
-  #       -webkit-backdrop-filter: blur(10px);
-  #       background:none !important;
+  #       backdrop-filter: blur(20px) brightness(70%);
+  #       -webkit-backdrop-filter: blur(20px) brightness(70%);
   #     }
-  #     .mdc-dialog__surface {
-  #       background:var(--background-color) !important;
-  #       border-radius:10px !important;
-  #       box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
+  #     .mdc-dialog .mdc-dialog__container .mdc-dialog__surface {
+  #       background: var(--card-color);
+  #       box-shadow: none;
+  #       border-radius: 1em;
   #     }
-  #     ha-paper-dialog {
-  #       border-radius:10px;
-  #     }
-  #     ::-webkit-scrollbar {
-  #       display: none;
-  #     }
-  #   ha-header-bar:
-  #     $: |
-  #       :host {
-  #           border-bottom:0 !important;
-  #       }
-  #       .mdc-top-app-bar {
-  #           background:none !important;
-  #       }
-  #       .mdc-top-app-bar__title {
-  #           opacity:0;
-  #       }
-  #   mwc-tab-bar:
-  #     $: |
-  #       :host {
-  #           border-bottom:0 !important;
-  #       }
+  card-mod-more-info: |
+    $: |
+      .mdc-dialog__scrim {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        background:none !important;
+      }
+      .mdc-dialog__surface {
+        background:var(--background-color) !important;
+        border-radius:10px !important;
+        box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
+      }
+      ha-paper-dialog {
+        border-radius:10px;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    ha-header-bar:
+      $: |
+        :host {
+            border-bottom:0 !important;
+        }
+        .mdc-top-app-bar {
+            background:none !important;
+        }
+        .mdc-top-app-bar__title {
+            opacity:0;
+        }
+    mwc-tab-bar:
+      $: |
+        :host {
+            border-bottom:0 !important;
+        }
 
   ## Header
   card-mod-root-yaml: |

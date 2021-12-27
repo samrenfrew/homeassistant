@@ -84,9 +84,10 @@ morning_alarm:
   sequence:
   - service: light.turn_on
     data:
-      kelvin: 1500
+      kelvin: 2000
       brightness: 1
-    entity_id: light.spotlight
+    target:
+      device_id: a0d44d57d68c39aae2128229af340e7c
   - delay:
       hours: 0
       minutes: 10

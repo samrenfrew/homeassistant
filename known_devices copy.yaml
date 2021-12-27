@@ -1,0 +1,903 @@
+router:
+  hide_if_away: false
+  icon:
+  mac: 24:A7:DC:01:B9:01
+  name: SkyRouter.Home
+  picture:
+  track: false
+
+pizero:
+  hide_if_away: false
+  icon:
+  mac: B8:27:EB:31:40:31
+  name: pizero
+  picture:
+  track: false
+
+desktop:
+  hide_if_away: false
+  icon:
+  mac: F4:6D:04:03:69:3A
+  name: Sam Desktop
+  picture:
+  track: false
+
+sams_mbp:
+  hide_if_away: false
+  icon:
+  mac: 38:F9:D3:B4:3D:2C
+  name: Sam Macbook
+  picture:
+  track: true
+
+adriennes_mbp:
+  hide_if_away: false
+  icon:
+  mac: D8:BB:2C:C0:7E:E4
+  name: Ady Macbook
+  picture:
+  track: true
+
+adrienne_vinces_iphone:
+  name: Ady iPhone
+  mac: F4:DB:E3:54:ED:95
+  icon:
+  picture:
+  track: true
+
+sam_phone:
+  hide_if_away: false
+  icon:
+  mac: ac:d6:18:37:10:94
+  name: Sam Phone
+  picture:
+  track: true
+
+sam_phone_bt:
+  hide_if_away: false
+  icon:
+  mac: BT_AC:D6:18:37:10:93
+  name: Sam Phone (BT)
+  picture:
+  track: true
+
+adrienne_vinces_iphone_bt:
+  hide_if_away: false
+  icon:
+  mac: BT_F4:DB:E3:4D:D2:33
+  name: Ady iPhone (BT)
+  picture:
+  track: true
+
+adrienne_vinces_ipad:
+  hide_if_away: false
+  icon:
+  mac: AC:CF:5C:27:C8:00
+  name: Adriennes-iPad
+  picture:
+  track: true
+
+50_c7_bf_67_fb_ae:
+  hide_if_away: false
+  icon:
+  mac: 50:C7:BF:67:FB:AE
+  name: 50 c7 bf 67 fb ae
+  picture:
+  track: false
+
+2c_3a_e8_35_d4_2c:
+  hide_if_away: false
+  icon:
+  mac: 2C:3A:E8:35:D4:2C
+  name: 2c 3a e8 35 d4 2c
+  picture:
+  track: false
+
+54_60_09_5f_c6_16:
+  hide_if_away: false
+  icon:
+  mac: 54:60:09:5F:C6:16
+  name: 54 60 09 5f c6 16
+  picture:
+  track: false
+
+5c_cf_7f_42_d1_13:
+  hide_if_away: false
+  icon:
+  mac: 5C:CF:7F:42:D1:13
+  name: 5c cf 7f 42 d1 13
+  picture:
+  track: false
+
+20_df_b9_1b_35_92:
+  hide_if_away: false
+  icon:
+  mac: 20:DF:B9:1B:35:92
+  name: 20 df b9 1b 35 92
+  picture:
+  track: false
+
+5c_cf_7f_ac_ac_5d:
+  hide_if_away: false
+  icon:
+  mac: 5C:CF:7F:AC:AC:5D
+  name: 5c cf 7f ac ac 5d
+  picture:
+  track: false
+
+a0_c9_a0_d6_df_71:
+  hide_if_away: false
+  icon:
+  mac: A0:C9:A0:D6:DF:71
+  name: a0 c9 a0 d6 df 71
+  picture:
+  track: false
+
+1c_f2_9a_12_65_ac:
+  hide_if_away: false
+  icon:
+  mac: 1C:F2:9A:12:65:AC
+  name: 1c f2 9a 12 65 ac
+  picture:
+  track: false
+
+a4_77_33_a9_2b_d4:
+  hide_if_away: false
+  icon:
+  mac: A4:77:33:A9:2B:D4
+  name: a4 77 33 a9 2b d4
+  picture:
+  track: false
+
+00_11_32_b4_6a_c9:
+  hide_if_away: false
+  icon:
+  mac: 00:11:32:B4:6A:C9
+  name: 00 11 32 b4 6a c9
+  picture:
+  track: false
+
+78_5d_c8_92_ef_0b:
+  hide_if_away: false
+  icon:
+  mac: 78:5D:C8:92:EF:0B
+  name: 78 5d c8 92 ef 0b
+  picture:
+  track: false
+
+huawei_mate_20_pro:
+  hide_if_away: false
+  icon:
+  mac: BT_34:29:12:0E:CD:EA
+  name: HUAWEI Mate 20 Pro
+  picture:
+  track: false
+
+e0_31_9e_12_e1_d0:
+  hide_if_away: false
+  icon:
+  mac: E0:31:9E:12:E1:D0
+  name: e0 31 9e 12 e1 d0
+  picture:
+  track: false
+
+emma_s_huawei:
+  hide_if_away: false
+  icon:
+  mac: BT_34:29:12:DD:D1:23
+  name: Emma's Huawei
+  picture:
+  track: false
+
+20_3d_bd_00_f1_36:
+  hide_if_away: false
+  icon:
+  mac: 20:3D:BD:00:F1:36
+  name: 20 3d bd 00 f1 36
+  picture:
+  track: false
+
+00_24_e4_44_f2_66:
+  hide_if_away: false
+  icon:
+  mac: 00:24:E4:44:F2:66
+  name: 00 24 e4 44 f2 66
+  picture:
+  track: false
+
+2c_3a_e8_34_04_db:
+  hide_if_away: false
+  icon:
+  mac: 2C:3A:E8:34:04:DB
+  name: 2c 3a e8 34 04 db
+  picture:
+  track: false
+
+soundcore_spirit:
+  hide_if_away: false
+  icon:
+  mac: BT_E8:07:BF:49:42:D3
+  name: 'Soundcore Spirit '
+  picture:
+  track: false
+
+tws_earbuds_l:
+  hide_if_away: false
+  icon:
+  mac: BT_00:00:00:00:34:04
+  name: TWS Earbuds-L
+  picture:
+  track: false
+
+huawei_mediapad_m5_lite_10:
+  hide_if_away: false
+  icon:
+  mac: BT_90:2B:D2:E2:26:6B
+  name: HUAWEI MediaPad M5 lite 10
+  picture:
+  track: false
+
+nokia_2730_classic:
+  hide_if_away: false
+  icon:
+  mac: BT_2C:D2:E7:E8:A2:64
+  name: Nokia 2730 classic
+  picture:
+  track: false
+
+esmeralda_pc:
+  hide_if_away: false
+  icon:
+  mac: BT_50:1A:C5:0B:78:29
+  name: ESMERALDA-PC
+  picture:
+  track: false
+
+pamu_slide:
+  hide_if_away: false
+  icon:
+  mac: BT_A0:10:00:00:B9:B5
+  name: PaMu Slide
+  picture:
+  track: false
+
+note_7p:
+  hide_if_away: false
+  icon:
+  mac: BT_56:91:46:00:00:30
+  name: Note_7P
+  picture:
+  track: false
+
+sandeeps_iphone:
+  hide_if_away: false
+  icon:
+  mac: BT_50:82:D5:90:A6:03
+  name: Sandeep’s iPhone
+  picture:
+  track: false
+
+dan_russells_trackpad:
+  hide_if_away: false
+  icon:
+  mac: BT_8C:85:90:F3:8F:B0
+  name: Dan Russell’s Trackpad
+  picture:
+  track: false
+
+inbasdlp02346:
+  hide_if_away: false
+  icon:
+  mac: BT_18:CF:5E:3B:E3:A1
+  name: INBASDLP02346
+  picture:
+  track: false
+
+sam_renfrews_keyboard:
+  icon:
+  mac: BT_80:4A:14:74:93:0F
+  name: Sam Renfrew’s Keyboard
+  picture:
+  track: false
+
+huawei_p30_pro:
+  icon:
+  mac: BT_44:59:E3:FB:E0:34
+  name: HUAWEI P30 Pro
+  picture:
+  track: false
+
+infinity_glide_500:
+  icon:
+  mac: BT_00:1E:7C:8E:19:8A
+  name: Infinity Glide 500
+  picture:
+  track: false
+
+adriennes_macbook_pro:
+  icon:
+  mac: BT_D8:BB:2C:C0:7E:E5
+  name: Adrienne’s MacBook Pro
+  picture:
+  track: false
+
+sam_renfrews_mouse:
+  icon:
+  mac: BT_04:0C:CE:33:6B:1D
+  name: Sam Renfrew’s Mouse
+  picture:
+  track: false
+
+sams_macbook_pro_work:
+  icon:
+  mac: BT_38:F9:D3:97:5C:8F
+  name: Sam’s MacBook Pro (Work)
+  picture:
+  track: false
+
+router_2:
+  icon:
+  mac: C8:D7:19:3B:16:ED
+  name: router
+  picture:
+  track: false
+
+'00_00_00_00_00_00':
+  icon:
+  mac: 00:00:00:00:00:00
+  name: '00_00_00_00_00_00'
+  picture:
+  track: false
+
+alcatel_onetouch_2045:
+  icon:
+  mac: BT_CC:FD:17:D9:92:D4
+  name: ALCATEL ONETOUCH 2045
+  picture:
+  track: false
+
+hs_huawei_p30_pro:
+  icon:
+  mac: BT_34:79:16:D1:5E:82
+  name: HS HUAWEI P30 Pro
+  picture:
+  track: false
+
+oppo_f11:
+  icon:
+  mac: BT_24:79:F3:9F:7B:A8
+  name: OPPO F11
+  picture:
+  track: false
+
+bose_on_ear_wireless:
+  icon:
+  mac: BT_28:11:A5:1A:89:89
+  name: Bose On-Ear Wireless
+  picture:
+  track: false
+
+tws_earbuds_l_2:
+  icon:
+  mac: BT_00:00:00:02:CA:E4
+  name: TWS Earbuds-L
+  picture:
+  track: false
+
+pi:
+  icon:
+  mac: B8:27:EB:F1:20:12
+  name: pi
+  picture:
+  track: false
+
+winny:
+  icon:
+  mac: BT_00:12:62:D5:62:1C
+  name: Winny
+  picture:
+  track: false
+
+d30408cf_05cb_4a33_bd60_f5c5b0634743:
+  icon:
+  mac: 34:EA:34:43:B0:70
+  name: d30408cf-05cb-4a33-bd60-f5c5b0634743
+  picture:
+  track: false
+
+honor_9:
+  icon:
+  mac: BT_04:79:70:10:8C:60
+  name: Honor 9
+  picture:
+  track: false
+
+dans_ipad:
+  icon:
+  mac: BT_4C:56:9D:5A:B2:01
+  name: Dan’s iPad
+  picture:
+  track: false
+
+ady_iphone:
+  icon:
+  mac: DC:56:E7:66:64:29
+  name: Ady iPhone
+  picture:
+  track: false
+
+0cf36ee5_4156_44fa_9e88_1fe5f79d1f3a:
+  icon:
+  mac: 9C:5A:44:BC:C6:6D
+  name: 0cf36ee5-4156-44fa-9e88-1fe5f79d1f3a
+  picture:
+  track: false
+
+mdcpl87504:
+  icon:
+  mac: 8C:C8:4B:61:DB:CB
+  name: MDCPL87504
+  picture:
+  track: false
+
+hayleys_iphone:
+  icon:
+  mac: BT_18:81:0E:0E:82:28
+  name: Hayley’s iPhone
+  picture:
+  track: false
+
+powerbeats:
+  icon:
+  mac: BT_84:AD:8D:03:4F:DC
+  name: Powerbeats
+  picture:
+  track: false
+
+sam_renfrews_mouse_2:
+  icon:
+  mac: BT_90:9C:4A:A9:AC:B5
+  name: Sam Renfrew’s Mouse
+  picture:
+  track: false
+
+iball_ew_sporty:
+  icon:
+  mac: BT_77:A6:05:00:E5:C1
+  name: iBall EW Sporty
+  picture:
+  track: false
+
+redmi:
+  icon:
+  mac: BT_74:51:BA:87:E8:32
+  name: Redmi
+  picture:
+  track: false
+
+ipad:
+  icon:
+  mac: BT_70:EA:5A:58:C8:B2
+  name: iPad
+  picture:
+  track: false
+
+taotronics_tt_bh16:
+  name: TaoTronics TT-BH16
+  mac: BT_34:DF:2A:3D:10:54
+  icon:
+  picture:
+  track: false
+
+unknown:
+  name: UNKNOWN
+  mac: E0:31:9E:12:E1:CF
+  icon:
+  picture:
+  track: false
+
+unknown_2:
+  name: UNKNOWN
+  mac: D6:E8:E1:3E:A3:72
+  icon:
+  picture:
+  track: false
+
+desktop_7doansi:
+  name: DESKTOP-7DOANSI
+  mac: BT_00:1A:7D:DA:71:15
+  icon:
+  picture:
+  track: false
+
+soundbuds_flow:
+  name: SoundBuds Flow
+  mac: BT_20:9B:A5:83:E4:1C
+  icon:
+  picture:
+  track: false
+
+galaxy_s7:
+  name: Galaxy S7
+  mac: BT_78:00:9E:5C:DB:85
+  icon:
+  picture:
+  track: false
+
+georges_iphone:
+  name: 'George’s iphone '
+  mac: BT_90:A2:5B:B1:F3:75
+  icon:
+  picture:
+  track: false
+
+echo_4n6:
+  name: Echo-4N6
+  mac: BT_4C:EF:C0:08:79:F8
+  icon:
+  picture:
+  track: false
+
+xbox_wireless_controller:
+  name: Xbox Wireless Controller
+  mac: BT_EC:83:50:02:AD:47
+  icon:
+  picture:
+  track: false
+
+ltuk421096:
+  name: LTUK421096
+  mac: BT_34:02:86:61:46:57
+  icon:
+  picture:
+  track: false
+
+sony_kd_55xh9005:
+  name: SONY KD-55XH9005
+  mac: BT_64:FF:0A:45:B0:FA
+  icon:
+  picture:
+  track: false
+
+ev_035:
+  name: EV-035
+  mac: BT_00:15:9E:32:14:FA
+  icon:
+  picture:
+  track: false
+
+unknown_3:
+  name: UNKNOWN
+  mac: EC:A8:6B:F6:38:00
+  icon:
+  picture:
+  track: false
+
+oneplus_7_pro:
+  name: OnePlus 7 Pro
+  mac: BT_98:09:CF:59:B9:7B
+  icon:
+  picture:
+  track: false
+
+iphone:
+  name: iPhone
+  mac: BT_30:57:14:31:CC:4A
+  icon:
+  picture:
+  track: false
+
+galaxy_s7_2:
+  name: Galaxy S7
+  mac: BT_B4:74:43:2E:ED:10
+  icon:
+  picture:
+  track: false
+
+pg_winpc:
+  name: PG-WINPC
+  mac: BT_54:27:1E:41:8A:C3
+  icon:
+  picture:
+  track: false
+
+sc515:
+  name: SC515
+  mac: BT_11:0B:9D:8A:95:0B
+  icon:
+  picture:
+  track: false
+
+unknown_4:
+  name: UNKNOWN
+  mac: 96:BC:86:78:94:E9
+  icon:
+  picture:
+  track: false
+
+ally_s_phone:
+  name: Ally's Phone
+  mac: BT_BC:09:63:A2:EA:25
+  icon:
+  picture:
+  track: false
+
+macbook_pro:
+  name: MacBook Pro
+  mac: BT_F8:FF:C2:62:B4:16
+  icon:
+  picture:
+  track: false
+
+powerbeats_pro:
+  name: Powerbeats Pro
+  mac: BT_84:AD:8D:57:20:99
+  icon:
+  picture:
+  track: false
+
+unknown_5:
+  name: UNKNOWN
+  mac: C8:2B:96:ED:34:7B
+  icon:
+  picture:
+  track: false
+
+dans_iphone:
+  name: Dan’s iPhone
+  mac: BT_F8:10:93:49:9A:C5
+  icon:
+  picture:
+  track: false
+
+unknown_6:
+  name: UNKNOWN
+  mac: B8:27:EB:FB:4C:C6
+  icon:
+  picture:
+  track: false
+
+lonl5l5mx:
+  name: LONL5L5MX
+  mac: BT_F8:E4:E3:07:F7:3C
+  icon:
+  picture:
+  track: false
+
+nishnareddy:
+  name: NISHNAREDDY
+  mac: BT_58:FB:84:0D:0B:82
+  icon:
+  picture:
+  track: false
+
+iphone_2:
+  name: iPhone
+  mac: BT_9C:E3:3F:9C:DF:E5
+  icon:
+  picture:
+  track: false
+
+bcm20703a1_generic_usb_uhe_apple_20mhz_fcbga_x87:
+  name: BCM20703A1 Generic USB UHE Apple 20Mhz fcbga_X87
+  mac: BT_F4:5C:89:C9:6A:C8
+  icon:
+  picture:
+  track: false
+
+desktop_q874opr:
+  name: DESKTOP-Q874OPR
+  mac: BT_90:CD:B6:4D:EE:EC
+  icon:
+  picture:
+  track: false
+
+laptop_9jclblq3:
+  name: LAPTOP-9JCLBLQ3
+  mac: BT_3C:F8:62:65:6D:0E
+  icon:
+  picture:
+  track: false
+
+unknown_7:
+  name: UNKNOWN
+  mac: AE:19:B8:A7:2B:63
+  icon:
+  picture:
+  track: false
+
+unknown_8:
+  name: UNKNOWN
+  mac: 64:A2:F9:B7:90:0F
+  icon:
+  picture:
+  track: false
+
+prasannas_macbook_pro:
+  name: Prasanna’s MacBook Pro
+  mac: BT_38:F9:D3:E4:9F:1A
+  icon:
+  picture:
+  track: false
+
+soundcore_life_p2:
+  name: Soundcore Life P2
+  mac: BT_AC:12:2F:2A:30:7F
+  icon:
+  picture:
+  track: false
+
+unknown_9:
+  name: UNKNOWN
+  mac: F6:F1:05:DC:92:FC
+  icon:
+  picture:
+  track: false
+
+unknown_10:
+  name: UNKNOWN
+  mac: F6:23:7C:64:BA:D2
+  icon:
+  picture:
+  track: false
+
+unknown_11:
+  name: UNKNOWN
+  mac: 62:5C:45:F7:D4:5D
+  icon:
+  picture:
+  track: false
+
+unknown_12:
+  name: UNKNOWN
+  mac: 7C:67:A2:00:EF:97
+  icon:
+  picture:
+  track: false
+
+oneplus_6:
+  name: OnePlus 6
+  mac: BT_64:A2:F9:2B:4B:D9
+  icon:
+  picture:
+  track: false
+
+sam_renfrews_keyboard_2:
+  name: Sam Renfrew’s Keyboard
+  mac: BT_90:9C:4A:12:F4:84
+  icon:
+  picture:
+  track: false
+
+unknown_13:
+  name: UNKNOWN
+  mac: 8C:55:4A:CB:26:0E
+  icon:
+  picture:
+  track: false
+
+wh_1000xm4:
+  name: WH-1000XM4
+  mac: BT_94:DB:56:52:CF:B9
+  icon:
+  picture:
+  track: false
+
+unknown_14:
+  name: UNKNOWN
+  mac: 00:0A:F5:98:45:58
+  icon:
+  picture:
+  track: false
+
+unknown_15:
+  name: UNKNOWN
+  mac: 34:7D:F6:15:B0:EE
+  icon:
+  picture:
+  track: false
+
+unknown_16:
+  name: UNKNOWN
+  mac: B4:2E:99:FF:D6:C1
+  icon:
+  picture:
+  track: false
+
+soundcore_life_p2_l:
+  name: Soundcore Life P2-L
+  mac: BT_AC:12:2F:2A:3A:BA
+  icon:
+  picture:
+  track: false
+
+oppo_a9_2020:
+  name: OPPO A9 2020
+  mac: BT_5C:66:6C:1D:27:16
+  icon:
+  picture:
+  track: false
+
+georgina_iphone:
+  name: Georgina iPhone
+  mac: BT_C4:61:8B:53:30:7D
+  icon:
+  picture:
+  track: false
+
+dans_beats_studio3:
+  name: Dan’s Beats Studio³
+  mac: BT_30:35:AD:E7:DD:EB
+  icon:
+  picture:
+  track: false
+
+unknown_17:
+  name: UNKNOWN
+  mac: 36:D0:23:ED:E4:EB
+  icon:
+  picture:
+  track: false
+
+unknown_18:
+  name: UNKNOWN
+  mac: AC:D6:18:37:10:94
+  icon:
+  picture:
+  track: false
+
+moto_e_6_plus:
+  name: moto e(6) plus
+  mac: BT_08:CC:27:41:8E:FD
+  icon:
+  picture:
+  track: false
+
+huawei_watch_gt_2_28f:
+  name: HUAWEI WATCH GT 2-28F
+  mac: BT_A0:D8:07:91:02:8F
+  icon:
+  picture:
+  track: false
+
+soundcore_life_q20:
+  name: Soundcore Life Q20
+  mac: BT_2C:FD:B3:56:BF:9B
+  icon:
+  picture:
+  track: false
+
+skyrouter_home:
+  name: SkyRouter.Home
+  mac: 9C:31:C3:AF:56:D9
+  icon:
+  picture:
+  track: false
+
+chromecast_ultra:
+  name: Chromecast-Ultra
+  mac: 44:09:B8:64:B8:EC
+  icon:
+  picture:
+  track: false
+
+nokia_130:
+  name: Nokia 130
+  mac: BT_E4:98:D1:65:D6:9B
+  icon:
+  picture:
+  track: false
+
+samantas_macbook_pro:
+  name: Samanta’s MacBook Pro
+  mac: BT_8C:85:90:28:19:80
+  icon:
+  picture:
+  track: false
+
+heygaal:
+  name: heygaal
+  mac: BT_8C:86:1E:AC:39:FA
+  icon:
+  picture:
+  track: false

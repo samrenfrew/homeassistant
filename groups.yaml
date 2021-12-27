@@ -11,16 +11,13 @@ lounge:
   entities:
     - light.big_lamp
     - light.small_lamp
+    - light.chair_lamp
     - light.tv_lamp
     - light.backlight
-    - light.bed_lights
-    - light.computer
-    # - switch.tv
-    # - switch.tplink
-    # - light.christmas_tree
-    # - light.shelf_lights
+    - light.christmas_tree
     - media_player.tv
     - media_player.lounge_speaker
+
 
 bedroom:
   name: Bedroom
@@ -63,14 +60,8 @@ all_lights:
   name: Lights
   icon: mdi:lightbulb-on-outline
   entities:
-    # - light.christmas_tree
-    # - light.shelf_lights
-    - light.bed_lights
-    - light.big_lamp
-    - light.small_lamp
-    - light.tv_lamp
-    - light.backlight
-    - light.spotlight
+    - light.all_lights
+    - light.christmas_tree
 
 motion:
   name: Motion

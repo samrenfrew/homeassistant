@@ -258,7 +258,6 @@ sensor.temperature:
   icon: mdi:thermometer-lines
 sensor.flat_temperature:
   device_class: temperature
-  friendly_name: Mean Temperature
 sensor.flat_temperature_feels_like: {}
 switch.jackett:
   icon: mdi:cloud-search
@@ -419,7 +418,7 @@ light.spotlight:
   icon: mdi:spotlight-beam
 binary_sensor.lounge_motion:
   friendly_name: Lounge Motion
-  icon: mdi:motion-sensor
+  device_class: motion
 switch.humidifier:
   friendly_name: Humidifier
   icon: mdi:air-humidifier
@@ -452,3 +451,11 @@ switch.mqtt:
   icon: hass:wifi-arrow-left-right
 switch.bazarr:
   icon: hass:subtitles
+binary_sensor.front_door:
+  device_class: door
+binary_sensor.office_window:
+  device_class: window
+binary_sensor.lounge_door:
+  device_class: door
+binary_sensor.bedroom_window:
+  device_class: window
