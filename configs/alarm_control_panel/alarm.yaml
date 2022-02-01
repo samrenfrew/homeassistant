@@ -1,5 +1,5 @@
 ## ALARM CONTROL PANEL
 - platform: manual
   name: Alarm
-  delay_time: 10
-  arming_time: 10
+  delay_time: 30
+  arming_time: 30

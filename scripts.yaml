@@ -59,16 +59,16 @@ nas_server:
           sequence:
           - service: notify.mobile_app_sam_phone
             data:
+              message: Turn the server off anyway?
+              title: Plex is currently streaming
               data:
                 actions:
                 - action: turn_server_off
                   title: Turn Off
-                icon: https://assets.materialup.com/uploads/147cc4e7-d765-4e1d-a329-cb51e3dd7b9c/preview.jpg
+                notification_icon: mdi:plex
                 requireInteraction: false
                 tag: server
                 url: /
-              message: Turn the server off anyway?
-              title: Plex is currently streaming
         default:
         - service: switch.turn_off
           data: {}
@@ -138,7 +138,7 @@ computer:
           message: Do you want to turn the computer off?
           data:
             tag: computer
-            icon: https://samrenfrew.duckdns.org/static/icons/favicon-192x192.png
+            notification-icon: mdi:desktop-classic
             requireInteraction: false
             actions:
             - action: turn_computer_off
@@ -179,3 +179,11 @@ speedtest:
       - service: speedtestdotnet.speedtest
   mode: single
   icon: mdi:speedometer
+force_location_update:
+  sequence:
+  - service: notify.mobile_app_iphone
+    data:
+      message: request_location_update
+  mode: single
+  alias: Force Location Update
+  icon: mdi:apple

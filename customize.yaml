@@ -389,7 +389,7 @@ device_tracker.adys_ipad_app:
   icon: mdi:apple
 device_tracker.adrienne_vinces_iphone_app:
   entity_picture: /local/img/ady.png
-  friendly_name: Adrienne Vince’s iPhone (App)
+  friendly_name: Ady's iPhone (App)
   icon: mdi:apple
 person.sam:
   entity_picture: /local/img/sam.jpg

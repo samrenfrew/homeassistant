@@ -10,11 +10,10 @@ lounge:
   icon: mdi:sofa
   entities:
     - light.big_lamp
+    - light.tv_lamp
     - light.small_lamp
     - light.chair_lamp
-    - light.tv_lamp
     - light.backlight
-    - light.christmas_tree
     - media_player.tv
     - media_player.lounge_speaker
 
@@ -35,19 +34,19 @@ office:
     - switch.nas_power
     - switch.ikea_plug
     - switch.extension_lead
+    - switch.humidifier
 
 hamenu:
   name: HAMenu
   entities:
-    - switch.pc_power
-    - switch.nas_power
-    - switch.tplink
-    # - switch.ikea_plug
-    - switch.extension_lead
-    - switch.transmission_turtle_mode
-    - switch.humidifier
     - input_boolean.night_mode
-    # - input_boolean.guest_mode
+    - input_boolean.guest_mode
+    # - switch.pc_power
+    # - switch.nas_power
+    # - switch.tplink
+    # - switch.ikea_plug
+    # - switch.extension_lead
+    # - switch.transmission_turtle_mode
 
 timer:
   name: Timer

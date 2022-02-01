@@ -22,7 +22,7 @@ mqtt:
 
 # Logs
 recorder:
-  purge_keep_days: 5
+  purge_keep_days: 30
   commit_interval: 5
   exclude:
     domains:
@@ -37,10 +37,10 @@ recorder:
       - sensor.current_version
       - sensor.latest_version
       - sensor.myipopendnscom
-      - binary_sensor.motion
     entity_globs:
       - sensor.dark_sky_*
       - sensor.leeds_*
+      - binary_sensor.*_motion
 
 logbook:
   exclude:
@@ -108,6 +108,7 @@ joaoapps_join:
 
 # Custom Components
 breaking_changes:
+config_editor:
 # browser_mod:
 #   disable:
 #     - all

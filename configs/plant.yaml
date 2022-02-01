@@ -1,12 +1,12 @@
 ## PLANTS
   lounge:
     sensors:
-      moisture: sensor.plant_moisture
-      battery: sensor.plant_battery
-      temperature: sensor.plant_temperature
-      conductivity: sensor.plant_conductivity
-      brightness: sensor.plant_brightness
-    min_moisture: 20
+      moisture: sensor.flower_moisture
+      battery: sensor.flower_battery
+      temperature: sensor.flower_temperature
+      conductivity: sensor.flower_conductivity
+      brightness: sensor.flower_brightness
+    min_moisture: 10
     max_moisture: 40
     min_temperature: 10
     max_temperature: 30
