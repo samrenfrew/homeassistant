@@ -93,6 +93,7 @@ script: !include scripts.yaml
 sensor: !include_dir_merge_list configs/sensor
 shell_command: !include configs/shell_command.yaml
 switch: !include_dir_merge_list configs/switch
+template: !include_dir_merge_list configs/template
 timer: !include configs/timer.yaml
 webostv: !include configs/webostv.yaml
 
@@ -109,6 +110,6 @@ joaoapps_join:
 # Custom Components
 breaking_changes:
 config_editor:
-# browser_mod:
-#   disable:
-#     - all
+browser_mod:
+  disable:
+    - all

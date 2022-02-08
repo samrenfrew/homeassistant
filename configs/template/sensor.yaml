@@ -1,0 +1,64 @@
+- sensor:
+  # - name: "tplink_power"
+  #   unique_id: "tplink_power"
+  #   attributes:
+  #     friendly_name: "TP-Link Power"
+  #   unit_of_measurement: 'W'
+  #   state: >-
+  #       {{ state_attr('switch.tplink', 'current_power_w') }}
+  #   device_class: power
+  - name: "humidifier"
+    unique_id: "humidifier"
+    attributes:
+      friendly_name: "Humidifier"
+    icon: mdi:water-percent
+    unit_of_measurement: '%'
+    state: >-
+        {%- if is_state('input_select.humidifier_location', 'Office') == true -%}
+          {{ states('sensor.office_humidity') }}
+        {%- else -%}
+          {{ states('sensor.lounge_humidity') }}
+        {%- endif -%}
+    device_class: humidity
+  - name: "flat_temperature"
+    unique_id: "flat_temperature"
+    attributes:
+      friendly_name: "Flat Temperature"
+    device_class: temperature
+    unit_of_measurement: "°C"
+    state: >
+      {% set bedroom = states('sensor.bedroom_temperature') | float(states('sensor.flat_temperature')) %}
+      {% set lounge = states('sensor.lounge_temperature') | float(states('sensor.flat_temperature')) %}
+      {% set office = states('sensor.office_temperature') | float(states('sensor.flat_temperature')) %}
+      {% set hallway = states('sensor.hallway_temperature') | float(states('sensor.flat_temperature')) %}
+
+      {{ ((bedroom + lounge + office + hallway) / 4) | round(1) }}
+  - name: "flat_humidity"
+    unique_id: "flat_humidity"
+    attributes:
+      friendly_name: "Flat Humidity"
+    device_class: humidity
+    unit_of_measurement: "%"
+    state: >
+      {% set bedroom = states('sensor.bedroom_humidity') | float(states('sensor.flat_humidity')) %}
+      {% set lounge = states('sensor.lounge_humidity') | float(states('sensor.flat_humidity')) %}
+      {% set office = states('sensor.office_humidity') | float(states('sensor.flat_humidity')) %}
+      {% set hallway = states('sensor.hallway_humidity') | float(states('sensor.flat_humidity')) %}
+
+      {{ ((bedroom + lounge + office + hallway) / 4) | round(1) }}
+  - name: "speedtest_download"
+    unique_id: "speedtest_download"
+    icon: mdi:download
+    attributes:
+      friendly_name: "Speedtest Download"
+    unit_of_measurement: "Mbit/s"
+    state: >
+      {{ state_attr("sensor.speedtest_ping", "download") | round(2) }}
+  - name: "speedtest_upload"
+    unique_id: "speedtest_upload"
+    icon: mdi:upload
+    attributes:
+      friendly_name: "Speedtest Upload"
+    unit_of_measurement: "Mbit/s"
+    state: >
+      {{ state_attr("sensor.speedtest_ping", "upload") | round(2) }}
