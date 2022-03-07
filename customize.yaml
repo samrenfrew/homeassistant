@@ -284,14 +284,6 @@ sensor.work:
 input_number.hallway_light_speed:
   friendly_name: Backlight Speed
   icon: mdi:gauge
-light.big_lamp:
-  icon: mdi:floor-lamp
-light.small_lamp:
-  icon: mdi:lamp
-light.tv_lamp:
-  icon: mdi:desk-lamp
-light.backlight:
-  icon: mdi:television-ambient-light
 input_number.computer_light_speed:
   icon: mdi:gauge
 sensor.latest_version:
@@ -320,16 +312,16 @@ switch.tradfri_outlet:
   icon: mdi:power-socket-uk
 device_tracker.adriennes_mbp:
   friendly_name: Ady's Macbook
-  icon: mdi:laptop-mac
+  icon: mdi:laptop
 switch.ikea_plug:
   device_class: outlet
   icon: mdi:power-socket-uk
 device_tracker.adriennes_ipad:
   friendly_name: Ady's iPad
-  icon: mdi:tablet-ipad
+  icon: mdi:tablet
 device_tracker.adrienne_vinces_iphone:
   friendly_name: Ady's iPhone
-  icon: mdi:cellphone-iphone
+  icon: mdi:cellphone
 sensor.samrenfrew_duckdns_org:
   friendly_name: IP Address
   icon: mdi:crosshairs-gps
@@ -373,14 +365,14 @@ light.christmas_tree:
   friendly_name: Christmas Tree
   icon: mdi:pine-tree
 device_tracker.sams_mbp:
-  icon: mdi:laptop-mac
+  icon: mdi:laptop
   friendly_name: Sam's Macbook
 device_tracker.adrienne_s_ipad:
   friendly_name: Adrienne's iPad (App)
   icon: mdi:apple
 device_tracker.adrienne_vinces_ipad:
   friendly_name: Adrienne's iPad
-  icon: mdi:tablet-ipad
+  icon: mdi:tablet
 device_tracker.sam_phone_app:
   entity_picture: /local/img/sam.jpg
   icon: mdi:android
@@ -440,9 +432,6 @@ binary_sensor.door_sensor:
 binary_sensor.office_window_sensor:
   friendly_name: Office Window
   device_class: window
-light.chair_lamp:
-  icon: mdi:sofa-single-outline
-  friendly_name: Chair Lamp
 switch.syncthing:
   icon: hass:sync-circle
 switch.filebrowser:
@@ -459,3 +448,5 @@ binary_sensor.lounge_door:
   device_class: door
 binary_sensor.bedroom_window:
   device_class: window
+zone.home:
+  radius: 50

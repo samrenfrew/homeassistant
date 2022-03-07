@@ -24,3 +24,13 @@
       icon: mdi:clock-check-outline
       state: "{{ is_state('binary_sensor.home', 'on') }}"
       auto_off: 0:10:00
+
+- trigger:
+    - platform: state
+      entity_id: binary_sensor.front_door
+  binary_sensor:
+    - name: "door_open_recently"
+      unique_id: 'door_open_recently'
+      device_class: door
+      state: "{{ is_state('binary_sensor.front_door', 'on') }}"
+      auto_off: 0:10:00

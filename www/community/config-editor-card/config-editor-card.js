@@ -1,4 +1,4 @@
-console.info("Config Editor 3.5");
+console.info("Config Editor 3.10");
 const LitElement = window.LitElement || Object.getPrototypeOf(customElements.get("hui-masonry-view") );
 const html = LitElement.prototype.html;
 const css = LitElement.prototype.css;
@@ -34,20 +34,39 @@ static get styles() {
 		padding:5px;
 		overflow-wrap:normal;
 		white-space:pre}
-	.top{min-height:calc(100vh - var(--header-height))}
-	.pin{text-align:right}
-	.pin label{cursor:pointer}
+	.top{
+		min-height:calc(95vh - var(--header-height))}
+	.pin,.filebar{
+		display:flex}
+	.pin label{
+		cursor:pointer}
+	.right{text-align:right;
+		flex-grow:1}
+	.right button{
+		font-family:Times,serif;
+		font-weight:bold}
 	.bar{
 		position:-webkit-sticky;
 		position:sticky;
 		bottom:0;
 		z-index:2;
 		background:var(--app-header-background-color);
-		color:var(--app-header-text-color,white)}
-	.bar i{background:#ff7a81;cursor:pointer}
+		color:var(--app-header-text-color,white);
+		white-space:nowrap;
+		overflow:hidden;
+		text-overflow:ellipsis}
+	.bar i{
+		background:#ff7a81;
+		cursor:pointer}
+	.bar select{
+		flex-grow:1;
+		text-overflow:ellipsis;
+		width:100%;
+		overflow:hidden}
 	`;
 }
-render() {
+
+render(){
 	const hver=this._hass.states['config_editor.version'];
 	if(!hver){return html`<ha-card>Missing 'config_editor:' in configuration.yaml
 		for github.com/htmltiger/config-editor</ha-card>`;}
@@ -56,49 +75,70 @@ render() {
 	if(this.fileList.length<1){
 		this.openedFile = this.localGet('Open')||'';
 		this.edit.ext = this.localGet('Ext')||'yaml';
-		this.edit.plainBox = this.localGet('Plain')||'';
+		this.edit.basic = this.localGet('Basic')||'';
 		if(this.fileList = JSON.parse(this.localGet('List'+this.edit.ext))){
 			if(this.openedFile.endsWith("."+this.edit.ext)){
 				setTimeout(this.oldText, 500, this);
 			}
 		}else{this.List();}
 	}
-	
 	return html`
 	<ha-card>
 		<div class="top">
 		<div class="pin">
+			<div class="left"><button @click="${this.reLoad}">Reload</button></div>
+			<div class="right">
+			<button @click="${e=>this.txtSize(0)}">-</button>
+			<button @click="${e=>this.txtSize(2)}">A</button>
+			<button @click="${e=>this.txtSize(1)}">+</button>
 			<select @change=${this.extChange}>
 			${["yaml","py","json","conf","js","txt","log"].map(value =>
 			html`<option ?selected=${value === this.edit.ext }
 				value=${value}>${value.toUpperCase()}</option>`)}
 			</select>
-			<label>Basic Editor<input type="checkbox"
-			?checked=${this.edit.plainBox=='1'}
-			name="plain" value="1" @change=${this.plainChange}></label>
+			<label>Basic Editor<input type="checkbox" ?checked=${this.edit.basic=='1'}
+			name="basic" value="1" @change=${this.basicChange}></label>
+			</div>
 		</div>
-		${this.edit.plainBox ?
-		html`<textarea rows="10"
-			@change=${this.updateText} id="code">${this.code}</textarea>`:
-		html`<ha-code-editor id="code" @keydown=${this.saveKey} .hass=${this._hass} hasAutocomplete mode="yaml"
-		@value-changed=${this.updateText} dir="ltr"></ha-code-editor>`}
+		${(this.edit.basic || this.edit.coder ) ?
+		html`<textarea rows="10" ?readonly=${!0==this.edit.readonly}
+			@change=${this.updateText} id="code" @keydown=${this.saveKey}>${this.code}</textarea>`:
+		html`<ha-code-editor id="code" mode="yaml" ?readOnly=${!0==this.edit.readonly}
+			@keydown=${this.saveKey} .hass=${this._hass} @value-changed=${this.updateText}
+			dir="ltr" autocomplete-entities></ha-code-editor>`}
 		</div>
+		${this.edit.hidefooter ? '' : html`
 		<div class="bar">
 			<div>${this.alertLine}</div>
-			<div>		
-			<button @click="${this.List}">Get List</button>
+			<div class="filebar">${!this.edit.readonly ?
+			html`<button @click="${this.Save}">Save</button>`:''}
 			<select @change=${this.Load}>
 			${[''].concat(this.fileList).map(value =>
 			html`<option ?selected=${value === this.openedFile}
 				value=${value}>${value}</option>`)}
 			</select>
-			<button @click="${this.Save}">Save</button>
+			<button @click="${this.List}">Get List</button>
 			</div>
 			<code>#${this.infoLine}</code>
-		</div>
+		</div>`}
 	</ha-card>
 `;
 
+}
+
+txtSize(e){
+	if(e<3){
+		if(e>1){
+			this.edit.size=100;
+		}else if(e>0){
+			this.edit.size+=5;
+		}else{
+			this.edit.size-=5;
+		}
+		this.localSet('Size', this.edit.size);
+		this.infoLine = 'size: '+this.edit.size;
+	}
+	this.renderRoot.querySelector('#code').style.fontSize=this.edit.size+'%';
 }
 
 extChange(e){
@@ -109,15 +149,15 @@ extChange(e){
 	this.List();
 }
 
-plainChange(){
-	this.edit.plainBox = this.edit.plainBox?'':'1';
-	this.localSet('Plain', this.edit.plainBox);
-	this.List();
+basicChange(){
+	this.edit.basic = this.edit.basic?'':'1';
+	this.localSet('Basic', this.edit.basic);
+	this.reLoad();
 }
 
 updateText(e) {
 	e.stopPropagation();
-	this.code = this.edit.plainBox ? e.target.value : e.detail.value;
+	this.code = this.edit.basic ? e.target.value : e.detail.value;
 	if(this.openedFile){this.localSet('Text', this.code);}
 }
 
@@ -146,6 +186,9 @@ saveList(){
 	this.localSet('List'+this.edit.ext, JSON.stringify(this.fileList));
 }
 
+reLoad(e){
+	this.Load({target:{value:this.openedFile},reload:1});
+}
 oldText(dhis){
 	dhis.Load({target:{value:dhis.openedFile}});
 }
@@ -172,18 +215,22 @@ Toast(message, duration){
 
 async Coder(){
 	const c="ha-yaml-editor";
-	if(customElements.get(c)){return;}
-	await customElements.whenDefined("partial-panel-resolver");
-	const p = document.createElement('partial-panel-resolver');
-	p.hass = {panels: [{url_path: "tmp", component_name: "config"}]};
-	p._updateRoutes();
-	await p.routerOptions.routes.tmp.load();
-	const d=document.createElement("ha-panel-config");
-	await d.routerOptions.routes.automation.load();
 	if(!customElements.get(c)){
-		this.localSet('Plain', 1);
+		await customElements.whenDefined("partial-panel-resolver");
+		const p = document.createElement('partial-panel-resolver');
+		p.hass = {panels: [{url_path: "tmp", component_name: "config"}]};
+		p._updateRoutes();
+		await p.routerOptions.routes.tmp.load();
+		const d=document.createElement("ha-panel-config");
+		await d.routerOptions.routes.automation.load();
+	}
+	const a=document.createElement(c);
+	this.edit.coder=0;
+	if(!a){
+		this.localSet('Basic', 1);
 		console.log('failed '+c);
 	}
+	this.render();
 }
 
 async List(){
@@ -194,11 +241,11 @@ async List(){
 	this.saveList();
 	if(this.openedFile.endsWith("."+this.edit.ext)){
 		setTimeout(this.oldText, 500, this);
-	}	
+	}
 }
 
 async Load(x) {
-	if(x.target.value == this.openedFile && this.code){return;}
+	if(x.target.value == this.openedFile && this.code && !x.hasOwnProperty('reload')){return;}
 	if(this.edit.orgCode.trim() != this.code.trim()){
 		if(!confirm("Switch without Saving?")){x.target.value = this.openedFile; return;}
 	}
@@ -224,10 +271,11 @@ async Load(x) {
 	}
 	this.edit.orgCode = this.code;
 	this.localSet('Open', this.openedFile);
+	this.txtSize(3);
 }
 
 async Save() {
-	if(this.renderRoot.querySelector('#code').value != this.code){
+	if(this.renderRoot.querySelector('#code').value != this.code || this.edit.readonly){
 		this.infoLine='Something not right!';
 		return;
 	}
@@ -259,7 +307,17 @@ getCardSize() {
 }
 
 setConfig(config) {
-	this.edit = {options: config, plainBox: false, ext: '', orgCode: ''};
+	this.edit = {file: '', hidefooter: false, readonly: false, basic: false, size: 0, ext: '', orgCode: '', coder:1, ...config};
+	if(this.edit.file){
+		const f=this.edit.file.split('.')[1];
+		if(f){
+			this.localSet('Open', this.edit.file);
+			this.localSet('Ext', f);
+		}
+	}
+	if(!this.edit.size){
+		this.edit.size=Number(this.localGet('Size'))||100;
+	}
 	this.Coder();
 }
 
