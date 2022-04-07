@@ -78,3 +78,12 @@
     entity_id: light.backlight
     domain: light
   mode: single
+- id: '1646945706545'
+  alias: LG webOS Smart TV - Turn On Action
+  description: ''
+  use_blueprint:
+    path: cvroque/webostv_turn_on.yaml
+    input:
+      webostv_mac: 78:5d:c8:92:ef:0b
+      select_action: false
+      webostv: media_player.tv

@@ -1,6 +1,6 @@
 - platform: workday
   name: "Work Tomorrow"
-  country: England
+  country: GB
   days_offset: 1
   add_holidays:
     - "2021-12-29"
@@ -8,7 +8,7 @@
     - "2021-12-31"
 - platform: workday
   name: "Work Today"
-  country: England
+  country: GB
   add_holidays:
     - "2021-12-29"
     - "2021-12-30"

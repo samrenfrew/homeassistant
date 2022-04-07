@@ -15,10 +15,10 @@ http:
     - 192.168.1.4
     - 192.168.1.1
 
-mqtt:
-  broker: 192.168.1.4
-  username: !secret mqtt_user
-  password: !secret mqtt_pw
+#mqtt:
+#  broker: 192.168.1.4
+#  username: !secret mqtt_user
+#  password: !secret mqtt_pw
 
 # Logs
 recorder:
