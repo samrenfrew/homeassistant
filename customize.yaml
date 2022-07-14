@@ -191,13 +191,6 @@ binary_sensor.hallway_light:
   friendly_name: Light Sensor
   icon: mdi:white-balance-incandescent
 light.hallway: {}
-device_tracker.sam_phone_bt:
-  friendly_name: Sam's Phone (BT)
-  hidden: true
-  icon: mdi:bluetooth
-device_tracker.adrienne_vinces_iphone_bt:
-  friendly_name: Ady's iPhone (BT)
-  icon: mdi:bluetooth
 switch.tv:
   friendly_name: TV Power
 sensor.disk_use_mediapistorage1:

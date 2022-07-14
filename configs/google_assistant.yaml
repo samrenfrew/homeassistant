@@ -92,7 +92,7 @@
       room: Bedroom
       aliases:
         - Spotlight
-    media_player.tv:
+    media_player.lg_webos_tv:
       expose: true
       name: TV
       aliases:

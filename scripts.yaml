@@ -187,3 +187,21 @@ force_location_update:
   mode: single
   alias: Force Location Update
   icon: mdi:apple
+enable_tv_on:
+  alias: Enable TV On
+  sequence:
+  - service: automation.turn_off
+    data: {}
+    target:
+      entity_id: automation.new_automation
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  - service: automation.turn_on
+    data: {}
+    target:
+      entity_id: automation.new_automation
+  mode: single
+  icon: mdi:television

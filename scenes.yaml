@@ -75,39 +75,56 @@
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      color_mode: color_temp
-      brightness: 133
-      color_temp: 454
       off_brightness:
+      icon: mdi:floor-lamp
       friendly_name: Big Lamp
       supported_features: 43
-      icon: mdi:floor-lamp
-      state: 'on'
+      state: 'off'
     light.small_lamp:
       min_mireds: 250
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      color_mode: color_temp
-      brightness: 97
-      color_temp: 454
       off_brightness:
+      icon: mdi:desk-lamp
       friendly_name: Small Lamp
       supported_features: 43
-      icon: mdi:lamp
+      color_mode: color_temp
+      brightness: 97
+      color_temp: 320
+      hs_color:
+      - 27.631
+      - 53.602
+      rgb_color:
+      - 255
+      - 181
+      - 118
+      xy_color:
+      - 0.485
+      - 0.381
       state: 'on'
     light.tv_lamp:
       min_mireds: 250
       max_mireds: 454
       supported_color_modes:
       - color_temp
-      color_mode: color_temp
-      brightness: 61
-      color_temp: 454
       off_brightness:
+      icon: mdi:lamp
       friendly_name: TV Lamp
       supported_features: 43
-      icon: mdi:desk-lamp
+      color_mode: color_temp
+      brightness: 61
+      color_temp: 320
+      hs_color:
+      - 27.631
+      - 53.602
+      rgb_color:
+      - 255
+      - 181
+      - 118
+      xy_color:
+      - 0.485
+      - 0.381
       state: 'on'
     light.backlight:
       min_mireds: 153
@@ -117,23 +134,25 @@
       supported_color_modes:
       - color_temp
       - hs
+      off_brightness: 1
+      icon: mdi:television-ambient-light
+      friendly_name: TV Backlight
+      supported_features: 63
       color_mode: hs
       brightness: 254
       hs_color:
-      - 35.932
+      - 34.237
       - 69.412
       rgb_color:
       - 255
-      - 183
+      - 178
       - 77
       xy_color:
-      - 0.513
-      - 0.413
-      off_brightness:
-      friendly_name: TV Backlight
-      supported_features: 63
-      icon: mdi:television-ambient-light
+      - 0.519
+      - 0.407
+      color_temp: 500
       state: 'on'
+  icon: mdi:weather-sunset
 - id: '1628548050102'
   name: Relax
   entities:
@@ -145,6 +164,10 @@
       supported_color_modes:
       - color_temp
       - hs
+      off_brightness:
+      icon: mdi:television-ambient-light
+      friendly_name: TV Backlight
+      supported_features: 63
       color_mode: hs
       brightness: 254
       hs_color:
@@ -157,12 +180,8 @@
       xy_color:
       - 0.513
       - 0.413
-      off_brightness:
-      friendly_name: TV Backlight
-      supported_features: 63
-      icon: mdi:television-ambient-light
       state: 'on'
-  icon: mdi:beach
+  icon: mdi:sofa
 - id: '1628548084428'
   name: Reading
   entities:
@@ -174,6 +193,10 @@
       supported_color_modes:
       - color_temp
       - hs
+      off_brightness:
+      icon: mdi:television-ambient-light
+      friendly_name: TV Backlight
+      supported_features: 63
       color_mode: hs
       brightness: 254
       hs_color:
@@ -186,8 +209,5 @@
       xy_color:
       - 0.447
       - 0.406
-      off_brightness:
-      friendly_name: TV Backlight
-      supported_features: 63
-      icon: mdi:television-ambient-light
       state: 'on'
+  icon: mdi:book

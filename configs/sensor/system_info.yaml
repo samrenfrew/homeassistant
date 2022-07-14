@@ -1,5 +1,5 @@
-- platform: uptime
-  scan_interval: 120
+#- platform: uptime
+#  scan_interval: 120
 # - platform: version
 # - platform: version
 #   source: local

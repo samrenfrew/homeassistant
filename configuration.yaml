@@ -7,18 +7,13 @@ frontend:
   extra_module_url:
     - /hacsfiles/lovelace-card-mod/card-mod.js
 http:
-  login_attempts_threshold: 10
-  ip_ban_enabled: false
+  login_attempts_threshold: 5
+  ip_ban_enabled: true
   use_x_forwarded_for: true
   trusted_proxies:
     - 192.168.1.5
     - 192.168.1.4
     - 192.168.1.1
-
-#mqtt:
-#  broker: 192.168.1.4
-#  username: !secret mqtt_user
-#  password: !secret mqtt_pw
 
 # Logs
 recorder:
@@ -64,16 +59,7 @@ logger:
     homeassistant.components.rest.switch: critical
     homeassistant.components.plex: critical
     homeassistant.components.sky_hub: critical
-
-# MQTT Event Stream
-# mqtt_eventstream:
-#   publish_topic: master/topic
-#   subscribe_topic: slaves/#
-#   ignore_event:
-#     - call_service
-#     # - state_changed
-#     - homeassistant_stop
-#     - homeassistant_start
+    homeassistant.components.media_player: debug
 
 # Main Components
 alarm_control_panel: !include_dir_merge_list configs/alarm_control_panel
@@ -83,10 +69,11 @@ device_tracker: !include_dir_merge_list configs/device_tracker
 google_assistant: !include configs/google_assistant.yaml
 group: !include groups.yaml
 light: !include_dir_merge_list configs/light
+mqtt: !include_dir_merge_named configs/mqtt
 media_player: !include_dir_merge_list configs/media_player
 notify: !include configs/notify.yaml
 panel_iframe: !include configs/panel_iframe.yaml
-plant: !include configs/plant.yaml
+# plant: !include configs/plant.yaml
 remote: !include configs/remote.yaml
 scene: !include scenes.yaml
 script: !include scripts.yaml
@@ -95,7 +82,7 @@ shell_command: !include configs/shell_command.yaml
 switch: !include_dir_merge_list configs/switch
 template: !include_dir_merge_list configs/template
 timer: !include configs/timer.yaml
-webostv: !include configs/webostv.yaml
+#webostv: !include configs/webostv.yaml
 
 # Additional Components
 tts:
@@ -108,8 +95,18 @@ joaoapps_join:
 # adaptive_lighting: !include configs/adaptive_lighting.yaml
 
 # Custom Components
-breaking_changes:
+#breaking_changes:
 config_editor:
 browser_mod:
   disable:
     - all
+# ble_monitor:
+#   active_scan: True
+#   discovery: False
+#   devices:
+#     - mac: 'C4:7C:8D:63:4B:41'
+#       name: 'MiFlora'
+#       temperature_unit: C
+#       decimals: 2
+#       use_median: False
+#       restore_state: True

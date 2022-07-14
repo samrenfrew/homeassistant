@@ -1,0 +1,290 @@
+mushroom:
+  # Colors                                                    # Light grey text
+  accent-color: '#2196f3'
+  # accent-color: '#00a1ff'
+  secondary-accent-color: '#3498db'
+
+  primary-color: '#636B75'
+
+  # masonry-view-card-margin: '0px'
+
+  text-color: '#636B75'  # Grey text
+  text-medium-color: '#8c96a5' # Medium grey text
+  text-light-color: '#BAC0C6'                                                       # Blue
+  background-color: '#F7F8F9'  # Light grey background
+  background-color-2: '#F7F8F9'  # Light grey background
+  background-card-color: '#F7F8F9' # White background
+  border-color: '#E8E8E8'  # Light grey border
+
+  # Header
+  app-header-background-color: '#F7F8F9'
+  app-header-text-color: '#636B75'
+  paper-tabs-selection-bar-color: var(--accent-color)'
+  app-header-edit-background-color: "#23608a"
+  # app-header-edit-text-color: ""
+
+  # Left Menu
+  paper-listbox-background-color: 'var(--background-color)' # Background
+
+  # UI
+  paper-card-header-color: 'var(--text-color)' # Title in settings
+  primary-background-color: 'var(--background-color)'
+  iron-icon-fill-color: 'var(--text-color)'
+  iron-icon-stroke-color: 'var(--text-color)'
+
+  # Card
+  paper-card-background-color: 'var(--background-card-color)' # Background
+  dark-primary-color: '#3498db'
+  primary-text-color: 'var(--text-color)'
+  paper-listbox-color: 'var(--text-color)'
+  light-primary-color: 'var(--text-light-color)'
+  secondary-text-color: 'var(--text-medium-color)'
+  disabled-text-color: 'var(--text-light-color)'
+  paper-dialog-button-color: 'var(--text-color)'
+  secondary-background-color: 'var(--background-color-2)' # Background more info title
+
+  # Icons
+  paper-item-icon-color: 'var(--text-light-color)' # Off
+  paper-item-icon-active-color: 'var(--accent-color)' # On
+
+  # Switches
+  switch-checked-button-color: '#00a1ff'   # Knob On
+  switch-unchecked-button-color: '#00a1ff'         # Knob Off
+  switch-checked-track-color: '#0077FF' # Background On
+  switch-unchecked-track-color: 'var(--disabled-text-color)' # Background Off
+
+  # Slider
+  paper-slider-active-color: 'var(--accent-color)'    # Line On
+  paper-slider-container-color: '#e5e7ea'   # Line Off
+  paper-slider-knob-color: 'var(--text-light-color)'  # Knob On
+  paper-slider-knob-start-color: 'var(--text-light-color)'  # Knob Off
+
+  # Shadows
+  #ha-card-box-shadow: 'none'
+  ha-card-box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.16)
+  ha-card-border-radius: 15px
+  #ha-card-background: none
+  # paper-card-background-color: rgba(0, 0, 0, 0.00)
+
+  # HACS
+  hacs-badge-color: 'var(--accent-color)'  # New Badge
+  hacs-status-installed: 'var(--text-color)'  # Installed Icon
+  hacs-status-pending-restart: 'var(--text-light-color)'   # Restart Icon
+  hacs-status-pending-update: 'var(--accent-color)'
+
+  dialog-backdrop-filter: blur(10px)
+
+  card-mod-theme: mushroom
+  card-mod-card-yaml: |
+    .: |
+      ha-card {
+        font-family: "Roman-55", "Helvetica Neue";
+        border-radius: 12px;
+        transition: height 0s, margin 0s;
+      }
+      ha-card.type-markdown {
+        --paper-card-background-color: 'rgba(11, 11, 11, 0.00)';
+        box-shadow: none;
+        padding-top: 20px;
+        background: none;
+      }
+      ha-card.type-glance, ha-card.media-player, ha-card.type-entities, ha-card.type-custom-uptime-card  {
+        // margin-bottom: 10px;
+      }
+      ha-card.chip {
+        letter-spacing: 0.2px;
+      }
+      ha-card.type-custom-button-card {
+        {% if config.entity and states(config.entity) == 'on' -%}
+          {%- if states('input_boolean.dark_mode') == 'on' -%}
+            box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.16) !important;
+          {%- else -%}
+            box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.16) !important;
+          {%- endif -%}
+        {%- endif %}
+      }
+      ha-card.type-custom-search-card {
+        background:none;
+      }
+      ha-card.type-custom-mushroom-light-card {
+        padding: 14px;
+        {% if config.entity and states(config.entity) == 'on' -%}
+          {%- if states('input_boolean.dark_mode') == 'on' -%}
+            #box-shadow: inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+          {%- else -%}
+            #box-shadow: inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+          {%- endif -%}
+        {%- endif %}
+      }
+
+    mushroom-state-info$: |
+      .secondary {
+        line-height:1.2
+      }
+    mushroom-shape-icon$: |
+      .shape {
+        background: none !important;
+      }
+      .shape.disabled ha-icon {
+        color: var(--primary-text-color) !important;
+      }
+      .shape ha-icon {
+        --mdc-icon-size:32px !important
+      }
+    mushroom-light-color-control$: 
+      mushroom-slider$: |
+        .container {
+          height:20px !important;
+        }
+    mushroom-light-brightness-control$:
+      mushroom-slider$: |
+        .container {
+          height:20px !important;
+        }
+        .slider .slider-track-indicator {
+          border-radius: 0 !important;
+        }
+
+    ha-markdown$: |
+        :host {
+          padding-left: 16px !important;
+          padding-right: 10px !important;
+        }
+        ha-markdown-element {
+          font-size:10px;
+          font-family: "Roman-55", "Helvetica Neue";
+          letter-spacing: 0.2px;
+        }
+        h1 {
+          font-size: 22px;
+          margin-bottom:5px;
+          font-weight: 700 !important;
+        }
+        h2 {
+          font-size: 15px;
+          margin-top:0;
+          font-weight: 700 !important;
+        }
+
+  ## More Info
+  card-mod-more-info: |
+    $: |
+      .mdc-dialog__scrim {
+        backdrop-filter: blur(10px);
+        -webkit-backdro-filter: blur(10px);
+        background:none !important;
+      }
+      .mdc-dialog__surface {
+        background:var(--background-color) !important;
+        border-radius:10px !important;
+        box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
+      }
+      ha-paper-dialog {
+        border-radius:10px;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    ha-header-bar:
+      $: |
+        :host {
+            border-bottom:0 !important;
+        }
+        .mdc-top-app-bar {
+            background:none !important;
+        }
+        .mdc-top-app-bar__title {
+            opacity:0;
+        }
+    mwc-tab-bar:
+      $: |
+        :host {
+            border-bottom:0 !important;
+        }
+
+  ## Header
+  card-mod-root-yaml: |
+    .: |
+      /* This changes the color of the currently selected tab. */
+      ha-tabs {
+        --paper-tabs-selection-bar-color: var(--accent-color) !important;
+      }
+      paper-tab[aria-selected=true] {
+        color: var(--accent-color) !important;
+      }
+      /* This hides the help button. */
+      a.menu-link[target="_blank"] {
+        display: none;
+      }
+
+# Mushroom layout
+  mush-spacing: 10px
+  # Title
+  mush-title-padding: 24px 12px 16px
+  mush-title-spacing: 12px
+  mush-title-font-size: 24px
+  mush-title-font-weight: bold
+  mush-title-line-height: 1
+  mush-title-font-family: "Roman-55, Helvetica Neue"
+  mush-subtitle-font-size: 16px
+  mush-subtitle-font-weight: normal
+  mush-subtitle-line-height: 1.2
+  # Card
+  mush-icon-border-radius: 50%
+  mush-control-border-radius: 4px
+  mush-card-primary-font-size: 14px
+  mush-card-secondary-font-size: 12px
+  mush-card-primary-font-weight: bold
+  mush-card-secondary-font-weight: bolder
+  # Chips
+  mush-chip-spacing: 8px
+  mush-chip-padding: 0 12px
+  mush-chip-height: 36px
+  mush-chip-border-radius: 18px
+  mush-chip-font-size: 0.3em # relative to chip height
+  mush-chip-font-weight: bold
+  mush-chip-icon-size: 0.5em # relative to chip height
+  # Slider
+  mush-slider-threshold: 10
+  # Colors
+  mush-rgb-red: 244, 67, 54
+  mush-rgb-pink: 233, 30, 99
+  mush-rgb-purple: 156, 39, 176
+  mush-rgb-deep-purple: 103, 58, 183
+  mush-rgb-indigo: 63, 81, 181
+  mush-rgb-blue: 33, 150, 243
+  mush-rgb-light-blue: 3, 169, 244
+  mush-rgb-cyan: 0, 188, 212
+  mush-rgb-teal: 0, 150, 136
+  mush-rgb-green: 76, 175, 80
+  mush-rgb-light-green: 139, 195, 74
+  mush-rgb-lime: 205, 220, 57
+  mush-rgb-yellow: 255, 235, 59
+  mush-rgb-amber: 255, 193, 7
+  mush-rgb-orange: 33, 150, 243
+  mush-rgb-deep-orange: 255, 87, 34
+  mush-rgb-brown: 121, 85, 72
+  mush-rgb-grey: 158, 158, 158
+  mush-rgb-blue-grey: 96, 125, 139
+  mush-rgb-black: 0, 0, 0
+  mush-rgb-white: 255, 255, 255
+  
+  mush-rgb-info: var(--rgb-blue)
+  mush-rgb-success: var(--rgb-green)
+  mush-rgb-warning: var(--rgb-blue)
+  mush-rgb-danger: var(--rgb-red)
+
+  mush-rgb-state-cover: var(--rgb-blue)
+  mush-rgb-state-fan: var(--rgb-green)
+  mush-rgb-state-light: var(--rgb-blue)
+  mush-rgb-state-entity: var(--rgb-blue)
+  mush-rgb-state-switch: var(--rgb-blue)
+
+  mush-rgb-state-alarm-disarmed: var(--rgb-info)
+  mush-rgb-state-alarm-armed: var(--rgb-success)
+  mush-rgb-state-alarm-triggered: var(--rgb-danger)
+
+  mush-rgb-state-person-home: var(--rgb-success)
+  mush-rgb-state-person-not-home: var(--rgb-danger)
+  mush-rgb-state-person-zone: var(--rgb-info)
+  mush-rgb-state-person-unknown: var(--rgb-grey)

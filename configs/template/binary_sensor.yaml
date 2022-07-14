@@ -34,3 +34,35 @@
       device_class: door
       state: "{{ is_state('binary_sensor.front_door', 'on') }}"
       auto_off: 0:10:00
+
+# - trigger:
+#     - platform: state
+#       entity_id: sensor.lounge_speaker_timers
+#     - platform: state
+#       entity_id: sensor.hallway_speaker_timers
+#     - platform: state
+#       entity_id: sensor.bedroom_speaker_timers
+#   binary_sensor:
+#     - name: "gh_timer_set"
+#       unique_id: 'gh_timer_set'
+#       state: >-
+#         {{ not is_state('sensor.lounge_speaker_timers', 'unavailable')
+#             or not is_state('sensor.hallway_speaker_timers', 'unavailable')
+#             or not is_state('sensor.bedroom_speaker_timers', 'unavailable') }}
+
+# - trigger:
+#     - platform: state
+#       entity_id: sensor.lounge_speaker_alarms
+#     - platform: state
+#       entity_id: sensor.hallway_speaker_alarms
+#     - platform: state
+#       entity_id: sensor.bedroom_speaker_alarms
+#   binary_sensor:
+#     - name: "gh_alarm_set"
+#       unique_id: 'gh_alarm_set'
+#       attributes:
+#         friendly_name: "Alarm Set"
+#       state: >-
+#         {{ not is_state('sensor.lounge_speaker_alarms', 'unavailable')
+#         or not is_state('sensor.hallway_speaker_alarms', 'unavailable')
+#         or not is_state('sensor.bedroom_speaker_alarms', 'unavailable') }}

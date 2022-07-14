@@ -7,6 +7,7 @@
   #   state: >-
   #       {{ state_attr('switch.tplink', 'current_power_w') }}
   #   device_class: power
+
   - name: "humidifier"
     unique_id: "humidifier"
     attributes:
@@ -20,6 +21,7 @@
           {{ states('sensor.lounge_humidity') }}
         {%- endif -%}
     device_class: humidity
+
   - name: "flat_temperature"
     unique_id: "flat_temperature"
     attributes:
@@ -33,6 +35,7 @@
       {% set hallway = states('sensor.hallway_temperature') | float(states('sensor.flat_temperature')) %}
 
       {{ ((bedroom + lounge + office + hallway) / 4) | round(1) }}
+
   - name: "flat_humidity"
     unique_id: "flat_humidity"
     attributes:
@@ -46,6 +49,7 @@
       {% set hallway = states('sensor.hallway_humidity') | float(states('sensor.flat_humidity')) %}
 
       {{ ((bedroom + lounge + office + hallway) / 4) | round(1) }}
+ 
   - name: "speedtest_download"
     unique_id: "speedtest_download"
     icon: mdi:download
@@ -54,6 +58,7 @@
     unit_of_measurement: "Mbit/s"
     state: >
       {{ state_attr("sensor.speedtest_ping", "download") | round(2) }}
+
   - name: "speedtest_upload"
     unique_id: "speedtest_upload"
     icon: mdi:upload
@@ -62,3 +67,111 @@
     unit_of_measurement: "Mbit/s"
     state: >
       {{ state_attr("sensor.speedtest_ping", "upload") | round(2) }}
+
+  - name: "gh_next_timer"
+    unique_id: "gh_next_timer"
+    icon: mdi:timer
+    device_class: timestamp
+    attributes:
+      friendly_name: "Next Timer"
+      timer_entity: >
+        {%- set timers = expand(['sensor.lounge_speaker_timers','sensor.hallway_speaker_timers','sensor.bedroom_speaker_timers'])| rejectattr('state', 'eq', 'unavailable') | list %}
+        {% set ns = namespace(time="",entity="",timer_id="") %}
+        {% for i in timers %}
+          {% if ns.time == ""%}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.timer_id = i.attributes.timers.0.timer_id %}
+          {% elif as_timestamp(i.state) < ns.time %}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.timer_id = i.attributes.timers.0.timer_id %}
+          {% endif %} 
+        {% endfor %}
+
+        {{ ns.entity }}
+      timer_id: >
+        {%- set timers = expand(['sensor.lounge_speaker_timers','sensor.hallway_speaker_timers','sensor.bedroom_speaker_timers'])| rejectattr('state', 'eq', 'unavailable') | list %}
+        {% set ns = namespace(time="",entity="",timer_id="") %}
+        {% for i in timers %}
+          {% if ns.time == ""%}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.timer_id = i.attributes.timers.0.timer_id %}
+          {% elif as_timestamp(i.state) < ns.time %}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.timer_id = i.attributes.timers.0.timer_id %}
+          {% endif %} 
+        {% endfor %}
+        {{ ns.timer_id }}
+    state: >-
+      {%- set timers = expand(['sensor.lounge_speaker_timers','sensor.hallway_speaker_timers','sensor.bedroom_speaker_timers'])| rejectattr('state', 'eq', 'unavailable') | list %}
+      {% set ns = namespace(time="",entity="",timer_id="") %}
+      {% for i in timers %}
+        {% if ns.time == ""%}
+          {%- set ns.time = as_timestamp(i.state) %}
+          {%- set ns.entity = i.entity_id %}
+          {%- set ns.timer_id = i.attributes.timers.0.timer_id %}
+        {% elif as_timestamp(i.state) < ns.time %}
+          {%- set ns.time = as_timestamp(i.state) %}
+          {%- set ns.entity = i.entity_id %}
+          {%- set ns.timer_id = i.attributes.timers.0.timer_id %}
+        {% endif %} 
+      {% endfor %}
+
+      {{ as_datetime(ns.time) }}
+
+  - name: "gh_next_alarm"
+    unique_id: "gh_next_alarm"
+    icon: mdi:alarm
+    device_class: timestamp
+    attributes:
+      friendly_name: "Next Alarm"
+      alarm_entity: >
+        {%- set timers = expand(['sensor.lounge_speaker_alarms','sensor.hallway_speaker_alarms','sensor.bedroom_speaker_alarms'])| rejectattr('state', 'eq', 'unavailable') | list %}
+        {% set ns = namespace(time="",entity="",alarm_id="") %}
+        {% for i in timers %}
+          {% if ns.time == ""%}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.alarm_id = i.attributes.alarms.0.alarm_id %}
+          {% elif as_timestamp(i.state) < ns.time %}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.alarm_id = i.attributes.alarms.0.alarm_id %}
+          {% endif %} 
+        {% endfor %}
+
+        {{ ns.entity }}
+      alarm_id: >
+        {%- set timers = expand(['sensor.lounge_speaker_alarms','sensor.hallway_speaker_alarms','sensor.bedroom_speaker_alarms'])| rejectattr('state', 'eq', 'unavailable') | list %}
+        {% set ns = namespace(time="",entity="",alarm_id="") %}
+        {% for i in timers %}
+          {% if ns.time == ""%}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.alarm_id = i.attributes.alarms.0.alarm_id %}
+          {% elif as_timestamp(i.state) < ns.time %}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.alarm_id = i.attributes.alarms.0.alarm_id %}
+          {% endif %} 
+        {% endfor %}
+        {{ ns.alarm_id }}
+    state: >-
+      {%- set timers = expand(['sensor.lounge_speaker_alarms','sensor.hallway_speaker_alarms','sensor.bedroom_speaker_alarms'])| rejectattr('state', 'eq', 'unavailable') | list %}
+      {% set ns = namespace(time="",entity="",alarm_id="") %}
+      {% for i in timers %}
+        {% if ns.time == ""%}
+          {%- set ns.time = as_timestamp(i.state) %}
+          {%- set ns.entity = i.entity_id %}
+          {%- set ns.alarm_id = i.attributes.alarms.0.alarm_id %}
+        {% elif as_timestamp(i.state) < ns.time %}
+          {%- set ns.time = as_timestamp(i.state) %}
+          {%- set ns.entity = i.entity_id %}
+          {%- set ns.alarm_id = i.attributes.alarms.0.alarm_id %}
+        {% endif %} 
+      {% endfor %}
+
+      {{ as_datetime(ns.time) }}
