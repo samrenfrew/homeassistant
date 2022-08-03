@@ -1,0 +1,19 @@
+device_tracker:
+  - name: "Sam Phone (BT)"
+    state_topic: "location/sam_bt/state"
+    json_attributes_topic: "location/sam_bt/attributes"
+    icon: mdi:cellphone-wireless
+    source_type: bluetooth
+    device:
+      connections: 
+        - ["mac", "AC:D6:18:37:10:93"]
+      manufacturer: OnePlus
+  - name: "Adrienne Vinces iPhone (BT)"
+    state_topic: "location/ady_bt/state"
+    json_attributes_topic: "location/ady_bt/attributes"
+    icon: mdi:cellphone-wireless
+    source_type: bluetooth
+    device:
+      connections: 
+       - ["mac", "F4:DB:E3:4D:D2:33"]
+      manufacturer: Apple

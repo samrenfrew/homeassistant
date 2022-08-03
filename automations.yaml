@@ -33,6 +33,15 @@
     entity_id: switch.humidifier
   - service: script.enable_tv_on
     data: {}
+  - service: mqtt.publish
+    data:
+      topic: monitor/office/KNOWN DEVICE STATES
+  - service: mqtt.publish
+    data:
+      topic: monitor/bedroom/KNOWN DEVICE STATES
+  - service: mqtt.publish
+    data:
+      topic: monitor/lounge/KNOWN DEVICE STATES
   mode: restart
 - id: '1619165147921'
   alias: Door open

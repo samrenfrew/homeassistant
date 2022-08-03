@@ -1,5 +1,4 @@
 - platform: ping
-  consider_home: 300
   count: 3
   hosts:
     adrienne_vinces_ipad: 192.168.1.12

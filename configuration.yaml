@@ -60,6 +60,7 @@ logger:
     homeassistant.components.plex: critical
     homeassistant.components.sky_hub: critical
     homeassistant.components.media_player: debug
+    #custom_components.google_home: debug
 
 # Main Components
 alarm_control_panel: !include_dir_merge_list configs/alarm_control_panel
