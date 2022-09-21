@@ -14,4 +14,4 @@
   host: 192.168.1.1
   consider_home: 180
   new_device_defaults:
-    track_new_devices: no
+    track_new_devices: false

@@ -1,19 +1,65 @@
 device_tracker:
   - name: "Sam Phone (BT)"
-    state_topic: "location/sam_bt/state"
-    json_attributes_topic: "location/sam_bt/attributes"
+    state_topic: "monitor/all/sam_bt"
     icon: mdi:cellphone-wireless
     source_type: bluetooth
     device:
-      connections: 
+      connections:
         - ["mac", "AC:D6:18:37:10:93"]
       manufacturer: OnePlus
-  - name: "Adrienne Vinces iPhone (BT)"
-    state_topic: "location/ady_bt/state"
-    json_attributes_topic: "location/ady_bt/attributes"
+  - name: "Ady Phone (BT)"
+    state_topic: "monitor/all/ady_bt"
     icon: mdi:cellphone-wireless
     source_type: bluetooth
     device:
-      connections: 
-       - ["mac", "F4:DB:E3:4D:D2:33"]
+      connections:
+        - ["mac", "F4:DB:E3:4D:D2:33"]
       manufacturer: Apple
+  # - name: "Sam (BT) Office"
+  #   state_topic: "monitor/office/sam_bt/device_tracker"
+  #   icon: mdi:cellphone-wireless
+  #   source_type: bluetooth
+  #   device:
+  #     connections:
+  #       - ["mac", "AC:D6:18:37:10:93"]
+  #     manufacturer: OnePlus
+  # - name: "Sam (BT) Lounge"
+  #   state_topic: "monitor/lounge/sam_bt/device_tracker"
+  #   icon: mdi:cellphone-wireless
+  #   source_type: bluetooth
+  #   device:
+  #     connections:
+  #       - ["mac", "AC:D6:18:37:10:93"]
+  #     manufacturer: OnePlus
+  # - name: "Sam (BT) Bedroom"
+  #   state_topic: "monitor/bedroom/sam_bt/device_tracker"
+  #   icon: mdi:cellphone-wireless
+  #   source_type: bluetooth
+  #   device:
+  #     connections:
+  #       - ["mac", "AC:D6:18:37:10:93"]
+  #     manufacturer: OnePlus
+  # - name: "Ady (BT) Office"
+  #   state_topic: "monitor/office/ady_bt/device_tracker"
+  #   icon: mdi:cellphone-wireless
+  #   source_type: bluetooth
+  #   device:
+  #     connections:
+  #      - ["mac", "F4:DB:E3:4D:D2:33"]
+  #     manufacturer: Apple
+  # - name: "Ady (BT) Lounge"
+  #   state_topic: "monitor/lounge/ady_bt/device_tracker"
+  #   icon: mdi:cellphone-wireless
+  #   source_type: bluetooth
+  #   device:
+  #     connections:
+  #      - ["mac", "F4:DB:E3:4D:D2:33"]
+  #     manufacturer: Apple
+  # - name: "Ady (BT) Bedroom"
+  #   state_topic: "monitor/bedroom/ady_bt/device_tracker"
+  #   icon: mdi:cellphone-wireless
+  #   source_type: bluetooth
+  #   device:
+  #     connections:
+  #      - ["mac", "F4:DB:E3:4D:D2:33"]
+  #     manufacturer: Apple
