@@ -20,6 +20,7 @@
     entity_id: alarm_control_panel.alarm
   - wait_template: ''
     timeout: '10'
+    alias: Wait 10s
   - service: frontend.reload_themes
     data: {}
   - data:
@@ -39,6 +40,7 @@
   - service: mqtt.publish
     data:
       topic: monitor/bedroom/KNOWN DEVICE STATES
+    enabled: false
   - service: mqtt.publish
     data:
       topic: monitor/lounge/KNOWN DEVICE STATES
