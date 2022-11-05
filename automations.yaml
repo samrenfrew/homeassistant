@@ -107,3 +107,17 @@
   - service: script.enable_tv_on
     data: {}
   mode: single
+- id: '1665083371978'
+  alias: Weekly Backup
+  description: ''
+  trigger:
+  - platform: time
+    at: 01:00:00
+  condition:
+  - condition: template
+    value_template: '{{ now().isoweekday() == 7 }}'
+    alias: On Sunday
+  action:
+  - service: backup.create
+    data: {}
+  mode: single

@@ -191,8 +191,6 @@ binary_sensor.hallway_light:
   friendly_name: Light Sensor
   icon: mdi:white-balance-incandescent
 light.hallway: {}
-switch.tv:
-  friendly_name: TV Power
 sensor.disk_use_mediapistorage1:
   friendly_name: Backup Drive
 sensor.disk_use_percent_mediapistorage1:

@@ -3,17 +3,17 @@
   service_account: !include service-account.json
   report_state: true
   exposed_domains:
-    - switch
-    - light
-    - input_boolean
-    - media_player
+    #- switch
+    #- light
+    #- input_boolean
+    #- media_player
   entity_config:
     switch.extension_lead:
-      expose: true
+      expose: false
       name: Extension Lead
       room: Spare Room
     switch.humidifier:
-      expose: true
+      expose: false
       name: Humidifier
       room: Spare Room
       aliases:
@@ -26,15 +26,15 @@
     #     - Guest Plug
     #     - Makeup Plug
     switch.pc_power:
-      expose: true
+      expose: false
       name: Computer
       room: Spare Room
     switch.nas_power:
-      expose: true
+      expose: false
       name: Server
       room: Spare Room
     light.christmas_tree:
-      expose: true
+      expose: false
       name: Christmas Tree
       aliases:
         - Xmas Tree
@@ -48,7 +48,7 @@
     #     - Spare Room Lights
     #   room: Spare Room
     light.chair_lamp:
-      expose: true
+      expose: false
       name: Chair Lamp
       aliases:
         - Other Lamp
@@ -56,22 +56,22 @@
         - Reading Light
       room: Lounge
     light.backlight:
-      expose: true
+      expose: false
       name: Backlight
       room: Lounge
     light.computer:
-      expose: true
+      expose: false
       name: Computer Light
       room: Spare Room
     light.big_lamp:
-      expose: true
+      expose: false
       name: Big Lamp
       room: Lounge
       aliases:
         - Big Lamp
         - Right Lamp
     light.small_lamp:
-      expose: true
+      expose: false
       name: TV Lamp
       room: Lounge
       aliases:
@@ -79,7 +79,7 @@
         - Telly Lamp
         - Tele Lamp
     light.tv_lamp:
-      expose: true
+      expose: false
       name: Small Lamp
       room: Lounge
       aliases:
@@ -87,13 +87,13 @@
         - Little Lamp
         - Left Lamp
     light.spotlight:
-      expose: true
+      expose: false
       name: Bedroom Light
       room: Bedroom
       aliases:
         - Spotlight
     media_player.lg_webos_tv:
-      expose: true
+      expose: false
       name: TV
       aliases:
         - TV
@@ -102,10 +102,10 @@
         - Tele
       room: Lounge
     input_boolean.night_mode:
-      expose: true
+      expose: false
       name: Night Mode
       room: Flat
     input_boolean.guest_mode:
-      expose: true
+      expose: false
       name: Guest Mode
       room: Flat

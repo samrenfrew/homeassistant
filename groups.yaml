@@ -16,6 +16,7 @@ lounge:
     - light.backlight
     - media_player.tv
     - media_player.lounge_speaker
+    - switch.tv
 
 
 bedroom:
