@@ -11,9 +11,9 @@ lounge:
   entities:
     - light.big_lamp
     - light.tv_lamp
-    - light.small_lamp
     - light.chair_lamp
     - light.backlight
+    - light.christmas_tree
     - media_player.tv
     - media_player.lounge_speaker
     - switch.tv
@@ -23,7 +23,6 @@ bedroom:
   name: Bedroom
   icon: mdi:bed-empty
   entities:
-    - light.spotlight
     - media_player.bedroom_speaker
     #- switch.tplink
 
@@ -31,6 +30,9 @@ office:
   name: Office
   icon: mdi:desktop-tower-monitor
   entities:
+    - light.computer
+    - light.small_lamp
+    - light.spotlight
     - switch.pc_power
     - switch.nas_power
     - switch.ikea_plug

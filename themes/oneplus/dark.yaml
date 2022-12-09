@@ -1,4 +1,4 @@
-slate:
+oneplus_dark:
   # Main colors
   # accent-color: '#3498db'
   accent-color: '#2196f3'
@@ -10,7 +10,7 @@ slate:
   dark-primary-color: '#3498db'
   light-primary-color: 'var(--accent-color)'
   # Text colors
-  primary-text-color: '#F2F2F2'
+  primary-text-color: '#d9d9d9'
   text-primary-color: 'var(--primary-text-color)'
   secondary-text-color: '#ccc'
   disabled-text-color: '#777777'
@@ -26,8 +26,8 @@ slate:
   # Sidebar
   sidebar-icon-color: '#777777'
   # Background colors
-  primary-background-color: '#222222'
-  secondary-background-color: '#222222'
+  primary-background-color: '#101010'
+  secondary-background-color: '#101010'
   divider-color: 'rgba(0, 0, 0, .12)'
   table-row-background-color: '#292929'
   table-row-alternative-background-color: '#292929'
@@ -137,37 +137,73 @@ slate:
   dialog-backdrop-filter: blur(5px)
 
   # Shadows
-  #ha-card-box-shadow: 'none'
-  ha-card-box-shadow: -6px -6px 6px 0 rgba(50, 50, 50,.5),6px 6px 6px 0 rgba(0,0,0,.15)
+  ha-card-box-shadow: 'none'
+  # ha-card-box-shadow: -6px -6px 6px 0 rgba(50, 50, 50,.5),6px 6px 6px 0 rgba(0,0,0,.15)
   ha-card-border-radius: 15px
   ha-card-background: none
   # paper-card-background-color: rgba(0, 0, 0, 0.00)
-  card-mod-theme: slate
+  card-mod-theme: oneplus_dark
   card-mod-card-yaml: |
     .: |
       ha-card {
         font-family: "Roman-55", "Helvetica Neue";
-        background: none;
+        background: #1a1a1a;
         border-radius: 12px;
+        border: none;
         transition: height 0s, margin 0s;
+      }
+      ha-card.type-custom-search-card {
+        background: #262626;
+        border-radius: 24px;
+        margin-left: 16px;
+        margin-right: 16px;
+        color: #6c6c6c;
+      }
+      ha-card.type-custom-search-card #searchContainer {
+        width: calc(100% - 20px) !important;
+        margin-bottom: 10px;
+      }
+      ha-card.type-custom-search-card #searchContainer ha-icon {
+        color: #a5a5a5;
       }
       ha-card.type-markdown {
         --paper-card-background-color: 'rgba(11, 11, 11, 0.00)';
         box-shadow: none;
         padding-top: 20px;
+        background:none;
       }
       ha-card.type-glance, ha-card.media-player, ha-card.type-entities, ha-card.type-custom-uptime-card  {
-        margin-bottom: 10px;
+        // margin-bottom: 10px;
       }
       ha-card.chip {
         letter-spacing: 0.2px;
       }
+      ha-card.type-template {
+        background:none;
+      }
       ha-card.type-custom-mushroom-light-card {
         padding: 14px;
         {% if config.entity and states(config.entity) == 'on' -%}
-          box-shadow: inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+          box-shadow: none;
         {%- endif %}
       }
+
+    "#searchContainer paper-input$": 
+      paper-input-container$: |
+        :host {
+          padding:0
+        }
+        .underline {
+          display:none !important;
+        }
+
+    "#searchContainer paper-input ha-icon-button$": 
+      mwc-icon-button$: |
+        button { 
+          padding: 5px 10px 10px 10px !important;
+          width: 40px !important; 
+          height: 40px !important;
+        }
 
     mushroom-state-info$: |
       .secondary {

@@ -1,3 +1,94 @@
+# Green Bin
+- trigger:
+    - platform: calendar
+      event: start
+      offset: "-4:0:0"
+      entity_id: calendar.bins
+      enabled: true
+    - platform: calendar
+      event: end
+      entity_id: calendar.bins
+      enabled: true
+    - platform: state
+      entity_id:
+        - calendar.bins
+  binary_sensor:
+    - name: Green Bin
+      unique_id: green_bin
+      icon: >
+        {% if is_state("binary_sensor.green_bin", "on") %}
+          mdi:delete-empty
+        {% else %}
+          mdi:delete
+        {% endif %}
+      state: >
+        {% if trigger.event == "start" and 'Green Bin' in trigger.calendar_event.summary %}
+          on
+        {% elif is_state("calendar.bins", "on") and 'Green Bin' in state_attr("calendar.bins", "message") %}
+          on
+        {% else %}
+          off
+        {% endif %}
+
+# Black Bin
+- trigger:
+    - platform: calendar
+      event: start
+      offset: "-4:0:0"
+      entity_id: calendar.bins
+      enabled: true
+    - platform: calendar
+      event: end
+      entity_id: calendar.bins
+      enabled: true
+    - platform: state
+      entity_id:
+        - calendar.bins
+  binary_sensor:
+    - name: Black Bin
+      unique_id: black_bin
+      icon: >
+        {% if is_state("binary_sensor.black_bin", "on") %}
+          mdi:delete-empty
+        {% else %}
+          mdi:delete
+        {% endif %}
+      state: >
+        {% if trigger.event == "start" and 'Black Bin' in trigger.calendar_event.summary %}
+          on
+        {% elif is_state("calendar.bins", "on") and 'Black Bin' in state_attr("calendar.bins", "message") %}
+          on
+        {% else %}
+          off
+        {% endif %}
+
+# Brown Bin
+- trigger:
+    - platform: calendar
+      event: start
+      offset: "-4:0:0"
+      entity_id: calendar.bins
+      enabled: true
+    - platform: calendar
+      event: end
+      entity_id: calendar.bins
+      enabled: true
+    - platform: state
+      entity_id:
+        - calendar.bins
+  binary_sensor:
+    - name: Brown Bin
+      unique_id: brown_bin
+      icon: mdi:delete
+      state: >
+        {% if trigger.event == "start" and 'Brown Bin' in trigger.calendar_event.summary %}
+          on
+        {% elif is_state("calendar.bins", "on") and 'Brown Bin' in state_attr("calendar.bins", "message") %}
+          on
+        {% else %}
+          off
+        {% endif %}
+
 - binary_sensor:
   - name: 'home'
     unique_id: 'home_occupancy'

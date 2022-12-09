@@ -141,6 +141,7 @@ slate:
   ha-card-box-shadow: -6px -6px 6px 0 rgba(50, 50, 50,.5),6px 6px 6px 0 rgba(0,0,0,.15)
   ha-card-border-radius: 15px
   ha-card-background: none
+  ha-card-border: none
   # paper-card-background-color: rgba(0, 0, 0, 0.00)
   card-mod-theme: slate
   card-mod-card-yaml: |
@@ -149,7 +150,12 @@ slate:
         font-family: "Roman-55", "Helvetica Neue";
         background: none;
         border-radius: 12px;
+        border: none;
         transition: height 0s, margin 0s;
+      }
+      ha-card.type-custom-search-card #searchContainer {
+        width: calc(100% - 20px) !important;
+        margin-bottom: 10px;
       }
       ha-card.type-markdown {
         --paper-card-background-color: 'rgba(11, 11, 11, 0.00)';
@@ -168,6 +174,30 @@ slate:
           box-shadow: inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3);
         {%- endif %}
       }
+      .pin, .bar { padding: 10px; }
+      @media screen and (max-width:870px){
+        .top {
+          padding-top: 40px !important;
+        }
+        .pin { 
+          top:0 !important;
+          position: fixed !important;
+          width: calc(100% - 20px) !important;
+        }
+        .bar {
+          bottom: 68px !important;
+          position: sticky !important;
+        }
+      }
+
+    "#searchContainer paper-input$": 
+      paper-input-container$: |
+        :host {
+          // padding:0
+        }
+        .underline {
+          // display:none !important;
+        }
 
     mushroom-state-info$: |
       .secondary {

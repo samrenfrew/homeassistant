@@ -1,8 +1,8 @@
 - platform: ping
   count: 3
   hosts:
-    adrienne_vinces_ipad: 192.168.1.12
-    adriennes_mbp: 192.168.1.7
-    adrienne_vinces_iphone: 192.168.1.11
-    sam_phone: 192.168.1.10
-    sams_mbp: 192.168.1.3
+    adrienne_vinces_ipad: 192.168.0.12
+    adriennes_mbp: 192.168.0.16
+    adrienne_vinces_iphone: 192.168.0.15
+    sam_phone: 192.168.0.10
+    sams_mbp: 192.168.0.3

@@ -26,7 +26,7 @@
     #     - Guest Plug
     #     - Makeup Plug
     switch.pc_power:
-      expose: false
+      expose: true
       name: Computer
       room: Spare Room
     switch.nas_power:
@@ -34,11 +34,12 @@
       name: Server
       room: Spare Room
     light.christmas_tree:
-      expose: false
+      expose: true
       name: Christmas Tree
       aliases:
         - Xmas Tree
         - Tree
+        - Christmas Lights
       room: Lounge
     # light.shelf_lights:
     #   expose: true
@@ -48,15 +49,16 @@
     #     - Spare Room Lights
     #   room: Spare Room
     light.chair_lamp:
-      expose: false
+      expose: true
       name: Chair Lamp
       aliases:
         - Other Lamp
+        - Left Lamp
         - Chair Light
         - Reading Light
       room: Lounge
     light.backlight:
-      expose: false
+      expose: true
       name: Backlight
       room: Lounge
     light.computer:
@@ -64,36 +66,36 @@
       name: Computer Light
       room: Spare Room
     light.big_lamp:
-      expose: false
+      expose: true
       name: Big Lamp
       room: Lounge
       aliases:
         - Big Lamp
+        - Silver Lamp
         - Right Lamp
     light.small_lamp:
       expose: false
-      name: TV Lamp
+      name: Small Lamp
       room: Lounge
       aliases:
         - TV Lamp
         - Telly Lamp
         - Tele Lamp
     light.tv_lamp:
-      expose: false
-      name: Small Lamp
+      expose: true
+      name: Wavy Lamp
       room: Lounge
       aliases:
         - Small Lamp
         - Little Lamp
-        - Left Lamp
     light.spotlight:
-      expose: false
+      expose: true
       name: Bedroom Light
       room: Bedroom
       aliases:
         - Spotlight
     media_player.lg_webos_tv:
-      expose: false
+      expose: true
       name: TV
       aliases:
         - TV
@@ -102,10 +104,10 @@
         - Tele
       room: Lounge
     input_boolean.night_mode:
-      expose: false
+      expose: true
       name: Night Mode
       room: Flat
     input_boolean.guest_mode:
-      expose: false
+      expose: true
       name: Guest Mode
       room: Flat

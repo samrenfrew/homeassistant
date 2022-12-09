@@ -121,3 +121,56 @@
   - service: backup.create
     data: {}
   mode: single
+- id: '1667902499798'
+  alias: Take Green Bin Out
+  description: ''
+  trigger:
+  - platform: calendar
+    event: start
+    offset: '-4:0:0'
+    entity_id: calendar.bins
+  condition:
+  - condition: template
+    value_template: '{{ ''Green Bin'' in trigger.calendar_event.summary }}'
+  action:
+  - service: notify.mobile_app_sam_phone
+    data:
+      message: "\U0001F7E2 Take the Green Bin out"
+      data:
+        notification_icon: mdi:delete
+        tag: bins
+        color: green
+        persistent: true
+        sticky: true
+        actions:
+        - action: dismiss
+          title: Dismiss
+  mode: single
+- id: '1667984447055'
+  alias: Test Calendar Triggers
+  description: ''
+  trigger:
+  - platform: calendar
+    event: start
+    offset: '-4:0:0'
+    entity_id: calendar.bins
+    enabled: true
+  - platform: calendar
+    event: end
+    entity_id: calendar.bins
+    enabled: true
+  - platform: state
+    entity_id:
+    - calendar.bins
+  condition:
+  - condition: template
+    value_template: '{{ ''Black Bin'' in state_attr("calendar.bins", "message") }}'
+    enabled: false
+  action:
+  - service: notify.mobile_app_sam_phone
+    data:
+      message: "{% if trigger.event == \"start\" and 'Black Bin' in trigger.calendar_event.summary
+        %}\n  \"on\"\n{% elif is_state(\"calendar.bins\", \"on\") and 'Black Bin'
+        in state_attr(\"calendar.bins\", \"message\") %}\n  \"on\"\n{% else %}\n  \"off\"\n{%
+        endif %}\n"
+  mode: single

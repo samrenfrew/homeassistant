@@ -4,7 +4,7 @@ oneplus_light:
   # accent-color: '#00a1ff'
   secondary-accent-color: '#3498db'
 
-  primary-color: '#252525'
+  primary-color: '#404040'
 
   # masonry-view-card-margin: '0px'
   box-shadow-off: 'none'
@@ -15,7 +15,7 @@ oneplus_light:
   text-light-color: '#BAC0C6'                                                       # Blue
   background-color: '#f5f5f5'  # Light grey background
   background-color-2: '#F7F8F9'  # Light grey background
-  background-card-color: '#F7F8F9' # White background
+  background-card-color: '#f5f5f5' # White background
   border-color: '#E8E8E8'  # Light grey border
 
   # Header
@@ -85,6 +85,7 @@ oneplus_light:
         font-family: "Roman-55", "Helvetica Neue";
         background: #fff;
         border-radius: 12px;
+        border: none;
         transition: height 0s, margin 0s;
       }
       ha-card.type-custom-search-card {
@@ -112,10 +113,13 @@ oneplus_light:
       ha-card.chip {
         letter-spacing: 0.2px;
       }
+      ha-card.type-template {
+        background:none;
+      }
       ha-card.type-custom-mushroom-light-card {
         padding: 14px;
         {% if config.entity and states(config.entity) == 'on' -%}
-          box-shadow: inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+          box-shadow: none;
         {%- endif %}
       }
 

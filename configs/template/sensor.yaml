@@ -75,7 +75,7 @@
     attributes:
       friendly_name: "Next Timer"
       timer_entity: >
-        {%- set timers = expand(['sensor.lounge_speaker_timers','sensor.hallway_speaker_timers','sensor.bedroom_speaker_timers'])| rejectattr('state', 'eq', 'unavailable') | list %}
+        {%- set timers = expand(['sensor.lounge_speaker_timers','sensor.kitchen_display_timers','sensor.bedroom_speaker_timers'])| rejectattr('state', 'eq', 'unavailable') | list %}
         {% set ns = namespace(time="",entity="",timer_id="") %}
         {% for i in timers %}
           {% if ns.time == ""%}
@@ -91,7 +91,7 @@
 
         {{ ns.entity }}
       timer_id: >
-        {%- set timers = expand(['sensor.lounge_speaker_timers','sensor.hallway_speaker_timers','sensor.bedroom_speaker_timers'])| rejectattr('state', 'eq', 'unavailable') | list %}
+        {%- set timers = expand(['sensor.lounge_speaker_timers','sensor.kitchen_display_timers','sensor.bedroom_speaker_timers'])| rejectattr('state', 'eq', 'unavailable') | list %}
         {% set ns = namespace(time="",entity="",timer_id="") %}
         {% for i in timers %}
           {% if ns.time == ""%}
@@ -106,7 +106,7 @@
         {% endfor %}
         {{ ns.timer_id }}
     state: >-
-      {%- set timers = expand(['sensor.lounge_speaker_timers','sensor.hallway_speaker_timers','sensor.bedroom_speaker_timers'])| rejectattr('state', 'eq', 'unavailable') | list %}
+      {%- set timers = expand(['sensor.lounge_speaker_timers','sensor.kitchen_display_timers','sensor.bedroom_speaker_timers'])| rejectattr('state', 'eq', 'unavailable') | list %}
       {% set ns = namespace(time="",entity="",timer_id="") %}
       {% for i in timers %}
         {% if ns.time == ""%}
@@ -129,7 +129,7 @@
     attributes:
       friendly_name: "Next Alarm"
       alarm_entity: >
-        {%- set timers = expand(['sensor.lounge_speaker_alarms','sensor.hallway_speaker_alarms','sensor.bedroom_speaker_alarms'])| rejectattr('state', 'eq', 'unavailable') | list %}
+        {%- set timers = expand(['sensor.lounge_speaker_alarms','sensor.kitchen_display_alarms','sensor.bedroom_speaker_alarms'])| rejectattr('state', 'eq', 'unavailable') | list %}
         {% set ns = namespace(time="",entity="",alarm_id="") %}
         {% for i in timers %}
           {% if ns.time == ""%}
@@ -145,7 +145,7 @@
 
         {{ ns.entity }}
       alarm_id: >
-        {%- set timers = expand(['sensor.lounge_speaker_alarms','sensor.hallway_speaker_alarms','sensor.bedroom_speaker_alarms'])| rejectattr('state', 'eq', 'unavailable') | list %}
+        {%- set timers = expand(['sensor.lounge_speaker_alarms','sensor.kitchen_display_alarms','sensor.bedroom_speaker_alarms'])| rejectattr('state', 'eq', 'unavailable') | list %}
         {% set ns = namespace(time="",entity="",alarm_id="") %}
         {% for i in timers %}
           {% if ns.time == ""%}
@@ -160,7 +160,7 @@
         {% endfor %}
         {{ ns.alarm_id }}
     state: >-
-      {%- set timers = expand(['sensor.lounge_speaker_alarms','sensor.hallway_speaker_alarms','sensor.bedroom_speaker_alarms'])| rejectattr('state', 'eq', 'unavailable') | list %}
+      {%- set timers = expand(['sensor.lounge_speaker_alarms','sensor.kitchen_display_alarms','sensor.bedroom_speaker_alarms'])| rejectattr('state', 'eq', 'unavailable') | list %}
       {% set ns = namespace(time="",entity="",alarm_id="") %}
       {% for i in timers %}
         {% if ns.time == ""%}
