@@ -174,3 +174,46 @@
         in state_attr(\"calendar.bins\", \"message\") %}\n  \"on\"\n{% else %}\n  \"off\"\n{%
         endif %}\n"
   mode: single
+- id: '1671058985923'
+  alias: Take the black bin out
+  description: ''
+  trigger:
+  - platform: calendar
+    event: start
+    offset: '-4:0:0'
+    entity_id: calendar.bins
+  condition:
+  - condition: template
+    value_template: '{{ ''Black Bin'' in trigger.calendar_event.summary }}'
+  action:
+  - service: notify.mobile_app_sam_phone
+    data:
+      message: ⚫ Take the Black Bin out
+      data:
+        notification_icon: mdi:delete
+        tag: bins
+        color: green
+        persistent: true
+        sticky: true
+        actions:
+        - action: dismiss
+          title: Dismiss
+  mode: single
+- id: '1671374342352'
+  alias: Tag Computer is scanned
+  description: ''
+  trigger:
+  - platform: tag
+    tag_id: computer
+  condition: []
+  action:
+  - service: switch.turn_on
+    data: {}
+    target:
+      entity_id: switch.pc_power
+  - service: light.turn_on
+    data:
+      profile: relax
+    target:
+      device_id: 2e0c7f0adf6f81d337d9058a82fd605f
+  mode: single

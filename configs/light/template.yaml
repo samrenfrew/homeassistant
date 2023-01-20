@@ -1,5 +1,5 @@
-#- platform: template
-#  lights:
+- platform: template
+  lights:
 #    chair_lamp:
 #      entity_id: switch.ikea_plug
 #      friendly_name: "Chair Lamp"
@@ -19,13 +19,13 @@
     #   turn_off:
     #     service: switch.turn_off
     #     entity_id: switch.extension_lead
-    #christmas_tree:
-    #  entity_id: switch.ikea_plug
-    #  friendly_name: "Christmas Tree"
-    #  value_template: "{{ is_state('switch.ikea_plug', 'on') }}"
-    #  turn_on:
-    #    service: switch.turn_on
-    #    entity_id: switch.ikea_plug
-    #  turn_off:
-    #    service: switch.turn_off
-    #    entity_id: switch.ikea_plug
+    christmas_tree:
+      entity_id: switch.ikea_plug
+      friendly_name: "Christmas Tree"
+      value_template: "{{ is_state('switch.ikea_plug', 'on') }}"
+      turn_on:
+        service: switch.turn_on
+        entity_id: switch.ikea_plug
+      turn_off:
+        service: switch.turn_off
+        entity_id: switch.ikea_plug

@@ -96,7 +96,16 @@
     state: >-
         {{ is_state('person.sam', 'home')
             or is_state('person.ady', 'home') }}
- 
+
+- binary_sensor:
+  - name: 'home2'
+    unique_id: 'home_occupancy2'
+    device_class: occupancy
+    state: >-
+        {{ not is_state('input_select.sam_status_select', 'Out')
+           or not is_state('input_select.ady_status_select', 'Out') }}
+
+
   # - name: 'lounge_occupancy'
   #   friendly_name: 'Lounge Occupancy'
   #   device_class: occupancy
