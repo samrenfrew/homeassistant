@@ -18,13 +18,13 @@
       room: Spare Room
       aliases:
         - Humidity
-    # switch.ikea_plug:
-    #   expose: true
-    #   name: Spare Bedroom Plug
-    #   room: Spare Room
-    #   aliases:
-    #     - Guest Plug
-    #     - Makeup Plug
+    light.ikea_plug:
+      expose: true
+      name: Cool Lamp
+      room: Dining Room
+      aliases:
+        - Dining Lamp
+        - Squiggly Lamp
     switch.pc_power:
       expose: true
       name: Computer
@@ -33,21 +33,6 @@
       expose: false
       name: Server
       room: Spare Room
-    light.christmas_tree:
-      expose: true
-      name: Christmas Tree
-      aliases:
-        - Xmas Tree
-        - Tree
-        - Christmas Lights
-      room: Lounge
-    # light.shelf_lights:
-    #   expose: true
-    #   name: Office Lights
-    #   aliases:
-    #     - Grotto Lights
-    #     - Spare Room Lights
-    #   room: Spare Room
     light.chair_lamp:
       expose: true
       name: Chair Lamp
@@ -61,10 +46,6 @@
       expose: true
       name: Backlight
       room: Lounge
-    light.computer:
-      expose: false
-      name: Computer Light
-      room: Spare Room
     light.big_lamp:
       expose: true
       name: Big Lamp
@@ -73,27 +54,33 @@
         - Big Lamp
         - Silver Lamp
         - Right Lamp
-    light.small_lamp:
-      expose: false
+    light.tv_lamp:
+      expose: true
       name: Small Lamp
       room: Lounge
       aliases:
-        - TV Lamp
-        - Telly Lamp
-        - Tele Lamp
-    light.tv_lamp:
-      expose: true
-      name: Wavy Lamp
-      room: Lounge
-      aliases:
-        - Small Lamp
+        - Side Lamp
         - Little Lamp
+        - Wavy Lamp
+    light.computer:
+      expose: true
+      name: Computer Light
+      room: Office
+      aliases:
+        - PC Light
+    light.small_lamp:
+      expose: true
+      name: Desk Lamp
+      room: office
+      aliases:
+        - Silver Lamp
     light.spotlight:
       expose: true
-      name: Bedroom Light
-      room: Bedroom
+      name: Nook Lamp
+      room: Office
       aliases:
         - Spotlight
+        - Nook Light
     media_player.lg_webos_tv:
       expose: true
       name: TV
@@ -106,8 +93,8 @@
     input_boolean.night_mode:
       expose: true
       name: Night Mode
-      room: Flat
+      room: House
     input_boolean.guest_mode:
       expose: true
       name: Guest Mode
-      room: Flat
+      room: House

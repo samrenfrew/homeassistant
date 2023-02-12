@@ -13,6 +13,7 @@
 - platform: template
   switches:
     tv:
+      unique_id: "tv"
       friendly_name: TV
       icon_template: mdi:television
       entity_id: media_player.lg_webos_tv

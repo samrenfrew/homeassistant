@@ -7,6 +7,7 @@
       enabled: true
     - platform: calendar
       event: end
+      offset: "-8:0:0"
       entity_id: calendar.bins
       enabled: true
     - platform: state
@@ -39,6 +40,7 @@
       enabled: true
     - platform: calendar
       event: end
+      offset: "-8:0:0"
       entity_id: calendar.bins
       enabled: true
     - platform: state
@@ -71,6 +73,7 @@
       enabled: true
     - platform: calendar
       event: end
+      offset: "-8:0:0"
       entity_id: calendar.bins
       enabled: true
     - platform: state

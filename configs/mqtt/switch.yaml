@@ -7,6 +7,16 @@ switch:
     payload_off: "OFF"
     optimistic: false
     retain: false
+    unique_id: "extension_lead"
+  - name: "Extension Lead 2"
+    state_topic: "stat/tasmota_ED2D99/POWER"
+    command_topic: "cmnd/tasmota_ED2D99/power"
+    qos: 0
+    payload_on: "ON"
+    payload_off: "OFF"
+    optimistic: false
+    retain: false
+    unique_id: "extension_lead_2"
   - name: "Humidifier"
     state_topic: "stat/humidifier/POWER"
     command_topic: "cmnd/humidifier/power"
@@ -15,3 +25,4 @@ switch:
     payload_off: "OFF"
     optimistic: false
     retain: false
+    unique_id: "humidifier"

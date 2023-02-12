@@ -145,6 +145,9 @@
         actions:
         - action: dismiss
           title: Dismiss
+  - service: notify.google_assistant_sdk
+    data:
+      message: The Green Bin needs to go out tonight
   mode: single
 - id: '1667984447055'
   alias: Test Calendar Triggers
@@ -198,6 +201,9 @@
         actions:
         - action: dismiss
           title: Dismiss
+  - service: notify.google_assistant_sdk
+    data:
+      message: The Black Bin needs to go out tonight
   mode: single
 - id: '1671374342352'
   alias: Tag Computer is scanned

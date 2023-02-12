@@ -22,4 +22,4 @@
   new_device_defaults:
     track_new_devices: true
   hosts:
-    ady_wifi: 192.168.0.7
+    ady_wifi: 192.168.0.11

@@ -445,3 +445,8 @@ sensor.sam_bt_office:
   templates:
     icon: if (state === 0) return 'mdi:bluetooth-off'; return 'mdi:bluetooth';
     icon_color: if (state === 0) return '#44739e'; return '#FDD835';
+switch.extension_lead:
+  friendly_name: Ady Plug
+  icon: mdi:power-socket-uk
+light.ikea_plug:
+  icon: mdi:lightbulb-cfl-spiral
