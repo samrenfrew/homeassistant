@@ -95,7 +95,7 @@
     path: cvroque/webostv_turn_on.yaml
     input:
       webostv: media_player.lg_webos_tv
-      webostv_mac: 78-5d-c8-92-ef-0b
+      webostv_mac: 20-3d-bd-00-f1-36
 - id: '1650834182234'
   alias: Re-enable TV turn on
   description: ''
