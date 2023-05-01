@@ -178,6 +178,11 @@ clear:
           margin-bottom:5px;
           font-weight: 700 !important;
         }
+        ha-icon {
+          display: inline-block;
+          transform: translateY(-2px);
+          margin-right: 3px;
+        }
         h2 {
           font-size: 15px;
           margin-top:0;
