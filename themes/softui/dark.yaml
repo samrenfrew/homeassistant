@@ -292,7 +292,7 @@ slate:
       }
       /* This changes the color of the currently selected tab. */
       paper-tab {
-        width:calc((100% / 6) - 28px);
+        width:calc((100% / 6) - 32px);
       }
       paper-tab[aria-selected=true] {
         color: var(--accent-color) !important;
@@ -303,18 +303,23 @@ slate:
       }
       /* Move header to bottom */
       @media screen and (max-width:870px){
-        ha-app-layout:not([class="edit-mode"]) app-header {
+        #view {
+          background:red;
+          margin-top: 0 !important;
+          height: calc(100vh - 68px) !important;
+        }
+        :not([class="edit-mode"]) .header {
           top: unset !important;
           bottom:0;
           position:fixed;
-          box-shadow: 0 0 20px rgba(255,255,255,0.05);
+          box-shadow: 0 0 20px rgba(0,0,0,0.05);
           height: 68px !important;
         }
-        app-toolbar {
+        .toolbar {
           height: 68px !important;
         }
         .edit-mode #view {
-          padding-top: calc(var(--header-height) + 60px);
+          margin-top: calc(var(--header-height) + 60px) !important;
         }
         ha-menu-button {
           display: none !important;
