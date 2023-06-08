@@ -210,7 +210,7 @@
   description: ''
   trigger:
   - platform: tag
-    tag_id: computer
+    tag_id: 'computer '
   condition: []
   action:
   - service: switch.turn_on

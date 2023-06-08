@@ -1,27 +1,32 @@
-oneplus_light:
-  # Colors                                                    # Light grey text
-  accent-color: '#2196f3'
-  # accent-color: '#00a1ff'
-  secondary-accent-color: '#3498db'
+light:
+  # Colors 
+  accent-color: '#2a79ff'
+  secondary-accent-color: '#6a5ef2'
 
-  primary-color: '#404040'
+  primary-color: '#4A4A4A'
 
   # masonry-view-card-margin: '0px'
   box-shadow-off: 'none'
   box-shadow-on: 'none'
 
+  # state-disabled-background: '#e4e4e4'
+  # state-disable-color: 'var(--primary-color)'
+  # state-background: 'var(--accent-color)'
+  # state-color: "#fff"
+
   text-color: '#252525'  # Grey text
-  text-medium-color: '#8c96a5' # Medium grey text
-  text-light-color: '#BAC0C6'                                                       # Blue
-  background-color: '#f5f5f5'  # Light grey background
-  background-color-2: '#F7F8F9'  # Light grey background
-  background-card-color: '#f5f5f5' # White background
+  text-medium-color: '#4a4a4a' # Medium grey text
+  text-light-color: '#E4E4E4' # Blue
+  background-color: '#f1f1f1'  # Light grey background
+  secondary-background-color: '#fbfbfb'
+  background-color-2: '#E4E4E4'  # Light grey background
+  background-card-color: '#f1f1f1' # White background
   border-color: '#E8E8E8'  # Light grey border
 
   # Header
-  app-header-background-color: '#F7F8F9'
-  app-header-text-color: '#636B75'
-  paper-tabs-selection-bar-color: var(--accent-color)'
+  app-header-background-color: '#f1f1f1'
+  app-header-text-color: '#4A4A4A'
+  paper-tabs-selection-bar-color: 'var(--accent-color)'
   app-header-edit-background-color: "#23608a"
   # app-header-edit-text-color: ""
 
@@ -38,9 +43,9 @@ oneplus_light:
   paper-card-background-color: 'var(--background-card-color)' # Background
   dark-primary-color: '#3498db'
   primary-text-color: 'var(--text-color)'
+  secondary-text-color: 'var(--text-medium-color)'
   paper-listbox-color: 'var(--text-color)'
   light-primary-color: 'var(--text-light-color)'
-  secondary-text-color: 'var(--text-medium-color)'
   disabled-text-color: 'var(--text-light-color)'
   paper-dialog-button-color: 'var(--text-color)'
   secondary-background-color: 'var(--background-color-2)' # Background more info title
@@ -61,12 +66,14 @@ oneplus_light:
   paper-slider-knob-color: 'var(--text-light-color)'  # Knob On
   paper-slider-knob-start-color: 'var(--text-light-color)'  # Knob Off
 
+  dialog-backdrop-filter: blur(10px)
+
   # Shadows
-  #ha-card-box-shadow: 'none'
-  ha-card-box-shadow: 'var(--box-shadow-off)'
-  ha-card-border-radius: 15px
+  ha-card-box-shadow: 'none'
+  ha-card-border-radius: 20px
   ha-card-background: '#fff'
-  # paper-card-background-color: rgba(0, 0, 0, 0.00)
+  ha-card-border-color: '#eee'
+  ha-card-border-width: '0px'
 
   # HACS
   hacs-badge-color: 'var(--accent-color)'  # New Badge
@@ -74,29 +81,32 @@ oneplus_light:
   hacs-status-pending-restart: 'var(--text-light-color)'   # Restart Icon
   hacs-status-pending-update: 'var(--accent-color)'
 
-  dialog-backdrop-filter: blur(10px)
-
-  card-mod-theme: oneplus_light
+  # CARD MOD
+  card-mod-theme: light
 
   ## CSS styling for all cards
   card-mod-card-yaml: |
     .: |
       ha-card {
-        font-family: "Roman-55", "Helvetica Neue";
-        background: #fff;
-        border-radius: 12px;
-        border: none;
+        font-family: "SF Pro Display","Roman-55", "Helvetica Neue";
         transition: height 0s, margin 0s;
       }
+      ha-card.type-custom-mini-media-player {
+        border-width: 1px;
+      }
+      ha-card.large-media-player {
+        min-height:144px;
+      }
+      ha-card.large-media-player .mmp-player {
+        align-self: center;
+      }
       ha-card.type-custom-search-card {
-        background: #e9e9e9;
-        border-radius: 24px;
-        margin-left: 16px;
-        margin-right: 16px;
+        margin: 0 4px;
       }
       ha-card.type-custom-search-card #searchContainer {
-        width: calc(100% - 20px) !important;
+        width: 100% !important;
         margin-bottom: 10px;
+        border-width: 1px;
       }
       ha-card.type-custom-search-card #searchContainer ha-icon {
         color: #a5a5a5;
@@ -113,20 +123,62 @@ oneplus_light:
       ha-card.chip {
         letter-spacing: 0.2px;
       }
-      ha-card.type-template {
+      ha-card.type-menu, ha-card.type-back {
         background:none;
       }
-      ha-card.type-custom-mushroom-light-card {
+
+      .remote {
+        max-width: 280px;
+        margin-top: 10px !important;
+        border-radius: 10px;
+      }
+      .remote-ch-vol {
+        border-radius: 30px;
+        width: 218px;
+        margin-left: 15px;
+        border-width: 1px;
+      }
+
+      ha-card.type-custom-mushroom-light-card, ha-card.type-custom-mushroom-alarm-control-panel-card, ha-card.type-custom-mushroom-person-card, ha-card.type-custom-mushroom-update-card {
         padding: 14px;
-        {% if config.entity and states(config.entity) == 'on' -%}
-          box-shadow: none;
-        {%- endif %}
+        border-width: 1px;
+      }
+      ha-card.type-custom-mushroom-light-card mushroom-state-item {
+        place-self: start;
+        width: 100%;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        margin-bottom: 0;
+      }
+      ha-card.type-custom-mushroom-light-card .actions {
+        margin-top: 3px;
+      }
+
+      ha-card.type-weather-forecast {
+        max-width: calc(100% - 16px);
+        margin: 0 8px;
+        border-width: 1px;
+      }
+      ha-card.type-weather-forecast .state {
+        letter-spacing: 0px;
+        font-size: 22px !important;
+        font-weight: 600;
+      }
+      ha-card.type-weather-forecast .temp-attribute .temp {        
+        font-size: 22px !important; 
+         padding-right: 1px;
+         font-weight: 600;
+      }
+      ha-card.type-weather-forecast .temp-attribute .temp span {
+        font-size: 22px !important;
+         font-weight: 600;
       }
 
     "#searchContainer paper-input$": 
       paper-input-container$: |
         :host {
-          padding:0
+          padding:8px;
         }
         .underline {
           display:none !important;
@@ -140,29 +192,76 @@ oneplus_light:
           height: 40px !important;
         }
 
-    mushroom-state-info$: |
-      .secondary {
-        line-height:1.2
+    mushroom-state-item$: |
+      .icon {
+        margin-bottom: 0 !important;
+        min-height: 75px;
+        place-self: start;
       }
+      .container {
+        width:100%;
+      }
+
+    mushroom-state-info$: |
+      .primary {
+        letter-spacing: 0.2px;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .secondary {
+        letter-spacing: 0.2px;
+        text-align: left; 
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;       
+      }
+      {% if config.entity and states(config.entity) == 'on' and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 -%}
+          .secondary { display:none; }
+      {%- endif %}
+
+    mushroom-shape-avatar$: |
+      .container {
+        width:50px !important;
+        height: 50px !important;
+        border-radius: 100px;
+        border: 3px solid var(--ha-card-background);
+        outline: 1px solid var(--ha-card-border-color);
+      }
+
     mushroom-shape-icon$: |
       .shape {
-        background: none !important;
+        background: var(--icon-color) !important;
+        {% if config.entity and states(config.entity) == 'disarmed' -%}
+        background: var(--background-color) !important;
+        {%- endif %}
+        padding: 5px;
+        border: 3px solid var(--ha-card-background);
+        outline: 1px solid var(--ha-card-border-color);
       }
-      .shape.disabled ha-icon {
-        color: var(--primary-text-color) !important;
+      .shape.disabled {
+        background: var(--background-color) !important;
       }
       .shape ha-icon {
-        --mdc-icon-size:32px !important
+        --mdc-icon-size:30px !important;
+        color: #fff !important;
+        {% if config.entity and states(config.entity) == 'disarmed' -%}
+        color: var(--primary-color) !important;
+        {%- endif %}
+      }
+      .shape.disabled ha-icon {
+        color: var(--primary-color) !important;
       }
     mushroom-light-color-control$: 
       mushroom-slider$: |
         .container {
-          height:20px !important;
+          height:18px !important;
         }
     mushroom-light-brightness-control$:
       mushroom-slider$: |
         .container {
-          height:20px !important;
+          height:18px !important;
         }
         .slider .slider-track-indicator {
           border-radius: 0 !important;
@@ -182,18 +281,23 @@ oneplus_light:
         }
         ha-markdown-element {
           font-size:10px;
-          font-family: "Roman-55", "Helvetica Neue";
+          font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
           letter-spacing: 0.2px;
         }
         h1 {
-          font-size: 22px;
+          font-size: 26px;
           margin-bottom:5px;
-          font-weight: 700 !important;
+          font-weight: 600 !important;
+          line-height: 1.07143 !important;
+          letter-spacing: -.005em;
         }
         h2 {
-          font-size: 15px;
+          font-size: 16px !important;
           margin-top:0;
-          font-weight: 700 !important;
+          font-weight: 500 !important;
+          letter-spacing: -.005em;
+          line-height:1.10722 !important;
+          color: var(--secondary-text-color);
         }
 
   ## More Info
@@ -242,7 +346,7 @@ oneplus_light:
       }
       /* This changes the color of the currently selected tab. */
       paper-tab {
-        width:calc((100% / 6) - 28px);
+        width:calc((100% / 6) - 32px);
       }
       paper-tab[aria-selected=true] {
         color: var(--accent-color) !important;
@@ -253,18 +357,26 @@ oneplus_light:
       }
       /* Move header to bottom */
       @media screen and (max-width:870px){
-        ha-app-layout:not([class="edit-mode"]) app-header {
+        #view {          
+          padding-top: 0 !important;
+        }
+        
+        #view hui-view vertical-layout$: |
+           #columns {
+              padding-bottom: 68px !important;
+            }
+        :not([class="edit-mode"]) .header {
           top: unset !important;
           bottom:0;
           position:fixed;
           box-shadow: 0 0 20px rgba(0,0,0,0.05);
           height: 68px !important;
         }
-        app-toolbar {
+        .toolbar {
           height: 68px !important;
         }
         .edit-mode #view {
-          padding-top: calc(var(--header-height) + 60px);
+          margin-top: calc(var(--header-height) + 60px) !important;
         }
         ha-menu-button {
           display: none !important;
@@ -279,6 +391,9 @@ oneplus_light:
       }
     ha-tabs$: |
       @media screen and (max-width:870px){
+        paper-icon-button {
+          display:none !important
+        }
         #tabsContent {
           width: 100% !important;
         }              
@@ -295,68 +410,118 @@ oneplus_light:
   mush-title-padding: 24px 12px 16px
   mush-title-spacing: 12px
   mush-title-font-size: 24px
-  mush-title-font-weight: bold
+  mush-title-letter-spacing: 0.2px
+  mush-title-font-weight: 600
   mush-title-line-height: 1
-  mush-title-font-family: "Roman-55, Helvetica Neue"
+  mush-title-font-family: "SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial"
   mush-subtitle-font-size: 16px
+  mush-subtitle-letter-spacing: 0.2px
   mush-subtitle-font-weight: normal
   mush-subtitle-line-height: 1.2
   # Card
   mush-icon-border-radius: 50%
   mush-control-border-radius: 4px
-  mush-card-primary-font-size: 14px
-  mush-card-secondary-font-size: 12px
-  mush-card-primary-font-weight: bold
-  mush-card-secondary-font-weight: bolder
+  mush-card-primary-font-size: 15px
+  mush-card-secondary-font-size: 14px
+  mush-card-primary-font-weight: 600
+  mush-card-secondary-font-weight: 400
   # Chips
   mush-chip-spacing: 8px
   mush-chip-padding: 0 12px
   mush-chip-height: 36px
   mush-chip-border-radius: 18px
-  mush-chip-font-size: 0.333em # relative to chip height
-  mush-chip-font-weight: bold
+  mush-chip-font-size: 13px # relative to chip height
+  mush-chip-font-weight: 600
   mush-chip-icon-size: 0.5em # relative to chip height
   # Slider
   mush-slider-threshold: 10
-  # Colors
-  mush-rgb-red: 244, 67, 54
-  mush-rgb-pink: 233, 30, 99
-  mush-rgb-purple: 156, 39, 176
-  mush-rgb-deep-purple: 103, 58, 183
-  mush-rgb-indigo: 63, 81, 181
-  mush-rgb-blue: 33, 150, 243
-  mush-rgb-light-blue: 3, 169, 244
-  mush-rgb-cyan: 0, 188, 212
-  mush-rgb-teal: 0, 150, 136
-  mush-rgb-green: 76, 175, 80
-  mush-rgb-light-green: 139, 195, 74
-  mush-rgb-lime: 205, 220, 57
-  mush-rgb-yellow: 255, 235, 59
-  mush-rgb-amber: 255, 193, 7
-  mush-rgb-orange: 33, 150, 243
-  mush-rgb-deep-orange: 255, 87, 34
-  mush-rgb-brown: 121, 85, 72
-  mush-rgb-grey: 158, 158, 158
-  mush-rgb-blue-grey: 96, 125, 139
-  mush-rgb-black: 0, 0, 0
-  mush-rgb-white: 255, 255, 255
+  # # Colors
+  # mush-rgb-red: 244, 67, 54
+  # mush-rgb-pink: 233, 30, 99
+  mush-rgb-purple: 106, 94, 242
+  # mush-rgb-deep-purple: 103, 58, 183
+  # mush-rgb-indigo: 63, 81, 181
+  # mush-rgb-blue: 33, 150, 243
+  # mush-rgb-light-blue: 3, 169, 244
+  # mush-rgb-cyan: 0, 188, 212
+  # mush-rgb-teal: 0, 150, 136
+  # mush-rgb-green: 76, 175, 80
+  # mush-rgb-light-green: 139, 195, 74
+  # mush-rgb-lime: 205, 220, 57
+  # mush-rgb-yellow: 255, 235, 59
+  # mush-rgb-amber: 255, 193, 7
+  # mush-rgb-orange: 33, 150, 243
+  mush-rgb-orange: 106, 94, 242
+  mush-rgb-info: 228, 228, 228
+  # mush-rgb-deep-orange: 255, 87, 34
+  # mush-rgb-brown: 121, 85, 72
+  # mush-rgb-grey: 158, 158, 158
+  # mush-rgb-blue-grey: 96, 125, 139
+  # mush-rgb-black: 0, 0, 0
+  # mush-rgb-white: 255, 255, 255
   
-  mush-rgb-info: var(--rgb-blue)
-  mush-rgb-success: var(--rgb-green)
-  mush-rgb-warning: var(--rgb-blue)
-  mush-rgb-danger: var(--rgb-red)
+  # mush-rgb-info: var(--rgb-blue)
+  # mush-rgb-success: var(--rgb-green)
+  # mush-rgb-warning: var(--rgb-blue)
+  # mush-rgb-danger: var(--rgb-red)
 
-  mush-rgb-state-cover: var(--rgb-blue)
-  mush-rgb-state-fan: var(--rgb-green)
-  mush-rgb-state-light: var(--rgb-blue)
-  mush-rgb-state-entity: var(--rgb-blue)
-  mush-rgb-state-switch: var(--rgb-blue)
+  # mush-rgb-state-cover: var(--rgb-blue)
+  # mush-rgb-state-fan: var(--rgb-green)
+  mush-rgb-state-light: var(--rgb-purple)
+  # mush-rgb-state-entity: var(--rgb-blue)
+  # mush-rgb-state-switch: var(--rgb-blue)
 
   mush-rgb-state-alarm-disarmed: var(--rgb-info)
-  mush-rgb-state-alarm-armed: var(--rgb-success)
-  mush-rgb-state-alarm-triggered: var(--rgb-danger)
+  # mush-rgb-state-alarm-armed: var(--rgb-success)
+  # mush-rgb-state-alarm-triggered: var(--rgb-danger)
 
-  mush-rgb-state-person-home: var(--rgb-success)
-  mush-rgb-state-person-not-home: var(--rgb-danger)
-  mush-rgb-state-person-zone: var(--rgb-info)
-  mush-rgb-state-person-unknown: var(--rgb-grey)
+  # mush-rgb-state-person-home: var(--rgb-success)
+  # mush-rgb-state-person-not-home: var(--rgb-danger)
+  # mush-rgb-state-person-zone: var(--rgb-info)
+  # mush-rgb-state-person-unknown: var(--rgb-grey)
+
+  #  # New Colours
+  # state-default-color: '#44739E' # Blue-Grey
+  # state-alarm-armed-color: '#F44336' # Red
+  # state-alarm-arming-color: '#FF9800' # Orange
+  # state-alarm-pending-color: '#FF9800' # Orange
+  # state-alarm-triggered-color: '#F44336' # Red
+  # state-alert-color: '#F44336' # Red
+  # state-automation-color: '#FFC107' # Amber
+  # state-binary-sensor-color: '#2196F3' # Blue
+  # state-binary-sensor-alerting-color: '#F44336' # Red
+  # state-calendar-color: '#2196F3' # Blue
+  # state-camera-color: '#2196F3' # Blue
+  # state-climate-auto-color: '#4CAF50' # Green
+  # state-climate-cool-color: '#2196F3' # Blue
+  # state-climate-dry-color: '#FF9800' # Orange
+  # state-climate-fan-only-color: '#00BCD4' # Cyan
+  # state-climate-heat-color: '#FF5722' # Deep Orange
+  # state-climate-heat-cool-color: '#FFC107' # Amber
+  # state-climate-idle-color: '#BDBDBD' # Disabled (Light Grey)
+  # state-cover-color: '#9C27B0' # Purple
+  # state-fan-color: '#00BCD4' # Cyan
+  # state-group-color: '#FFC107' # Amber
+  # state-humidifier-color: '#2196F3' # Blue
+  # state-input-boolean-color: '#FFC107' # Amber
+  state-light-color: '#6a5ef2' # Amber
+  # state-lock-jammed-color: '#F44336' # Red
+  # state-lock-locked-color: '#4CAF50' # Green
+  # state-lock-pending-color: '#FF9800' # Orange
+  # state-media-player-color: '#3F51B5' # Indigo
+  # state-person-home-color: '#2196F3' # Blue
+  # state-person-zone-color: '#2196F3' # Blue
+  # state-remote-color: '#2196F3' # Blue
+  # state-script-color: '#FFC107' # Amber
+  # state-sensor-battery-high-color: '#4CAF50' # Green
+  # state-sensor-battery-low-color: '#F44336' # Red
+  # state-sensor-battery-medium-color: '#FF9800' # Orange
+  # state-sensor-battery-unknown-color: '#BDBDBD' # Disabled (Light Grey)
+  # state-siren-color: '#F44336' # Red
+  # state-sun-day-color: '#FFC107' # Amber
+  # state-sun-night-color: '#673AB7' # Deep Purple
+  # state-switch-color: '#2196F3' # Blue
+  # state-timer-color: '#FFC107' # Amber
+  # state-update-color: '#4CAF50' # Green
+  # state-update-installing-color: '#FF9800' # Orange
+  # state-vacuum-color: '#009688' # Teal

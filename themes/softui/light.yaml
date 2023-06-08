@@ -246,11 +246,14 @@ clear:
       }
       /* Move header to bottom */
       @media screen and (max-width:870px){
-        #view {
-          background:red;
-          margin-top: 0 !important;
-          height: calc(100vh - 68px) !important;
+        #view {          
+          padding-top: 0 !important;
         }
+        
+        #view hui-view vertical-layout$: |
+           #columns {
+              padding-bottom: 68px !important;
+            }
         :not([class="edit-mode"]) .header {
           top: unset !important;
           bottom:0;
@@ -277,6 +280,9 @@ clear:
       }
     ha-tabs$: |
       @media screen and (max-width:870px){
+        paper-icon-button {
+          display:none !important
+        }
         #tabsContent {
           width: 100% !important;
         }              
