@@ -225,6 +225,12 @@ clear:
             border-bottom:0 !important;
         }
 
+  card-mod-sidebar-yaml: |
+    .: |
+      :host {
+        font-family: "SF Pro Display", sans-serif;
+      }
+
   ## Header
   card-mod-root-yaml: |
     .: |

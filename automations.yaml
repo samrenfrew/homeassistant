@@ -26,6 +26,7 @@
   - data:
       name: clear
     service: frontend.set_theme
+    enabled: false
   - service: switch.turn_on
     data: {}
     entity_id: switch.extension_lead

@@ -1,0 +1,31 @@
+- binary_sensor:
+    command: netstat -na | grep "5555" | grep "LISTEN" > /dev/null && (echo "Running") || (echo "Not running")
+    name: 'SSH'
+    unique_id: ssh
+    device_class: running
+    payload_on: "Running"
+    payload_off: "Not running"
+
+- binary_sensor:
+    command: netstat -na | grep "445 " | grep "LISTEN" > /dev/null && (echo "Running") || (echo "Not running")
+    name: 'Samba'
+    unique_id: samba
+    device_class: running
+    payload_on: "Running"
+    payload_off: "Not running"
+
+- binary_sensor:
+    command: netstat -na | grep "5555" | grep "ESTABLISHED" > /dev/null && (echo "Connected") || (echo "Not connected")
+    name: 'SSH Connected'
+    unique_id: ssh_connected
+    device_class: connectivity
+    payload_on: "Connected"
+    payload_off: "Not connected"
+
+- binary_sensor:
+    command: netstat -na | grep "445 " | grep "192.168." | grep "ESTABLISHED" > /dev/null && (echo "Connected") || (echo "Not connected")
+    name: 'Samba Connected'
+    unique_id: samba_connected
+    device_class: connectivity
+    payload_on: "Connected"
+    payload_off: "Not connected"

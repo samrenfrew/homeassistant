@@ -96,3 +96,7 @@
   font-weight: 400;
   src: url("/local/fonts/NeueHaasGrotTextRound-55Roman.woff2") format("woff2");
 }
+
+body {
+  font-family: "SF Pro Display", "Roman-55", Helvetica, Arial, sans-serif;
+}
