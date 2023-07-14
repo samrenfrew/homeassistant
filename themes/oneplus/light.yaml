@@ -23,6 +23,12 @@ light:
   background-card-color: '#f1f1f1' # White background
   border-color: '#E8E8E8'  # Light grey border
 
+  # Fonts
+  mdc-typography-font-family: 'SF Pro Display'
+  paper-font-headline_-_font-family: 'SF Pro Display'
+  paper-font-subhead_-_font-family: 'SF Pro Display'
+  paper-font-body1_-_font-family: 'SF Pro Display'
+
   # Header
   app-header-background-color: '#f1f1f1'
   app-header-text-color: '#4A4A4A'
@@ -92,6 +98,16 @@ light:
   # CARD MOD
   card-mod-theme: light
 
+  ## CSS styling for Sidebar
+  card-mod-sidebar-yaml: |
+    .: |
+      * {
+        font-family: "SF Pro Display","Roman-55", "Helvetica Neue";
+      }
+      .menu .title {
+        font-weight: 500;
+      }
+
   ## CSS styling for Entity cards
   card-mod-row-yaml: |
     "*:first-child$": 
@@ -160,7 +176,7 @@ light:
         color: #fff !important;
       }
       ha-state-icon[data-domain="switch"][data-state="on"] {
-        background: var(--state-switch-on-color, var(--state-switch-active-color, var(--state-active-color)));
+        background: var(--secondary-accent-color, var(--state-switch-active-color, var(--state-active-color)));
         color: #fff !important;
       }
       ha-state-icon[data-domain="device_tracker"][data-state="home"] {
@@ -209,38 +225,76 @@ light:
         border-radius: 0 0 20px 20px;
       }
       ha-card.spotify .mmp-player__core {
-        flex-direction: column-reverse;
+        flex-direction: row;
+        flex-wrap:wrap;
       }
       ha-card.spotify mmp-powerstrip {
         justify-content: space-between;
         margin-left:0;
+        flex-basis: 100%;
+        order:1;
       }
       ha-card.spotify mmp-source-menu {
         max-width: unset;
       }
+      ha-card.spotify .entity__icon {
+        order:2;
+        margin:0;
+      }
+      ha-card.spotify .entity__info {
+        order:3;
+        flex: 0 1 100%;
+        margin:0;
+      }
       ha-card.spotify .entity__info__media {
         max-height: var(--mmp-unit);
         display:flex;
-        flex-direction:column;
-        flex-wrap:nowrap;
+        flex-direction:row;
+        flex-wrap:wrap;
         justify-content:start;
         opacity:1;
       }
-      ha-card .attr__media_title {
+      ha-card.spotify [class*="attr_"] {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        flex-basis:100%;
+      }
+      ha-card.spotify [class*="attr_"]::before {
+        display:none;
+      }
+      ha-card.spotify .attr__media_title {
         font-weight: 600;
         padding-right: 8px;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
       }
-      ha-card.spotify .attr__media_artist {
+      ha-card.spotify .attr__media_artist, ha-card.spotify .attr__media_artist {
         opacity: 0.75;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
       }
-      ha-card.spotify .attr__media_artist::before {
-        display:none;
+      ha-card.spotify .attr__media_series_title, ha-card.spotify .attr__media_season, ha-card.spotify .attr__media_episode {
+        opacity: 0.75;
+        flex-basis: auto;
+      }
+      ha-card.spotify .attr__media_season::before {
+        content: " (";
+        display: inline-block;
+        padding-left: 4px;
+      }
+      ha-card.spotify .attr__media_episode::before {
+        content: " - ";
+        display: inline-block;
+        padding: 0 4px;
+      }
+      ha-card.spotify .attr__media_episode::after {
+        content: ")";
+        display: inline-block;
+      }
+      ha-card.spotify .entity__icon + .entity__info {
+        flex-basis: calc(100% - 50px);
+      }
+
+      ha-card.type-custom-mini-graph-card .states .state .state__value {
+        font-weight: 500;
+        letter-spacing: -0.02em;
       }
 
       ha-card.type-custom-search-card {
@@ -281,6 +335,7 @@ light:
       ha-card.type-menu, ha-card.type-back {
         background:none;
         border:none;
+        --card-mod-icon-color: var(--accent-color);
       }
 
       ha-card.type-glance {
@@ -313,7 +368,7 @@ light:
       }
       ha-card.type-custom-mushroom-light-card {
         {% if config.entity and is_state(config.entity, 'on') %}
-        background: linear-gradient(240deg, var(--secondary-accent-color) -200%, var(--ha-card-background) 30%);
+        background: linear-gradient(240deg, rgb(var(--mush-rgb-orange)) -200%, var(--ha-card-background) 30%);
         {% endif %}
       }
       ha-card.type-custom-mushroom-light-card mushroom-state-item {
@@ -656,7 +711,7 @@ light:
   mush-rgb-purple: 106, 94, 242
   # mush-rgb-deep-purple: 103, 58, 183
   # mush-rgb-indigo: 63, 81, 181
-  # mush-rgb-blue: 33, 150, 243
+  mush-rgb-blue: 42, 121, 255
   # mush-rgb-light-blue: 3, 169, 244
   # mush-rgb-cyan: 0, 188, 212
   # mush-rgb-teal: 0, 150, 136
@@ -665,7 +720,7 @@ light:
   # mush-rgb-lime: 205, 220, 57
   # mush-rgb-yellow: 255, 235, 59
   # mush-rgb-amber: 255, 193, 7
-  # mush-rgb-orange: 33, 150, 243
+  # mush-rgb-orange: 255, 152, 0
   mush-rgb-orange: 106, 94, 242
   mush-rgb-info: 228, 228, 228
   # mush-rgb-deep-orange: 255, 87, 34
@@ -682,7 +737,7 @@ light:
 
   # mush-rgb-state-cover: var(--rgb-blue)
   # mush-rgb-state-fan: var(--rgb-green)
-  mush-rgb-state-light: var(--rgb-purple)
+  # mush-rgb-state-light: var(--rgb-purple)
   # mush-rgb-state-entity: var(--rgb-blue)
   # mush-rgb-state-switch: var(--rgb-blue)
 
