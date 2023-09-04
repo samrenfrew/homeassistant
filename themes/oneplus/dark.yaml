@@ -4,6 +4,8 @@ dark:
   # Colors 
   accent-color: '#2a79ff'
   secondary-accent-color: '#6a5ef2'
+  running-accent-color: '#4caf50'
+  stopped-accent-color: '#f44336'
 
   primary-color: '#808080'
   # dark-primary-color: '#9c5b1b'
@@ -163,7 +165,7 @@ dark:
   hacs-status-pending-update: 'var(--accent-color)'
 
   # CARD MOD
-  card-mod-theme: light
+  card-mod-theme: cardmod
 
 
 # Mushroom layout
@@ -182,7 +184,6 @@ dark:
   mush-subtitle-line-height: 1.2
   # Card
   mush-icon-border-radius: 50%
-  mush-control-border-radius: 4px
   mush-card-primary-font-size: 15px
   mush-card-secondary-font-size: 14px
   mush-card-primary-font-weight: 600
@@ -199,6 +200,7 @@ dark:
   mush-chip-icon-size: 0.5em # relative to chip height
   # Slider
   mush-slider-threshold: 10
+  mush-control-border-radius: 10px
   # # Colors
   # mush-rgb-red: 244, 67, 54
   # mush-rgb-pink: 233, 30, 99
@@ -209,7 +211,7 @@ dark:
   # mush-rgb-light-blue: 3, 169, 244
   # mush-rgb-cyan: 0, 188, 212
   # mush-rgb-teal: 0, 150, 136
-  # mush-rgb-green: 76, 175, 80
+  mush-rgb-green: 76, 175, 80
   # mush-rgb-light-green: 139, 195, 74
   # mush-rgb-lime: 205, 220, 57
   # mush-rgb-yellow: 255, 235, 59
@@ -238,6 +240,8 @@ dark:
   mush-rgb-state-alarm-disarmed: var(--rgb-info)
   # mush-rgb-state-alarm-armed: var(--rgb-success)
   # mush-rgb-state-alarm-triggered: var(--rgb-danger)
+
+  mush-rgb-state-update-on: var(--mush-rgb-green)
 
   # mush-rgb-state-person-home: var(--rgb-success)
   # mush-rgb-state-person-not-home: var(--rgb-danger)
@@ -287,6 +291,6 @@ dark:
   # state-switch-color: '#2196F3' # Blue
   # state-timer-color: '#FFC107' # Amber
   # state-unavailable-color: var(--rgb-info)
-  # state-update-color: '#4CAF50' # Green
+  state-update-color: '#4CAF50' # Green
   # state-update-installing-color: '#FF9800' # Orange
   # state-vacuum-color: '#009688' # Teal

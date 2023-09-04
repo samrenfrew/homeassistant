@@ -3,6 +3,8 @@ mushroom:
   accent-color: '#2196f3'
   # accent-color: '#00a1ff'
   secondary-accent-color: '#3498db'
+  running-accent-color: '#4caf50'
+  stopped-accent-color: '#f44336'
 
   primary-color: '#636B75'
 

@@ -1,0 +1,616 @@
+cardmod:
+  ## CSS styling for Sidebar
+  card-mod-sidebar-yaml: |
+    .: |
+      * {
+        font-family: "SF Pro Display","Roman-55", "Helvetica Neue";
+      }
+      .menu .title {
+        font-weight: 500;
+      }
+
+  ## CSS styling for Entity cards
+  card-mod-row-yaml: |
+    "*:first-child$": 
+      state-badge$: 
+        .: |
+          :host {
+            border: var(--theme-icon-border);
+            outline: var(--theme-icon-outline);
+            border-radius: 100px;
+            overflow: hidden;
+          }
+          ha-state-icon {
+            background: var(--theme-icon-background);
+            color: var(--theme-icon-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            --mdc-icon-size: 20px;
+
+            {% if config.entity.endswith('battery') or config.entity.endswith('battery_level') %}
+            {% if config.entity and is_state(config.entity, 'unavailable') -%}
+            background: var(--theme-icon-background) !important;            
+            color: var(--theme-icon-color) !important;
+            {% elif config.entity and (states(config.entity) | int(default=0)) < 30 -%}
+            background: var(--state-sensor-battery-low-color) !important;
+            color: #fff !important;
+            {%- elif config.entity and (states(config.entity) | int(default=0)) < 70 -%}
+            background: var(--state-sensor-battery-medium-color) !important;
+            color: #fff !important;
+            {%- endif %}
+            {% endif %}
+
+            {% if '_bt_' in config.entity and is_state(config.entity, '100') %}
+            background: var(--accent-color) !important;
+            color: #fff !important;
+            {% endif %}
+          }
+
+  ## CSS styling for Glance cards
+  card-mod-glance-yaml: |
+    .: |
+      .name {
+        font-weight: 600;
+        order:2;
+      }
+      div {
+        order:3;
+      }
+    state-badge$: |        
+      :host {
+        width: 50px !important;
+        height: 50px !important;
+        order:1;
+      }
+      ha-state-icon {
+        background: var(--theme-icon-background);
+        border: var(--theme-icon-border);
+        outline: var(--theme-icon-outline);
+        padding: 13px 10px 14px;
+        color: var(--theme-icon-color) !important;
+        border-radius: 100px;
+      }
+      ha-state-icon[data-state="normal"], ha-state-icon[data-state="on"] {
+        background: var(--accent-color);
+        color: #fff !important;
+      }
+      ha-state-icon[data-domain="switch"][data-state="on"] {
+        background: var(--secondary-accent-color, var(--state-switch-active-color, var(--state-active-color)));
+        color: #fff !important;
+      }
+      ha-state-icon[data-domain="device_tracker"][data-state="home"] {
+        background: var(--state-device_tracker-home-color, var(--state-device_tracker-active-color, var(--state-active-color)));
+        color: #fff !important;
+      }
+      ha-state-icon[data-domain="sensor"][data-state*="2"], ha-state-icon[data-domain="sensor"][data-state*="1"] {
+        background: var(--state-sensor-battery-low-color);
+        color: #fff !important;
+      }
+      ha-state-icon[data-domain="sensor"][data-state*="3"], ha-state-icon[data-domain="sensor"][data-state*="4"], ha-state-icon[data-domain="sensor"][data-state*="5"], ha-state-icon[data-domain="sensor"][data-state*="6"] {
+        background: var(--state-sensor-battery-medium-color);
+        color: #fff !important;
+      }
+
+
+  ## CSS styling for all cards
+  card-mod-card-yaml: |      
+    .: |
+      ha-card {
+        font-family: "SF Pro Display","Roman-55", "Helvetica Neue";
+        transition: height 0s, margin 0s;
+      }
+      ha-card.type-custom-mini-media-player {
+        border-width: 1px;
+      }
+
+      ha-card.large-media-player {
+        min-height:144px;
+      }
+      ha-card.large-media-player .mmp-player {
+        align-self: center;
+      }
+
+      ha-card.spotify {
+        min-height:144px;
+        height: 100%;
+        aspect-ratio: 1;
+      }
+      ha-card.spotify .mmp__bg .cover-gradient {
+        transform: rotate(-90deg)
+      }
+      ha-card.spotify .mmp-player {
+        align-self: end;
+        background: rgba(255,255,255,0.15);
+        border-radius: 0 0 20px 20px;
+      }
+      ha-card.spotify .mmp-player__core {
+        flex-direction: row;
+        flex-wrap:wrap;
+      }
+      ha-card.spotify mmp-powerstrip {
+        justify-content: space-between;
+        margin-left:0;
+        flex-basis: 100%;
+        order:1;
+      }
+      ha-card.spotify mmp-source-menu {
+        max-width: unset;
+      }
+      ha-card.spotify .entity__icon {
+        order:2;
+        margin:0;
+      }
+      ha-card.spotify .entity__info {
+        order:3;
+        flex: 0 1 100%;
+        margin:0;
+      }
+      ha-card.spotify .entity__info__media {
+        max-height: var(--mmp-unit);
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:start;
+        opacity:1;
+      }
+      ha-card.spotify [class*="attr_"] {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        flex-basis:100%;
+      }
+      ha-card.spotify [class*="attr_"]::before {
+        display:none;
+      }
+      ha-card.spotify .attr__media_title {
+        font-weight: 600;
+        padding-right: 8px;
+      }
+      ha-card.spotify .attr__media_artist, ha-card.spotify .attr__media_artist {
+        opacity: 0.75;
+      }
+      ha-card.spotify .attr__media_series_title, ha-card.spotify .attr__media_season, ha-card.spotify .attr__media_episode {
+        opacity: 0.75;
+        flex-basis: auto;
+      }
+      ha-card.spotify .attr__media_season::before {
+        content: " (";
+        display: inline-block;
+        padding-left: 4px;
+      }
+      ha-card.spotify .attr__media_episode::before {
+        content: " - ";
+        display: inline-block;
+        padding: 0 4px;
+      }
+      ha-card.spotify .attr__media_episode::after {
+        content: ")";
+        display: inline-block;
+      }
+      ha-card.spotify .entity__icon + .entity__info {
+        flex-basis: calc(100% - 50px);
+      }
+
+      ha-card.type-custom-mini-graph-card .states .state .state__value {
+        font-weight: 500;
+        letter-spacing: -0.02em;
+      }
+
+      ha-card.type-custom-search-card {
+        border-width: 1px;
+      }
+      ha-card.type-custom-search-card #searchContainer {
+        width: 100% !important;
+        border-width: 1px;
+      }
+      ha-card.type-custom-search-card #count {
+        padding-right: 20px;
+      }
+      ha-card.type-custom-search-card #searchContainer ha-icon {
+        color: #a5a5a5;
+      }
+      ha-card.type-markdown {
+        --paper-card-background-color: 'rgba(11, 11, 11, 0.00)';
+        box-shadow: none;
+        padding-top: 20px;
+        background: none !important;
+      }
+      ha-card.type-markdown.center {
+        padding:0;
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+      }
+      ha-card.type-markdown.center ha-markdown {
+        padding-top:0;
+        padding-bottom:0;
+      }
+      ha-card.type-glance, ha-card.media-player, ha-card.type-entities, ha-card.type-custom-uptime-card, ha-card.type-gauge, ha-card.type-custom-mini-graph-card, ha-card.type-map  {
+        border-width: 1px;
+      }
+      ha-card.chip {
+        letter-spacing: 0.2px;
+      }
+      ha-card.type-menu, ha-card.type-back {
+        background:none;
+        border:none;
+        --card-mod-icon-color: var(--accent-color);
+      }
+
+      ha-card.type-glance {
+        padding: 14px;
+      }
+      ha-card.type-glance .entities {
+        padding:0;
+      }
+      ha-card.type-glance .entity {
+        flex-direction: column;
+        margin-bottom: 10px;
+      }
+
+      .remote {
+        max-width: 280px;
+        margin-top: 10px !important;
+        border-radius: 10px;
+      }
+      .remote-ch-vol {
+        border-radius: 30px;
+        width: 218px;
+        margin-left: 0;
+        border-width: 1px;
+      }
+      
+
+      ha-card.type-custom-mushroom-light-card, ha-card.type-custom-mushroom-alarm-control-panel-card, ha-card.type-custom-mushroom-person-card, ha-card.type-custom-mushroom-update-card {
+        padding: 14px;
+        border-width: 1px;
+      }
+      ha-card.type-custom-mushroom-light-card {
+        {% if config.entity and is_state(config.entity, 'on') %}
+        background: linear-gradient(240deg, rgb(var(--mush-rgb-purple)) -200%, var(--ha-card-background) 30%);
+        {% endif %}
+      }
+      ha-card.type-custom-mushroom-light-card mushroom-state-item {
+        place-self: start;
+        width: 100%;
+        display: flex;
+        align-items: start;
+        justify-content: start;
+        margin-bottom: 0;
+      }
+      ha-card.type-custom-mushroom-light-card .actions {
+        margin-top: 3px;
+      }
+      ha-card.battery {
+        background: red;
+      }
+      ha-card.type-custom-mushroom-person-card {
+        {% if config.entity and is_state(config.entity, 'home') %}
+        background: linear-gradient(240deg, rgb(var(--rgb-state-person-home)) -200%, var(--ha-card-background) 30%);
+        {% else %}
+        background: linear-gradient(240deg, rgb(var(--rgb-state-person-not-home)) -200%, var(--ha-card-background) 30%);
+        {% endif %}
+      }
+      ha-card.type-custom-mushroom-update-card {
+        {% if config.entity and is_state(config.entity, 'on') %}
+        background: linear-gradient(240deg, rgb(var(--rgb-state-update-on)) -200%, var(--ha-card-background) 30%);
+        {% endif %}
+      }
+      ha-card.type-custom-mushroom-alarm-control-panel-card {
+        {% if config.entity and is_state(config.entity, 'armed_away') %}
+        background: linear-gradient(240deg, rgb(var(--rgb-state-alarm-armed)) -200%, var(--ha-card-background) 30%);
+        {% elif config.entity and is_state(config.entity, 'triggered') %}
+        background: linear-gradient(240deg, rgb(var(--rgb-state-alarm-triggered)) -200%, var(--ha-card-background) 30%);
+        {% endif %}
+      }
+      
+
+      ha-card.type-weather-forecast {
+        border-width: 1px;
+        padding: 14px;
+      }
+      ha-card.type-weather-forecast .state {
+        letter-spacing: 0px;
+        font-size: 22px !important;
+        font-weight: 600;
+      }
+      ha-card.type-weather-forecast .temp-attribute .temp {        
+        font-size: 22px !important; 
+         padding-right: 1px;
+         font-weight: 600;
+      }
+      ha-card.type-weather-forecast .temp-attribute .temp span {
+        font-size: 22px !important;
+         font-weight: 600;
+      }
+      ha-card.type-weather-forecast .templow {
+        display:none;
+      }
+
+      @media screen and (max-width: 870px){
+         ha-card .top {
+          padding-top: 20px !important;
+          padding-bottom:68px !important;
+        }
+        ha-card .pin { 
+          top:0 !important;
+          position: fixed !important;
+          width: 100% !important;
+        }
+        ha-card .bar {
+          bottom: 68px !important;
+          position: sticky !important;
+        }
+      }
+     
+
+    "#searchContainer paper-input$": 
+      paper-input-container$: |
+        :host {
+          padding:8px;
+        }
+        .underline {
+          display:none !important;
+        }
+
+    "#searchContainer paper-input ha-icon-button$": 
+      mwc-icon-button$: |
+        button { 
+          padding: 5px 10px 10px 10px !important;
+          width: 40px !important; 
+          height: 40px !important;
+        }
+
+    mushroom-state-item$: |
+      .icon {
+        margin-bottom: 0 !important;
+        min-height: 75px;
+        place-self: start;
+      }
+      .container {
+        width:100%;
+      }
+
+    mushroom-state-info$: |
+      .primary {
+        letter-spacing: 0.2px;
+        text-align: left;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+      }
+      .secondary {
+        letter-spacing: 0.2px;
+        text-align: left; 
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;       
+      }
+      {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 -%}
+      .secondary { 
+        display:none; 
+      }
+      {%- endif %}
+
+    mushroom-shape-avatar$: |
+      .container {
+        width:50px !important;
+        height: 50px !important;
+        border-radius: 100px;
+        border: var(--theme-icon-border);
+        outline: var(--theme-icon-outline);
+      }
+
+    mushroom-shape-icon$: |
+      .shape {
+        background: var(--icon-color) !important;
+        padding: 5px;
+        border: var(--theme-icon-border);
+        outline: var(--theme-icon-outline);
+        {% if config.entity and is_state(config.entity, 'disarmed') %}
+        background: var(--theme-icon-background) !important;
+        {% endif %}
+      }
+      .shape.disabled {
+        background: var(--theme-icon-background) !important;
+      }
+      .shape ::slotted(*) {
+        --mdc-icon-size: 30px;
+        color: #fff !important;
+        {% if config.entity and is_state(config.entity, 'disarmed') %}
+        color: var(--theme-icon-color) !important;
+        {% endif %}
+      }
+      .shape.disabled ::slotted(*) {
+        color: var(--theme-icon-color) !important;
+      }
+      .shape ha-state-icon {
+        --mdc-icon-size:30px !important;
+        color: #fff !important;
+      }
+      .shape.disabled ha-state-icon {
+        color: var(--theme-icon-color) !important;
+      }
+      {% if config.entity and is_state(config.entity, 'disarmed') %}
+      .shape {
+        background: var(--theme-icon-background) !important;
+      }
+      .shape ha-state-icon {
+        color: var(--theme-icon-color) !important;
+      }        
+      {% endif %}
+    mushroom-light-color-control$: 
+      mushroom-slider$: |
+        .container {
+          height:18px !important;
+        }
+    mushroom-light-brightness-control$:
+      mushroom-slider$: |
+        .container {
+          height:18px !important;
+        }
+        .slider .slider-track-indicator {
+          border-radius: 0 !important;
+        }
+
+    mmp-powerstrip$: 
+      mmp-source-menu$:
+        .: |
+          :host { max-width: unset !important; }
+        mmp-dropdown$: | 
+          mmp-button .mmp-dropdown__label {
+            font-weight: 400;
+            font-size: 13px;
+            opacity:0.75;
+          }
+      .: |
+        card-mod {
+          display:none;
+        }
+
+    ha-markdown$: |
+        :host {
+          padding-left: 16px !important;
+          padding-right: 10px !important;
+        }
+        ha-markdown-element {
+          font-size:10px;
+          font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+          letter-spacing: 0.2px;
+        }
+        h1 {
+          font-size: 26px;
+          margin-bottom:5px;
+          font-weight: 600 !important;
+          line-height: 1.07143 !important;
+          letter-spacing: -.005em;
+        }
+        h2 {
+          font-size: 16px !important;
+          margin-top:0;
+          font-weight: 500 !important;
+          letter-spacing: -.005em;
+          line-height:1.10722 !important;
+          color: var(--secondary-text-color);
+        }
+
+  ## More Info
+  card-mod-more-info: |
+    $: |
+      .mdc-dialog__scrim {
+        backdrop-filter: blur(10px);
+        -webkit-backdro-filter: blur(10px);
+        background:none !important;
+      }
+      .mdc-dialog__surface {
+        background:var(--background-color) !important;
+        border-radius:10px !important;
+        box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
+      }
+      ha-paper-dialog {
+        border-radius:10px;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+    ha-header-bar:
+      $: |
+        :host {
+            border-bottom:0 !important;
+        }
+        .mdc-top-app-bar {
+            background:none !important;
+        }
+        .mdc-top-app-bar__title {
+            opacity:0;
+        }
+    mwc-tab-bar:
+      $: |
+        :host {
+            border-bottom:0 !important;
+        }
+
+  ## Header
+  card-mod-root-yaml: |
+    .: |
+      /* Hide the left/right arrows */
+      mwc-icon-button[slot="trigger"] > ha-svg-icon {
+        display: none;
+      }
+      mwc-icon-button[slot="trigger"]::after {
+        font-size: 22px;
+        height: 20px; 
+        width: 100px;
+        margin-left: 0px;
+        margin-right: 0px;
+        content: "{{ states('sensor.time') }}";
+        position: absolute;
+        top: 14px;
+        right: 0px;
+      }
+      /* Change the tabs */
+      ha-tabs {
+        --paper-tabs-selection-bar-color: var(--accent-color) !important;
+        direction: unset !important;
+        justify-content:center !important;
+      }
+      /* This changes the color of the currently selected tab. */
+      paper-tab {
+        width:calc((100% / 6) - 32px);
+      }
+      paper-tab[aria-selected=true] {
+        color: var(--accent-color) !important;
+      }
+      /* This hides the help button. */
+      a.menu-link[target="_blank"] {
+        display: none;
+      }
+      /* Move header to bottom */
+      @media screen and (max-width:870px){
+        #view {          
+          padding-top: 0 !important;
+        }
+        
+        #view hui-view vertical-layout$: |
+           #columns {
+              padding-bottom: 68px !important;
+            }
+        :not([class="edit-mode"]) .header {
+          top: unset !important;
+          bottom:0;
+          position:fixed;
+          box-shadow: 0 0 20px rgba(0,0,0,0.05);
+          height: 68px !important;
+        }
+        .toolbar {
+          height: 68px !important;
+        }
+        .edit-mode #view {
+          margin-top: calc(var(--header-height) + 60px) !important;
+        }
+        ha-menu-button {
+          display: none !important;
+        }  
+      } 
+    ha-app-layout$: |
+      @media screen and (max-width:870px){
+        #contentContainer {
+          padding-top: 0 !important;
+          padding-bottom: 68px !important;
+        }
+      }
+    ha-tabs$: |
+      @media screen and (max-width:870px){
+        paper-icon-button {
+          display:none !important
+        }
+        #tabsContent {
+          width: 100% !important;
+        }              
+        #selectionBar {
+          bottom: unset !important;
+          border-bottom-width: 2.5px !important;
+        }
+      } 
