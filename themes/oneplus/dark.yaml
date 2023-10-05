@@ -216,8 +216,8 @@ dark:
   # mush-rgb-lime: 205, 220, 57
   # mush-rgb-yellow: 255, 235, 59
   # mush-rgb-amber: 255, 193, 7
-  # mush-rgb-orange: 255, 152, 0
-  mush-rgb-orange: 106, 94, 242
+  mush-rgb-orange: 255, 152, 0
+  # mush-rgb-orange: 106, 94, 242
   mush-rgb-info: 228, 228, 228
   # mush-rgb-deep-orange: 255, 87, 34
   # mush-rgb-brown: 121, 85, 72
@@ -251,6 +251,8 @@ dark:
   #  # New Colours
   # state-default-color: '#44739E' # Blue-Grey
   # state-alarm-armed-color: '#F44336' # Red
+  # state-alarm_control_panel-armed_away-color: 
+  state-alarm_control_panel-armed_home-color: rgb(var(--rgb-orange))
   # state-alarm-arming-color: '#FF9800' # Orange
   # state-alarm-pending-color: '#FF9800' # Orange
   # state-alarm-triggered-color: '#F44336' # Red

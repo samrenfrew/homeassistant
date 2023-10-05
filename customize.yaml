@@ -318,10 +318,6 @@ sensor.samrenfrew_duckdns_org:
   icon: mdi:crosshairs-gps
 timer.fan_timer:
   friendly_name: Timer
-switch.extension_lead:
-  device_class: outlet
-  friendly_name: Extension Lead
-  icon: mdi:power-socket-uk
 switch.plex:
   icon: mdi:plex
 switch.radarr:
@@ -445,8 +441,5 @@ sensor.sam_bt_office:
   templates:
     icon: if (state === 0) return 'mdi:bluetooth-off'; return 'mdi:bluetooth';
     icon_color: if (state === 0) return '#44739e'; return '#FDD835';
-switch.extension_lead:
-  friendly_name: Ady Plug
-  icon: mdi:power-socket-uk
 light.ikea_plug:
   icon: mdi:lightbulb-cfl-spiral

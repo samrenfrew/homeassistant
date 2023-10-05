@@ -20,6 +20,6 @@
   consider_home: 300
   scan_interval: 12
   new_device_defaults:
-    track_new_devices: true
+    track_new_devices: false
   hosts:
     ady_wifi: 192.168.0.11

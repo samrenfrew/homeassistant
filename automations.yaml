@@ -29,7 +29,10 @@
     enabled: false
   - service: switch.turn_on
     data: {}
-    entity_id: switch.extension_lead
+    target:
+      entity_id:
+      - switch.extension_lead
+      - switch.extension_lead_2
   - service: switch.turn_off
     data: {}
     entity_id: switch.humidifier

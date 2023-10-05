@@ -1,0 +1,5 @@
+- platform: aarlo
+  all_sirens: True
+  snapshot: True
+  siren_volume: 1
+  siren_duration: 10

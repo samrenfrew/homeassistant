@@ -269,7 +269,7 @@ cardmod:
       }
       ha-card.type-custom-mushroom-light-card {
         {% if config.entity and is_state(config.entity, 'on') %}
-        background: linear-gradient(240deg, rgb(var(--mush-rgb-purple)) -200%, var(--ha-card-background) 30%);
+        background: linear-gradient(240deg, rgb(var(--rgb-state-light)) -200%, var(--ha-card-background) 30%);
         {% endif %}
       }
       ha-card.type-custom-mushroom-light-card mushroom-state-item {
@@ -301,6 +301,8 @@ cardmod:
       ha-card.type-custom-mushroom-alarm-control-panel-card {
         {% if config.entity and is_state(config.entity, 'armed_away') %}
         background: linear-gradient(240deg, rgb(var(--rgb-state-alarm-armed)) -200%, var(--ha-card-background) 30%);
+        {% elif config.entity and is_state(config.entity, 'armed_home') %}
+        background: linear-gradient(240deg, rgb(var(--rgb-orange)) -200%, var(--ha-card-background) 30%);
         {% elif config.entity and is_state(config.entity, 'triggered') %}
         background: linear-gradient(240deg, rgb(var(--rgb-state-alarm-triggered)) -200%, var(--ha-card-background) 30%);
         {% endif %}
@@ -411,6 +413,8 @@ cardmod:
         outline: var(--theme-icon-outline);
         {% if config.entity and is_state(config.entity, 'disarmed') %}
         background: var(--theme-icon-background) !important;
+        {% elif is_state(config.entity, 'armed_home') %}
+        background: rgb(var(--rgb-orange)) !important;
         {% endif %}
       }
       .shape.disabled {

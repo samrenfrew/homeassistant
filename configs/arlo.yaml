@@ -1,0 +1,12 @@
+  username: !secret arlo_username
+  password: !secret arlo_password
+  backend: sse
+  tfa_source: imap
+  tfa_type: email
+  tfa_host: imap.gmail.com
+  tfa_username: !secret imap_user
+  tfa_password: !secret imap_pw
+  save_media_to: "/config/media/${N}/${F}/${T}"
+  refresh_devices_every: 3
+  reconnect_every: 60
+  request_timeout: 120
