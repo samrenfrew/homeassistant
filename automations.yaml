@@ -6,6 +6,9 @@
     platform: homeassistant
   condition: []
   action:
+  - wait_template: ''
+    timeout: '10'
+    alias: Wait 10s
   - data:
       data:
         tag: start-up
@@ -18,9 +21,6 @@
   - service: alarm_control_panel.alarm_disarm
     data: {}
     entity_id: alarm_control_panel.alarm
-  - wait_template: ''
-    timeout: '10'
-    alias: Wait 10s
   - service: frontend.reload_themes
     data: {}
   - data:
@@ -31,7 +31,6 @@
     data: {}
     target:
       entity_id:
-      - switch.extension_lead
       - switch.extension_lead_2
   - service: switch.turn_off
     data: {}
@@ -99,7 +98,7 @@
     path: cvroque/webostv_turn_on.yaml
     input:
       webostv: media_player.lg_webos_tv
-      webostv_mac: 20-3d-bd-00-f1-36
+      webostv_mac: 78-5D-C8-92-EF-0B
 - id: '1650834182234'
   alias: Re-enable TV turn on
   description: ''

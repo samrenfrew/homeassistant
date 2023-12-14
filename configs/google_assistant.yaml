@@ -20,11 +20,10 @@
         - Humidity
     light.ikea_plug:
       expose: true
-      name: Cool Lamp
-      room: Dining Room
+      name: Christmas Tree
+      room: Lounge
       aliases:
-        - Dining Lamp
-        - Squiggly Lamp
+        - Tree
     switch.pc_power:
       expose: true
       name: Computer
@@ -76,11 +75,11 @@
         - Silver Lamp
     light.spotlight:
       expose: true
-      name: Nook Lamp
-      room: Office
+      name: Bedroom Lamp
+      room: Bedroom
       aliases:
         - Spotlight
-        - Nook Light
+        - Bright Light
     media_player.lg_webos_tv:
       expose: true
       name: TV

@@ -296,3 +296,4 @@ dark:
   state-update-color: '#4CAF50' # Green
   # state-update-installing-color: '#FF9800' # Orange
   # state-vacuum-color: '#009688' # Teal
+  box-shadow: 'inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3)'

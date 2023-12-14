@@ -29,7 +29,7 @@ cardmod:
             height: 100%;
             --mdc-icon-size: 20px;
 
-            {% if config.entity.endswith('battery') or config.entity.endswith('battery_level') %}
+            {% if config.entity and config.entity.endswith('battery') or config.entity.endswith('battery_level') %}
             {% if config.entity and is_state(config.entity, 'unavailable') -%}
             background: var(--theme-icon-background) !important;            
             color: var(--theme-icon-color) !important;
@@ -42,7 +42,7 @@ cardmod:
             {%- endif %}
             {% endif %}
 
-            {% if '_bt_' in config.entity and is_state(config.entity, '100') %}
+            {% if config.entity and '_bt_' in config.entity and is_state(config.entity, '100') %}
             background: var(--accent-color) !important;
             color: #fff !important;
             {% endif %}
@@ -307,6 +307,10 @@ cardmod:
         background: linear-gradient(240deg, rgb(var(--rgb-state-alarm-triggered)) -200%, var(--ha-card-background) 30%);
         {% endif %}
       }
+
+      ha-card.remote-area #container #area {
+        box-shadow: var(--box-shadow);
+      }
       
 
       ha-card.type-weather-forecast {
@@ -345,8 +349,17 @@ cardmod:
           bottom: 68px !important;
           position: sticky !important;
         }
-      }
-     
+      } 
+
+    "#searchContainer": 
+      "ha-textfield$": |
+        label {
+           background:none !important;
+         }
+         .mdc-line-ripple, .mdc-text-field__ripple {
+           display:none !important;
+         }
+          
 
     "#searchContainer paper-input$": 
       paper-input-container$: |
@@ -388,7 +401,8 @@ cardmod:
         text-align: left; 
         text-overflow: ellipsis;
         white-space: nowrap;
-        overflow: hidden;       
+        overflow: hidden;  
+        text-transform: capitalize;
       }
       {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 -%}
       .secondary { 
@@ -413,7 +427,7 @@ cardmod:
         outline: var(--theme-icon-outline);
         {% if config.entity and is_state(config.entity, 'disarmed') %}
         background: var(--theme-icon-background) !important;
-        {% elif is_state(config.entity, 'armed_home') %}
+        {% elif config.entity and is_state(config.entity, 'armed_home') %}
         background: rgb(var(--rgb-orange)) !important;
         {% endif %}
       }
@@ -448,12 +462,12 @@ cardmod:
     mushroom-light-color-control$: 
       mushroom-slider$: |
         .container {
-          height:18px !important;
+          height:28px !important;
         }
     mushroom-light-brightness-control$:
       mushroom-slider$: |
         .container {
-          height:18px !important;
+          height:28px !important;
         }
         .slider .slider-track-indicator {
           border-radius: 0 !important;
@@ -572,6 +586,7 @@ cardmod:
         display: none;
       }
       /* Move header to bottom */
+
       @media screen and (max-width:870px){
         #view {          
           padding-top: 0 !important;
