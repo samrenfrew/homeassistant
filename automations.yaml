@@ -226,3 +226,19 @@
     target:
       device_id: 2e0c7f0adf6f81d337d9058a82fd605f
   mode: single
+- id: '1703438381522'
+  alias: Front Door Notification
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      message: A {{ label }} {{ 'is loitering' if loitering else 'was detected' }}
+        on the {{ camera_name }} camera.
+      camera: camera.front_door
+      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      attachment: thumbnail
+      update_thumbnail: true
+      icon: mdi:cctv
+      labels:
+      - person
+      - cat

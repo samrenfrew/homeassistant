@@ -6,6 +6,6 @@
     - captured_today
     - battery_level
     - signal_strength
-    # - temperature
-    # - humidity
-    # - air_quality
+#     # - temperature
+#     # - humidity
+#     # - air_quality

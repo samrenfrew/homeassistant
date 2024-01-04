@@ -41,7 +41,7 @@
         - Chair Light
         - Reading Light
       room: Lounge
-    light.backlight:
+    light.tv:
       expose: true
       name: Backlight
       room: Lounge
@@ -53,7 +53,7 @@
         - Big Lamp
         - Silver Lamp
         - Right Lamp
-    light.tv_lamp:
+    light.small_lamp:
       expose: true
       name: Small Lamp
       room: Lounge
@@ -67,13 +67,13 @@
       room: Office
       aliases:
         - PC Light
-    light.small_lamp:
+    light.desk_lamp:
       expose: true
       name: Desk Lamp
       room: office
       aliases:
         - Silver Lamp
-    light.spotlight:
+    light.bedroom_lamp:
       expose: true
       name: Bedroom Lamp
       room: Bedroom
