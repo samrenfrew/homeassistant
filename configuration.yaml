@@ -78,10 +78,8 @@ logger:
 
 # Main Components
 alarm_control_panel: !include_dir_merge_list configs/alarm_control_panel
-aarlo: !include configs/arlo.yaml
 automation: !include automations.yaml
 camera: !include_dir_merge_list configs/camera
-# climate: !include_dir_merge_list configs/climate
 command_line: !include_dir_merge_list configs/command_line
 binary_sensor: !include_dir_merge_list configs/binary_sensor
 device_tracker: !include_dir_merge_list configs/device_tracker
@@ -91,8 +89,6 @@ light: !include_dir_merge_list configs/light
 mqtt: !include_dir_merge_named configs/mqtt
 media_player: !include_dir_merge_list configs/media_player
 notify: !include configs/notify.yaml
-# panel_iframe: !include configs/panel_iframe.yaml
-# plant: !include configs/plant.yaml
 remote: !include configs/remote.yaml
 scene: !include scenes.yaml
 script: !include scripts.yaml
@@ -101,7 +97,6 @@ shell_command: !include configs/shell_command.yaml
 switch: !include_dir_merge_list configs/switch
 template: !include_dir_merge_list configs/template
 timer: !include configs/timer.yaml
-#webostv: !include configs/webostv.yaml
 
 # Additional Components
 tts:
@@ -111,16 +106,16 @@ joaoapps_join:
 - name: android
   api_key: !secret join_api
   device_id: group.android
-# adaptive_lighting: !include configs/adaptive_lighting.yaml
-
-zha:
-  zigpy_config:
-    ota:
-      ikea_provider: true
-      ledvance_provider: true                    # Auto update LEDVANCE/OSRAM devices
-      salus_provider: true                       # Auto update SALUS/Computime devices
-      inovelli_provider: true                    # Auto update INOVELLI devices
-      thirdreality_provider: true   
+waste_collection_schedule: !include configs/waste_collection.yaml
+        
+# zha:
+#   zigpy_config:
+#     ota:
+#       ikea_provider: true
+#       ledvance_provider: true                    # Auto update LEDVANCE/OSRAM devices
+#       salus_provider: true                       # Auto update SALUS/Computime devices
+#       inovelli_provider: true                    # Auto update INOVELLI devices
+#       thirdreality_provider: true   
 
 
 # Custom Components

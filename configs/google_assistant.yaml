@@ -19,7 +19,7 @@
       aliases:
         - Humidity
     light.ikea_plug:
-      expose: true
+      expose: false
       name: Christmas Tree
       room: Lounge
       aliases:
@@ -73,6 +73,15 @@
       room: office
       aliases:
         - Silver Lamp
+    light.nursery_lamp:
+      expose: true
+      name: Nursery Lamp
+      room: Nursery
+      aliases:
+        - "Ella's Lamp"
+        - "Ella's Room Light"
+        - "Ella's Room Lamp"
+        - The Brain
     light.bedroom_lamp:
       expose: true
       name: Bedroom Lamp
@@ -97,3 +106,15 @@
       expose: true
       name: Guest Mode
       room: House
+    sensor.bedroom_temperature:
+      expose: true
+      name: Bedroom Temperature
+      room: Bedroom
+    sensor.nursery_temperature:
+      expose: true
+      name: Nursery Temperature
+      room: Nursery
+    sensor.lounge_temperature:
+      expose: true
+      name: Lounge Temperature
+      room: Lounge

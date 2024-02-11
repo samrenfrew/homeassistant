@@ -3,3 +3,7 @@
   name: Alarm
   delay_time: 30
   arming_time: 30
+- platform: manual
+  name: Fridge
+  delay_time: 60
+  

@@ -48,22 +48,6 @@
     data:
       topic: monitor/lounge/KNOWN DEVICE STATES
   mode: restart
-- id: '1619165147921'
-  alias: Door open
-  description: ''
-  trigger:
-  - type: opened
-    platform: device
-    device_id: d0c8bd8b1c2ae297782db08a526849c9
-    entity_id: binary_sensor.door_sensor
-    domain: binary_sensor
-  condition: []
-  action:
-  - service: notify.mobile_app_sam_phone
-    data:
-      title: Door opened
-      message: Door has been opened
-  mode: single
 - id: '1633069327926'
   alias: Speedtest
   description: ''
@@ -74,22 +58,6 @@
   condition: []
   action:
   - service: speedtestdotnet.speedtest
-  mode: single
-- id: '1637237249300'
-  alias: Turn Lights On
-  description: ''
-  trigger:
-  - device_id: 256caebf10d88041fcc86f6a97b42bcd
-    domain: zha
-    platform: device
-    type: remote_button_short_press
-    subtype: remote_button_short_press
-  condition: []
-  action:
-  - type: toggle
-    device_id: dca4679ce3dc03d1077e271896fbb74b
-    entity_id: light.backlight
-    domain: light
   mode: single
 - id: '1650046822895'
   alias: Enable TV Turn On
@@ -125,76 +93,25 @@
     data: {}
   mode: single
 - id: '1667902499798'
-  alias: Take Green Bin Out
+  alias: Take The Bin Out
   description: ''
   trigger:
-  - platform: calendar
-    event: start
-    offset: '-4:0:0'
-    entity_id: calendar.bins
-  condition:
-  - condition: template
-    value_template: '{{ ''Green Bin'' in trigger.calendar_event.summary }}'
-  action:
-  - service: notify.mobile_app_sam_phone
-    data:
-      message: "\U0001F7E2 Take the Green Bin out"
-      data:
-        notification_icon: mdi:delete
-        tag: bins
-        color: green
-        persistent: true
-        sticky: true
-        actions:
-        - action: dismiss
-          title: Dismiss
-  - service: notify.google_assistant_sdk
-    data:
-      message: The Green Bin needs to go out tonight
-  mode: single
-- id: '1667984447055'
-  alias: Test Calendar Triggers
-  description: ''
-  trigger:
-  - platform: calendar
-    event: start
-    offset: '-4:0:0'
-    entity_id: calendar.bins
-    enabled: true
-  - platform: calendar
-    event: end
-    entity_id: calendar.bins
-    enabled: true
   - platform: state
     entity_id:
-    - calendar.bins
+    - sensor.next_bin
+    attribute: daysTo
+    to: '1'
   condition:
-  - condition: template
-    value_template: '{{ ''Black Bin'' in state_attr("calendar.bins", "message") }}'
+  - condition: numeric_state
+    entity_id: sensor.next_bin
+    attribute: daysTo
+    above: 0
+    below: 2
     enabled: false
   action:
   - service: notify.mobile_app_sam_phone
     data:
-      message: "{% if trigger.event == \"start\" and 'Black Bin' in trigger.calendar_event.summary
-        %}\n  \"on\"\n{% elif is_state(\"calendar.bins\", \"on\") and 'Black Bin'
-        in state_attr(\"calendar.bins\", \"message\") %}\n  \"on\"\n{% else %}\n  \"off\"\n{%
-        endif %}\n"
-  mode: single
-- id: '1671058985923'
-  alias: Take the black bin out
-  description: ''
-  trigger:
-  - platform: calendar
-    event: start
-    offset: '-4:0:0'
-    entity_id: calendar.bins
-  condition:
-  - condition: template
-    value_template: '{{ ''Black Bin'' in trigger.calendar_event.summary }}'
-  action:
-  - service: notify.mobile_app_sam_phone
-    data:
-      message: ⚫ Take the Black Bin out
+      message: Take the {{ states("sensor.next_bin") }} out
       data:
         notification_icon: mdi:delete
         tag: bins
@@ -206,7 +123,8 @@
           title: Dismiss
   - service: notify.google_assistant_sdk
     data:
-      message: The Black Bin needs to go out tonight
+      message: The {{ states("sensor.next_bin") }} needs to go out tonight
+    enabled: true
   mode: single
 - id: '1671374342352'
   alias: Tag Computer is scanned
@@ -225,20 +143,23 @@
       profile: relax
     target:
       device_id: 2e0c7f0adf6f81d337d9058a82fd605f
+    enabled: false
   mode: single
-- id: '1703438381522'
-  alias: Front Door Notification
+- id: '1704480730372'
+  alias: Updated Bedroom Thermostat
   description: ''
-  use_blueprint:
-    path: SgtBatten/Stable.yaml
-    input:
-      message: A {{ label }} {{ 'is loitering' if loitering else 'was detected' }}
-        on the {{ camera_name }} camera.
-      camera: camera.front_door
-      notify_device: 0392f3b78fa57ea8933051b62331e81c
-      attachment: thumbnail
-      update_thumbnail: true
-      icon: mdi:cctv
-      labels:
-      - person
-      - cat
+  trigger:
+  - platform: state
+    entity_id:
+    - sensor.bedroom_temperature
+  condition: []
+  action:
+  - service: mqtt.publish
+    metadata: {}
+    data:
+      qos: 0
+      retain: false
+      topic: zigbee2mqtt/Bedroom Thermostat/set
+      payload_template: '{"external_temperature_input":{{ (states(''sensor.bedroom_temperature'')|float(0)|round(1))
+        }}}'
+  mode: single
