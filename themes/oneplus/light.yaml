@@ -26,10 +26,10 @@ light:
   border-color: '#E8E8E8'  # Light grey border
 
   # Fonts
-  mdc-typography-font-family: 'SF Pro Display'
-  paper-font-headline_-_font-family: 'SF Pro Display'
-  paper-font-subhead_-_font-family: 'SF Pro Display'
-  paper-font-body1_-_font-family: 'SF Pro Display'
+  mdc-typography-font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif"
+  paper-font-headline_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
+  paper-font-subhead_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
+  paper-font-body1_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
 
   # Header
   app-header-background-color: '#f1f1f1'
@@ -132,8 +132,8 @@ light:
   mush-chip-font-weight: 600
   mush-chip-icon-size: 0.5em # relative to chip height
   # Slider
-  mush-slider-threshold: 10
-  mush-control-border-radius: 10px
+  mush-slider-threshold: 20
+  mush-control-border-radius: 8px
   # # Colors
   # mush-rgb-red: 244, 67, 54
   # mush-rgb-pink: 233, 30, 99

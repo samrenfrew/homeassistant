@@ -99,15 +99,13 @@
   - platform: state
     entity_id:
     - sensor.next_bin
-    attribute: daysTo
-    to: '1'
   condition:
   - condition: numeric_state
     entity_id: sensor.next_bin
     attribute: daysTo
-    above: 0
     below: 2
-    enabled: false
+    enabled: true
+    above: 0
   action:
   - service: notify.mobile_app_sam_phone
     data:

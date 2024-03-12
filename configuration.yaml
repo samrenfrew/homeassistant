@@ -15,11 +15,9 @@ http:
   use_x_forwarded_for: true
   trusted_proxies:
     - 127.0.0.1
-    - 192.168.0.4
     - 192.168.0.1
-    - 192.168.1.5
-    - 192.168.1.4
-    - 192.168.1.1
+    - 192.168.0.4
+    - 192.168.0.5
 
 # Logs
 recorder:
@@ -106,7 +104,11 @@ joaoapps_join:
 - name: android
   api_key: !secret join_api
   device_id: group.android
-waste_collection_schedule: !include configs/waste_collection.yaml
+sonos:
+  media_player:
+    hosts:
+      - 192.168.0.202
+# waste_collection_schedule: !include configs/waste_collection.yaml
         
 # zha:
 #   zigpy_config:

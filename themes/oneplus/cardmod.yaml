@@ -236,7 +236,7 @@ cardmod:
       ha-card.type-menu, ha-card.type-back {
         background:none;
         border:none;
-        --card-mod-icon-color: var(--accent-color);
+        # --card-mod-icon-color: var(--accent-color);
       }
 
       ha-card.type-glance {
@@ -266,6 +266,10 @@ cardmod:
       ha-card.type-custom-mushroom-light-card, ha-card.type-custom-mushroom-alarm-control-panel-card, ha-card.type-custom-mushroom-person-card, ha-card.type-custom-mushroom-update-card {
         padding: 14px;
         border-width: 1px;
+        height: calc(100% - 2px);
+      }
+      ha-card[class*="type-custom-mushroom"] {
+        # aspect-ratio: 1;
       }
       ha-card.type-custom-mushroom-light-card {
         {% if config.entity and is_state(config.entity, 'on') %}
@@ -280,6 +284,7 @@ cardmod:
         justify-content: start;
         margin-bottom: 0;
       }
+      
       ha-card.type-custom-mushroom-light-card .actions {
         margin-top: 3px;
       }
@@ -378,6 +383,15 @@ cardmod:
           height: 40px !important;
         }
 
+    ha-map$: |
+      .leaflet-bar a {
+        background-color: var(--card-background-color);
+        color: var(--primary-text-color);
+      }
+      .leaflet-marker-icon {
+        color: var(--primary-text-color); !important;
+      }
+
     mushroom-state-item$: |
       .icon {
         margin-bottom: 0 !important;
@@ -387,8 +401,18 @@ cardmod:
       .container {
         width:100%;
       }
+      {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 -%}
+      .container.vertical { 
+        flex-direction: row !important;
+        gap: 6px;
+        margin-bottom: 20px;
+      }
+      .icon {
+        min-height: unset;
+      }
+      {%- endif %}
 
-    mushroom-state-info$: |
+    mushroom-state-info$: | 
       .primary {
         letter-spacing: 0.2px;
         text-align: left;
@@ -406,9 +430,11 @@ cardmod:
       }
       {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 -%}
       .secondary { 
-        display:none; 
+        # display:none; 
       }
       {%- endif %}
+
+    
 
     mushroom-shape-avatar$: |
       .container {
@@ -430,22 +456,31 @@ cardmod:
         {% elif config.entity and is_state(config.entity, 'armed_home') %}
         background: rgb(var(--rgb-orange)) !important;
         {% endif %}
+        {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 %}
+        width: 30px !important;
+        height: 30px !important;
+        {% endif %}
       }
+      
       .shape.disabled {
         background: var(--theme-icon-background) !important;
       }
       .shape ::slotted(*) {
-        --mdc-icon-size: 30px;
+        --mdc-icon-size: 28px;
         color: #fff !important;
         {% if config.entity and is_state(config.entity, 'disarmed') %}
         color: var(--theme-icon-color) !important;
+        {% endif %}
+        {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 %}
+        --mdc-icon-size: 24px;
         {% endif %}
       }
       .shape.disabled ::slotted(*) {
         color: var(--theme-icon-color) !important;
       }
+      
       .shape ha-state-icon {
-        --mdc-icon-size:30px !important;
+        --mdc-icon-size:28px !important;
         color: #fff !important;
       }
       .shape.disabled ha-state-icon {
@@ -462,12 +497,12 @@ cardmod:
     mushroom-light-color-control$: 
       mushroom-slider$: |
         .container {
-          height:28px !important;
+          # height:36px !important;
         }
     mushroom-light-brightness-control$:
       mushroom-slider$: |
         .container {
-          height:28px !important;
+          # height:36px !important;
         }
         .slider .slider-track-indicator {
           border-radius: 0 !important;
