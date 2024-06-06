@@ -95,7 +95,7 @@ cardmod:
 
 
   ## CSS styling for all cards
-  card-mod-card-yaml: |      
+  card-mod-card-yaml: | 
     .: |
       ha-card {
         font-family: "SF Pro Display","Roman-55", "Helvetica Neue";
@@ -138,6 +138,9 @@ cardmod:
       ha-card.spotify mmp-source-menu {
         max-width: unset;
       }
+      ha-card.spotify .mmp-dropdown {
+        background: red;
+      }
       ha-card.spotify .entity__icon {
         order:2;
         margin:0;
@@ -147,7 +150,7 @@ cardmod:
         flex: 0 1 100%;
         margin:0;
       }
-      ha-card.spotify .entity__info__media {
+      ha-card.type-custom-mini-media-player .entity__info__media {
         max-height: var(--mmp-unit);
         display:flex;
         flex-direction:row;
@@ -155,37 +158,37 @@ cardmod:
         justify-content:start;
         opacity:1;
       }
-      ha-card.spotify [class*="attr_"] {
+      ha-card.type-custom-mini-media-player [class*="attr_"] {
         text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
         flex-basis:100%;
       }
-      ha-card.spotify [class*="attr_"]::before {
+      ha-card.type-custom-mini-media-player [class*="attr_"]::before {
         display:none;
       }
-      ha-card.spotify .attr__media_title {
+      ha-card.type-custom-mini-media-player .attr__media_title {
         font-weight: 600;
         padding-right: 8px;
       }
-      ha-card.spotify .attr__media_artist, ha-card.spotify .attr__media_artist {
+      ha-card.type-custom-mini-media-player .attr__media_artist, ha-card.type-custom-mini-media-player .attr__media_artist {
         opacity: 0.75;
       }
-      ha-card.spotify .attr__media_series_title, ha-card.spotify .attr__media_season, ha-card.spotify .attr__media_episode {
+      ha-card.type-custom-mini-media-player .attr__media_series_title, ha-card.type-custom-mini-media-player .attr__media_season, ha-card.type-custom-mini-media-player .attr__media_episode {
         opacity: 0.75;
         flex-basis: auto;
       }
-      ha-card.spotify .attr__media_season::before {
+      ha-card.type-custom-mini-media-player .attr__media_season::before {
         content: " (";
         display: inline-block;
         padding-left: 4px;
       }
-      ha-card.spotify .attr__media_episode::before {
+      ha-card.type-custom-mini-media-player .attr__media_episode::before {
         content: " - ";
         display: inline-block;
         padding: 0 4px;
       }
-      ha-card.spotify .attr__media_episode::after {
+      ha-card.type-custom-mini-media-player .attr__media_episode::after {
         content: ")";
         display: inline-block;
       }
@@ -512,12 +515,17 @@ cardmod:
       mmp-source-menu$:
         .: |
           :host { max-width: unset !important; }
-        mmp-dropdown$: | 
-          mmp-button .mmp-dropdown__label {
-            font-weight: 400;
-            font-size: 13px;
-            opacity:0.75;
-          }
+        mmp-dropdown$: 
+          mmp-button$: |
+            .container .slot-container {
+              margin-left: 0;
+            }            
+          .: |
+            mmp-button .mmp-dropdown__label {
+              font-weight: 400;
+              font-size: 13px;
+              opacity:0.75;
+            }
       .: |
         card-mod {
           display:none;

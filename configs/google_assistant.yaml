@@ -89,6 +89,12 @@
       aliases:
         - Spotlight
         - Bright Light
+    media_player.sonos_one:
+      expose: false
+      name: Dining Room Speaker
+      aliases:
+        - Sonos
+      room: Dining Room
     media_player.lg_webos_tv:
       expose: true
       name: TV
