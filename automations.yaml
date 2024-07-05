@@ -161,3 +161,26 @@
       payload_template: '{"external_temperature_input":{{ (states(''sensor.bedroom_temperature'')|float(0)|round(1))
         }}}'
   mode: single
+- id: '1718579204875'
+  alias: Turn off Humidifier after 30 minutes
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - switch.humidifier
+    to: 'on'
+    from: 'off'
+  condition: []
+  action:
+  - sequence:
+    - delay:
+        hours: 0
+        minutes: 30
+        seconds: 0
+        milliseconds: 0
+    - service: switch.turn_off
+      metadata: {}
+      data: {}
+      target:
+        entity_id: switch.humidifier
+  mode: single

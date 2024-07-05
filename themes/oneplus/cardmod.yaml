@@ -562,8 +562,8 @@ cardmod:
     $: |
       .mdc-dialog__scrim {
         backdrop-filter: blur(8px);
-        -webkit-backdro-filter: blur(8px);
-        background:none !important;
+        -webkit-backdrop-filter: blur(8px);
+        background:var(--background-color) !important;
       }
       .mdc-dialog__surface {
         background:var(--background-color) !important;
@@ -651,13 +651,17 @@ cardmod:
            #columns {
               padding-bottom: 68px !important;
             }
-        :not([class="edit-mode"]) .header {
+        div:not(.edit-mode) .header {
           top: unset !important;
           bottom:0;
           position:fixed;
           box-shadow: 0 0 20px rgba(0,0,0,0.05);
           height: 68px !important;
         }
+        # .edit-mode .header {
+        #   top: 0 !important;
+        #   bottom: unset;
+        # }
         .toolbar {
           height: 68px !important;
         }
