@@ -55,24 +55,25 @@ logbook:
 logger:
   default: error
   logs:
-    pyaarlo: debug
-    custom_components.aarlo: debug
-    custom_components.aarlo.alarm_control_panel: debug
-    custom_components.aarlo.binary_sensor: debug
-    custom_components.aarlo.camera: debug
-    custom_components.aarlo.media_player: debug
-    custom_components.aarlo.sensor: debug
-    custom_components.aarlo.switch: debug
+    # pyaarlo: debug
+    # custom_components.aarlo: debug
+    # custom_components.aarlo.alarm_control_panel: debug
+    # custom_components.aarlo.binary_sensor: debug
+    # custom_components.aarlo.camera: debug
+    # custom_components.aarlo.media_player: debug
+    # custom_components.aarlo.sensor: debug
+    # custom_components.aarlo.switch: debug
     homeassistant.components.sensor.command_line: critical
     homeassistant.components.device_tracker.nmap_tracker: critical
     homeassistant.components.switch.command_line: critical
     homeassistant.loader: info
-    homeassistant.components.mqtt: debug
+    homeassistant.components.mqtt: warn
     homeassistant.components.rest.switch: critical
     homeassistant.components.plex: critical
     homeassistant.components.sky_hub: critical
     homeassistant.components.media_player: debug
     #custom_components.google_home: debug
+    custom_components.iphonedetect: debug
 
 # Main Components
 alarm_control_panel: !include_dir_merge_list configs/alarm_control_panel

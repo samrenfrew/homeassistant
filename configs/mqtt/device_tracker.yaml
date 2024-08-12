@@ -1,13 +1,15 @@
 device_tracker:
   - name: "Sam Phone (BT)"
+    unique_id: sam_phone_bt
     state_topic: "monitor/all/sam_bt"
     icon: mdi:cellphone-wireless
     source_type: bluetooth
     device:
       connections:
-        - ["mac", "AC:D6:18:37:10:93"]
-      manufacturer: OnePlus
+        - ["mac", "94:45:60:6d:f9:b4"]
+      manufacturer: Google
   - name: "Ady Phone (BT)"
+    unique_id: ady_phone_bt
     state_topic: "monitor/all/ady_bt"
     icon: mdi:cellphone-wireless
     source_type: bluetooth

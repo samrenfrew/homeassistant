@@ -171,7 +171,7 @@ dark:
 
 
 # Mushroom layout
-  mush-spacing: 10px
+  mush-spacing: 14px
   # Title
   mush-title-padding: 32px 16px 8px
   mush-title-spacing: 5px
@@ -203,8 +203,9 @@ dark:
   # Slider
   mush-slider-threshold: 20
   mush-control-border-radius: 8px
+  mush-control-height: 36px
   # # Colors
-  # mush-rgb-red: 244, 67, 54
+  mush-rgb-red: 244, 67, 54
   # mush-rgb-pink: 233, 30, 99
   mush-rgb-purple: 106, 94, 242
   # mush-rgb-deep-purple: 103, 58, 183
@@ -240,10 +241,14 @@ dark:
   # mush-rgb-state-switch: var(--rgb-blue)
 
   mush-rgb-state-alarm-disarmed: var(--rgb-info)
-  # mush-rgb-state-alarm-armed: var(--rgb-success)
-  # mush-rgb-state-alarm-triggered: var(--rgb-danger)
+  mush-rgb-state-alarm-armed: var(--rgb-success)
+  mush-rgb-state-alarm-triggered: var(--rgb-danger)
 
   mush-rgb-state-update-on: var(--mush-rgb-green)
+
+  color-orange: '#FF9800'
+  color-green: '#4CAF50'
+  color-red: '#F44336'
 
   # mush-rgb-state-person-home: var(--rgb-success)
   # mush-rgb-state-person-not-home: var(--rgb-danger)
@@ -254,7 +259,7 @@ dark:
   # state-default-color: '#44739E' # Blue-Grey
   # state-alarm-armed-color: '#F44336' # Red
   # state-alarm_control_panel-armed_away-color: 
-  state-alarm_control_panel-armed_home-color: rgb(var(--rgb-orange))
+  state-alarm_control_panel-armed_home-color: var(--color-orange)
   # state-alarm-arming-color: '#FF9800' # Orange
   # state-alarm-pending-color: '#FF9800' # Orange
   # state-alarm-triggered-color: '#F44336' # Red
@@ -276,7 +281,7 @@ dark:
   # state-group-color: '#FFC107' # Amber
   # state-humidifier-color: '#2196F3' # Blue
   # state-input-boolean-color: '#FFC107' # Amber
-  state-light-color: '#6a5ef2' # Amber
+  state-light-color: var(--color-orange) # Amber
   # state-lock-jammed-color: '#F44336' # Red
   # state-lock-locked-color: '#4CAF50' # Green
   # state-lock-pending-color: '#FF9800' # Orange
@@ -295,7 +300,7 @@ dark:
   # state-switch-color: '#2196F3' # Blue
   # state-timer-color: '#FFC107' # Amber
   # state-unavailable-color: var(--rgb-info)
-  state-update-color: '#4CAF50' # Green
+  state-update-color: var(--color-green) # Green
   # state-update-installing-color: '#FF9800' # Orange
   # state-vacuum-color: '#009688' # Teal
   box-shadow: 'inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3)'

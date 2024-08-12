@@ -174,8 +174,8 @@
   action:
   - sequence:
     - delay:
-        hours: 0
-        minutes: 30
+        hours: 1
+        minutes: 0
         seconds: 0
         milliseconds: 0
     - service: switch.turn_off
@@ -184,3 +184,25 @@
       target:
         entity_id: switch.humidifier
   mode: single
+- id: '1720187794184'
+  alias: Frigate Notifications (0.12.0.4a)
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      camera: camera.front_door
+      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      base_url: https://home.samrenfrew.co.uk
+      message: A {{ label | lower }} {{ 'is loitering' if loitering else 'was detected'
+        }} at the front door
+      update_thumbnail: true
+      video: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/{{camera}}/clip.mp4'
+      icon: mdi:door-open
+      tap_action: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
+      button_1: Snapshot
+      url_1: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
+      button_2: Clip
+      url_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/{{camera}}/clip.mp4'
+      tv_duration: 0
+      button_3: Silence
+      group: Front Door

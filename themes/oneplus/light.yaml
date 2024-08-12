@@ -102,7 +102,7 @@ light:
 
 
 # Mushroom layout
-  mush-spacing: 10px
+  mush-spacing: 14px
   # Title
   mush-title-padding: 32px 16px 8px
   mush-title-spacing: 5px
@@ -134,6 +134,7 @@ light:
   # Slider
   mush-slider-threshold: 20
   mush-control-border-radius: 8px
+  mush-control-height: 36px
   # # Colors
   # mush-rgb-red: 244, 67, 54
   # mush-rgb-pink: 233, 30, 99
@@ -181,10 +182,14 @@ light:
   # mush-rgb-state-person-zone: var(--rgb-info)
   # mush-rgb-state-person-unknown: var(--rgb-grey)
 
+  color-orange: '#FF9800'
+  color-green: '#4CAF50'
+  color-red: '#F44336'
+
   #  # New Colours
   # state-default-color: '#44739E' # Blue-Grey  
   # state-alarm_control_panel-armed_away-color: 
-  state-alarm_control_panel-armed_home-color: rgb(var(--rgb-orange))
+  state-alarm_control_panel-armed_home-color: var(--orange-color)
   # state-alarm-armed-color: '#F44336' # Red
   # state-alarm-arming-color: '#FF9800' # Orange
   # state-alarm-pending-color: '#FF9800' # Orange
@@ -207,7 +212,7 @@ light:
   # state-group-color: '#FFC107' # Amber
   # state-humidifier-color: '#2196F3' # Blue
   # state-input-boolean-color: '#FFC107' # Amber
-  state-light-color: '#6a5ef2' # Amber
+  state-light-color: var(--orange-color) # Amber
   # state-lock-jammed-color: '#F44336' # Red
   # state-lock-locked-color: '#4CAF50' # Green
   # state-lock-pending-color: '#FF9800' # Orange
@@ -226,7 +231,7 @@ light:
   # state-switch-color: '#2196F3' # Blue
   # state-timer-color: '#FFC107' # Amber
   # state-unavailable-color: var(--rgb-info)
-  state-update-color: '#4CAF50' # Green
+  state-update-color: var(--green-color) # Green
   # state-update-installing-color: '#FF9800' # Orange
   # state-vacuum-color: '#009688' # Teal
   box-shadow: 'inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03)'

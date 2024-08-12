@@ -1,0 +1,5 @@
+binary_sensor:
+  state_topic: "arlo/motion/front_door"
+  payload_on: "true"
+  payload_off: "false"
+  unique_id: arlo_motion

@@ -1,7 +1,7 @@
 switch:
   - name: "Extension Lead"
-    state_topic: "stat/sonoff/POWER"
-    command_topic: "cmnd/sonoff/power"
+    state_topic: "stat/tasmota_42D113/POWER"
+    command_topic: "cmnd/tasmota_42D113/power"
     qos: 0
     payload_on: "ON"
     payload_off: "OFF"

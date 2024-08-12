@@ -1,9 +1,17 @@
 ## ALARM CONTROL PANEL
 - platform: manual
+  unique_id: house
   name: Alarm
   delay_time: 30
   arming_time: 30
+  trigger_time: 1200
+  code_arm_required: false
+  arming_states: 
+    - armed_away
 - platform: manual
+  unique_id: fridge
   name: Fridge
   delay_time: 60
+  trigger_time: 1200
+  code_arm_required: false
   

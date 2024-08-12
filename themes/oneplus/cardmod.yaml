@@ -93,25 +93,64 @@ cardmod:
         color: #fff !important;
       }
 
-
   ## CSS styling for all cards
-  card-mod-card-yaml: | 
-    .: |
+  card-mod-card-yaml: |
+    .: |      
       ha-card {
         font-family: "SF Pro Display","Roman-55", "Helvetica Neue";
-        transition: height 0s, margin 0s;
+        transition: all 0.2s ease-in-out, height 0s, margin 0s;
       }
+      
+      ha-card.type-custom-button-card:hover, ha-card.type-custom-mushroom-light-card:hover, ha-card.type-custom-mushroom-person-card:hover, ha-card.type-custom-mushroom-update-card:hover, ha-card.type-custom-mushroom-media-player-card:hover {
+        @media (hover: hover) {
+          transform: scale(1.05);
+          box-shadow:1px 3px 10px rgba(0,0,0,0.05);
+        }
+      }
+      ha-card.remote-area:hover {
+        transform: unset;
+      }
+
+      ha-card.square {
+        aspect-ratio:1;
+        max-width:100%;
+        max-height:100%;
+      }
+
       ha-card.type-custom-mini-media-player {
         border-width: 1px;
       }
 
+      
+      ha-card.tv-remote {
+        background: none;
+        box-shadow: none;
+        margin: 10px;
+        font-family: "Roman-55", "Helvetica Neue";
+        letter-spacing: 0.2px;
+      }
+      ha-card.tv-remote .mmp-player__core {
+        flex-direction:column-reverse;
+      }
+      ha-card.tv-remote mmp-powerstrip {
+        justify-content:flex-start;
+        margin-left:0;
+      }
+      ha-card.tv-remote .entity__info {
+        margin-left:0;
+      }
+
       ha-card.large-media-player {
-        min-height:144px;
+        min-height: 120px;
+        background: linear-gradient(240deg, var(--accent-color) -200%, var(--ha-card-background) 30%);
+      }
+      ha-card.large-media-player .mmp__bg {
+        display:none;
       }
       ha-card.large-media-player .mmp-player {
         align-self: center;
+        padding: 14px;
       }
-
       ha-card.spotify {
         min-height:144px;
         height: 100%;
@@ -196,6 +235,27 @@ cardmod:
         flex-basis: calc(100% - 50px);
       }
 
+      ha-card.temperature {
+        flex-direction:row !important;
+        flex-wrap:wrap;
+      }
+
+      ha-card.temperature .states {
+        padding-right: 0 !important;
+        flex-basis: calc(45% - 16px);
+        padding-bottom:0 !important;
+      }
+
+      ha-card.temperature .info {
+        padding-left: 0 !important;
+        flex-basis: calc(55% - 16px);
+        padding-bottom:0 !important;
+      }
+
+      ha-card.temperature .info .info__item__time {
+        display:none;
+      }
+
       ha-card.type-custom-mini-graph-card .states .state .state__value {
         font-weight: 500;
         letter-spacing: -0.02em;
@@ -266,30 +326,89 @@ cardmod:
       }
       
 
-      ha-card.type-custom-mushroom-light-card, ha-card.type-custom-mushroom-alarm-control-panel-card, ha-card.type-custom-mushroom-person-card, ha-card.type-custom-mushroom-update-card {
-        padding: 14px;
+      ha-card.type-custom-mushroom-light-card, ha-card.type-custom-mushroom-alarm-control-panel-card, ha-card.type-custom-mushroom-person-card, ha-card.type-custom-mushroom-update-card, ha-card.type-custom-mushroom-media-player-card {
+        # padding: 14px;
         border-width: 1px;
         height: calc(100% - 2px);
+      }
+      ha-card.type-custom-mushroom-media-player-card {
+        {% if config.entity and is_state(config.entity, 'playing') %}
+        background-image:url('{{ state_attr(config.entity, 'entity_picture') }}') !important;
+        {% endif %}
+        background-position:center;
+        background-size: cover;
+        color: #fff;
+        position:relative;
+        overflow:hidden;
+        justify-content:flex-end;
+        padding:0;
+        min-height: 146px;
+        --card-primary-color: #fff;
+        --card-secondary-color: #fff;
+      }
+      ha-card.type-custom-mushroom-media-player-card.large-speaker {
+        @media screen and (max-width:870px){
+          min-height:377px;
+        }
+      }
+      ha-card.type-custom-mushroom-media-player-card::before {
+        display:block;
+        content: "";
+        background:linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.2));
+        width:calc(100% + 2px);
+        height:calc(100% + 2px);
+        position:absolute;
+        top:0;
+        left:0;
+        border-radius: 19px;
+        z-index:0;
+      }
+      ha-card.type-custom-mushroom-media-player-card mushroom-card {
+        padding: 14px;
+        backdrop-filter: blur(0px);
+        z-index:1;
+        background:rgba(255,255,255,0.05);
+        z-index:1;
+        border-radius: 0 0 20px 20px;
+      }
+      ha-card.type-custom-mushroom-media-player-card mushroom-card .container {
+        justify-content: flex-end;
+      }
+      mushroom-card {
+        height:100%;
+      }
+      ha-card.type-custom-mushroom-media-player-card mushroom-button {
+        background-color:rgba(255,255,255,0.1);
+        border-radius:var(--control-border-radius);
+        --icon-color:#fff;
       }
       ha-card[class*="type-custom-mushroom"] {
         # aspect-ratio: 1;
       }
       ha-card.type-custom-mushroom-light-card {
-        {% if config.entity and is_state(config.entity, 'on') %}
+        {% if config.entity and is_state(config.entity, 'on') -%}
         background: linear-gradient(240deg, rgb(var(--rgb-state-light)) -200%, var(--ha-card-background) 30%);
-        {% endif %}
+        {%- endif %}
+        min-height:141px;
+        @media screen and (max-width:870px){
+          min-height: 122px;
+        }
       }
       ha-card.type-custom-mushroom-light-card mushroom-state-item {
-        place-self: start;
-        width: 100%;
-        display: flex;
-        align-items: start;
-        justify-content: start;
-        margin-bottom: 0;
+        # place-self: start;
+        # width: 100%;
+        # display: flex;
+        # align-items: start;
+        # justify-content: start;
+        # margin-bottom: 0;
+        # height:100%;
+        # {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 -%}
+        # height:unset;
+        # {%- endif %}
       }
       
       ha-card.type-custom-mushroom-light-card .actions {
-        margin-top: 3px;
+        # margin-top: 3px;
       }
       ha-card.battery {
         background: red;
@@ -321,28 +440,6 @@ cardmod:
       }
       
 
-      ha-card.type-weather-forecast {
-        border-width: 1px;
-        padding: 14px;
-      }
-      ha-card.type-weather-forecast .state {
-        letter-spacing: 0px;
-        font-size: 22px !important;
-        font-weight: 600;
-      }
-      ha-card.type-weather-forecast .temp-attribute .temp {        
-        font-size: 22px !important; 
-         padding-right: 1px;
-         font-weight: 600;
-      }
-      ha-card.type-weather-forecast .temp-attribute .temp span {
-        font-size: 22px !important;
-         font-weight: 600;
-      }
-      ha-card.type-weather-forecast .templow {
-        display:none;
-      }
-
       @media screen and (max-width: 870px){
          ha-card .top {
           padding-top: 20px !important;
@@ -358,6 +455,45 @@ cardmod:
           position: sticky !important;
         }
       } 
+
+    mmp-media-controls$: |
+      :host {
+        flex-direction:column;
+      }
+      .mmp-media-controls__media {
+        width:100%;
+        gap:10px;
+
+      }
+      .mmp-media-controls__media ha-icon-button {
+        background:var(--background-color) !important;
+        border-radius: 12px;
+        border: 1px solid var(--ha-card-border-color);
+        justify-content: center;
+        width:100%;
+        display:flex;
+        # --mmp-text-color: #fff;
+      }
+
+    mushroom-media-player-volume-control$:
+      mushroom-button-group$: |
+        .container ::slotted(mushroom-button) {
+          background-color:rgba(255,255,255, 0.15) !important;
+          border-radius: var(--control-border-radius);
+          --icon-color:#fff;
+        }
+        .container ::slotted(mushroom-slider) {
+          background-color:rgba(255,255,255, 0.15) !important;
+          border-radius: var(--control-border-radius);
+          --icon-color:#fff;
+        }
+    mushroom-media-player-media-control$:
+      mushroom-button-group$: |
+        .container ::slotted(mushroom-button) {
+          background-color:rgba(255,255,255, 0.15) !important;
+          border-radius: var(--control-border-radius);
+          --icon-color:#fff;
+        }
 
     "#searchContainer": 
       "ha-textfield$": |
@@ -395,23 +531,42 @@ cardmod:
         color: var(--primary-text-color); !important;
       }
 
+    # mushroom-card$: |
+    #   .container {
+    #     justify-content: flex-end !important;
+    #   }
+      
     mushroom-state-item$: |
-      .icon {
-        margin-bottom: 0 !important;
-        min-height: 75px;
-        place-self: start;
-      }
       .container {
         width:100%;
+      }
+      .container.vertical {
+        height:100%;
+        gap: 10px;
+        align-items: flex-start;
+      }
+      .container.vertical .icon {
+        margin-bottom: 0 !important;
+        # min-height: 75px;
+        height:100%;
+        # place-self: start;
+        @media screen and (max-width: 870px){
+          # min-height: 56px;
+        }
+      }
+      .container:not(.vertical) .icon ::slotted(mushroom-shape-icon) .shape ::slotted(*) {
+        --mdc-icon-size: 24px;
+        background:red;
       }
       {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 -%}
       .container.vertical { 
         flex-direction: row !important;
         gap: 6px;
-        margin-bottom: 20px;
+        padding-bottom: 10px;
+        # margin-bottom: 5px;
       }
       .icon {
-        min-height: unset;
+        min-height: unset !important;
       }
       {%- endif %}
 
@@ -437,7 +592,7 @@ cardmod:
       }
       {%- endif %}
 
-    
+
 
     mushroom-shape-avatar$: |
       .container {
@@ -446,6 +601,11 @@ cardmod:
         border-radius: 100px;
         border: var(--theme-icon-border);
         outline: var(--theme-icon-outline);
+        @media screen and (max-width: 870px){
+          width:40px !important;
+          height: 40px !important;
+        }
+
       }
 
     mushroom-shape-icon$: |
@@ -469,7 +629,6 @@ cardmod:
         background: var(--theme-icon-background) !important;
       }
       .shape ::slotted(*) {
-        --mdc-icon-size: 28px;
         color: #fff !important;
         {% if config.entity and is_state(config.entity, 'disarmed') %}
         color: var(--theme-icon-color) !important;
@@ -478,6 +637,14 @@ cardmod:
         --mdc-icon-size: 24px;
         {% endif %}
       }
+      @media screen and (max-width: 870px){
+        .shape {
+          --icon-size: 30px;
+        }
+        .shape ::slotted(*) {
+          --mdc-icon-size: 24px;
+        }
+      }
       .shape.disabled ::slotted(*) {
         color: var(--theme-icon-color) !important;
       }
@@ -485,6 +652,9 @@ cardmod:
       .shape ha-state-icon {
         --mdc-icon-size:28px !important;
         color: #fff !important;
+        @media screen and (max-width: 870px){
+          --mdc-icon-size: 24px !important;
+        }
       }
       .shape.disabled ha-state-icon {
         color: var(--theme-icon-color) !important;
@@ -608,21 +778,21 @@ cardmod:
   ## Header
   card-mod-root-yaml: |
     .: |
-      /* Hide the left/right arrows */
-      mwc-icon-button[slot="trigger"] > ha-svg-icon {
-        display: none;
-      }
-      mwc-icon-button[slot="trigger"]::after {
-        font-size: 22px;
-        height: 20px; 
-        width: 100px;
-        margin-left: 0px;
-        margin-right: 0px;
-        content: "{{ states('sensor.time') }}";
-        position: absolute;
-        top: 14px;
-        right: 0px;
-      }
+      # /* Hide the left/right arrows */
+      # mwc-icon-button[slot="trigger"] > ha-svg-icon {
+      #   display: none;
+      # }
+      # mwc-icon-button[slot="trigger"]::after {
+      #   font-size: 22px;
+      #   height: 20px; 
+      #   width: 100px;
+      #   margin-left: 0px;
+      #   margin-right: 0px;
+      #   content: "{{ states('sensor.time') }}";
+      #   position: absolute;
+      #   top: 14px;
+      #   right: 0px;
+      # }
       /* Change the tabs */
       ha-tabs {
         --paper-tabs-selection-bar-color: var(--accent-color) !important;
@@ -631,7 +801,7 @@ cardmod:
       }
       /* This changes the color of the currently selected tab. */
       paper-tab {
-        width:calc((100% / 6) - 32px);
+        # width:calc((100% / 6));
       }
       paper-tab[aria-selected=true] {
         color: var(--accent-color) !important;
@@ -645,6 +815,7 @@ cardmod:
       @media screen and (max-width:870px){
         #view {          
           padding-top: 0 !important;
+          padding-bottom: 68px !important;
         }
         
         #view hui-view vertical-layout$: |
@@ -655,7 +826,7 @@ cardmod:
           top: unset !important;
           bottom:0;
           position:fixed;
-          box-shadow: 0 0 20px rgba(0,0,0,0.05);
+          box-shadow: 0 0 20px rgba(0,0,0,0.08) !important;
           height: 68px !important;
         }
         # .edit-mode .header {
@@ -680,6 +851,9 @@ cardmod:
         }
       }
     ha-tabs$: |
+      :host {
+        # background: red !important;
+      }
       @media screen and (max-width:870px){
         paper-icon-button {
           display:none !important
@@ -687,8 +861,14 @@ cardmod:
         #tabsContent {
           width: 100% !important;
         }              
+        #tabsContent slot {
+          width:100%;
+          display:grid;
+          grid-template-columns: repeat(6,1fr);
+          height:100%;
+        }
         #selectionBar {
           bottom: unset !important;
           border-bottom-width: 2.5px !important;
         }
-      } 
+      }
