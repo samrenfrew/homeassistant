@@ -100,3 +100,11 @@
 body {
   font-family: "SF Pro Display", "Roman-55", Helvetica, Arial, sans-serif;
 }
+
+h1 {
+  font-size: 26px;
+}
+
+h2 {
+  font-size: 15px;
+}

@@ -162,7 +162,7 @@
         }}}'
   mode: single
 - id: '1718579204875'
-  alias: Turn off Humidifier after 30 minutes
+  alias: Turn off Humidifier after 2 hours
   description: ''
   trigger:
   - platform: state
@@ -174,15 +174,15 @@
   action:
   - sequence:
     - delay:
-        hours: 1
+        hours: 2
         minutes: 0
         seconds: 0
         milliseconds: 0
-    - service: switch.turn_off
-      metadata: {}
+    - metadata: {}
       data: {}
       target:
         entity_id: switch.humidifier
+      action: switch.turn_off
   mode: single
 - id: '1720187794184'
   alias: Frigate Notifications (0.12.0.4a)

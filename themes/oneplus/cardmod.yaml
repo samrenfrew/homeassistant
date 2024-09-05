@@ -279,6 +279,7 @@ cardmod:
         box-shadow: none;
         padding-top: 20px;
         background: none !important;
+        transition: none !important;
       }
       ha-card.type-markdown.center {
         padding:0;
@@ -332,8 +333,13 @@ cardmod:
         height: calc(100% - 2px);
       }
       ha-card.type-custom-mushroom-media-player-card {
-        {% if config.entity and is_state(config.entity, 'playing') %}
+        background: linear-gradient(240deg, var(--accent-color) -200%, var(--ha-card-background) 30%);
+        {% if config.entity and is_state(config.entity, 'playing') and state_attr(config.entity, 'entity_picture') %}
         background-image:url('{{ state_attr(config.entity, 'entity_picture') }}') !important;
+        --card-primary-color: #fff;
+        --card-secondary-color: #fff;
+        {% else %}        
+        border: 1px solid var(--ha-card-border-color);
         {% endif %}
         background-position:center;
         background-size: cover;
@@ -342,16 +348,15 @@ cardmod:
         overflow:hidden;
         justify-content:flex-end;
         padding:0;
-        min-height: 146px;
-        --card-primary-color: #fff;
-        --card-secondary-color: #fff;
+        min-height: 141px;
       }
       ha-card.type-custom-mushroom-media-player-card.large-speaker {
         @media screen and (max-width:870px){
-          min-height:377px;
+          min-height:250px;
         }
       }
       ha-card.type-custom-mushroom-media-player-card::before {
+        {% if config.entity and is_state(config.entity, 'playing') and state_attr(config.entity, 'entity_picture') %}
         display:block;
         content: "";
         background:linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.2));
@@ -362,13 +367,15 @@ cardmod:
         left:0;
         border-radius: 19px;
         z-index:0;
+        {% endif %}
       }
       ha-card.type-custom-mushroom-media-player-card mushroom-card {
-        padding: 14px;
+        padding: 1px;
         backdrop-filter: blur(0px);
         z-index:1;
+        {% if config.entity and is_state(config.entity, 'playing') and state_attr(config.entity, 'entity_picture') %}
         background:rgba(255,255,255,0.05);
-        z-index:1;
+        {% endif %}
         border-radius: 0 0 20px 20px;
       }
       ha-card.type-custom-mushroom-media-player-card mushroom-card .container {
@@ -379,8 +386,10 @@ cardmod:
       }
       ha-card.type-custom-mushroom-media-player-card mushroom-button {
         background-color:rgba(255,255,255,0.1);
-        border-radius:var(--control-border-radius);
+        border-radius:var(--control-border-radius);     
+        {% if config.entity and is_state(config.entity, 'playing') %}
         --icon-color:#fff;
+        {% endif %}
       }
       ha-card[class*="type-custom-mushroom"] {
         # aspect-ratio: 1;
@@ -480,7 +489,9 @@ cardmod:
         .container ::slotted(mushroom-button) {
           background-color:rgba(255,255,255, 0.15) !important;
           border-radius: var(--control-border-radius);
+          {% if config.entity and is_state(config.entity, 'playing') %}
           --icon-color:#fff;
+          {% endif %}
         }
         .container ::slotted(mushroom-slider) {
           background-color:rgba(255,255,255, 0.15) !important;
@@ -491,8 +502,10 @@ cardmod:
       mushroom-button-group$: |
         .container ::slotted(mushroom-button) {
           background-color:rgba(255,255,255, 0.15) !important;
-          border-radius: var(--control-border-radius);
+          border-radius: var(--control-border-radius);          
+          {% if config.entity and is_state(config.entity, 'playing') %}
           --icon-color:#fff;
+          {% endif %}
         }
 
     "#searchContainer": 
@@ -544,6 +557,7 @@ cardmod:
         height:100%;
         gap: 10px;
         align-items: flex-start;
+        justify-content: flex-end;
       }
       .container.vertical .icon {
         margin-bottom: 0 !important;
@@ -677,8 +691,29 @@ cardmod:
         .container {
           # height:36px !important;
         }
+        .slider {        
+          --handle-size: 4px;
+          --handle-margin: calc(var(--control-height) / 8);
+          --slider-size: calc(100% - 2 * var(--handle-margin) - var(--handle-size));
+        }
         .slider .slider-track-indicator {
           border-radius: 0 !important;
+        }
+        .slider .slider-track-active {
+          border-radius: var(--control-border-radius);
+          transform: translate3d(calc((var(--value,0) - 1) * var(--slider-size)),0,0) !important;
+        }
+        .slider .slider-track-active::after {
+          content: "";
+          display:block;
+          position:absolute;
+          width: 4px;
+          height:50%;
+          top:50%;
+          transform: translateY(-50%);
+          right: var(--handle-margin);
+          border-radius: 4px;
+          background:rgba(255,255,255);
         }
 
     mmp-powerstrip$: 
