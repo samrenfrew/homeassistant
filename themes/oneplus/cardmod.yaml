@@ -94,6 +94,7 @@ cardmod:
       }
 
   ## CSS styling for all cards
+
   card-mod-card-yaml: |
     .: |      
       ha-card {
@@ -101,7 +102,7 @@ cardmod:
         transition: all 0.2s ease-in-out, height 0s, margin 0s;
       }
       
-      ha-card.type-custom-button-card:hover, ha-card.type-custom-mushroom-light-card:hover, ha-card.type-custom-mushroom-person-card:hover, ha-card.type-custom-mushroom-update-card:hover, ha-card.type-custom-mushroom-media-player-card:hover {
+      ha-card.type-custom-button-card:not(.no-hover):hover, ha-card.type-custom-mushroom-light-card:not(.no-hover):hover, ha-card.type-custom-mushroom-person-card:not(.no-hover):hover, ha-card.type-custom-mushroom-update-card:not(.no-hover):hover, ha-card.type-custom-mushroom-media-player-card:not(.no-hover):hover, ha-card.type-custom-mushroom-climate-card:not(.no-hover):hover {
         @media (hover: hover) {
           transform: scale(1.05);
           box-shadow:1px 3px 10px rgba(0,0,0,0.05);
@@ -152,7 +153,7 @@ cardmod:
         padding: 14px;
       }
       ha-card.spotify {
-        min-height:144px;
+        min-height:141px;
         height: 100%;
         aspect-ratio: 1;
       }
@@ -238,9 +239,13 @@ cardmod:
       ha-card.temperature {
         flex-direction:row !important;
         flex-wrap:wrap;
+        min-height:141px;
+        @media screen and (max-width:870px){
+          min-height: 122px;
+        }
       }
 
-      ha-card.temperature .states {
+      ha-card.temperature:not(.small) .states {
         padding-right: 0 !important;
         flex-basis: calc(45% - 16px);
         padding-bottom:0 !important;
@@ -327,7 +332,7 @@ cardmod:
       }
       
 
-      ha-card.type-custom-mushroom-light-card, ha-card.type-custom-mushroom-alarm-control-panel-card, ha-card.type-custom-mushroom-person-card, ha-card.type-custom-mushroom-update-card, ha-card.type-custom-mushroom-media-player-card {
+      ha-card.type-custom-mushroom-light-card, ha-card.type-custom-mushroom-alarm-control-panel-card, ha-card.type-custom-mushroom-person-card, ha-card.type-custom-mushroom-update-card, ha-card.type-custom-mushroom-media-player-card, ha-card.type-custom-mushroom-climate-card {
         # padding: 14px;
         border-width: 1px;
         height: calc(100% - 2px);
@@ -383,6 +388,9 @@ cardmod:
       }
       mushroom-card {
         height:100%;
+      }
+      ha-card.type-custom-mushroom-title-card {
+        margin-bottom:0;
       }
       ha-card.type-custom-mushroom-media-player-card mushroom-button {
         background-color:rgba(255,255,255,0.1);
@@ -443,9 +451,119 @@ cardmod:
         background: linear-gradient(240deg, rgb(var(--rgb-state-alarm-triggered)) -200%, var(--ha-card-background) 30%);
         {% endif %}
       }
+      
+      ha-card.type-custom-mushroom-climate-card {
+        min-height: 141px;
+        @media screen and (max-width: 870px) {
+          min-height: 122px;
+        }
+        {% if config.entity and state_attr(config.entity, "hvac_action") == "heating" %}
+        background: linear-gradient(240deg, var(--state-climate-heat-color) -200%, var(--ha-card-background) 30%);
+        {% endif %}
+      }
+      
+
+      ha-card.type-custom-mushroom-climate-card mushroom-shape-icon {
+        display:none;
+      }
+      ha-card.type-custom-mushroom-climate-card mushroom-badge-icon {
+        position:relative;
+        top:unset;
+        right:unset;    
+        border-radius: var(--badge-border-radius);
+        border: var(--theme-icon-border);
+        outline: var(--theme-icon-outline);
+        display:flex;
+        --badge-icon-size: 24px;
+        --badge-size: 40px;
+        @media screen and (max-width: 870px) {
+        --badge-icon-size: 24px;
+        --badge-size: 40px;
+        }
+        {%- if config.entity and state_attr(config.entity, 'hvac_action') == "idle" -%}
+        --main-color: var(--theme-icon-background) !important;
+        --icon-color: var(--theme-icon-color) !important;
+        {%- endif -%}
+
+      }
 
       ha-card.remote-area #container #area {
         box-shadow: var(--box-shadow);
+      }
+
+      ha-card.type-weather-forecast {
+        border-width: 1px;
+        padding: 14px 14px 70px;
+        {% set entity = states("weather.pirateweather") -%}
+        {%- if entity == "sunny" -%}
+          {%- set slug = "01-sunny-home-laundry" -%}
+          {%- set color = "#45B5E5" -%}
+        {%- elif entity == "clear-night" -%}
+          {%- set slug = "05-clear-home-lounging" -%}
+          {%- set color = "#5352AA" -%}    
+        {%- elif entity == "exceptional" or entity == "lightning-rainy" -%}
+          {%- set slug = "22-iso-thunderstorms-home-inside" -%}
+          {%- set color = "#9D4D7B" -%} 
+        {%- elif entity == "fog" -%}
+          {%- set slug = "26-haze-fog-dust-smoke-field-lantern" -%}
+          {%- set color = "#8B8583" -%} 
+        {%- elif entity == "hail" -%}
+          {%- set slug = "19-mixed-rain-hail-rain-sleet-busstop-waiting" -%}
+          {%- set color = "#5E9096" -%}   
+        {%- elif entity == "lightning" -%}
+          {%- set slug = "24-strong-thunderstorms-home-inside" -%}
+          {%- set color = "#9D4D7C" -%}
+        {%- elif entity == "rainy" or entity == "pouring" -%}
+          {%- set slug = "11-rain-home-laundry" -%}
+          {%- set color = "#3D88AC" -%}
+        {%- elif entity == "snowy" or entity == "snowy-rainy" -%}
+          {%- set slug = "17-heavy-snow-blizzard-home-shoveling" -%}
+          {%- set color = "#7B7585" -%}
+        {%- elif entity == "windy" or entity == "windy-variant" -%}
+          {%- set slug = "25-breezy-windy-home-laundry" -%}
+          {%- set color = "#72657F" -%}
+        {%- else -%}
+        {%- set slug = "03-partly-cloudy-day-home-flowers" -%}
+        {%- set color = "#ADCEE0" -%}
+        {%- endif -%}
+        {%- if states("sun.sun") == "below_horizon" -%} 
+          {%- if entity == "partlycloudy" -%}
+            {%- set slug = "07-partly-cloudy-night-home-inside" -%}
+            {%- set color = "#596AA7" -%} 
+          {%- elif entity == "cloudy" -%}
+            {%- set slug = "08-mostly-cloudy-night-home-inside" -%}
+            {%- set color = "#586AA6" -%} 
+          {%- endif -%}
+        {%- else -%}
+          {%- if entity == "partlycloudy" -%}
+            {%- set slug = "03-partly-cloudy-day-home-flowers" -%}
+            {%- set color = "#ADCEE0" -%}
+          {%- elif entity == "cloudy" -%}
+            {%- set slug = "04-mostly-cloudy-day-home-flowers" -%}
+            {%- set color = "#5687AF" -%}
+          {%- endif -%}
+        {%- endif %}
+        background: url('https://ssl.gstatic.com/weather/froggie/l/{{ slug }}_1x.png'), linear-gradient(to top, {{ color }} 10%, var(--ha-card-background) 80%);
+        background-size: contain, auto;
+        background-repeat: no-repeat;
+        background-position: bottom left;
+      }
+      ha-card.type-weather-forecast .state {
+        letter-spacing: 0px;
+        font-size: 22px !important;
+        font-weight: 600;
+      }
+      ha-card.type-weather-forecast .temp-attribute .temp {        
+        font-size: 22px !important; 
+         padding-right: 1px;
+         font-weight: 600;
+      }
+      ha-card.type-weather-forecast .temp-attribute .temp span {
+        font-size: 22px !important;
+         font-weight: 600;
+      }
+      ha-card.type-weather-forecast .templow {
+        display:none;
       }
       
 
@@ -551,7 +669,12 @@ cardmod:
       
     mushroom-state-item$: |
       .container {
-        width:100%;
+        width:100%;        
+        {% if config.entity and state_attr(config.entity, 'hvac_modes') -%}
+        gap: 6px !important;
+        padding-bottom: 10px !important;
+        height: unset !important;
+        {%- endif %}
       }
       .container.vertical {
         height:100%;
@@ -577,14 +700,21 @@ cardmod:
         flex-direction: row !important;
         gap: 6px;
         padding-bottom: 10px;
-        # margin-bottom: 5px;
       }
       .icon {
         min-height: unset !important;
       }
       {%- endif %}
 
-    mushroom-state-info$: | 
+    mushroom-state-info$: |
+      .container {
+        {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 -%}
+        min-height:44px;
+        {% elif config.entity and state_attr(config.entity, 'hvac_modes') -%}
+        min-height:44px;
+        {%- endif %}
+        justify-content:center;
+      }
       .primary {
         letter-spacing: 0.2px;
         text-align: left;
@@ -785,11 +915,12 @@ cardmod:
         --ha-dialog-border-radius: 16px !important;
         
         @media (max-width: 450px), (max-height: 500px) {
-          --mdc-dialog-max-width: 90vw !important;
-          --mdc-dialog-min-width: 90vw !important;
-          --mdc-dialog-min-height: 90vh !important;
+          --ha-dialog-border-radius: 16px 16px 0 0 !important;
+          --mdc-dialog-max-width: 100vw !important;
+          --mdc-dialog-min-width: 100vw !important;
+          --mdc-dialog-min-height: unset !important;
           --mdc-dialog-max-height: 90vh !important;
-          --vertical-align-dialog: center !important;
+          --vertical-align-dialog: flex-end !important;
           box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
         }
       }

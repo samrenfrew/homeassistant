@@ -1,8 +1,8 @@
 ## ALARM CONTROL PANEL
 - platform: manual
   name: Alarm
-  delay_time: 30
-  arming_time: 30
+  delay_time: 120
+  arming_time: 60
   trigger_time: 1200
   code_arm_required: false
   arming_states: 

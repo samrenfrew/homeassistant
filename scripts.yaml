@@ -205,3 +205,18 @@ enable_tv_on:
       entity_id: automation.new_automation
   mode: single
   icon: mdi:television
+lounge_lights:
+  alias: Lounge Lights
+  sequence:
+  - variables:
+      count: '{{ states.light | selectattr(''state'', ''eq'', ''on'') | selectattr(''entity_id'',''in'',''light.chair_lamp,
+        light.small_lamp, light.big_lamp'') | map(attribute=''entity_id'') | list
+        | count }}'
+      lights: '{{ states.light | selectattr(''state'', ''eq'', ''on'') | selectattr(''entity_id'',''in'',''light.chair_lamp,
+        light.small_lamp, light.big_lamp'') | map(attribute=''entity_id'') | list
+        }}'
+      brightness: '{{ state_attr(''light.lounge_lights'', ''brightness'') }}'
+  - condition: template
+    value_template: '{{ count }} != 0'
+  description: ''
+  icon: mdi:lightbulb-auto

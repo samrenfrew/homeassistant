@@ -124,9 +124,9 @@ sonos:
 # Custom Components
 #breaking_changes:
 config_editor:
-#browser_mod:
-#  disable:
-#    - all
+browser_mod:
+  disable:
+   - all
 # ble_monitor:
 #   active_scan: True
 #   discovery: False

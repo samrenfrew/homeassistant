@@ -162,7 +162,7 @@
         }}}'
   mode: single
 - id: '1718579204875'
-  alias: Turn off Humidifier after 2 hours
+  alias: Turn off Humidifier after 1 hour
   description: ''
   trigger:
   - platform: state
@@ -174,7 +174,7 @@
   action:
   - sequence:
     - delay:
-        hours: 2
+        hours: 1
         minutes: 0
         seconds: 0
         milliseconds: 0
@@ -206,3 +206,467 @@
       tv_duration: 0
       button_3: Silence
       group: Front Door
+- id: '1726218750173'
+  alias: Dining Room
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - media_player.sonos_one
+    id: musicon
+    to:
+    - playing
+  - platform: state
+    entity_id:
+    - media_player.sonos_one
+    to: paused
+    id: musicoff
+    for:
+      hours: 0
+      minutes: 0
+      seconds: 0
+  - platform: state
+    entity_id:
+    - media_player.sonos_one
+    attribute: media_title
+    id: musicon
+  - platform: state
+    entity_id:
+    - media_player.sonos_one
+    attribute: media_title
+    to:
+    - none
+    - None
+    - null
+    id: musicoff
+  condition: []
+  action:
+  - variables:
+      action_previous: '{{ ''PREVIOUS_'' ~ context.id }}'
+      action_play: '{{ ''PLAY_'' ~ context.id }}'
+      action_next: '{{ ''NEXT_'' ~ context.id }}'
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - musicon
+      sequence:
+      - data:
+          title: Dining Room Speaker
+          message: '{{trigger.to_state.attributes.media_artist}} - {{trigger.to_state.attributes.media_title}}'
+          data:
+            channel: Music Notifications
+            clickAction: /lovelace/home
+            sticky: true
+            persistent: false
+            image: '{{ state_attr(''media_player.sonos_one'', ''entity_picture'')
+              }}'
+            actions:
+            - action: '{{ action_previous }}'
+              title: Prev
+            - action: '{{ action_play }}'
+              title: '{% if states(''media_player.sonos_one'') == ''playing'' %}Pause{%
+                else %}Play{% endif %}'
+            - action: '{{ action_next }}'
+              title: Next
+            notification_icon: '{% if states(''media_player.sonos_one'') == ''playing''
+              %}mdi:speaker-play{% else %}mdi:speaker-pause{% endif %}'
+            tag: speaker
+        action: notify.mobile_app_sam_phone
+    - conditions:
+      - condition: trigger
+        id:
+        - musicoff
+      sequence:
+      - data:
+          message: clear_notification
+          data:
+            tag: speaker
+        action: notify.mobile_app_sam_phone
+  - wait_for_trigger:
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: '{{ action_previous }}'
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: '{{ action_play }}'
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: '{{ action_next }}'
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == action_previous }}'
+      sequence:
+      - target:
+          entity_id: media_player.sonos_one
+        data: {}
+        action: media_player.media_previous_track
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == action_play }}'
+      sequence:
+      - target:
+          entity_id: media_player.sonos_one
+        data: {}
+        action: media_player.media_play_pause
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == action_next }}'
+      sequence:
+      - target:
+          entity_id: media_player.sonos_one
+        data: {}
+        action: media_player.media_next_track
+  mode: restart
+- id: '1726495873728'
+  alias: Lounge Speaker
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - media_player.lounge_speaker
+    id: musicon
+    to:
+    - playing
+  - platform: state
+    entity_id:
+    - media_player.lounge_speaker
+    to: paused
+    id: musicoff
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  - platform: state
+    entity_id:
+    - media_player.lounge_speaker
+    attribute: media_title
+    id: musicon
+  - platform: state
+    entity_id:
+    - media_player.lounge_speaker
+    attribute: media_title
+    to:
+    - none
+    - None
+    - null
+    id: musicoff
+  condition: []
+  action:
+  - variables:
+      action_previous: '{{ ''PREVIOUS_'' ~ context.id }}'
+      action_play: '{{ ''PLAY_'' ~ context.id }}'
+      action_next: '{{ ''NEXT_'' ~ context.id }}'
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - musicon
+      sequence:
+      - data:
+          title: Lounge Speaker
+          message: '{{trigger.to_state.attributes.media_artist}} - {{trigger.to_state.attributes.media_title}}'
+          data:
+            channel: Music Notifications
+            clickAction: /lovelace/home
+            sticky: true
+            persistent: false
+            image: '{{ state_attr(''media_player.lounge_speaker'', ''entity_picture'')
+              }}'
+            actions:
+            - action: '{{ action_previous }}'
+              title: Prev
+            - action: '{{ action_play }}'
+              title: '{% if states(''media_player.lounge_speaker'') == ''playing''
+                %}Pause{% else %}Play{% endif %}'
+            - action: '{{ action_next }}'
+              title: Next
+            notification_icon: '{% if states(''media_player.lounge_speaker'') == ''playing''
+              %}mdi:speaker-play{% else %}mdi:speaker-pause{% endif %}'
+            tag: speaker
+        action: notify.mobile_app_sam_phone
+    - conditions:
+      - condition: trigger
+        id:
+        - musicoff
+      sequence:
+      - data:
+          message: clear_notification
+          data:
+            tag: speaker
+        action: notify.mobile_app_sam_phone
+  - wait_for_trigger:
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: '{{ action_previous }}'
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: '{{ action_play }}'
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: '{{ action_next }}'
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == action_previous }}'
+      sequence:
+      - target:
+          entity_id: media_player.lounge_speaker
+        data: {}
+        action: media_player.media_previous_track
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == action_play }}'
+      sequence:
+      - target:
+          entity_id: media_player.lounge_speaker
+        data: {}
+        action: media_player.media_play_pause
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == action_next }}'
+      sequence:
+      - target:
+          entity_id: media_player.lounge_speaker
+        data: {}
+        action: media_player.media_next_track
+  mode: restart
+- id: '1726495910801'
+  alias: Bedroom Speaker
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - media_player.bedroom_speaker
+    id: musicon
+    to:
+    - playing
+  - platform: state
+    entity_id:
+    - media_player.bedroom_speaker
+    to: paused
+    id: musicoff
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  - platform: state
+    entity_id:
+    - media_player.bedroom_speaker
+    attribute: media_title
+    id: musicon
+  - platform: state
+    entity_id:
+    - media_player.bedroom_speaker
+    attribute: media_title
+    to:
+    - none
+    - None
+    - null
+    id: musicoff
+  condition: []
+  action:
+  - variables:
+      action_previous: '{{ ''PREVIOUS_'' ~ context.id }}'
+      action_play: '{{ ''PLAY_'' ~ context.id }}'
+      action_next: '{{ ''NEXT_'' ~ context.id }}'
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - musicon
+      sequence:
+      - data:
+          title: Bedroom Speaker
+          message: '{{trigger.to_state.attributes.media_artist}} - {{trigger.to_state.attributes.media_title}}'
+          data:
+            channel: Music Notifications
+            clickAction: /lovelace/home
+            sticky: true
+            persistent: false
+            image: '{{ state_attr(''media_player.bedroom_speaker'', ''entity_picture'')
+              }}'
+            actions:
+            - action: '{{ action_previous }}'
+              title: Prev
+            - action: '{{ action_play }}'
+              title: '{% if states(''media_player.bedroom_speaker'') == ''playing''
+                %}Pause{% else %}Play{% endif %}'
+            - action: '{{ action_next }}'
+              title: Next
+            notification_icon: '{% if states(''media_player.bedroom_speaker'') ==
+              ''playing'' %}mdi:speaker-play{% else %}mdi:speaker-pause{% endif %}'
+            tag: speaker
+        action: notify.mobile_app_sam_phone
+    - conditions:
+      - condition: trigger
+        id:
+        - musicoff
+      sequence:
+      - data:
+          message: clear_notification
+          data:
+            tag: speaker
+        action: notify.mobile_app_sam_phone
+  - wait_for_trigger:
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: '{{ action_previous }}'
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: '{{ action_play }}'
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: '{{ action_next }}'
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == action_previous }}'
+      sequence:
+      - target:
+          entity_id: media_player.bedroom_speaker
+        data: {}
+        action: media_player.media_previous_track
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == action_play }}'
+      sequence:
+      - target:
+          entity_id: media_player.bedroom_speaker
+        data: {}
+        action: media_player.media_play_pause
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == action_next }}'
+      sequence:
+      - target:
+          entity_id: media_player.bedroom_speaker
+        data: {}
+        action: media_player.media_next_track
+  mode: restart
+- id: '1726495938464'
+  alias: Kitchen Speaker
+  description: ''
+  trigger:
+  - platform: state
+    entity_id:
+    - media_player.kitchen_display
+    id: musicon
+    to:
+    - playing
+  - platform: state
+    entity_id:
+    - media_player.kitchen_display
+    to: paused
+    id: musicoff
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  - platform: state
+    entity_id:
+    - media_player.kitchen_display
+    attribute: media_title
+    id: musicon
+  - platform: state
+    entity_id:
+    - media_player.kitchen_display
+    attribute: media_title
+    to:
+    - none
+    - None
+    - null
+    id: musicoff
+  condition: []
+  action:
+  - variables:
+      action_previous: '{{ ''PREVIOUS_'' ~ context.id }}'
+      action_play: '{{ ''PLAY_'' ~ context.id }}'
+      action_next: '{{ ''NEXT_'' ~ context.id }}'
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - musicon
+      sequence:
+      - data:
+          title: Kitchen Speaker
+          message: '{{trigger.to_state.attributes.media_artist}} - {{trigger.to_state.attributes.media_title}}'
+          data:
+            channel: Music Notifications
+            clickAction: /lovelace/home
+            sticky: true
+            persistent: false
+            image: '{{ state_attr(''media_player.kitchen_display'', ''entity_picture'')
+              }}'
+            actions:
+            - action: '{{ action_previous }}'
+              title: Prev
+            - action: '{{ action_play }}'
+              title: '{% if states(''media_player.kitchen_display'') == ''playing''
+                %}Pause{% else %}Play{% endif %}'
+            - action: '{{ action_next }}'
+              title: Next
+            notification_icon: '{% if states(''media_player.kitchen_display'') ==
+              ''playing'' %}mdi:speaker-play{% else %}mdi:speaker-pause{% endif %}'
+            tag: speaker
+        action: notify.mobile_app_sam_phone
+    - conditions:
+      - condition: trigger
+        id:
+        - musicoff
+      sequence:
+      - data:
+          message: clear_notification
+          data:
+            tag: speaker
+        action: notify.mobile_app_sam_phone
+  - wait_for_trigger:
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: '{{ action_previous }}'
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: '{{ action_play }}'
+    - platform: event
+      event_type: mobile_app_notification_action
+      event_data:
+        action: '{{ action_next }}'
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == action_previous }}'
+      sequence:
+      - target:
+          entity_id: media_player.kitchen_display
+        data: {}
+        action: media_player.media_previous_track
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == action_play }}'
+      sequence:
+      - target:
+          entity_id: media_player.kitchen_display
+        data: {}
+        action: media_player.media_play_pause
+    - conditions:
+      - condition: template
+        value_template: '{{ wait.trigger.event.data.action == action_next }}'
+      sequence:
+      - target:
+          entity_id: media_player.kitchen_display
+        data: {}
+        action: media_player.media_next_track
+  mode: restart

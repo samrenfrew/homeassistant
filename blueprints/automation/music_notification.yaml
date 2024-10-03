@@ -1,0 +1,152 @@
+blueprint:
+  name: Speaker Notification
+  description: Show an actionable notification when a speaker is playing
+  domain: automation
+  input:
+    speaker_target:
+      name: Speaker
+      selector:
+        entity:
+          domain: media_player
+    title:
+      name: Notification Title
+      description: Title of the notification
+    notification_tag:
+      name: Unique Tag
+      description: If multiple speakers are playing, this will create a unique notification for each
+      default: speaker
+    notification_device:
+      name: Mobile Device
+      description: Select a device that runs the official Home Assistant app to receive
+        notifications.
+      selector:
+        device:
+          integration: mobile_app
+          multiple: false
+    notification_channel:
+      name: Notification Channel
+      default: Speakers
+
+mode: restart
+max_exceeded: silent
+
+trigger:
+  - platform: state
+    entity_id:
+      - !input speaker_target
+    id: musicon
+    to: 
+      - playing
+      - paused
+  - platform: state
+    entity_id:
+      - !input speaker_target
+    to: paused
+    id: musicoff
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  - platform: state
+    entity_id:
+      - !input speaker_target
+    to: 
+      - "off"
+      - idle
+    id: musicoff
+  - platform: state
+    entity_id:
+      - !input speaker_target
+    attribute: media_title
+    id: musicon
+
+action:
+  - variables:
+      action_previous: "{{ 'PREVIOUS_' ~ context.id }}"
+      action_play: "{{ 'PLAY_' ~ context.id }}"
+      action_next: "{{ 'NEXT_' ~ context.id }}"
+      target: !input speaker_target
+      state: "{{ states(''+target+'')}}"
+      picture: "{{ state_attr(''+target+'', 'entity_picture') }}"
+  - choose:
+      - conditions:
+          - condition: trigger
+            id:
+              - musicon
+        sequence:
+          - device_id: !input notification_device
+            domain: mobile_app
+            type: notify
+            title: !input title
+            message: >-
+              {{trigger.to_state.attributes.media_artist}} -
+              {{trigger.to_state.attributes.media_title}}
+            data:
+              channel: !input notification_channel
+              clickAction: /lovelace/home
+              sticky: true
+              persistent: false
+              image: "{{picture}}"
+              actions:
+                - action: "{{ action_previous }}"
+                  title: Previous
+                - action: "{{ action_play }}"
+                  title: >-
+                    {% if state == 'playing' %}Pause{% else
+                    %}Play{% endif %}
+                - action: "{{ action_next }}"
+                  title: Next
+              notification_icon: >-
+                {% if state == 'playing' %}mdi:speaker-play{% else
+                %}mdi:speaker-pause{% endif %}
+              tag: !input notification_tag
+      - conditions:
+          - condition: trigger
+            id:
+              - musicoff
+        sequence:
+          - device_id: !input notification_device
+            domain: mobile_app
+            type: notify
+            message: clear_notification
+            data:
+              tag: !input notification_tag
+  - wait_for_trigger:
+      - platform: event
+        event_type: mobile_app_notification_action
+        event_data:
+          action: "{{ action_previous }}"
+      - platform: event
+        event_type: mobile_app_notification_action
+        event_data:
+          action: "{{ action_play }}"
+      - platform: event
+        event_type: mobile_app_notification_action
+        event_data:
+          action: "{{ action_next }}"
+  - choose:
+      - conditions:
+          - condition: template
+            value_template: "{{ wait.trigger.event.data.action == action_previous }}"
+        sequence:
+          - target:
+              entity_id: !input speaker_target
+            data: {}
+            action: media_player.media_previous_track
+      - conditions:
+          - condition: template
+            value_template: "{{ wait.trigger.event.data.action == action_play }}"
+        sequence:
+          - target:
+              entity_id: !input speaker_target
+            data: {}
+            action: media_player.media_play_pause
+      - conditions:
+          - condition: template
+            value_template: "{{ wait.trigger.event.data.action == action_next }}"
+        sequence:
+          - target:
+              entity_id: !input speaker_target
+            data: {}
+            action: media_player.media_next_track
+mode: restart
