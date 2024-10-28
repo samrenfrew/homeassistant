@@ -8,6 +8,15 @@
   #       {{ state_attr('switch.tplink', 'current_power_w') }}
   #   device_class: power
 
+  - name: "speakers_on"
+    unique_id: "speakers_on"
+    attributes:
+      friendly_name: "Speakers On"
+    icon: mdi:speaker-multiple
+    state: >-
+      {{ expand(states.media_player) | selectattr('state', 'eq', 'playing') | selectattr('entity_id','in',['media_player.bedroom_speaker','media_player.sonos_one','media_player.lounge_speaker','media_player.kitchen_display']) | map(attribute='entity_id') | list | count }}
+
+
   - name: "lights_on"
     unique_id: "lights_on"
     attributes:
@@ -65,6 +74,7 @@
     unit_of_measurement: "Mbit/s"
     state: >
       {{ state_attr("sensor.speedtest_ping", "download") | round(2) }}
+    state_class: measurement
 
   - name: "speedtest_upload"
     unique_id: "speedtest_upload"
@@ -74,6 +84,7 @@
     unit_of_measurement: "Mbit/s"
     state: >
       {{ state_attr("sensor.speedtest_ping", "upload") | round(2) }}
+    state_class: measurement
 
   - name: "gh_next_timer"
     unique_id: "gh_next_timer"

@@ -108,7 +108,7 @@ joaoapps_join:
 sonos:
   media_player:
     hosts:
-      - 192.168.0.202
+      - 192.168.0.202  
 # waste_collection_schedule: !include configs/waste_collection.yaml
         
 # zha:
@@ -124,9 +124,9 @@ sonos:
 # Custom Components
 #breaking_changes:
 config_editor:
-browser_mod:
-  disable:
-   - all
+# browser_mod:
+#   disable:
+#    - all
 # ble_monitor:
 #   active_scan: True
 #   discovery: False

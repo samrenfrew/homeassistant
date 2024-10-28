@@ -15,6 +15,7 @@ dark:
   light-primary-color: 'var(--accent-color)'
   # Text colors
   primary-text-color: '#fff'
+  rgb-primary-text-color: 255,255,255
   text-primary-color: 'var(--primary-text-color)'
   secondary-text-color: rgba(255,255,255,0.75)
   disabled-text-color: '#777777'
@@ -151,7 +152,15 @@ dark:
   st-mode-background: 'var(--primary-background-color)'
   # fix white on white markdown code sections (eg. the addons infos)
   markdown-code-background-color: 'var(--secondary-background-color)'
+
+  #Modal
   dialog-backdrop-filter: blur(10px)
+  mdc-dialog-scrim-color: rgba(0,0,0,0)
+  mdc-dialog-box-shadow: 0px 11px 15px 0 rgba(0, 0, 0, 0.1)
+  modal-background: rgba(23,23,23,0.88)
+
+    # Inputs
+  input-fill-color: var(--ha-card-background)
 
   # Shadows
   ha-card-box-shadow: 'none'

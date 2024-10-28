@@ -13,6 +13,7 @@
     command_timeout: 30
     scan_interval: 3600
     unit_of_measurement: ms
+    state_class: measurement
     json_attributes:
       - 'download'
       - 'upload'

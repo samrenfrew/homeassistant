@@ -670,3 +670,43 @@
         data: {}
         action: media_player.media_next_track
   mode: restart
+- id: '1728277713332'
+  alias: Humidifer
+  description: ''
+  triggers:
+  - entity_id:
+    - switch.humidifier
+    to: 'on'
+    from: 'off'
+    trigger: state
+  conditions: []
+  actions:
+  - action: script.turn_on
+    target:
+      entity_id: script.turn_off_after_x
+    data:
+      variables:
+        entity: switch.humidifier
+        minutes: 30
+  mode: single
+- id: '1728327473723'
+  alias: Clear Dining Room after 30 Mins
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - media_player.sonos_one
+    from:
+    to: paused
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
+  conditions: []
+  actions:
+  - action: media_player.clear_playlist
+    metadata: {}
+    data: {}
+    target:
+      entity_id: media_player.sonos_one
+  mode: single

@@ -220,3 +220,23 @@ lounge_lights:
     value_template: '{{ count }} != 0'
   description: ''
   icon: mdi:lightbulb-auto
+turn_on_for_x:
+  alias: Turn switch off after X
+  variables:
+    entity:
+    hours: 0
+    minutes: 0
+    seconds: 0
+  sequence:
+  - delay:
+      hours: '{{ hours }}'
+      minutes: '{{ minutes }}'
+      seconds: '{{ seconds }}'
+      milliseconds: 0
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: '{{ entity }}'
+  fields: {}
+  description: ''

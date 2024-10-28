@@ -1,5 +1,10 @@
 cardmod:
   ## CSS styling for Sidebar
+  card-mod-drawer-yaml: |
+    .: |
+      * {
+        background: red;
+      }
   card-mod-sidebar-yaml: |
     .: |
       * {
@@ -96,10 +101,13 @@ cardmod:
   ## CSS styling for all cards
 
   card-mod-card-yaml: |
-    .: |      
+    .: |     
       ha-card {
-        font-family: "SF Pro Display","Roman-55", "Helvetica Neue";
-        transition: all 0.2s ease-in-out, height 0s, margin 0s;
+        font-family: "SF Pro Display","Roman-55", "Helvetica Neue" !important;
+        transition: all 0.2s ease-in-out, height 0s, margin 0s !important;
+      }      
+      ha-card.type-glance, ha-card.media-player, ha-card.type-entities, ha-card.type-custom-uptime-card, ha-card.type-gauge, ha-card.type-custom-mini-graph-card, ha-card.type-map  {
+        border-width: 1px;
       }
       
       ha-card.type-custom-button-card:not(.no-hover):hover, ha-card.type-custom-mushroom-light-card:not(.no-hover):hover, ha-card.type-custom-mushroom-person-card:not(.no-hover):hover, ha-card.type-custom-mushroom-update-card:not(.no-hover):hover, ha-card.type-custom-mushroom-media-player-card:not(.no-hover):hover, ha-card.type-custom-mushroom-climate-card:not(.no-hover):hover {
@@ -108,21 +116,12 @@ cardmod:
           box-shadow:1px 3px 10px rgba(0,0,0,0.05);
         }
       }
-      ha-card.remote-area:hover {
-        transform: unset;
+
+      ha-card.type-markdown {
+        background: none !important;
+        transition: none !important;
       }
 
-      ha-card.square {
-        aspect-ratio:1;
-        max-width:100%;
-        max-height:100%;
-      }
-
-      ha-card.type-custom-mini-media-player {
-        border-width: 1px;
-      }
-
-      
       ha-card.tv-remote {
         background: none;
         box-shadow: none;
@@ -141,55 +140,6 @@ cardmod:
         margin-left:0;
       }
 
-      ha-card.large-media-player {
-        min-height: 120px;
-        background: linear-gradient(240deg, var(--accent-color) -200%, var(--ha-card-background) 30%);
-      }
-      ha-card.large-media-player .mmp__bg {
-        display:none;
-      }
-      ha-card.large-media-player .mmp-player {
-        align-self: center;
-        padding: 14px;
-      }
-      ha-card.spotify {
-        min-height:141px;
-        height: 100%;
-        aspect-ratio: 1;
-      }
-      ha-card.spotify .mmp__bg .cover-gradient {
-        transform: rotate(-90deg)
-      }
-      ha-card.spotify .mmp-player {
-        align-self: end;
-        background: rgba(255,255,255,0.15);
-        border-radius: 0 0 20px 20px;
-      }
-      ha-card.spotify .mmp-player__core {
-        flex-direction: row;
-        flex-wrap:wrap;
-      }
-      ha-card.spotify mmp-powerstrip {
-        justify-content: space-between;
-        margin-left:0;
-        flex-basis: 100%;
-        order:1;
-      }
-      ha-card.spotify mmp-source-menu {
-        max-width: unset;
-      }
-      ha-card.spotify .mmp-dropdown {
-        background: red;
-      }
-      ha-card.spotify .entity__icon {
-        order:2;
-        margin:0;
-      }
-      ha-card.spotify .entity__info {
-        order:3;
-        flex: 0 1 100%;
-        margin:0;
-      }
       ha-card.type-custom-mini-media-player .entity__info__media {
         max-height: var(--mmp-unit);
         display:flex;
@@ -211,101 +161,36 @@ cardmod:
         font-weight: 600;
         padding-right: 8px;
       }
-      ha-card.type-custom-mini-media-player .attr__media_artist, ha-card.type-custom-mini-media-player .attr__media_artist {
-        opacity: 0.75;
-      }
-      ha-card.type-custom-mini-media-player .attr__media_series_title, ha-card.type-custom-mini-media-player .attr__media_season, ha-card.type-custom-mini-media-player .attr__media_episode {
-        opacity: 0.75;
-        flex-basis: auto;
-      }
-      ha-card.type-custom-mini-media-player .attr__media_season::before {
-        content: " (";
-        display: inline-block;
-        padding-left: 4px;
-      }
-      ha-card.type-custom-mini-media-player .attr__media_episode::before {
-        content: " - ";
-        display: inline-block;
-        padding: 0 4px;
-      }
-      ha-card.type-custom-mini-media-player .attr__media_episode::after {
-        content: ")";
-        display: inline-block;
-      }
-      ha-card.spotify .entity__icon + .entity__info {
-        flex-basis: calc(100% - 50px);
-      }
 
       ha-card.temperature {
         flex-direction:row !important;
         flex-wrap:wrap;
         min-height:141px;
-        @media screen and (max-width:870px){
+        @media screen and (max-width:1199px){
           min-height: 122px;
         }
       }
-
       ha-card.temperature:not(.small) .states {
         padding-right: 0 !important;
         flex-basis: calc(45% - 16px);
         padding-bottom:0 !important;
       }
-
       ha-card.temperature .info {
         padding-left: 0 !important;
         flex-basis: calc(55% - 16px);
         padding-bottom:0 !important;
       }
-
       ha-card.temperature .info .info__item__time {
         display:none;
       }
-
       ha-card.type-custom-mini-graph-card .states .state .state__value {
         font-weight: 500;
         letter-spacing: -0.02em;
       }
 
-      ha-card.type-custom-search-card {
-        border-width: 1px;
-      }
-      ha-card.type-custom-search-card #searchContainer {
-        width: 100% !important;
-        border-width: 1px;
-      }
-      ha-card.type-custom-search-card #count {
-        padding-right: 20px;
-      }
-      ha-card.type-custom-search-card #searchContainer ha-icon {
-        color: #a5a5a5;
-      }
-      ha-card.type-markdown {
-        --paper-card-background-color: 'rgba(11, 11, 11, 0.00)';
-        box-shadow: none;
-        padding-top: 20px;
-        background: none !important;
-        transition: none !important;
-      }
-      ha-card.type-markdown.center {
-        padding:0;
-        display:flex;
-        flex-direction:column;
-        justify-content:center;
-      }
-      ha-card.type-markdown.center ha-markdown {
-        padding-top:0;
-        padding-bottom:0;
-      }
-      ha-card.type-glance, ha-card.media-player, ha-card.type-entities, ha-card.type-custom-uptime-card, ha-card.type-gauge, ha-card.type-custom-mini-graph-card, ha-card.type-map  {
-        border-width: 1px;
-      }
-      ha-card.chip {
-        letter-spacing: 0.2px;
-      }
       ha-card.type-menu, ha-card.type-back {
         background:none;
         border:none;
-        # --card-mod-icon-color: var(--accent-color);
       }
 
       ha-card.type-glance {
@@ -319,255 +204,24 @@ cardmod:
         margin-bottom: 10px;
       }
 
-      .remote {
-        max-width: 280px;
-        margin-top: 10px !important;
-        border-radius: 10px;
+      ha-card.type-custom-more-info-card {
+        background:none;
       }
-      .remote-ch-vol {
-        border-radius: 30px;
-        width: 218px;
-        margin-left: 0;
-        border-width: 1px;
+      ha-card.type-custom-more-info-card state-card-content {
+        display:none;
       }
-      
-
-      ha-card.type-custom-mushroom-light-card, ha-card.type-custom-mushroom-alarm-control-panel-card, ha-card.type-custom-mushroom-person-card, ha-card.type-custom-mushroom-update-card, ha-card.type-custom-mushroom-media-player-card, ha-card.type-custom-mushroom-climate-card {
-        # padding: 14px;
-        border-width: 1px;
-        height: calc(100% - 2px);
-      }
-      ha-card.type-custom-mushroom-media-player-card {
-        background: linear-gradient(240deg, var(--accent-color) -200%, var(--ha-card-background) 30%);
-        {% if config.entity and is_state(config.entity, 'playing') and state_attr(config.entity, 'entity_picture') %}
-        background-image:url('{{ state_attr(config.entity, 'entity_picture') }}') !important;
-        --card-primary-color: #fff;
-        --card-secondary-color: #fff;
-        {% else %}        
-        border: 1px solid var(--ha-card-border-color);
-        {% endif %}
-        background-position:center;
-        background-size: cover;
-        color: #fff;
-        position:relative;
-        overflow:hidden;
-        justify-content:flex-end;
-        padding:0;
-        min-height: 141px;
-      }
-      ha-card.type-custom-mushroom-media-player-card.large-speaker {
-        @media screen and (max-width:870px){
-          min-height:250px;
-        }
-      }
-      ha-card.type-custom-mushroom-media-player-card::before {
-        {% if config.entity and is_state(config.entity, 'playing') and state_attr(config.entity, 'entity_picture') %}
-        display:block;
-        content: "";
-        background:linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.2));
-        width:calc(100% + 2px);
-        height:calc(100% + 2px);
-        position:absolute;
-        top:0;
-        left:0;
-        border-radius: 19px;
-        z-index:0;
-        {% endif %}
-      }
-      ha-card.type-custom-mushroom-media-player-card mushroom-card {
-        padding: 1px;
-        backdrop-filter: blur(0px);
-        z-index:1;
-        {% if config.entity and is_state(config.entity, 'playing') and state_attr(config.entity, 'entity_picture') %}
-        background:rgba(255,255,255,0.05);
-        {% endif %}
-        border-radius: 0 0 20px 20px;
-      }
-      ha-card.type-custom-mushroom-media-player-card mushroom-card .container {
-        justify-content: flex-end;
-      }
-      mushroom-card {
-        height:100%;
-      }
-      ha-card.type-custom-mushroom-title-card {
-        margin-bottom:0;
-      }
-      ha-card.type-custom-mushroom-media-player-card mushroom-button {
-        background-color:rgba(255,255,255,0.1);
-        border-radius:var(--control-border-radius);     
-        {% if config.entity and is_state(config.entity, 'playing') %}
-        --icon-color:#fff;
-        {% endif %}
-      }
-      ha-card[class*="type-custom-mushroom"] {
-        # aspect-ratio: 1;
-      }
-      ha-card.type-custom-mushroom-light-card {
-        {% if config.entity and is_state(config.entity, 'on') -%}
-        background: linear-gradient(240deg, rgb(var(--rgb-state-light)) -200%, var(--ha-card-background) 30%);
-        {%- endif %}
-        min-height:141px;
-        @media screen and (max-width:870px){
-          min-height: 122px;
-        }
-      }
-      ha-card.type-custom-mushroom-light-card mushroom-state-item {
-        # place-self: start;
-        # width: 100%;
-        # display: flex;
-        # align-items: start;
-        # justify-content: start;
-        # margin-bottom: 0;
-        # height:100%;
-        # {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 -%}
-        # height:unset;
-        # {%- endif %}
+      ha-card.type-custom-more-info-card h1.card-header {
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 26px;
+        letter-spacing: -0.13px;
       }
       
-      ha-card.type-custom-mushroom-light-card .actions {
-        # margin-top: 3px;
-      }
       ha-card.battery {
         background: red;
       }
-      ha-card.type-custom-mushroom-person-card {
-        {% if config.entity and is_state(config.entity, 'home') %}
-        background: linear-gradient(240deg, rgb(var(--rgb-state-person-home)) -200%, var(--ha-card-background) 30%);
-        {% else %}
-        background: linear-gradient(240deg, rgb(var(--rgb-state-person-not-home)) -200%, var(--ha-card-background) 30%);
-        {% endif %}
-      }
-      ha-card.type-custom-mushroom-update-card {
-        {% if config.entity and is_state(config.entity, 'on') %}
-        background: linear-gradient(240deg, rgb(var(--rgb-state-update-on)) -200%, var(--ha-card-background) 30%);
-        {% endif %}
-      }
-      ha-card.type-custom-mushroom-alarm-control-panel-card {
-        {% if config.entity and is_state(config.entity, 'armed_away') %}
-        background: linear-gradient(240deg, rgb(var(--rgb-state-alarm-armed)) -200%, var(--ha-card-background) 30%);
-        {% elif config.entity and is_state(config.entity, 'armed_home') %}
-        background: linear-gradient(240deg, rgb(var(--rgb-orange)) -200%, var(--ha-card-background) 30%);
-        {% elif config.entity and is_state(config.entity, 'triggered') %}
-        background: linear-gradient(240deg, rgb(var(--rgb-state-alarm-triggered)) -200%, var(--ha-card-background) 30%);
-        {% endif %}
-      }
-      
-      ha-card.type-custom-mushroom-climate-card {
-        min-height: 141px;
-        @media screen and (max-width: 870px) {
-          min-height: 122px;
-        }
-        {% if config.entity and state_attr(config.entity, "hvac_action") == "heating" %}
-        background: linear-gradient(240deg, var(--state-climate-heat-color) -200%, var(--ha-card-background) 30%);
-        {% endif %}
-      }
-      
 
-      ha-card.type-custom-mushroom-climate-card mushroom-shape-icon {
-        display:none;
-      }
-      ha-card.type-custom-mushroom-climate-card mushroom-badge-icon {
-        position:relative;
-        top:unset;
-        right:unset;    
-        border-radius: var(--badge-border-radius);
-        border: var(--theme-icon-border);
-        outline: var(--theme-icon-outline);
-        display:flex;
-        --badge-icon-size: 24px;
-        --badge-size: 40px;
-        @media screen and (max-width: 870px) {
-        --badge-icon-size: 24px;
-        --badge-size: 40px;
-        }
-        {%- if config.entity and state_attr(config.entity, 'hvac_action') == "idle" -%}
-        --main-color: var(--theme-icon-background) !important;
-        --icon-color: var(--theme-icon-color) !important;
-        {%- endif -%}
-
-      }
-
-      ha-card.remote-area #container #area {
-        box-shadow: var(--box-shadow);
-      }
-
-      ha-card.type-weather-forecast {
-        border-width: 1px;
-        padding: 14px 14px 70px;
-        {% set entity = states("weather.pirateweather") -%}
-        {%- if entity == "sunny" -%}
-          {%- set slug = "01-sunny-home-laundry" -%}
-          {%- set color = "#45B5E5" -%}
-        {%- elif entity == "clear-night" -%}
-          {%- set slug = "05-clear-home-lounging" -%}
-          {%- set color = "#5352AA" -%}    
-        {%- elif entity == "exceptional" or entity == "lightning-rainy" -%}
-          {%- set slug = "22-iso-thunderstorms-home-inside" -%}
-          {%- set color = "#9D4D7B" -%} 
-        {%- elif entity == "fog" -%}
-          {%- set slug = "26-haze-fog-dust-smoke-field-lantern" -%}
-          {%- set color = "#8B8583" -%} 
-        {%- elif entity == "hail" -%}
-          {%- set slug = "19-mixed-rain-hail-rain-sleet-busstop-waiting" -%}
-          {%- set color = "#5E9096" -%}   
-        {%- elif entity == "lightning" -%}
-          {%- set slug = "24-strong-thunderstorms-home-inside" -%}
-          {%- set color = "#9D4D7C" -%}
-        {%- elif entity == "rainy" or entity == "pouring" -%}
-          {%- set slug = "11-rain-home-laundry" -%}
-          {%- set color = "#3D88AC" -%}
-        {%- elif entity == "snowy" or entity == "snowy-rainy" -%}
-          {%- set slug = "17-heavy-snow-blizzard-home-shoveling" -%}
-          {%- set color = "#7B7585" -%}
-        {%- elif entity == "windy" or entity == "windy-variant" -%}
-          {%- set slug = "25-breezy-windy-home-laundry" -%}
-          {%- set color = "#72657F" -%}
-        {%- else -%}
-        {%- set slug = "03-partly-cloudy-day-home-flowers" -%}
-        {%- set color = "#ADCEE0" -%}
-        {%- endif -%}
-        {%- if states("sun.sun") == "below_horizon" -%} 
-          {%- if entity == "partlycloudy" -%}
-            {%- set slug = "07-partly-cloudy-night-home-inside" -%}
-            {%- set color = "#596AA7" -%} 
-          {%- elif entity == "cloudy" -%}
-            {%- set slug = "08-mostly-cloudy-night-home-inside" -%}
-            {%- set color = "#586AA6" -%} 
-          {%- endif -%}
-        {%- else -%}
-          {%- if entity == "partlycloudy" -%}
-            {%- set slug = "03-partly-cloudy-day-home-flowers" -%}
-            {%- set color = "#ADCEE0" -%}
-          {%- elif entity == "cloudy" -%}
-            {%- set slug = "04-mostly-cloudy-day-home-flowers" -%}
-            {%- set color = "#5687AF" -%}
-          {%- endif -%}
-        {%- endif %}
-        background: url('https://ssl.gstatic.com/weather/froggie/l/{{ slug }}_1x.png'), linear-gradient(to top, {{ color }} 10%, var(--ha-card-background) 80%);
-        background-size: contain, auto;
-        background-repeat: no-repeat;
-        background-position: bottom left;
-      }
-      ha-card.type-weather-forecast .state {
-        letter-spacing: 0px;
-        font-size: 22px !important;
-        font-weight: 600;
-      }
-      ha-card.type-weather-forecast .temp-attribute .temp {        
-        font-size: 22px !important; 
-         padding-right: 1px;
-         font-weight: 600;
-      }
-      ha-card.type-weather-forecast .temp-attribute .temp span {
-        font-size: 22px !important;
-         font-weight: 600;
-      }
-      ha-card.type-weather-forecast .templow {
-        display:none;
-      }
-      
-
-      @media screen and (max-width: 870px){
+      @media screen and (max-width: 1199px){
          ha-card .top {
           padding-top: 20px !important;
           padding-bottom:68px !important;
@@ -602,6 +256,32 @@ cardmod:
         # --mmp-text-color: #fff;
       }
 
+    ha-markdown$: |
+      :host {
+        padding-left: 16px !important;
+        padding-right: 10px !important;
+      }
+      ha-markdown-element {
+        font-size:10px;
+        font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+        letter-spacing: 0.2px;
+      }
+      h1 {
+        font-size: 26px;
+        margin-bottom:5px;
+        font-weight: 600 !important;
+        line-height: 1.07143 !important;
+        letter-spacing: -.005em;
+      }
+      h2 {
+        font-size: 16px !important;
+        margin-top:0;
+        font-weight: 500 !important;
+        letter-spacing: -.005em;
+        line-height:1.10722 !important;
+        color: var(--secondary-text-color);
+      }
+
     mushroom-media-player-volume-control$:
       mushroom-button-group$: |
         .container ::slotted(mushroom-button) {
@@ -625,42 +305,6 @@ cardmod:
           --icon-color:#fff;
           {% endif %}
         }
-
-    "#searchContainer": 
-      "ha-textfield$": |
-        label {
-           background:none !important;
-         }
-         .mdc-line-ripple, .mdc-text-field__ripple {
-           display:none !important;
-         }
-          
-
-    "#searchContainer paper-input$": 
-      paper-input-container$: |
-        :host {
-          padding:8px;
-        }
-        .underline {
-          display:none !important;
-        }
-
-    "#searchContainer paper-input ha-icon-button$": 
-      mwc-icon-button$: |
-        button { 
-          padding: 5px 10px 10px 10px !important;
-          width: 40px !important; 
-          height: 40px !important;
-        }
-
-    ha-map$: |
-      .leaflet-bar a {
-        background-color: var(--card-background-color);
-        color: var(--primary-text-color);
-      }
-      .leaflet-marker-icon {
-        color: var(--primary-text-color); !important;
-      }
 
     # mushroom-card$: |
     #   .container {
@@ -687,7 +331,7 @@ cardmod:
         # min-height: 75px;
         height:100%;
         # place-self: start;
-        @media screen and (max-width: 870px){
+        @media screen and (max-width: 1199px){
           # min-height: 56px;
         }
       }
@@ -705,6 +349,15 @@ cardmod:
         min-height: unset !important;
       }
       {%- endif %}
+
+    $: |
+      h1.card-header {
+        font-family: "SF Pro Display","Roman-55", "Helvetica Neue" !important;
+        font-size: 26px !important;
+        font-weight: 600 !important;
+        line-height: 26px !important;
+        letter-spacing: -0.13px !important;
+      }
 
     mushroom-state-info$: |
       .container {
@@ -729,6 +382,7 @@ cardmod:
         white-space: nowrap;
         overflow: hidden;  
         text-transform: capitalize;
+        opacity: 0.6;
       }
       {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 -%}
       .secondary { 
@@ -745,7 +399,7 @@ cardmod:
         border-radius: 100px;
         border: var(--theme-icon-border);
         outline: var(--theme-icon-outline);
-        @media screen and (max-width: 870px){
+        @media screen and (max-width: 1199px){
           width:40px !important;
           height: 40px !important;
         }
@@ -781,7 +435,7 @@ cardmod:
         --mdc-icon-size: 24px;
         {% endif %}
       }
-      @media screen and (max-width: 870px){
+      @media screen and (max-width: 1199px){
         .shape {
           --icon-size: 30px;
         }
@@ -796,7 +450,7 @@ cardmod:
       .shape ha-state-icon {
         --mdc-icon-size:28px !important;
         color: #fff !important;
-        @media screen and (max-width: 870px){
+        @media screen and (max-width: 1199px){
           --mdc-icon-size: 24px !important;
         }
       }
@@ -866,51 +520,11 @@ cardmod:
           display:none;
         }
 
-    ha-markdown$: |
-        :host {
-          padding-left: 16px !important;
-          padding-right: 10px !important;
-        }
-        ha-markdown-element {
-          font-size:10px;
-          font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
-          letter-spacing: 0.2px;
-        }
-        h1 {
-          font-size: 26px;
-          margin-bottom:5px;
-          font-weight: 600 !important;
-          line-height: 1.07143 !important;
-          letter-spacing: -.005em;
-        }
-        h2 {
-          font-size: 16px !important;
-          margin-top:0;
-          font-weight: 500 !important;
-          letter-spacing: -.005em;
-          line-height:1.10722 !important;
-          color: var(--secondary-text-color);
-        }
+      
 
   ## More Info
-  card-mod-more-info: |
-    $: |
-      .mdc-dialog__scrim {
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
-        background:var(--background-color) !important;
-      }
-      .mdc-dialog__surface {
-        background:var(--background-color) !important;
-        border-radius:10px !important;
-        box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
-      }
-      ha-paper-dialog {
-        border-radius:10px;
-      }
-      ::-webkit-scrollbar {
-        display: none;
-      }
+  card-mod-more-info-yaml: |
+    .: |
       ha-dialog {  
         --ha-dialog-border-radius: 16px !important;
         
@@ -924,6 +538,34 @@ cardmod:
           box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
         }
       }
+    $: |     
+      .mdc-dialog {
+        # display:flex !important;
+        # opacity:0;
+        # visibility:hidden;
+      }
+      .mdc-dialog.mdc-dialog--open {
+        # opacity:1;
+        # visibility:visible;
+      }
+      .mdc-dialog__surface {
+        box-shadow: 0px 11px 15px 0 rgba(0, 0, 0, 0.1) !important;
+        background: var(--modal-background) !important;
+        # transform: translateY(100vh) !important;
+        # transition-delay: 0.3s;
+        # transition: transform 0.5s ease-in-out;
+      }
+      .mdc-dialog.mdc-dialog--open .mdc-dialog__surface {
+        # transition-delay: 0.5s !important;
+        # transform: translateY(0) !important;
+      }
+      ha-paper-dialog {
+        border-radius:10px;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      
     ha-header-bar:
       $: |
         :host {
