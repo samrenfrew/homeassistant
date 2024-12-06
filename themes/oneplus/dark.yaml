@@ -179,9 +179,9 @@ dark:
   card-mod-theme: cardmod
 
   # SECTIONS
-  ha-section-grid-column-gap: 10px
-  ha-section-grid-row-gap: 10px
-  ha-view-sections-column-gap: 24px
+  ha-section-grid-column-gap: 16px
+  ha-section-grid-row-gap: 16px
+  ha-view-sections-column-gap: 16px
 
 
 # Mushroom layout

@@ -64,7 +64,7 @@ light:
   secondary-background-color: 'var(--background-color-2)' # Background more info title
 
   # Icons
-  paper-item-icon-color: 'var(--text-light-color)' # Off
+  paper-item-icon-color: 'var(--state-icon-color)' # Off
   paper-item-icon-active-color: 'var(--accent-color)' # On
   theme-icon-border: '3px solid var(--ha-card-background)'
   theme-icon-outline: '1px solid var(--ha-card-border-color)'

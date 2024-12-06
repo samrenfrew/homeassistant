@@ -19,7 +19,7 @@
       aliases:
         - Humidity
     light.ikea_plug:
-      expose: false
+      expose: true
       name: Christmas Tree
       room: Lounge
       aliases:

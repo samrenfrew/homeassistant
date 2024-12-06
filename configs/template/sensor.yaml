@@ -23,7 +23,7 @@
       friendly_name: "Lights On"
     icon: mdi:lightbulb-group-outline
     state: >-
-      {{ expand(states.light) | selectattr('state', 'eq', 'on') | rejectattr('entity_id','in',['light.all_lights','light.lounge_lights']) | map(attribute='entity_id') | list | count }}
+      {{ expand(states.light) | selectattr('state', 'eq', 'on') | rejectattr('entity_id','in',['light.all_lights','light.lounge_lights', 'light.aarlo_front_door']) | map(attribute='entity_id') | list | count }}
 
   - name: "humidifier"
     unique_id: "humidifier"
