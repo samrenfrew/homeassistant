@@ -247,5 +247,5 @@ light:
   # state-unavailable-color: var(--rgb-info)
   state-update-color: var(--green-color) # Green
   # state-update-installing-color: '#FF9800' # Orange
-  # state-vacuum-color: '#009688' # Teal
+  # state-vacuum-color: '#009688' # Teal  
   box-shadow: 'inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03)'

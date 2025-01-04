@@ -10,10 +10,10 @@ lounge:
   icon: mdi:sofa
   entities:
     - light.big_lamp
-    - light.tv_lamp
+    - light.small_lamp
     - light.chair_lamp
-    - light.backlight
-    - media_player.tv
+    # - light.backlight
+    - media_player.lg_webos_tv
     - media_player.lounge_speaker
     - switch.tv
     - sensor.lounge_humidity
@@ -36,12 +36,14 @@ office:
   icon: mdi:desktop-tower-monitor
   entities:
     - light.computer
-    - light.small_lamp
-    - light.spotlight
+    - light.desk_lamp
     - switch.pc_power
-    - switch.ikea_plug
+    # - switch.ikea_plug
     - switch.extension_lead
-    - sensor.office_motion
+    - binary_sensor.office_motion
+    - sensor.office_temperature
+    - sensor.office_humidity
+    - climate.office
 
 nursery:
   name: Nursery
@@ -59,8 +61,8 @@ ady_office:
   entities:
     - switch.extension_lead_2
     - climate.upstairs
-    - sensor.office_humidity
-    - sensor.office_temperature
+    - sensor.upstairs_temperature
+    - sensor.upstairs_humidity
 
 dining_room:
   name: Dining Room
@@ -101,7 +103,8 @@ all_lights:
   icon: mdi:lightbulb-on-outline
   entities:
     - light.all_lights
-    - light.christmas_tree
+    - light.ikea_plug
+    # - light.christmas_tree
 
 speakers:
   name: Speakers

@@ -48,17 +48,6 @@
     data:
       topic: monitor/lounge/KNOWN DEVICE STATES
   mode: restart
-- id: '1633069327926'
-  alias: Speedtest
-  description: ''
-  trigger:
-  - platform: time_pattern
-    minutes: '0'
-    hours: '*'
-  condition: []
-  action:
-  - service: speedtestdotnet.speedtest
-  mode: single
 - id: '1650046822895'
   alias: Enable TV Turn On
   description: ''
@@ -127,21 +116,21 @@
 - id: '1671374342352'
   alias: Tag Computer is scanned
   description: ''
-  trigger:
-  - platform: tag
-    tag_id: 'computer '
-  condition: []
-  action:
-  - service: switch.turn_on
-    data: {}
+  triggers:
+  - tag_id: computer
+    trigger: tag
+  conditions: []
+  actions:
+  - data: {}
     target:
       entity_id: switch.pc_power
-  - service: light.turn_on
-    data:
+    action: switch.turn_on
+  - data:
       profile: relax
     target:
-      device_id: 2e0c7f0adf6f81d337d9058a82fd605f
+      entity_id: light.desk_lamp
     enabled: false
+    action: light.turn_on
   mode: single
 - id: '1704480730372'
   alias: Updated Bedroom Thermostat
@@ -709,4 +698,39 @@
     data: {}
     target:
       entity_id: media_player.sonos_one
+  mode: single
+- id: '1734637425851'
+  alias: Turn on Humidifier every hour
+  description: ''
+  triggers:
+  - trigger: time_pattern
+    minutes: '0'
+  conditions:
+  - condition: time
+    after: '20:00:00'
+    before: 06:00:00
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+  actions:
+  - action: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.humidifier
+  - delay:
+      hours: 0
+      minutes: 10
+      seconds: 0
+      milliseconds: 0
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.humidifier
   mode: single

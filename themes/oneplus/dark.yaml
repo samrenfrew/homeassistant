@@ -317,4 +317,6 @@ dark:
   state-update-color: var(--color-green) # Green
   # state-update-installing-color: '#FF9800' # Orange
   # state-vacuum-color: '#009688' # Teal
+  # state-device_tracker-not_home-color: var(--color-red)
+  # state-device_tracker-home-color: var(--color-green)
   box-shadow: 'inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3)'
