@@ -20,10 +20,10 @@
         - Humidity
     light.ikea_plug:
       expose: true
-      name: Christmas Tree
-      room: Lounge
+      name: Office Lamp
+      room: Office
       aliases:
-        - Tree
+        - Cool Lamp
     switch.pc_power:
       expose: true
       name: Computer
@@ -90,10 +90,11 @@
         - Spotlight
         - Bright Light
     media_player.sonos_one:
-      expose: false
+      expose: true
       name: Dining Room Speaker
       aliases:
         - Sonos
+        - Dining Room
       room: Dining Room
     media_player.lg_webos_tv:
       expose: true

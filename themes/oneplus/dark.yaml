@@ -1,8 +1,6 @@
 dark:
   # Colors 
   accent-color: '#2a79ff'
-  # Colors 
-  accent-color: '#2a79ff'
   secondary-accent-color: '#6a5ef2'
   running-accent-color: '#4caf50'
   stopped-accent-color: '#f44336'
@@ -48,7 +46,6 @@ dark:
   border-color: '#222323'
 
   # Inputs
-  input-fill-color: "#282828"
   code-editor-background-color: "#282828"
   input-ink-color: 'var(--primary-text-color)'
   input-label-ink-color: 'var(--primary-text-color)'
@@ -180,8 +177,9 @@ dark:
 
   # SECTIONS
   ha-section-grid-column-gap: 16px
-  ha-section-grid-row-gap: 16px
+  ha-section-grid-row-gap: 13px
   ha-view-sections-column-gap: 16px
+  ha-view-sections-row-gap: 13px
 
 
 # Mushroom layout

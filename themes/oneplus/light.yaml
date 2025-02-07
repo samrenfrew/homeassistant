@@ -21,7 +21,6 @@ light:
   text-medium-color: '#4a4a4a' # Medium grey text
   text-light-color: '#E4E4E4' # Blue
   background-color: '#f1f1f1'  # Light grey background
-  secondary-background-color: '#fbfbfb'
   background-color-2: '#E4E4E4'  # Light grey background
   background-card-color: '#f1f1f1' # White background
   border-color: '#E8E8E8'  # Light grey border
@@ -109,9 +108,10 @@ light:
   card-mod-theme: cardmod
 
   # SECTIONS
-  ha-section-grid-column-gap: 10px
-  ha-section-grid-row-gap: 10px
-  ha-view-sections-column-gap: 24px
+  ha-section-grid-column-gap: 16px
+  ha-section-grid-row-gap: 13px
+  ha-view-sections-column-gap: 16px
+  ha-view-sections-row-gap: 13px
 
 
 # Mushroom layout

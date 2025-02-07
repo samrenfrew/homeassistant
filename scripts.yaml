@@ -240,3 +240,28 @@ turn_on_for_x:
       entity_id: '{{ entity }}'
   fields: {}
   description: ''
+boost_radiator_for_x:
+  sequence:
+  - action: climate.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: '{{ entity }}'
+  - delay:
+      hours: '{{ hours }}'
+      minutes: '{{ minutes }}'
+      seconds: '{{ seconds }}'
+      milliseconds: 0
+  - action: climate.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: '{{ entity }}'
+  alias: Boost radiator for X
+  variables:
+    entity:
+    hours: 0
+    minutes: 0
+    seconds: 0
+  fields: {}
+  description: ''

@@ -3,6 +3,11 @@ homeassistant:
   customize: !include customize.yaml
   media_dirs:
     media: /config/media
+  auth_mfa_modules:
+    - type: totp
+    - type: notify
+      include:
+        - device_tracker.sam_phone_app
 default_config:
 media_source:
 frontend:
