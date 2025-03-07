@@ -7,9 +7,10 @@
   code_arm_required: false
   arming_states: 
     - armed_away
-- platform: manual
-  name: Fridge
-  delay_time: 60
-  trigger_time: 1200
-  code_arm_required: false
+    - armed_home
+# - platform: manual
+#   name: Fridge
+#   delay_time: 60
+#   trigger_time: 1200
+#   code_arm_required: false
   

@@ -27,7 +27,7 @@
     switch.pc_power:
       expose: true
       name: Computer
-      room: Spare Room
+      room: Office
     switch.nas_power:
       expose: false
       name: Server
@@ -42,7 +42,7 @@
         - Reading Light
       room: Lounge
     light.tv:
-      expose: true
+      expose: false
       name: Backlight
       room: Lounge
     light.big_lamp:
@@ -54,7 +54,7 @@
         - Silver Lamp
         - Right Lamp
     light.small_lamp:
-      expose: true
+      expose: false
       name: Small Lamp
       room: Lounge
       aliases:
@@ -62,7 +62,7 @@
         - Little Lamp
         - Wavy Lamp
     light.computer:
-      expose: true
+      expose: false
       name: Computer Light
       room: Office
       aliases:
@@ -82,13 +82,14 @@
         - "Ella's Room Light"
         - "Ella's Room Lamp"
         - The Brain
-    light.bedroom_lamp:
+    light.orb_lamp:
       expose: true
-      name: Bedroom Lamp
-      room: Bedroom
+      name: The Orb
+      room: Lounge
       aliases:
-        - Spotlight
-        - Bright Light
+        - Small Lamp
+        - Orb Lamp
+        - Corner Lamp
     media_player.sonos_one:
       expose: true
       name: Dining Room Speaker
@@ -117,6 +118,10 @@
       expose: true
       name: Bedroom Temperature
       room: Bedroom
+    sensor.upstairs_temperature:
+      expose: true
+      name: Spare Bedroom Temperature
+      room: Spare Bedroom
     sensor.nursery_temperature:
       expose: true
       name: Nursery Temperature
@@ -125,3 +130,23 @@
       expose: true
       name: Lounge Temperature
       room: Lounge
+    climate.bedroom:
+      expose: true
+      name: Bedroom Radiator
+      room: Bedroom
+    climate.nursery:
+      expose: true
+      name: Nursery Radiator
+      room: Nursery
+      aliases:
+        - Ella Radiator
+    climate.office:
+      expose: true
+      name: Office Radiator
+      room: Office
+    climate.upstairs:
+      expose: true
+      name: Spare Bedroom Radiator
+      room: Spare Bedroom
+      aliases:
+        - Ady Office Radiator

@@ -1,18 +1,10 @@
 - platform: template
   lights:
-    # shelf_lights:
-    #   entity_id: switch.extension_lead
-    #   value_template: "{{ is_state('switch.extension_lead', 'on') }}"
-    #   turn_on:
-    #     service: switch.turn_on
-    #     entity_id: switch.extension_lead
-    #   turn_off:
-    #     service: switch.turn_off
-    #     entity_id: switch.extension_lead
     ikea_plug:
       unique_id: "ikea_plug"
       friendly_name: "Cool Lamp"
       value_template: "{{ is_state('switch.ikea_plug', 'on') }}"
+      availability_template: "{{ is_state('switch.ikea_plug', 'on') or is_state('switch.ikea_plug', 'off')}}"
       turn_on:
         action: switch.turn_on
         entity_id: switch.ikea_plug

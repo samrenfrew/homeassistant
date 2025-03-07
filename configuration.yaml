@@ -7,13 +7,14 @@ homeassistant:
     - type: totp
     - type: notify
       include:
-        - device_tracker.sam_phone_app
+        - notify.sam_phone_app
 default_config:
 media_source:
 frontend:
   themes: !include_dir_merge_named themes
   extra_module_url:
     - /hacsfiles/lovelace-card-mod/card-mod.js
+    - /hacsfiles/custom-brand-icons/custom-brand-icons.js
 http:
   login_attempts_threshold: 5
   ip_ban_enabled: true
@@ -75,10 +76,10 @@ logger:
     homeassistant.components.mqtt: warn
     homeassistant.components.rest.switch: critical
     homeassistant.components.plex: critical
-    homeassistant.components.sky_hub: critical
-    homeassistant.components.media_player: debug
+    # homeassistant.components.sky_hub: critical
+    # homeassistant.components.media_player: debug
     #custom_components.google_home: debug
-    custom_components.iphonedetect: debug
+    # custom_components.iphonedetect: debug
 
 # Main Components
 alarm_control_panel: !include_dir_merge_list configs/alarm_control_panel

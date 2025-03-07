@@ -66,25 +66,25 @@
 
 #      {{ ((bedroom + lounge + office + hallway) / 4) | round(1) }}
  
-  - name: "speedtest_download"
-    unique_id: "speedtest_download"
-    icon: mdi:download
-    attributes:
-      friendly_name: "Speedtest Download"
-    unit_of_measurement: "Mbit/s"
-    state: >
-      {{ state_attr("sensor.speedtest_ping", "download") | round(2) }}
-    state_class: measurement
+  # - name: "speedtest_download"
+  #   unique_id: "speedtest_download"
+  #   icon: mdi:download
+  #   attributes:
+  #     friendly_name: "Speedtest Download"
+  #   unit_of_measurement: "Mbit/s"
+  #   state: >
+  #     {{ state_attr("sensor.speedtest_ping", "download") | round(2) }}
+  #   state_class: measurement
 
-  - name: "speedtest_upload"
-    unique_id: "speedtest_upload"
-    icon: mdi:upload
-    attributes:
-      friendly_name: "Speedtest Upload"
-    unit_of_measurement: "Mbit/s"
-    state: >
-      {{ state_attr("sensor.speedtest_ping", "upload") | round(2) }}
-    state_class: measurement
+  # - name: "speedtest_upload"
+  #   unique_id: "speedtest_upload"
+  #   icon: mdi:upload
+  #   attributes:
+  #     friendly_name: "Speedtest Upload"
+  #   unit_of_measurement: "Mbit/s"
+  #   state: >
+  #     {{ state_attr("sensor.speedtest_ping", "upload") | round(2) }}
+  #   state_class: measurement
 
   - name: "gh_next_timer"
     unique_id: "gh_next_timer"

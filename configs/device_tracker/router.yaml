@@ -16,11 +16,11 @@
 #   new_device_defaults:
 #     track_new_devices: false
 
-- platform: iphonedetect
-  consider_home: 300
-  scan_interval: 12
-  new_device_defaults:
-    track_new_devices: false
-  hosts:
-    ady_wifi: 192.168.0.11
+#- platform: iphonedetect
+#  consider_home: 300
+#  scan_interval: 12
+#  new_device_defaults:
+#    track_new_devices: false
+#  hosts:
+#    ady_wifi: 192.168.0.11
 #    sam_wifi: 192.168.0.6
