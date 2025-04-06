@@ -265,3 +265,43 @@ boost_radiator_for_x:
     seconds: 0
   fields: {}
   description: ''
+boost_heating_to_x_for_y_minutes:
+  sequence:
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      qos: 0
+      retain: false
+      topic: zigbee2mqtt/Hive/set
+      payload: "{\n   \"system_mode\":\"emergency_heating\",\n   \"temperature_setpoint_hold_duration\":{{minutes}},
+        \ \n   \"temperature_setpoint_hold\": true,\n   \"occupied_heating_setpoint\":
+        {{temperature}}  \n}"
+  alias: Boost Heating to X for Y minutes
+  variables:
+    minutes: 30
+    temperature: 21
+  description: ''
+disable_hive_boosting:
+  sequence:
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.hive_temperature_setpoint_hold
+  - action: number.set_value
+    metadata: {}
+    data:
+      value: '0'
+    target:
+      entity_id: number.hive_temperature_setpoint_hold_duration
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      qos: 0
+      retain: false
+      topic: zigbee2mqtt/Hive/set
+      payload: "{\n  \"system_mode\": \"heat\"\n}"
+  alias: Disable Hive Boosting
+  description: ''

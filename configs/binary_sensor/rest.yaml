@@ -67,12 +67,6 @@
   value_template: '{{ value_json is not none and value_json.state == "running" }}'
 - platform: rest
   device_class: running
-  unique_id: nuc_ddclient
-  resource: http://192.168.0.4:8126/container/ddclient
-  name: nuc_ddclient
-  value_template: '{{ value_json is not none and value_json.state == "running" }}'
-- platform: rest
-  device_class: running
   unique_id: nuc_glances
   resource: http://192.168.0.4:8126/container/glances
   name: nuc_glances
@@ -135,7 +129,7 @@
   value_template: '{{ value_json is not none and value_json.state == "running" }}'
 - platform: rest
   device_class: running
-  unique_id: nas_plex
+  unique_id: nas_tautilli
   resource: http://192.168.0.5:8126/container/tautilli
   name: nas_plex
   value_template: '{{ value_json is not none and value_json.state == "running" }}'

@@ -1,13 +1,4 @@
 - sensor:
-  # - name: "tplink_power"
-  #   unique_id: "tplink_power"
-  #   attributes:
-  #     friendly_name: "TP-Link Power"
-  #   unit_of_measurement: 'W'
-  #   state: >-
-  #       {{ state_attr('switch.tplink', 'current_power_w') }}
-  #   device_class: power
-
   - name: "speakers_on"
     unique_id: "speakers_on"
     attributes:
@@ -16,7 +7,7 @@
     state: >-
       {{ expand(states.media_player) | selectattr('state', 'eq', 'playing') | selectattr('entity_id','in',['media_player.bedroom_speaker','media_player.sonos_one','media_player.lounge_speaker','media_player.kitchen_display']) | map(attribute='entity_id') | list | count }}
 
-
+- sensor:
   - name: "lights_on"
     unique_id: "lights_on"
     attributes:
@@ -25,67 +16,22 @@
     state: >-
       {{ expand(states.light) | selectattr('state', 'eq', 'on') | rejectattr('entity_id','in',['light.all_lights','light.lounge_lights', 'light.aarlo_front_door']) | map(attribute='entity_id') | list | count }}
 
-  - name: "humidifier"
-    unique_id: "humidifier"
-    attributes:
-      friendly_name: "Humidifier"
-    icon: mdi:water-percent
-    unit_of_measurement: '%'
-    state: >-
-        {%- if is_state('input_select.humidifier_location', 'Office') == true -%}
-          {{ states('sensor.office_humidity') }}
-        {%- else -%}
-          {{ states('sensor.lounge_humidity') }}
-        {%- endif -%}
-    device_class: humidity
+# - sensor:
+#   - name: "humidifier"
+#     unique_id: "humidifier"
+#     attributes:
+#       friendly_name: "Humidifier"
+#     icon: mdi:water-percent
+#     unit_of_measurement: '%'
+#     state: >-
+#         {%- if is_state('input_select.humidifier_location', 'Office') == true -%}
+#           {{ states('sensor.office_humidity') }}
+#         {%- else -%}
+#           {{ states('sensor.lounge_humidity') }}
+#         {%- endif -%}
+#     device_class: humidity
 
-#  - name: "flat_temperature"
-#    unique_id: "flat_temperature"
-#    attributes:
-#      friendly_name: "Flat Temperature"
-#    device_class: temperature
-#    unit_of_measurement: "°C"
-#    state: >
-#      {% set bedroom = states('sensor.bedroom_temperature') | float(states('sensor.flat_temperature')) %}
- #     {% set lounge = states('sensor.lounge_temperature') | float(states('sensor.flat_temperature')) %}
-#      {% set office = states('sensor.office_temperature') | float(states('sensor.flat_temperature')) %}
-#      {% set hallway = states('sensor.hallway_temperature') | float(states('sensor.flat_temperature')) %}
-#      {{ ((bedroom + lounge + office + hallway) / 4) | round(1) }}
-
-#  - name: "flat_humidity"
-#    unique_id: "flat_humidity"
-#    attributes:
-#      friendly_name: "Flat Humidity"
-#    device_class: humidity
-#    unit_of_measurement: "%"
-#    state: >
-#      {% set bedroom = states('sensor.bedroom_humidity') | float(states('sensor.flat_humidity')) %}
-#      {% set lounge = states('sensor.lounge_humidity') | float(states('sensor.flat_humidity')) %}
-#      {% set office = states('sensor.office_humidity') | float(states('sensor.flat_humidity')) %}
-#      {% set hallway = states('sensor.hallway_humidity') | float(states('sensor.flat_humidity')) %}
-
-#      {{ ((bedroom + lounge + office + hallway) / 4) | round(1) }}
- 
-  # - name: "speedtest_download"
-  #   unique_id: "speedtest_download"
-  #   icon: mdi:download
-  #   attributes:
-  #     friendly_name: "Speedtest Download"
-  #   unit_of_measurement: "Mbit/s"
-  #   state: >
-  #     {{ state_attr("sensor.speedtest_ping", "download") | round(2) }}
-  #   state_class: measurement
-
-  # - name: "speedtest_upload"
-  #   unique_id: "speedtest_upload"
-  #   icon: mdi:upload
-  #   attributes:
-  #     friendly_name: "Speedtest Upload"
-  #   unit_of_measurement: "Mbit/s"
-  #   state: >
-  #     {{ state_attr("sensor.speedtest_ping", "upload") | round(2) }}
-  #   state_class: measurement
-
+- sensor:
   - name: "gh_next_timer"
     unique_id: "gh_next_timer"
     icon: mdi:timer
@@ -140,6 +86,7 @@
 
       {{ as_datetime(ns.time) }}
 
+- sensor:
   - name: "gh_next_alarm"
     unique_id: "gh_next_alarm"
     icon: mdi:alarm
@@ -193,3 +140,86 @@
       {% endfor %}
 
       {{ as_datetime(ns.time) }}
+
+- trigger:
+    - trigger: state
+      entity_id:
+        - binary_sensor.back_door_person_occupancy
+        - binary_sensor.back_door_cat_occupancy
+        - binary_sensor.back_door_bicycle_occupancy
+      from: "off"
+      to: "on"
+  sensor:
+  - name: "Back Door Last Activity"
+    unique_id: "back_door_last_activity"
+    state: >-
+      {{ now().strftime('%m-%d-%Y %H:%M') }}
+    attributes:
+      object_type: >-
+        {% set match = trigger.entity_id | regex_findall_index('binary_sensor.back_door_(.+?)_occupancy', ignorecase=False) %}
+        {{ match if match else 'unknown' }}
+    icon: mdi:cctv
+
+- trigger:
+    - trigger: state
+      entity_id:
+        - binary_sensor.front_door_person_occupancy
+        - binary_sensor.front_door_cat_occupancy
+        - binary_sensor.front_door_car_occupancy
+        - binary_sensor.front_door_package_occupancy
+      from: "off"
+      to: "on"
+  sensor:
+  - name: "Front Door Last Activity"
+    unique_id: "front_door_last_activity"
+    state: >-
+      {{ now().strftime('%m-%d-%Y %H:%M') }}
+    attributes:
+      object_type: >-
+        {% set match = trigger.entity_id | regex_findall_index('binary_sensor.front_door_(.+?)_occupancy', ignorecase=False) %}
+        {{ match if match else 'unknown' }}
+    icon: mdi:cctv
+
+- trigger:
+  - trigger: time
+    id: "midnight"
+    at: "00:00:00"
+  - trigger: state
+    entity_id: sensor.back_door_all_count
+  sensor: 
+  - name: "Back Door Daily Count"
+    unique_id: "back_door_object_daily_count"
+    state: >
+      {% if trigger.id == "midnight" %}
+          0
+        {% elif states('sensor.back_door_all_count') | int(0) %}
+          {{ states('sensor.back_door_daily_count') | int(0) + states('sensor.back_door_all_count') | int(0) }}
+        {% else %}
+          {{ states('sensor.back_door_daily_count') | int(0) }}
+        {% endif %}
+    attributes:
+      last_reset: "{{ now().replace(hour=0, minute=0, second=0, microsecond=0).isoformat() }}"
+    unit_of_measurement: "count"
+    state_class: total
+
+- trigger:
+  - trigger: time
+    id: "midnight"
+    at: "00:00:00"
+  - trigger: state
+    entity_id: sensor.front_door_all_count
+  sensor: 
+  - name: "Front Door Daily Count"
+    unique_id: "front_door_object_daily_count"
+    state: >
+      {% if trigger.id == "midnight" %}
+          0
+        {% elif states('sensor.front_door_all_count') | int(0) %}
+          {{ states('sensor.front_door_daily_count') | int(0) + states('sensor.front_door_all_count') | int(0) }}
+        {% else %}
+          {{ states('sensor.front_door_daily_count') | int(0) }}
+        {% endif %}
+    attributes:
+      last_reset: "{{ now().replace(hour=0, minute=0, second=0, microsecond=0).isoformat() }}"
+    unit_of_measurement: "count"
+    state_class: total

@@ -86,28 +86,6 @@
     enabled: false
     action: light.turn_on
   mode: single
-- id: '1720187794184'
-  alias: Frigate Notifications (0.12.0.4a)
-  description: ''
-  use_blueprint:
-    path: SgtBatten/Stable.yaml
-    input:
-      camera: camera.front_door
-      notify_device: 0392f3b78fa57ea8933051b62331e81c
-      base_url: https://home.samrenfrew.co.uk
-      message: A {{ label | lower }} {{ 'is loitering' if loitering else 'was detected'
-        }} at the front door
-      update_thumbnail: true
-      video: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/{{camera}}/clip.mp4'
-      icon: mdi:door-open
-      tap_action: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
-      button_1: Snapshot
-      url_1: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
-      button_2: Clip
-      url_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/{{camera}}/clip.mp4'
-      tv_duration: 0
-      button_3: Silence
-      group: Front Door
 - id: '1728277713332'
   alias: Turn humidifier off after 1 hour
   description: ''
@@ -125,8 +103,7 @@
     data:
       variables:
         entity: switch.humidifier
-        minutes:
-          '[object Object]':
+        minutes: 60
   mode: single
 - id: '1728327473723'
   alias: Clear Dining Room after 30 Mins
@@ -184,3 +161,115 @@
     target:
       entity_id: switch.humidifier
   mode: single
+- id: '1741615654446'
+  alias: Frigate Notifications (0.14.0.2w)
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      presence_filter:
+      - ''
+      camera:
+      - camera.front_door
+      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      final_update: false
+      loiter_timer: 15
+      initial_delay: 2
+      final_delay: 10
+      cooldown: 20
+      attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
+      url_2: '{{base_url}}/api/camera_proxy_stream/camera.{{trigger.payload_json[''after''][''camera'']
+        | lower | replace(''-'',''_'')}}?token={{state_attr( ''camera.'' ~ camera,
+        ''access_token'')}}'
+      button_3: Silence
+      button_2: View Stream
+      channel: Frigate
+      color: '#03a9f4'
+      icon: mdi:cctv
+      attachment_2: ''
+      zone_multi: false
+      zone_order_enforced: false
+      zones:
+      - driveway
+      - door
+      labels: []
+      zone_filter: false
+- id: '1742289426804'
+  alias: Test Shopping List
+  description: ''
+  triggers:
+  - trigger: zone
+    entity_id: person.sam
+    zone: zone.little_sainsburys
+    event: enter
+  conditions:
+  - condition: numeric_state
+    entity_id: todo.google_keep_shopping
+    above: 0
+  actions:
+  - sequence:
+    - action: todo.get_items
+      metadata: {}
+      data:
+        status: needs_action
+      target:
+        entity_id: todo.google_keep_shopping
+      response_variable: list
+    - wait_template: '{% set items = list[''todo.google_keep_shopping''][''items'']
+        %}
+
+        {{ items.length > 0 }}'
+      continue_on_timeout: true
+      enabled: false
+    - action: notify.mobile_app_sam_phone
+      metadata: {}
+      data:
+        title: '{%- set i = states(''todo.google_keep_shopping'') -%} You have {{
+          i }} item{% if i == "1"%}{% else %}s{% endif %} on the shopping list'
+        message: '{%- set items = list[''todo.google_keep_shopping''][''items''] -%}
+          {%- set summaries = items | map(attribute=''summary'') | list -%} {%- if
+          summaries | length == 1 -%} {{ summaries[0][0]|upper}}{{summaries[0][1:]
+          }} {%- else -%} {%- for summary in summaries -%} {{ summary[0]|upper}}{{summary[1:]
+          }} {%- if not loop.last -%} , {% if loop.revindex0 == 1 %}and {% endif -%}
+          {%- endif -%} {%- endfor -%} {%- endif -%}'
+  mode: single
+- id: '1743777829813'
+  alias: Weather
+  description: ''
+  triggers:
+  - trigger: conversation
+    command: What's the weather today
+  conditions: []
+  actions:
+  - set_conversation_response: 'Today it will be {{ states(''weather.pirateweather'')
+      }} '
+  mode: single
+- id: '1743790462805'
+  alias: 'Back Door camera '
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      presence_filter:
+      - person.ady
+      - person.sam
+      camera:
+      - camera.back_door
+      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      final_update: false
+      loiter_timer: 15
+      initial_delay: 5
+      final_delay: 10
+      cooldown: 20
+      attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
+      url_2: '{{base_url}}/api/camera_proxy_stream/camera.{{trigger.payload_json[''after''][''camera'']
+        | lower | replace(''-'',''_'')}}?token={{state_attr( ''camera.'' ~ camera,
+        ''access_token'')}}'
+      button_3: Silence
+      button_2: View Stream
+      channel: Frigate
+      color: '#03a9f4'
+      icon: mdi:cctv
+      attachment_2: ''
+      master_condition: []
+      zone_order_enforced: false
