@@ -1,30 +1,30 @@
 # Green Bin
 - trigger:
-    - platform: calendar
+    - trigger: calendar
       event: start
       offset: "-05:00:00"
       entity_id: calendar.house
       enabled: true
-    - platform: calendar
+    - trigger: calendar
       event: end
-      offset: "-08:00:00"
+      offset: "-14:00:00"
       entity_id: calendar.house
       enabled: true
-    - platform: state
+    - trigger: state
       entity_id:
         - calendar.house
-  sensor:
-    - name: Next House Event
-      unique_id: next_house_event
-      state: "{{ state_attr('calendar.house', 'message') }}"
-      attributes:
-        start: "{{ trigger.event == 'start' }}"
-        start_time: "{{ trigger.calendar_event.start }}"
-        end_time: "{{ trigger.calendar_event.end }}"
-        description: "{{ trigger.calendar_event.description }}"
-        location: "{{ trigger.calendar_event.location }}"
-        summary: "{{ trigger.calendar_event.summary }} "
-        all_day: "{{ trigger.calendar_event.all_day }}"
+  # sensor:
+  #   - name: Next House Event
+  #     unique_id: next_house_event
+  #     state: "{{ state_attr('calendar.house', 'message') }}"
+  #     attributes:
+  #       start: "{{ trigger.event == 'start' }}"
+  #       start_time: "{{ trigger.calendar_event.start }}"
+  #       end_time: "{{ trigger.calendar_event.end }}"
+  #       description: "{{ trigger.calendar_event.description }}"
+  #       location: "{{ trigger.calendar_event.location }}"
+  #       summary: "{{ trigger.calendar_event.summary }} "
+  #       all_day: "{{ trigger.calendar_event.all_day }}"
   binary_sensor:
     - name: Green Bin
       unique_id: green_bin
@@ -37,6 +37,8 @@
       state: >
         {% if trigger.event == "start" and 'Green Bin' in trigger.calendar_event.summary %}
           on
+        {% elif trigger.event == "end" and 'Green Bin' in trigger.calendar_event.summary %}
+          off
         {% elif is_state("calendar.house", "on") and 'Green Bin' in state_attr("calendar.house", "message") %}
           on
         {% else %}
@@ -53,6 +55,8 @@
       state: >
         {% if trigger.event == "start" and 'Black Bin' in trigger.calendar_event.summary %}
           on
+        {% elif trigger.event == "end" and 'Black Bin' in trigger.calendar_event.summary %}
+          off
         {% elif is_state("calendar.house", "on") and 'Black Bin' in state_attr("calendar.house", "message") %}
           on
         {% else %}
@@ -69,20 +73,22 @@
       state: >
         {% if trigger.event == "start" and 'Brown Bin' in trigger.calendar_event.summary %}
           on
+        {% elif trigger.event == "end" and 'Brown Bin' in trigger.calendar_event.summary %}
+          off
         {% elif is_state("calendar.house", "on") and 'Brown Bin' in state_attr("calendar.house", "message") %}
           on
         {% else %}
           off
         {% endif %}
-    - name: Cleaners
-      unique_id: cleaners
-      icon: mdi:hand-wash
-      state: >
-        {% if trigger.event == "start" and 'Cleaners' in trigger.calendar_event.summary %}
-          on
-        {% else %}
-          off
-        {% endif %}
+    # - name: Cleaners
+    #   unique_id: cleaners
+    #   icon: mdi:hand-wash
+    #   state: >
+    #     {% if trigger.event == "start" and 'Cleaners' in trigger.calendar_event.summary %}
+    #       on
+    #     {% else %}
+    #       off
+    #     {% endif %}
 
 
 
@@ -104,7 +110,7 @@
 
 
 - trigger:
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.lounge_motion
   binary_sensor:
     - name: "lounge_occupancy"
@@ -116,7 +122,7 @@
         {{ is_state('binary_sensor.lounge_motion', 'on') }}
 
 - trigger:
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.bedroom_motion
   binary_sensor:
     - name: "bedroom_occupancy"
@@ -128,7 +134,7 @@
         {{ is_state('binary_sensor.bedroom_motion', 'on') }}
 
 - trigger:
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.kitchen_motion
   binary_sensor:
     - name: "kitchen_occupancy"
@@ -140,7 +146,7 @@
         {{ is_state('binary_sensor.kitchen_motion', 'on') }}
 
 - trigger:
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.office_motion
   binary_sensor:
     - name: "office_occupancy"
@@ -152,7 +158,7 @@
         {{ is_state('binary_sensor.office_motion', 'on') }}
 
 - trigger:
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.home
   binary_sensor:
     - name: "home_10_minutes"
@@ -163,7 +169,7 @@
       auto_off: 0:10:00
 
 - trigger:
-    - platform: state
+    - trigger: state
       entity_id: binary_sensor.front_door
   binary_sensor:
     - name: "door_open_recently"
@@ -173,11 +179,11 @@
       auto_off: 0:10:00
 
 # - trigger:
-#     - platform: state
+#     - trigger: state
 #       entity_id: sensor.lounge_speaker_timers
-#     - platform: state
+#     - trigger: state
 #       entity_id: sensor.hallway_speaker_timers
-#     - platform: state
+#     - trigger: state
 #       entity_id: sensor.bedroom_speaker_timers
 #   binary_sensor:
 #     - name: "gh_timer_set"
@@ -188,11 +194,11 @@
 #             or not is_state('sensor.bedroom_speaker_timers', 'unavailable') }}
 
 # - trigger:
-#     - platform: state
+#     - trigger: state
 #       entity_id: sensor.lounge_speaker_alarms
-#     - platform: state
+#     - trigger: state
 #       entity_id: sensor.hallway_speaker_alarms
-#     - platform: state
+#     - trigger: state
 #       entity_id: sensor.bedroom_speaker_alarms
 #   binary_sensor:
 #     - name: "gh_alarm_set"

@@ -1,11 +1,11 @@
 - id: '1590219311319'
   alias: Home Assistant Boot
   description: ''
-  trigger:
+  triggers:
   - event: start
-    platform: homeassistant
-  condition: []
-  action:
+    trigger: homeassistant
+  conditions: []
+  actions:
   - wait_template: ''
     timeout: '10'
     alias: Wait 10s
@@ -14,39 +14,40 @@
         tag: start-up
       message: A system boot has been initiated at {{ states('sensor.time') }}
       title: Home Assistant Startup
-    service: notify.mobile_app_sam_phone
+    action: notify.mobile_app_sam_phone
   - condition: state
     entity_id: binary_sensor.home
     state: 'on'
-  - service: alarm_control_panel.alarm_disarm
-    data: {}
+  - data: {}
     entity_id: alarm_control_panel.alarm
-  - service: frontend.reload_themes
-    data: {}
+    action: alarm_control_panel.alarm_disarm
+  - data: {}
+    action: frontend.reload_themes
   - data:
       name: clear
-    service: frontend.set_theme
     enabled: false
-  - service: switch.turn_on
-    data: {}
+    action: frontend.set_theme
+  - data: {}
     target:
       entity_id:
       - switch.extension_lead_2
-  - service: switch.turn_off
-    data: {}
+    action: switch.turn_on
+  - data: {}
     entity_id: switch.humidifier
-  - service: script.enable_tv_on
-    data: {}
-  - service: mqtt.publish
-    data:
+    action: switch.turn_off
+  - data: {}
+    action: script.enable_tv_on
+    enabled: false
+  - data:
       topic: monitor/office/KNOWN DEVICE STATES
-  - service: mqtt.publish
-    data:
+    action: mqtt.publish
+  - data:
       topic: monitor/bedroom/KNOWN DEVICE STATES
     enabled: false
-  - service: mqtt.publish
-    data:
+    action: mqtt.publish
+  - data:
       topic: monitor/lounge/KNOWN DEVICE STATES
+    action: mqtt.publish
   mode: restart
 - id: '1650046822895'
   alias: Enable TV Turn On
@@ -55,7 +56,7 @@
     path: cvroque/webostv_turn_on.yaml
     input:
       webostv: media_player.lg_webos_tv
-      webostv_mac: 78-5D-C8-92-EF-0B
+      webostv_mac: 00-A1-59-E8-89-08
 - id: '1650834182234'
   alias: Re-enable TV turn on
   description: ''
@@ -172,9 +173,9 @@
       camera:
       - camera.front_door
       notify_device: 0392f3b78fa57ea8933051b62331e81c
-      final_update: false
+      final_update: true
       loiter_timer: 15
-      initial_delay: 2
+      initial_delay: 1
       final_delay: 10
       cooldown: 20
       attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
@@ -182,18 +183,26 @@
         | lower | replace(''-'',''_'')}}?token={{state_attr( ''camera.'' ~ camera,
         ''access_token'')}}'
       button_3: Silence
-      button_2: View Stream
+      button_2: View Live
       channel: Frigate
       color: '#03a9f4'
       icon: mdi:cctv
-      attachment_2: ''
-      zone_multi: false
-      zone_order_enforced: false
+      attachment_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{review_id}}/review_preview.gif'
+      zone_multi: true
+      zone_order_enforced: true
       zones:
-      - driveway
+      - front_drive
       - door
       labels: []
-      zone_filter: false
+      zone_filter: true
+      debug: true
+      message: A {{ label | lower }} {{ 'was' if type == 'end' else 'is' }} at the
+        {{ camera_name | lower }}
+      update_sub_label: true
+      master_condition:
+      - condition: state
+        entity_id: binary_sensor.home
+        state: 'on'
 - id: '1742289426804'
   alias: Test Shopping List
   description: ''
@@ -250,15 +259,13 @@
   use_blueprint:
     path: SgtBatten/Stable.yaml
     input:
-      presence_filter:
-      - person.ady
-      - person.sam
+      presence_filter: []
       camera:
       - camera.back_door
       notify_device: 0392f3b78fa57ea8933051b62331e81c
       final_update: false
       loiter_timer: 15
-      initial_delay: 5
+      initial_delay: 1
       final_delay: 10
       cooldown: 20
       attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
@@ -266,10 +273,63 @@
         | lower | replace(''-'',''_'')}}?token={{state_attr( ''camera.'' ~ camera,
         ''access_token'')}}'
       button_3: Silence
-      button_2: View Stream
+      button_2: View Live
       channel: Frigate
       color: '#03a9f4'
       icon: mdi:cctv
       attachment_2: ''
-      master_condition: []
+      master_condition:
+      - condition: state
+        entity_id: binary_sensor.home
+        state: 'on'
+      zone_order_enforced: true
+      debug: true
+      state_filter_states: []
+      state_filter: true
+      message: A {{ label | lower }} {{ 'was' if type == 'end' else 'is' }} at the
+        {{ camera_name | lower }}
+      zone_filter: true
+      zones:
+      - back_drive
+      - garden
+      zone_multi: true
+- id: '1745693175108'
+  alias: Cameras - Away
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      presence_filter: []
+      camera:
+      - camera.front_door
+      - camera.back_door
+      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      final_update: true
+      loiter_timer: 15
+      initial_delay: 1
+      final_delay: 10
+      cooldown: 20
+      attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
+      url_2: '{{base_url}}/api/camera_proxy_stream/camera.{{trigger.payload_json[''after''][''camera'']
+        | lower | replace(''-'',''_'')}}?token={{state_attr( ''camera.'' ~ camera,
+        ''access_token'')}}'
+      button_3: Silence
+      button_2: View Live
+      channel: Frigate
+      color: '#03a9f4'
+      icon: mdi:cctv
+      attachment_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{review_id}}/review_preview.gif'
+      zone_multi: false
       zone_order_enforced: false
+      zones: []
+      labels: []
+      zone_filter: false
+      debug: true
+      master_condition:
+      - condition: state
+        entity_id: binary_sensor.home
+        state: 'off'
+      critical: 'true'
+      message: A {{ label | lower }} {{ 'was' if type == 'end' else 'is' }} at the
+        {{ camera_name | lower }}
+      android_auto: true

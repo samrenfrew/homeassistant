@@ -12,6 +12,10 @@
       expose: false
       name: Extension Lead
       room: Spare Room
+    switch.radio:
+      expose: true
+      name: Radio
+      room: Kitchen
     switch.humidifier:
       expose: false
       name: Humidifier
@@ -91,7 +95,7 @@
         - Orb Lamp
         - Corner Lamp
     media_player.sonos_one:
-      expose: true
+      expose: false
       name: Dining Room Speaker
       aliases:
         - Sonos
@@ -115,21 +119,21 @@
       name: Guest Mode
       room: House
     sensor.bedroom_temperature:
-      expose: true
+      expose: false
       name: Bedroom Temperature
       room: Bedroom
     sensor.upstairs_temperature:
-      expose: true
+      expose: false
       name: Spare Bedroom Temperature
       room: Spare Bedroom
     sensor.nursery_temperature:
-      expose: true
+      expose: false
       name: Nursery Temperature
       room: Nursery
-    sensor.lounge_temperature:
-      expose: true
-      name: Lounge Temperature
-      room: Lounge
+    # sensor.lounge_temperature:
+    #   expose: true
+    #   name: Lounge Temperature
+    #   room: Lounge
     climate.bedroom:
       expose: true
       name: Bedroom Radiator
@@ -150,3 +154,16 @@
       room: Spare Bedroom
       aliases:
         - Ady Office Radiator
+    climate.hive: 
+      expose: true
+      name: Hive
+      room: Lounge
+      aliases:
+        - Boiler
+        - Heating
+    input_boolean.cbeebies:
+      expose: true
+      name: Cbeebies
+      room: Lounge
+      aliases:
+        - cbeebs
