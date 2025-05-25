@@ -8,6 +8,21 @@
     #- input_boolean
     #- media_player
   entity_config:
+    camera.front_door:
+      expose: true
+      name: Front Door
+      aliases:
+       - Front Camera
+       - Door Camera
+       - Front Door Camera
+    camera.back_door:
+      expose: true
+      name: Back Door
+      aliases:
+        - Back Door Camera
+        - Back Camera 
+        - Garage Camera 
+        - Garage
     switch.extension_lead:
       expose: false
       name: Extension Lead

@@ -294,7 +294,7 @@
       - garden
       zone_multi: true
 - id: '1745693175108'
-  alias: Cameras - Away
+  alias: Front Door - Away
   description: ''
   use_blueprint:
     path: SgtBatten/Stable.yaml
@@ -302,6 +302,44 @@
       presence_filter: []
       camera:
       - camera.front_door
+      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      final_update: true
+      loiter_timer: 15
+      initial_delay: 1
+      final_delay: 10
+      cooldown: 20
+      attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
+      url_2: '{{base_url}}/api/camera_proxy_stream/camera.{{trigger.payload_json[''after''][''camera'']
+        | lower | replace(''-'',''_'')}}?token={{state_attr( ''camera.'' ~ camera,
+        ''access_token'')}}'
+      button_3: Silence
+      button_2: View Live
+      channel: Frigate
+      color: '#03a9f4'
+      icon: mdi:cctv
+      attachment_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{review_id}}/review_preview.gif'
+      zone_multi: false
+      zone_order_enforced: false
+      zones: []
+      labels: []
+      zone_filter: false
+      debug: true
+      master_condition:
+      - condition: state
+        entity_id: binary_sensor.home
+        state: 'off'
+      critical: 'true'
+      message: A {{ label | lower }} {{ 'was' if type == 'end' else 'is' }} at the
+        {{ camera_name | lower }}
+      android_auto: true
+- id: '1747630936897'
+  alias: Back Door - Away
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      presence_filter: []
+      camera:
       - camera.back_door
       notify_device: 0392f3b78fa57ea8933051b62331e81c
       final_update: true
