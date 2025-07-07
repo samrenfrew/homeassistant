@@ -51,15 +51,15 @@
       expose: false
       name: Server
       room: Spare Room
-    light.chair_lamp:
-      expose: true
-      name: Chair Lamp
-      aliases:
-        - Other Lamp
-        - Left Lamp
-        - Chair Light
-        - Reading Light
-      room: Lounge
+    # light.chair_lamp:
+    #   expose: true
+    #   name: Chair Lamp
+    #   aliases:
+    #     - Other Lamp
+    #     - Left Lamp
+    #     - Chair Light
+    #     - Reading Light
+    #   room: Lounge
     light.tv:
       expose: false
       name: Backlight
@@ -69,17 +69,18 @@
       name: Big Lamp
       room: Lounge
       aliases:
-        - Big Lamp
-        - Silver Lamp
-        - Right Lamp
+        - White Lamp
+        - Left Lamp
+        - Chair Lamp
     light.small_lamp:
-      expose: false
+      expose: true
       name: Small Lamp
       room: Lounge
       aliases:
         - Side Lamp
         - Little Lamp
         - Wavy Lamp
+        - Right Lamp
     light.computer:
       expose: false
       name: Computer Light
@@ -106,7 +107,6 @@
       name: The Orb
       room: Lounge
       aliases:
-        - Small Lamp
         - Orb Lamp
         - Corner Lamp
     media_player.sonos_one:

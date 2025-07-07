@@ -1,2 +1,3 @@
 profile,color_x,color_y,brightness,transition
 light.tv.default,0.517,0.41,255,1
+light.computer.default,0.517,0.41,255,0

@@ -8,7 +8,7 @@ cardmod:
   card-mod-sidebar-yaml: |
     .: |
       * {
-        font-family: "SF Pro Display","Roman-55", "Helvetica Neue";
+        font-family: "SF Pro Display", sans-serif;
       }
       .menu .title {
         font-weight: 500;
@@ -33,6 +33,8 @@ cardmod:
             justify-content: center;
             height: 100%;
             --mdc-icon-size: 20px;
+            padding: 0 10px;
+            --ha-icon-display: block;
 
             {% if config.entity and config.entity.endswith('battery') or config.entity.endswith('battery_level') %}
             {% if config.entity and is_state(config.entity, 'unavailable') -%}
@@ -73,7 +75,7 @@ cardmod:
         background: var(--theme-icon-background);
         border: var(--theme-icon-border);
         outline: var(--theme-icon-outline);
-        padding: 13px 10px 14px;
+        padding: 10px;
         color: var(--theme-icon-color) !important;
         border-radius: 100px;
       }
@@ -103,14 +105,13 @@ cardmod:
   card-mod-card-yaml: |
     .: |     
       ha-card {
-        font-family: "SF Pro Display","Roman-55", "Helvetica Neue" !important;
         transition: all 0.2s ease-in-out, height 0s, margin 0s !important;
       }      
       ha-card.type-glance, ha-card.media-player, ha-card.type-entities, ha-card.type-custom-uptime-card, ha-card.type-gauge, ha-card.type-custom-mini-graph-card, ha-card.type-map  {
         border-width: 1px;
       }
       
-      ha-card.type-custom-button-card:not(.no-hover):hover, ha-card.type-custom-mushroom-light-card:not(.no-hover):hover, ha-card.type-custom-mushroom-person-card:not(.no-hover):hover, ha-card.type-custom-mushroom-update-card:not(.no-hover):hover, ha-card.type-custom-mushroom-media-player-card:not(.no-hover):hover, ha-card.type-custom-mushroom-climate-card:not(.no-hover):hover {
+      ha-card.type-custom-button-card:not(.no-hover):hover {
         @media (hover: hover) {
           transform: scale(1.05);
           box-shadow:1px 3px 10px rgba(0,0,0,0.05);
@@ -263,7 +264,7 @@ cardmod:
       }
       ha-markdown-element {
         font-size:10px;
-        font-family: "SF Pro Display","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+        font-family: "SF Pro Display",sans-serif;
         letter-spacing: 0.2px;
       }
       h1 {
@@ -282,223 +283,14 @@ cardmod:
         color: var(--secondary-text-color);
       }
 
-    mushroom-media-player-volume-control$:
-      mushroom-button-group$: |
-        .container ::slotted(mushroom-button) {
-          background-color:rgba(255,255,255, 0.15) !important;
-          border-radius: var(--control-border-radius);
-          {% if config.entity and is_state(config.entity, 'playing') %}
-          --icon-color:#fff;
-          {% endif %}
-        }
-        .container ::slotted(mushroom-slider) {
-          background-color:rgba(255,255,255, 0.15) !important;
-          border-radius: var(--control-border-radius);
-          --icon-color:#fff;
-        }
-    mushroom-media-player-media-control$:
-      mushroom-button-group$: |
-        .container ::slotted(mushroom-button) {
-          background-color:rgba(255,255,255, 0.15) !important;
-          border-radius: var(--control-border-radius);          
-          {% if config.entity and is_state(config.entity, 'playing') %}
-          --icon-color:#fff;
-          {% endif %}
-        }
-
-    # mushroom-card$: |
-    #   .container {
-    #     justify-content: flex-end !important;
-    #   }
-      
-    mushroom-state-item$: |
-      .container {
-        width:100%;        
-        {% if config.entity and state_attr(config.entity, 'hvac_modes') -%}
-        gap: 6px !important;
-        padding-bottom: 10px !important;
-        height: unset !important;
-        {%- endif %}
-      }
-      .container.vertical {
-        height:100%;
-        gap: 10px;
-        align-items: flex-start;
-        justify-content: flex-end;
-      }
-      .container.vertical .icon {
-        margin-bottom: 0 !important;
-        # min-height: 75px;
-        height:100%;
-        # place-self: start;
-        @media screen and (max-width: 1199px){
-          # min-height: 56px;
-        }
-      }
-      .container:not(.vertical) .icon ::slotted(mushroom-shape-icon) .shape ::slotted(*) {
-        --mdc-icon-size: 24px;
-        background:red;
-      }
-      {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 -%}
-      .container.vertical { 
-        flex-direction: row !important;
-        gap: 6px;
-        padding-bottom: 10px;
-      }
-      .icon {
-        min-height: unset !important;
-      }
-      {%- endif %}
-
     $: |
       h1.card-header {
-        font-family: "SF Pro Display","Roman-55", "Helvetica Neue" !important;
+        font-family: "SF Pro Display", sans-serif !important;
         font-size: 26px !important;
         font-weight: 600 !important;
         line-height: 26px !important;
         letter-spacing: -0.13px !important;
       }
-
-    mushroom-state-info$: |
-      .container {
-        {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 -%}
-        min-height:44px;
-        {% elif config.entity and state_attr(config.entity, 'hvac_modes') -%}
-        min-height:44px;
-        {%- endif %}
-        justify-content:center;
-      }
-      .primary {
-        letter-spacing: 0.2px;
-        text-align: left;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
-      }
-      .secondary {
-        letter-spacing: 0.2px;
-        text-align: left; 
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        overflow: hidden;  
-        text-transform: capitalize;
-        opacity: 0.6;
-      }
-      {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 -%}
-      .secondary { 
-        # display:none; 
-      }
-      {%- endif %}
-
-
-
-    mushroom-shape-avatar$: |
-      .container {
-        width:50px !important;
-        height: 50px !important;
-        border-radius: 100px;
-        border: var(--theme-icon-border);
-        outline: var(--theme-icon-outline);
-        @media screen and (max-width: 1199px){
-          width:40px !important;
-          height: 40px !important;
-        }
-
-      }
-
-    mushroom-shape-icon$: |
-      .shape {
-        background: var(--icon-color) !important;
-        padding: 5px;
-        border: var(--theme-icon-border);
-        outline: var(--theme-icon-outline);
-        {% if config.entity and is_state(config.entity, 'disarmed') %}
-        background: var(--theme-icon-background) !important;
-        {% elif config.entity and is_state(config.entity, 'armed_home') %}
-        background: rgb(var(--rgb-orange)) !important;
-        {% endif %}
-        {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 %}
-        width: 30px !important;
-        height: 30px !important;
-        {% endif %}
-      }
-      
-      .shape.disabled {
-        background: var(--theme-icon-background) !important;
-      }
-      .shape ::slotted(*) {
-        color: #fff !important;
-        {% if config.entity and is_state(config.entity, 'disarmed') %}
-        color: var(--theme-icon-color) !important;
-        {% endif %}
-        {% if config.entity and is_state(config.entity, 'on') and (state_attr(config.entity, 'brightness') |int(default=0)) > 0 %}
-        --mdc-icon-size: 24px;
-        {% endif %}
-      }
-      @media screen and (max-width: 1199px){
-        .shape {
-          --icon-size: 30px;
-        }
-        .shape ::slotted(*) {
-          --mdc-icon-size: 24px;
-        }
-      }
-      .shape.disabled ::slotted(*) {
-        color: var(--theme-icon-color) !important;
-      }
-      
-      .shape ha-state-icon {
-        --mdc-icon-size:28px !important;
-        color: #fff !important;
-        @media screen and (max-width: 1199px){
-          --mdc-icon-size: 24px !important;
-        }
-      }
-      .shape.disabled ha-state-icon {
-        color: var(--theme-icon-color) !important;
-      }
-      {% if config.entity and is_state(config.entity, 'disarmed') %}
-      .shape {
-        background: var(--theme-icon-background) !important;
-      }
-      .shape ha-state-icon {
-        color: var(--theme-icon-color) !important;
-      }        
-      {% endif %}
-    mushroom-light-color-control$: 
-      mushroom-slider$: |
-        .container {
-          # height:36px !important;
-        }
-    mushroom-light-brightness-control$:
-      mushroom-slider$: |
-        .container {
-          # height:36px !important;
-        }
-        .slider {        
-          --handle-size: 4px;
-          --handle-margin: calc(var(--control-height) / 8);
-          --slider-size: calc(100% - 2 * var(--handle-margin) - var(--handle-size));
-        }
-        .slider .slider-track-indicator {
-          border-radius: 0 !important;
-        }
-        .slider .slider-track-active {
-          border-radius: var(--control-border-radius);
-          transform: translate3d(calc((var(--value,0) - 1) * var(--slider-size)),0,0) !important;
-        }
-        .slider .slider-track-active::after {
-          content: "";
-          display:block;
-          position:absolute;
-          width: 4px;
-          height:50%;
-          top:50%;
-          transform: translateY(-50%);
-          right: var(--handle-margin);
-          border-radius: 4px;
-          background:rgba(255,255,255);
-        }
 
     mmp-powerstrip$: 
       mmp-source-menu$:
@@ -543,6 +335,9 @@ cardmod:
         # display:flex !important;
         # opacity:0;
         # visibility:hidden;
+      }
+      .mdc-dialog * {
+        font-family: "SF Pro Display", sans-serif;
       }
       .mdc-dialog.mdc-dialog--open {
         # opacity:1;
@@ -635,14 +430,14 @@ cardmod:
           bottom:0;
           position:fixed;
           box-shadow: 0 0 20px rgba(0,0,0,0.08) !important;
-          height: 68px !important;
+          # height: 68px !important;
         }
         # .edit-mode .header {
         #   top: 0 !important;
         #   bottom: unset;
         # }
         .toolbar {
-          height: 68px !important;
+          # height: 68px !important;
         }
         .edit-mode #view {
           margin-top: calc(var(--header-height) + 60px) !important;
@@ -658,24 +453,12 @@ cardmod:
           padding-bottom: 68px !important;
         }
       }
-    ha-tabs$: |
-      :host {
-        # background: red !important;
-      }
+    sl-tab-group$: |
       @media screen and (max-width:870px){
         paper-icon-button {
           display:none !important
         }
-        #tabsContent {
-          width: 100% !important;
-        }              
-        #tabsContent slot {
-          width:100%;
-          display:grid;
-          grid-template-columns: repeat(6,1fr);
-          height:100%;
-        }
-        #selectionBar {
+        .tab-group__indicator {
           bottom: unset !important;
           border-bottom-width: 2.5px !important;
         }

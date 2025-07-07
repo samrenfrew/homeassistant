@@ -6,25 +6,11 @@
       entity_id: calendar.house
       enabled: true
     - trigger: calendar
-      event: end
+      event: end 
       offset: "-14:00:00"
       entity_id: calendar.house
       enabled: true
-    - trigger: state
-      entity_id:
-        - calendar.house
-  # sensor:
-  #   - name: Next House Event
-  #     unique_id: next_house_event
-  #     state: "{{ state_attr('calendar.house', 'message') }}"
-  #     attributes:
-  #       start: "{{ trigger.event == 'start' }}"
-  #       start_time: "{{ trigger.calendar_event.start }}"
-  #       end_time: "{{ trigger.calendar_event.end }}"
-  #       description: "{{ trigger.calendar_event.description }}"
-  #       location: "{{ trigger.calendar_event.location }}"
-  #       summary: "{{ trigger.calendar_event.summary }} "
-  #       all_day: "{{ trigger.calendar_event.all_day }}"
+
   binary_sensor:
     - name: Green Bin
       unique_id: green_bin
@@ -39,10 +25,8 @@
           on
         {% elif trigger.event == "end" and 'Green Bin' in trigger.calendar_event.summary %}
           off
-        {% elif is_state("calendar.house", "on") and 'Green Bin' in state_attr("calendar.house", "message") %}
-          on
         {% else %}
-          off
+          {{ states("binary_sensor.green_bin") | default('off') }}
         {% endif %}
     - name: Black Bin
       unique_id: black_bin
@@ -57,10 +41,9 @@
           on
         {% elif trigger.event == "end" and 'Black Bin' in trigger.calendar_event.summary %}
           off
-        {% elif is_state("calendar.house", "on") and 'Black Bin' in state_attr("calendar.house", "message") %}
-          on
         {% else %}
-          off
+          
+          {{ states("binary_sensor.blackn_bin") | default('off') }}
         {% endif %}
     - name: Brown Bin
       unique_id: brown_bin
@@ -75,10 +58,8 @@
           on
         {% elif trigger.event == "end" and 'Brown Bin' in trigger.calendar_event.summary %}
           off
-        {% elif is_state("calendar.house", "on") and 'Brown Bin' in state_attr("calendar.house", "message") %}
-          on
-        {% else %}
-          off
+        {% else %}          
+          {{ states("binary_sensor.brown_bin") | default('off') }}
         {% endif %}
     # - name: Cleaners
     #   unique_id: cleaners

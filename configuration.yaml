@@ -1,5 +1,7 @@
 # Configuration
 homeassistant:
+  external_url: "https://home.samrenfrew.co.uk"
+  internal_url: "http://192.168.0.4:8123"
   customize: !include customize.yaml
   media_dirs:
     media: /config/media

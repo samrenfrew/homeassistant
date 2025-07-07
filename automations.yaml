@@ -174,9 +174,9 @@
       - camera.front_door
       notify_device: 0392f3b78fa57ea8933051b62331e81c
       final_update: true
-      loiter_timer: 15
-      initial_delay: 1
-      final_delay: 10
+      loiter_timer: 3
+      initial_delay: 0
+      final_delay: 5
       cooldown: 20
       attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
       url_2: '{{base_url}}/api/camera_proxy_stream/camera.{{trigger.payload_json[''after''][''camera'']
@@ -184,12 +184,11 @@
         ''access_token'')}}'
       button_3: Silence
       button_2: View Live
-      channel: Frigate
+      channel: frigate
       color: '#03a9f4'
-      icon: mdi:cctv
       attachment_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{review_id}}/review_preview.gif'
       zone_multi: true
-      zone_order_enforced: true
+      zone_order_enforced: false
       zones:
       - front_drive
       - door
@@ -203,6 +202,9 @@
       - condition: state
         entity_id: binary_sensor.home
         state: 'on'
+      review_severity:
+      - alert
+      disable_times: []
 - id: '1742289426804'
   alias: Test Shopping List
   description: ''
@@ -314,7 +316,7 @@
         ''access_token'')}}'
       button_3: Silence
       button_2: View Live
-      channel: Frigate
+      channel: frigate
       color: '#03a9f4'
       icon: mdi:cctv
       attachment_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{review_id}}/review_preview.gif'
@@ -328,7 +330,7 @@
       - condition: state
         entity_id: binary_sensor.home
         state: 'off'
-      critical: 'true'
+      critical: 'false'
       message: A {{ label | lower }} {{ 'was' if type == 'end' else 'is' }} at the
         {{ camera_name | lower }}
       android_auto: true
@@ -353,7 +355,7 @@
         ''access_token'')}}'
       button_3: Silence
       button_2: View Live
-      channel: Frigate
+      channel: frigate
       color: '#03a9f4'
       icon: mdi:cctv
       attachment_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{review_id}}/review_preview.gif'
@@ -367,7 +369,113 @@
       - condition: state
         entity_id: binary_sensor.home
         state: 'off'
-      critical: 'true'
+      critical: 'false'
       message: A {{ label | lower }} {{ 'was' if type == 'end' else 'is' }} at the
         {{ camera_name | lower }}
-      android_auto: true
+      android_auto: false
+- id: '1748682769307'
+  alias: Plex is down
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.plex
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  conditions: []
+  actions:
+  - action: notify.mobile_app_sam_phone
+    metadata: {}
+    data:
+      title: Plex is down!
+      message: 'Check the docker container to see what''s wrong '
+  mode: single
+- id: '1750766484213'
+  alias: Google Meet Mute Toggle
+  description: ''
+  triggers:
+  - trigger: webhook
+    allowed_methods:
+    - POST
+    - PUT
+    local_only: false
+    webhook_id: google-meet-mute-toggle-wCZcPX59LRpBJrBPBVIcMBDA
+    id: unmuted
+  - trigger: webhook
+    allowed_methods:
+    - POST
+    - PUT
+    local_only: false
+    webhook_id: google-meet-mute-toggle-oETcBTBAG3jZxoJBXdABRRn6
+    id: muted
+  - trigger: webhook
+    allowed_methods:
+    - POST
+    - PUT
+    local_only: false
+    webhook_id: google-meet-mute-toggle-6D7mA0QRrbT5YRkLzLA3L0B3
+    id: left
+  conditions:
+  - condition: state
+    entity_id: person.sam
+    state: home
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - unmuted
+      sequence:
+      - action: light.turn_on
+        metadata: {}
+        data:
+          color_name: green
+          transition: 0
+        target:
+          entity_id: light.computer
+      - action: input_boolean.turn_off
+        metadata: {}
+        data: {}
+        target:
+          entity_id: input_boolean.google_meet_muted
+    - conditions:
+      - condition: trigger
+        id:
+        - muted
+      sequence:
+      - action: light.turn_on
+        metadata: {}
+        data:
+          color_name: red
+          transition: 0
+        target:
+          entity_id: light.computer
+      - action: input_boolean.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: input_boolean.google_meet_muted
+    - conditions:
+      - condition: trigger
+        id:
+        - left
+      sequence:
+      - action: light.turn_on
+        metadata: {}
+        data:
+          xy_color:
+          - 0.517
+          - 0.41
+          brightness: 255
+          transition: 0
+        target:
+          entity_id: light.computer
+      - action: input_boolean.turn_off
+        metadata: {}
+        data: {}
+        target:
+          entity_id: input_boolean.google_meet_muted
+  mode: single

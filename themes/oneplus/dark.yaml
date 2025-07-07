@@ -4,6 +4,7 @@ dark:
   secondary-accent-color: '#6a5ef2'
   running-accent-color: '#4caf50'
   stopped-accent-color: '#f44336'
+  ha-tab-active-text-color: 'var(--accent-color)'
   
   map-filter: 'invert(0.9) hue-rotate(170deg) brightness(1.5) contrast(1.2) saturate(0.3)'
 
@@ -20,10 +21,11 @@ dark:
   label-badge-border-color: 'green'
 
   # Fonts
-  mdc-typography-font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif"
-  paper-font-headline_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
-  paper-font-subhead_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
-  paper-font-body1_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
+  mdc-typography-font-family: "SF Pro Display, sans-serif"
+  # paper-font-headline_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
+  # paper-font-subhead_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
+  # paper-font-body1_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
+  ha-font-family-body: '"SF Pro Display", sans-serif'
 
   # Header
   app-header-background-color: '#0d0d0d'
