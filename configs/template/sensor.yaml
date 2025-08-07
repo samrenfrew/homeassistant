@@ -9,23 +9,26 @@
         modules: "{{ trigger.event.data.modules }}"
         last_updated: "{{ trigger.event.data.last_updated }}"
 
-- sensor:
-  - name: "speakers_on"
-    unique_id: "speakers_on"
-    attributes:
-      friendly_name: "Speakers On"
-    icon: mdi:speaker-multiple
-    state: >-
-      {{ expand(states.media_player) | selectattr('state', 'eq', 'playing') | selectattr('entity_id','in',['media_player.bedroom_speaker','media_player.sonos_one','media_player.lounge_speaker','media_player.kitchen_display']) | map(attribute='entity_id') | list | count }}
+# - sensor:
+#   - name: "speakers_on"
+#     unique_id: "speakers_on"
+#     attributes:
+#       friendly_name: "Speakers On"
+#     icon: mdi:speaker-multiple
+#     state: >-
+#       {% set speakers = label_entities('speakers') | select('match', 'media_player') | selectattr('state','in',['playing','paused','buffering']) | expand() %}
+#       {% set multi_state_speakers = speakers | rejectattr('entity_id','eq','media_player.sonos_one') | list | count %}
+#       {% set sonos_playing = speakers | selectattr('entity_id','eq','media_player.sonos_one') | selectattr('state','eq','playing') | list | count %}
+#       {{ multi_state_speakers + sonos_playing }}
 
-- sensor:
-  - name: "lights_on"
-    unique_id: "lights_on"
-    attributes:
-      friendly_name: "Lights On"
-    icon: mdi:lightbulb-group-outline
-    state: >-
-      {{ expand(states.light) | selectattr('state', 'eq', 'on') | rejectattr('entity_id','in',['light.all_lights','light.lounge_lights', 'light.aarlo_front_door']) | map(attribute='entity_id') | list | count }}
+# - sensor:
+#   - name: "lights_on"
+#     unique_id: "lights_on"
+#     attributes:
+#       friendly_name: "Lights On"
+#     icon: mdi:lightbulb-group-outline
+#     state: >-
+#       {{ expand(states.light) | selectattr('state', 'eq', 'on') | rejectattr('entity_id','in',['light.all_lights','light.lounge_lights', 'light.aarlo_front_door']) | map(attribute='entity_id') | list | count }}
 
 # - sensor:
 #   - name: "humidifier"

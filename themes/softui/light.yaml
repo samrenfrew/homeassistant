@@ -77,239 +77,242 @@ clear:
 
   dialog-backdrop-filter: blur(10px)
 
-  card-mod-theme: clear
+  card-mod-theme: softmod
 
-  ## CSS styling for all cards
-  card-mod-card-yaml: |
-    .: |
-      ha-card {
-        font-family: "Roman-55", "Helvetica Neue";
-        background: none;
-        border-radius: 12px;
-        border: none;
-        transition: height 0s, margin 0s;
-      }
-      ha-card.type-custom-search-card #searchContainer {
-        width: calc(100% - 20px) !important;
-        margin-bottom: 10px;
-      }
-      ha-card.type-markdown {
-        --paper-card-background-color: 'rgba(11, 11, 11, 0.00)';
-        box-shadow: none;
-        padding-top: 20px;
-      }
-      ha-card.type-glance, ha-card.media-player, ha-card.type-entities, ha-card.type-custom-uptime-card  {
-        // margin-bottom: 10px;
-      }
-      ha-card.chip {
-        letter-spacing: 0.2px;
-      }
-      ha-card.type-custom-mushroom-light-card {
-        padding: 14px;
-        {% if config.entity and states(config.entity) == 'on' -%}
-          box-shadow: inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
-        {%- endif %}
-      }
-      .pin, .bar { padding: 10px; }
-      @media screen and (max-width:870px){
-        .top {
-          padding-top: 40px !important;
-        }
-        .pin { 
-          top:0 !important;
-          position: fixed !important;
-          width: calc(100% - 20px) !important;
-        }
-        .bar {
-          bottom: 68px !important;
-          position: sticky !important;
-        }
-      }
+  # ## CSS styling for all cards
+  # card-mod-card-yaml: |
+  #   .: |
+  #     ha-card {
+  #       font-family: "Roman-55", "Helvetica Neue";
+  #       background: none;
+  #       border-radius: 12px;
+  #       border: none;
+  #       transition: height 0s, margin 0s;
+  #     }
+  #     ha-card.type-custom-search-card #searchContainer {
+  #       width: calc(100% - 20px) !important;
+  #       margin-bottom: 10px;
+  #     }
+  #     ha-card.type-markdown {
+  #       --paper-card-background-color: 'rgba(11, 11, 11, 0.00)';
+  #       box-shadow: none;
+  #       padding-top: 20px;
+  #     }
+  #     ha-card.type-glance, ha-card.media-player, ha-card.type-entities, ha-card.type-custom-uptime-card  {
+  #       // margin-bottom: 10px;
+  #     }
+  #     ha-card.chip {
+  #       letter-spacing: 0.2px;
+  #     }
+  #     ha-card.type-custom-mushroom-light-card {
+  #       padding: 14px;
+  #       {% if config.entity and states(config.entity) == 'on' -%}
+  #         box-shadow: inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03);
+  #       {%- endif %}
+  #     }
+  #     .pin, .bar { padding: 10px; }
+  #     @media screen and (max-width:870px){
+  #       .top {
+  #         padding-top: 40px !important;
+  #       }
+  #       .pin { 
+  #         top:0 !important;
+  #         position: fixed !important;
+  #         width: calc(100% - 20px) !important;
+  #       }
+  #       .bar {
+  #         bottom: 68px !important;
+  #         position: sticky !important;
+  #       }
+  #     }
 
-    "#searchContainer paper-input$": 
-      paper-input-container$: |
-        :host {
-          // padding:0
-        }
-        .underline {
-          // display:none !important;
-        }
+  #   "#searchContainer paper-input$": 
+  #     paper-input-container$: |
+  #       :host {
+  #         // padding:0
+  #       }
+  #       .underline {
+  #         // display:none !important;
+  #       }
 
-    mushroom-state-info$: |
-      .secondary {
-        line-height:1.2
-      }
-    mushroom-shape-icon$: |
-      .shape {
-        background: none !important;
-      }
-      .shape.disabled ha-icon {
-        color: var(--primary-text-color) !important;
-      }
-      .shape ha-icon {
-        --mdc-icon-size:32px !important
-      }
-    mushroom-light-color-control$: 
-      mushroom-slider$: |
-        .container {
-          height:20px !important;
-        }
-    mushroom-light-brightness-control$:
-      mushroom-slider$: |
-        .container {
-          height:20px !important;
-        }
-        .slider .slider-track-indicator {
-          border-radius: 0 !important;
-        }
+  #   mushroom-state-info$: |
+  #     .secondary {
+  #       line-height:1.2
+  #     }
+  #   mushroom-shape-icon$: |
+  #     .shape {
+  #       background: none !important;
+  #     }
+  #     .shape.disabled ha-icon {
+  #       color: var(--primary-text-color) !important;
+  #     }
+  #     .shape ha-icon {
+  #       --mdc-icon-size:32px !important
+  #     }
+  #   mushroom-light-color-control$: 
+  #     mushroom-slider$: |
+  #       .container {
+  #         height:20px !important;
+  #       }
+  #   mushroom-light-brightness-control$:
+  #     mushroom-slider$: |
+  #       .container {
+  #         height:20px !important;
+  #       }
+  #       .slider .slider-track-indicator {
+  #         border-radius: 0 !important;
+  #       }
 
-    ha-markdown$: |
-        :host {
-          padding-left: 16px !important;
-          padding-right: 10px !important;
-        }
-        ha-markdown-element {
-          font-size:10px;
-          font-family: "Roman-55", "Helvetica Neue";
-          letter-spacing: 0.2px;
-        }
-        h1 {
-          font-size: 22px;
-          margin-bottom:5px;
-          font-weight: 700 !important;
-        }
-        ha-icon {
-          display: inline-block;
-          transform: translateY(-2px);
-          margin-right: 3px;
-        }
-        h2 {
-          font-size: 15px;
-          margin-top:0;
-          font-weight: 700 !important;
-        }
+  #   ha-markdown$: |
+  #       :host {
+  #         padding-left: 16px !important;
+  #         padding-right: 10px !important;
+  #       }
+  #       ha-markdown-element {
+  #         font-size:10px;
+  #         font-family: "Roman-55", "Helvetica Neue";
+  #         letter-spacing: 0.2px;
+  #       }
+  #       h1 {
+  #         font-size: 22px;
+  #         margin-bottom:5px;
+  #         font-weight: 700 !important;
+  #       }
+  #       ha-icon {
+  #         display: inline-block;
+  #         transform: translateY(-2px);
+  #         margin-right: 3px;
+  #       }
+  #       h2 {
+  #         font-size: 15px;
+  #         margin-top:0;
+  #         font-weight: 700 !important;
+  #       }
 
-  ## More Info
-  card-mod-more-info: |
-    $: |
-      .mdc-dialog__scrim {
-        backdrop-filter: blur(10px);
-        -webkit-backdro-filter: blur(10px);
-        background:none !important;
-      }
-      .mdc-dialog__surface {
-        background:var(--background-color) !important;
-        border-radius:10px !important;
-        box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
-      }
-      ha-paper-dialog {
-        border-radius:10px;
-      }
-      ::-webkit-scrollbar {
-        display: none;
-      }
-    ha-header-bar:
-      $: |
-        :host {
-            border-bottom:0 !important;
-        }
-        .mdc-top-app-bar {
-            background:none !important;
-        }
-        .mdc-top-app-bar__title {
-            opacity:0;
-        }
-    mwc-tab-bar:
-      $: |
-        :host {
-            border-bottom:0 !important;
-        }
+  # ## More Info
+  # card-mod-more-info: |
+  #   $: |
+  #     .mdc-dialog__scrim {
+  #       backdrop-filter: blur(10px);
+  #       -webkit-backdro-filter: blur(10px);
+  #       background:none !important;
+  #     }
+  #     .mdc-dialog__surface {
+  #       background:var(--background-color) !important;
+  #       border-radius:10px !important;
+  #       box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
+  #     }
+  #     ha-paper-dialog {
+  #       border-radius:10px;
+  #     }
+  #     ::-webkit-scrollbar {
+  #       display: none;
+  #     }
+  #   ha-header-bar:
+  #     $: |
+  #       :host {
+  #           border-bottom:0 !important;
+  #       }
+  #       .mdc-top-app-bar {
+  #           background:none !important;
+  #       }
+  #       .mdc-top-app-bar__title {
+  #           opacity:0;
+  #       }
+  #   mwc-tab-bar:
+  #     $: |
+  #       :host {
+  #           border-bottom:0 !important;
+  #       }
 
-  card-mod-sidebar-yaml: |
-    .: |
-      :host {
-        font-family: "SF Pro Display", sans-serif;
-      }
+  # card-mod-sidebar-yaml: |
+  #   .: |
+  #     :host {
+  #       font-family: "SF Pro Display", sans-serif;
+  #     }
 
-  ## Header
-  card-mod-root-yaml: |
-    .: |
-      ha-tabs {
-        --paper-tabs-selection-bar-color: var(--accent-color) !important;
-        direction: unset !important;
-        justify-content:center !important;
-      }
-      /* This changes the color of the currently selected tab. */
-      paper-tab {
-        width:calc((100% / 6) - 32px);
-      }
-      paper-tab[aria-selected=true] {
-        color: var(--accent-color) !important;
-      }
-      /* This hides the help button. */
-      a.menu-link[target="_blank"] {
-        display: none;
-      }
-      /* Move header to bottom */
-      @media screen and (max-width:870px){
-        #view {          
-          padding-top: 0 !important;
-        }
+  # ## Header
+  # card-mod-root-yaml: |
+  #   .: |
+  #     ha-tabs {
+  #       --paper-tabs-selection-bar-color: var(--accent-color) !important;
+  #       direction: unset !important;
+  #       justify-content:center !important;
+  #     }
+  #     /* This changes the color of the currently selected tab. */
+  #     paper-tab {
+  #       width:calc((100% / 6) - 32px);
+  #     }
+  #     paper-tab[aria-selected=true] {
+  #       color: var(--accent-color) !important;
+  #     }
+  #     /* This hides the help button. */
+  #     a.menu-link[target="_blank"] {
+  #       display: none;
+  #     }
+  #     /* Move header to bottom */
+  #     @media screen and (max-width:870px){
+  #       #view {          
+  #         padding-top: 0 !important;
+  #       }
         
-        #view hui-view vertical-layout$: |
-           #columns {
-              padding-bottom: 68px !important;
-            }
-        :not([class="edit-mode"]) .header {
-          top: unset !important;
-          bottom:0;
-          position:fixed;
-          box-shadow: 0 0 20px rgba(0,0,0,0.05);
-          height: 68px !important;
-        }
-        .toolbar {
-          height: 68px !important;
-        }
-        .edit-mode #view {
-          margin-top: calc(var(--header-height) + 60px) !important;
-        }
-        ha-menu-button {
-          display: none !important;
-        }  
-      } 
-    ha-app-layout$: |
-      @media screen and (max-width:870px){
-        #contentContainer {
-          padding-top: 0 !important;
-          padding-bottom: 68px !important;
-        }
-      }
-    ha-tabs$: |
-      @media screen and (max-width:870px){
-        paper-icon-button {
-          display:none !important
-        }
-        #tabsContent {
-          width: 100% !important;
-        }              
-        #selectionBar {
-          bottom: unset !important;
-          border-bottom-width: 2.5px !important;
-        }
-      } 
+  #       #view hui-view vertical-layout$: |
+  #          #columns {
+  #             padding-bottom: 68px !important;
+  #           }
+  #       :not([class="edit-mode"]) .header {
+  #         top: unset !important;
+  #         bottom:0;
+  #         position:fixed;
+  #         box-shadow: 0 0 20px rgba(0,0,0,0.05);
+  #         height: 68px !important;
+  #       }
+  #       .toolbar {
+  #         height: 68px !important;
+  #       }
+  #       .edit-mode #view {
+  #         margin-top: calc(var(--header-height) + 60px) !important;
+  #       }
+  #       ha-menu-button {
+  #         display: none !important;
+  #       }  
+  #     } 
+  #   ha-app-layout$: |
+  #     @media screen and (max-width:870px){
+  #       #contentContainer {
+  #         padding-top: 0 !important;
+  #         padding-bottom: 68px !important;
+  #       }
+  #     }
+  #   ha-tabs$: |
+  #     @media screen and (max-width:870px){
+  #       paper-icon-button {
+  #         display:none !important
+  #       }
+  #       #tabsContent {
+  #         width: 100% !important;
+  #       }              
+  #       #selectionBar {
+  #         bottom: unset !important;
+  #         border-bottom-width: 2.5px !important;
+  #       }
+  #     } 
 
 
 # Mushroom layout
-  mush-spacing: 10px
+  mush-spacing: 14px
   # Title
-  mush-title-padding: 24px 12px 16px
-  mush-title-spacing: 12px
-  mush-title-font-size: 24px
-  mush-title-font-weight: bold
+  #mush-title-padding: 32px 16px 8px
+  mush-title-padding: 8px 16px
+  mush-title-spacing: 5px
+  mush-title-font-size: 26px
+  mush-title-letter-spacing: -0.13px
+  mush-title-font-weight: 600
   mush-title-line-height: 1
-  mush-title-font-family: "Roman-55, Helvetica Neue"
+  mush-title-font-family: "SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial"
   mush-subtitle-font-size: 16px
-  mush-subtitle-font-weight: normal
+  mush-subtitle-letter-spacing: -0.08px
+  mush-subtitle-font-weight: 500
   mush-subtitle-line-height: 1.2
   # Card
   mush-icon-border-radius: 50%

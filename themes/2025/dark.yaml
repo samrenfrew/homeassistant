@@ -1,4 +1,4 @@
-dark:
+dark2:
   # Colors 
   accent-color: '#2a79ff'
   secondary-accent-color: '#6a5ef2'
@@ -175,7 +175,7 @@ dark:
   hacs-status-pending-update: 'var(--accent-color)'
 
   # CARD MOD
-  card-mod-theme: cardmod
+  card-mod-theme: cardmod2
 
   # SECTIONS
   ha-section-grid-column-gap: 16px

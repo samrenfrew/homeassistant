@@ -1,4 +1,4 @@
-cardmod:
+softmod:
   ## CSS styling for Sidebar
   card-mod-drawer-yaml: |
     .: |
@@ -20,7 +20,7 @@ cardmod:
       state-badge$: 
         .: |
           :host {
-            border: var(--theme-icon-border);
+            border: none;
             outline: var(--theme-icon-outline);
             border-radius: 100px;
             overflow: hidden;
@@ -249,7 +249,7 @@ cardmod:
       .mmp-media-controls__media ha-icon-button {
         background:var(--background-color) !important;
         border-radius: 12px;
-        border: 1px solid var(--ha-card-border-color);
+        # border: 1px solid var(--ha-card-border-color);
         justify-content: center;
         width:100%;
         display:flex;

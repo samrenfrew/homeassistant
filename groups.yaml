@@ -16,7 +16,7 @@ lounge:
     - media_player.lg_webos_tv
     - media_player.lounge_speaker
     - switch.tv
-    - sensor.lounge_humidity
+    # - sensor.lounge_humidity
     - sensor.lounge_temperature
     - binary_sensor.lounge_motion
 
@@ -28,7 +28,7 @@ bedroom:
     - sensor.bedroom_humidity
     - sensor.bedroom_temperature
     - binary_sensor.bedroom_motion
-    - climate.bedroom
+    - climate.bedroom_trv
 
 office:
   name: Sam Office
@@ -43,7 +43,7 @@ office:
     - binary_sensor.office_motion
     - sensor.office_temperature
     - sensor.office_humidity
-    - climate.office
+    - climate.office_trv
 
 nursery:
   name: Nursery
@@ -53,7 +53,7 @@ nursery:
     - switch.humidifier
     - sensor.nursery_humidity
     - sensor.nursery_temperature
-    - climate.nursery
+    - climate.nursery_trv
 
 ady_office:
   name: Ady Office
@@ -61,9 +61,9 @@ ady_office:
   entities:
     - switch.extension_lead_2
     - light.small_lamp
-    - climate.upstairs
-    - sensor.upstairs_temperature
-    - sensor.upstairs_humidity
+    - climate.spare_trv
+    - sensor.spare_temperature
+    - sensor.spare_humidity
 
 dining_room:
   name: Dining Room

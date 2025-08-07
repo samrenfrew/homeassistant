@@ -326,14 +326,14 @@
       labels: []
       zone_filter: false
       debug: true
-      master_condition:
-      - condition: state
-        entity_id: binary_sensor.home
-        state: 'off'
+      master_condition: []
       critical: 'false'
       message: A {{ label | lower }} {{ 'was' if type == 'end' else 'is' }} at the
         {{ camera_name | lower }}
       android_auto: true
+      video: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/{{camera}}/clip.mp4'
+      review_severity:
+      - alert
 - id: '1747630936897'
   alias: Back Door - Away
   description: ''
@@ -478,4 +478,35 @@
         data: {}
         target:
           entity_id: input_boolean.google_meet_muted
+  mode: single
+- id: '1753295905887'
+  alias: Outside Light
+  description: ''
+  triggers:
+  - trigger: sun
+    event: sunset
+    offset: -01:00:00
+    id: sunset
+  - trigger: sun
+    event: sunrise
+    offset: 01:00:00
+    id: sunrise
+  conditions: []
+  actions:
+  - if:
+    - condition: trigger
+      id:
+      - sunset
+    then:
+    - action: light.turn_on
+      metadata: {}
+      data: {}
+      target:
+        entity_id: light.outside
+    else:
+    - action: light.turn_off
+      metadata: {}
+      data: {}
+      target:
+        entity_id: light.outside
   mode: single

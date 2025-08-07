@@ -1,4 +1,4 @@
-cardmod:
+cardmod2:
   ## CSS styling for Sidebar
   card-mod-drawer-yaml: |
     .: |
@@ -113,14 +113,15 @@ cardmod:
       
       ha-card.type-custom-button-card:not(.no-hover):hover {
         @media (hover: hover) {
-          transform: scale(1.05);
-          box-shadow:1px 3px 10px rgba(0,0,0,0.05);
+          # transform: scale(1.05);
+          box-shadow: var(--box-shadow-on) !important;
         }
       }
 
       ha-card.type-markdown {
         background: none !important;
         transition: none !important;
+        box-shadow: none !important;
       }
 
       ha-card.tv-remote {
