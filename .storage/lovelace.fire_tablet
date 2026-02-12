@@ -1042,6 +1042,186 @@
               "type": "custom:layout-card",
               "layout_type": "custom:grid-layout",
               "layout": {
+                "grid-gap": "9px",
+                "padding": 0,
+                "margin": 0,
+                "mediaquery": {
+                  "(max-width: 600px)": {
+                    "grid-template-columns": "repeat(2,1fr)"
+                  }
+                }
+              },
+              "cards": [
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "group.lounge",
+                  "icon": "mdi:sofa",
+                  "name": "Lounge",
+                  "template": [
+                    "room_card"
+                  ],
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#lounge",
+                    "haptic": "light"
+                  },
+                  "layout_options": {
+                    "grid_columns": 2
+                  },
+                  "variables": {
+                    "temp": "sensor.lounge_temperature",
+                    "entities": [
+                      "light.big_lamp",
+                      "light.small_lamp",
+                      "light.orb_lamp",
+                      "light.tv",
+                      "media_player.lg_webos_tv",
+                      "media_player.lounge_speaker"
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "group.bedroom",
+                  "icon": "mdi:bed-king",
+                  "name": "Bedroom",
+                  "template": [
+                    "room_card"
+                  ],
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#bedroom"
+                  },
+                  "layout_options": {
+                    "grid_columns": 2
+                  },
+                  "variables": {
+                    "temp": "sensor.bedroom_temperature",
+                    "entities": [
+                      "light.bedroom_lamp",
+                      "media_player.bedroom_speaker"
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "group.nursery",
+                  "icon": "mdi:account-child",
+                  "name": "Nursery",
+                  "template": [
+                    "room_card"
+                  ],
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#nursery"
+                  },
+                  "layout_options": {
+                    "grid_columns": 2
+                  },
+                  "variables": {
+                    "temp": "sensor.nursery_temperature",
+                    "entities": [
+                      "light.nursery_lamp"
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "group.ady_office",
+                  "icon": "mdi:bed-single",
+                  "name": "Ella's Room",
+                  "template": [
+                    "room_card"
+                  ],
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#ella"
+                  },
+                  "layout_options": {
+                    "grid_columns": 2
+                  },
+                  "variables": {
+                    "temp": "sensor.ella_temperature",
+                    "entities": [
+                      "light.fairy_lights"
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "group.office",
+                  "icon": "mdi:desktop-classic",
+                  "name": "Office",
+                  "template": [
+                    "room_card"
+                  ],
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#office"
+                  },
+                  "layout_options": {
+                    "grid_columns": 2
+                  },
+                  "variables": {
+                    "temp": "sensor.office_temperature",
+                    "entities": [
+                      "light.desk_lamp",
+                      "light.ikea_plug",
+                      "light.computer",
+                      "switch.pc_power",
+                      "switch.extension_lead"
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "group.kitchen",
+                  "icon": "mdi:microwave",
+                  "name": "Kitchen",
+                  "template": [
+                    "room_card"
+                  ],
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#kitchen"
+                  },
+                  "layout_options": {
+                    "grid_columns": 2
+                  },
+                  "variables": {
+                    "temp": "sensor.kitchen_temperature",
+                    "entities": [
+                      "media_player.kitchen_display"
+                    ]
+                  }
+                }
+              ],
+              "view_layout": {
+                "grid-area": "sidebar"
+              }
+            },
+            {
+              "type": "custom:layout-card",
+              "layout_type": "custom:grid-layout",
+              "layout": {
                 "margin": "0 0 0",
                 "card_margin": 0,
                 "gap": 0,
@@ -1073,7 +1253,9 @@
                       "modules": [
                         "fire_tablet",
                         "!popup"
-                      ]
+                      ],
+                      "slider_fill_orientation": "left",
+                      "slider_value_position": "right"
                     },
                     {
                       "type": "custom:layout-card",
@@ -2223,293 +2405,6 @@
               "view_layout": {
                 "grid-area": "footer"
               }
-            },
-            {
-              "type": "custom:layout-card",
-              "layout_type": "custom:grid-layout",
-              "layout": {
-                "grid-gap": "9px",
-                "padding": 0,
-                "margin": 0,
-                "mediaquery": {
-                  "(max-width: 600px)": {
-                    "grid-template-columns": "repeat(2,1fr)"
-                  }
-                }
-              },
-              "cards": [
-                {
-                  "type": "custom:button-card",
-                  "card_mod": {
-                    "class": "no-hover"
-                  },
-                  "entity": "group.lounge",
-                  "icon": "mdi:sofa",
-                  "name": "Lounge",
-                  "template": [
-                    "room_card"
-                  ],
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "#lounge",
-                    "haptic": "light"
-                  },
-                  "layout_options": {
-                    "grid_columns": 2
-                  },
-                  "variables": {
-                    "temp": "sensor.lounge_temperature",
-                    "entities": [
-                      "light.big_lamp",
-                      "light.small_lamp",
-                      "light.orb_lamp",
-                      "light.tv",
-                      "media_player.lg_webos_tv",
-                      "media_player.lounge_speaker"
-                    ]
-                  }
-                },
-                {
-                  "type": "custom:button-card",
-                  "card_mod": {
-                    "class": "no-hover"
-                  },
-                  "entity": "group.bedroom",
-                  "icon": "mdi:bed-king",
-                  "name": "Bedroom",
-                  "template": [
-                    "room_card"
-                  ],
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "#bedroom"
-                  },
-                  "layout_options": {
-                    "grid_columns": 2
-                  },
-                  "variables": {
-                    "temp": "sensor.bedroom_temperature",
-                    "entities": [
-                      "light.bedroom_lamp",
-                      "media_player.bedroom_speaker"
-                    ]
-                  }
-                },
-                {
-                  "type": "custom:button-card",
-                  "card_mod": {
-                    "class": "no-hover"
-                  },
-                  "entity": "group.nursery",
-                  "icon": "mdi:account-child",
-                  "name": "Nursery",
-                  "template": [
-                    "room_card"
-                  ],
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "#nursery"
-                  },
-                  "layout_options": {
-                    "grid_columns": 2
-                  },
-                  "variables": {
-                    "temp": "sensor.nursery_temperature",
-                    "entities": [
-                      "light.nursery_lamp"
-                    ]
-                  }
-                },
-                {
-                  "type": "custom:button-card",
-                  "card_mod": {
-                    "class": "no-hover"
-                  },
-                  "entity": "group.ady_office",
-                  "icon": "mdi:bed-single",
-                  "name": "Ella's Room",
-                  "template": [
-                    "room_card"
-                  ],
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "#ella"
-                  },
-                  "layout_options": {
-                    "grid_columns": 2
-                  },
-                  "variables": {
-                    "temp": "sensor.ella_temperature",
-                    "entities": [
-                      "light.fairy_lights"
-                    ]
-                  }
-                },
-                {
-                  "type": "custom:button-card",
-                  "card_mod": {
-                    "class": "no-hover"
-                  },
-                  "entity": "group.office",
-                  "icon": "mdi:desktop-classic",
-                  "name": "Office",
-                  "template": [
-                    "room_card"
-                  ],
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "#office"
-                  },
-                  "layout_options": {
-                    "grid_columns": 2
-                  },
-                  "variables": {
-                    "temp": "sensor.office_temperature",
-                    "entities": [
-                      "light.desk_lamp",
-                      "light.ikea_plug",
-                      "light.computer",
-                      "switch.pc_power",
-                      "switch.extension_lead"
-                    ]
-                  }
-                },
-                {
-                  "type": "custom:button-card",
-                  "card_mod": {
-                    "class": "no-hover"
-                  },
-                  "entity": "group.kitchen",
-                  "icon": "mdi:microwave",
-                  "name": "Kitchen",
-                  "template": [
-                    "room_card"
-                  ],
-                  "tap_action": {
-                    "action": "navigate",
-                    "navigation_path": "#kitchen"
-                  },
-                  "layout_options": {
-                    "grid_columns": 2
-                  },
-                  "variables": {
-                    "temp": "sensor.kitchen_temperature",
-                    "entities": [
-                      "media_player.kitchen_display"
-                    ]
-                  }
-                }
-              ],
-              "view_layout": {
-                "grid-area": "sidebar"
-              }
-            },
-            {
-              "type": "vertical-stack",
-              "cards": [
-                {
-                  "type": "custom:bubble-card",
-                  "card_type": "pop-up",
-                  "hash": "#lounge",
-                  "button_type": "name",
-                  "name": "",
-                  "icon": "",
-                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n",
-                  "show_header": true,
-                  "show_icon": false,
-                  "show_name": false,
-                  "scrolling_effect": true,
-                  "width_desktop": "580px",
-                  "auto_close": "30000",
-                  "bg_color": "#0d0d0d",
-                  "sub_button": {
-                    "main": [],
-                    "bottom": []
-                  },
-                  "modules": [
-                    "fire_tablet",
-                    "!popup"
-                  ],
-                  "bg_blur": "0",
-                  "slider_fill_orientation": "left",
-                  "slider_value_position": "right"
-                },
-                {
-                  "type": "custom:layout-card",
-                  "layout_type": "custom:grid-layout",
-                  "cards": [
-                    {
-                      "type": "custom:mushroom-title-card",
-                      "title": "Lounge",
-                      "subtitle": "{% set li = expand(area_entities('Lounge')) | selectattr('domain', 'eq', 'light') | selectattr('state', 'eq', 'on') | rejectattr('entity_id','in','light.lounge_lights') | map(attribute='entity_id') | list | count %}\n\nThe lounge is {{ states('sensor.lounge_temperature') | round | int(default=0)}}°C\n\n{%- if li == 1 -%}\n, 1 light is on \n{%- elif li > 1 -%}\n, {{li}} lights are on\n{%- endif %} and {% if is_state('binary_sensor.lounge_occupancy', 'on') -%}\nit's currently occupied\n{%- else -%} \nit's empty\n{% endif %}\n",
-                      "view_layout": {
-                        "grid-column": "1 / -1"
-                      }
-                    },
-                    {
-                      "type": "custom:button-card",
-                      "variables": {
-                        "entity": "light.big_lamp"
-                      },
-                      "template": "light_card"
-                    },
-                    {
-                      "type": "custom:button-card",
-                      "variables": {
-                        "entity": "light.small_lamp"
-                      },
-                      "template": "light_card"
-                    },
-                    {
-                      "type": "custom:button-card",
-                      "variables": {
-                        "entity": "light.orb_lamp"
-                      },
-                      "template": "light_card"
-                    },
-                    {
-                      "type": "custom:button-card",
-                      "entity": "media_player.lg_webos_tv",
-                      "template": [
-                        "default"
-                      ],
-                      "variables": {
-                        "name": "TV"
-                      },
-                      "label": "[[[\n  return entity.attributes.media_title || entity.attributes.source || entity.state;\n]]]\n",
-                      "tap_action": {
-                        "action": "navigate",
-                        "navigation_path": "#tv",
-                        "haptic": "light"
-                      },
-                      "double_tap_action": {
-                        "action": "none"
-                      }
-                    },
-                    {
-                      "type": "custom:button-card",
-                      "entity": "media_player.lounge_speaker",
-                      "template": [
-                        "media_card"
-                      ],
-                      "tap_action": {
-                        "action": "navigate",
-                        "navigation_path": "#lounge_speaker"
-                      }
-                    }
-                  ],
-                  "layout": {
-                    "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
-                    "grid-column-gap": "var(--grid-column-gap, 16px)",
-                    "grid-row-gap": "var(--grid-row-gap, 13px)",
-                    "height": "100%",
-                    "margin": 0,
-                    "card_margin": 0,
-                    "reflow": true,
-                    "grid-auto-flow": "dense"
-                  }
-                }
-              ]
             }
           ],
           "layout": {
