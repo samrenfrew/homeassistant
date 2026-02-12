@@ -1826,7 +1826,9 @@
                       "modules": [
                         "fire_tablet",
                         "!popup"
-                      ]
+                      ],
+                      "slider_fill_orientation": "left",
+                      "slider_value_position": "right"
                     },
                     {
                       "type": "custom:layout-card",
@@ -2091,12 +2093,12 @@
                       "hash": "#tv",
                       "name": "",
                       "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  --horizontal-stack-card-gap: 8px !important;\n  padding: 18px 18px 56px 18px !important;\n}\n\n",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  --horizontal-stack-card-gap: 8px !important;\n  padding: 18px 28px 56px 28px !important;\n}\n\n",
                       "show_header": true,
                       "show_icon": false,
                       "show_name": false,
                       "scrolling_effect": true,
-                      "width_desktop": "580px",
+                      "width_desktop": "fit-content",
                       "auto_close": "",
                       "background_update": true,
                       "button_type": "name",
@@ -2104,7 +2106,9 @@
                       "sub_button": {
                         "main": [],
                         "bottom": []
-                      }
+                      },
+                      "slider_fill_orientation": "left",
+                      "slider_value_position": "right"
                     },
                     {
                       "type": "custom:streamline-card",
