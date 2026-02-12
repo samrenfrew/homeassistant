@@ -1826,9 +1826,7 @@
                       "modules": [
                         "fire_tablet",
                         "!popup"
-                      ],
-                      "slider_fill_orientation": "left",
-                      "slider_value_position": "right"
+                      ]
                     },
                     {
                       "type": "custom:layout-card",
@@ -2040,6 +2038,56 @@
                     {
                       "type": "custom:bubble-card",
                       "card_type": "pop-up",
+                      "hash": "#heating",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      }
+                    },
+                    {
+                      "type": "thermostat",
+                      "entity": "climate.hive",
+                      "name": " "
+                    },
+                    {
+                      "type": "entities",
+                      "entities": [
+                        {
+                          "entity": "button.hive_heating_boost"
+                        },
+                        {
+                          "entity": "number.hive_heating_boost_temperature"
+                        },
+                        {
+                          "entity": "number.hive_heating_boost_duration"
+                        },
+                        {
+                          "entity": "sensor.hive_heating_boost_remaining"
+                        },
+                        {
+                          "entity": "switch.hive_temperature_setpoint_hold"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
                       "hash": "#tv",
                       "name": "",
                       "icon": "",
@@ -2069,6 +2117,35 @@
             {
               "type": "vertical-stack",
               "cards": [
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#lounge_speaker",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "750px",
+                      "bg_color": "111111"
+                    },
+                    {
+                      "type": "custom:streamline-card",
+                      "template": "speaker_popup",
+                      "variables": [
+                        {
+                          "entity": "media_player.lounge_speaker"
+                        }
+                      ]
+                    }
+                  ]
+                },
                 {
                   "type": "vertical-stack",
                   "cards": [
@@ -2280,56 +2357,6 @@
                       "card_mod": {
                         "style": "state-card-content {\n  display:none !important;\n}\n"
                       }
-                    }
-                  ]
-                },
-                {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#heating",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      }
-                    },
-                    {
-                      "type": "thermostat",
-                      "entity": "climate.hive",
-                      "name": " "
-                    },
-                    {
-                      "type": "entities",
-                      "entities": [
-                        {
-                          "entity": "button.hive_heating_boost"
-                        },
-                        {
-                          "entity": "number.hive_heating_boost_temperature"
-                        },
-                        {
-                          "entity": "number.hive_heating_boost_duration"
-                        },
-                        {
-                          "entity": "sensor.hive_heating_boost_remaining"
-                        },
-                        {
-                          "entity": "switch.hive_temperature_setpoint_hold"
-                        }
-                      ]
                     }
                   ]
                 },
