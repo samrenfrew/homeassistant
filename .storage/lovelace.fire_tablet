@@ -2025,7 +2025,13 @@
                       "scrolling_effect": true,
                       "width_desktop": "580px",
                       "auto_close": "30000",
-                      "bg_color": ""
+                      "bg_color": "",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      },
+                      "slider_fill_orientation": "left",
+                      "slider_value_position": "right"
                     },
                     {
                       "type": "custom:layout-card",
@@ -2059,183 +2065,6 @@
                           "title": " "
                         }
                       ]
-                    }
-                  ]
-                },
-                {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#alarm",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": ""
-                    },
-                    {
-                      "type": "custom:more-info-card",
-                      "entity": "alarm_control_panel.alarm",
-                      "title": " ",
-                      "card_mod": {
-                        "style": "state-card-content {\n  display:none !important;\n}\n"
-                      }
-                    },
-                    {
-                      "type": "custom:layout-card",
-                      "layout_type": "custom:grid-layout",
-                      "cards": [
-                        {
-                          "type": "custom:mushroom-title-card",
-                          "title": "Security",
-                          "subtitle": "{% set captured = states.sensor.aarlo_captured_today_front_door.state | int (default=0) %}\n{% set p = captured > 0 %}\n\nCamera battery is at {{ states.sensor.aarlo_battery_level_front_door.state }}%. {% if p -%}\nThere {% if captured == 1 -%}has{%- else -%}have{%- endif %} been {{ captured }} recording{% if captured != 1 -%}s{%- endif %} today\n{%- endif -%}\n",
-                          "view_layout": {
-                            "grid-column": "1/-1"
-                          }
-                        },
-                        {
-                          "type": "custom:aarlo-glance",
-                          "entity": "camera.aarlo_front_door",
-                          "name": "Front Door",
-                          "image_bottom": "library,snapshot|stream,battery",
-                          "libary_view": "direct",
-                          "image_click": "recording",
-                          "image_view": "direct",
-                          "library_sizes": "2,1",
-                          "view_layout": {
-                            "grid-column": "1 / -1"
-                          },
-                          "card_mod": {
-                            "style": ".aarlo-image, .aarlo-video {\n  object-fit: cover;\n  height:100%;\n}\n.box {\n  line-height: 40px;\n  backdrop-filter: blur(1px);\n  z-index:3;\n}\n.box ha-icon {\n  padding: 8px;\n  color:#fff;\n}\n{%- set regions =  state_attr(\"sensor.aarlo_last_front_door\", \"object_region\").split(\",\") -%}\n{%- set type =  state_attr(\"sensor.aarlo_last_front_door\", \"object_type\") -%}\n{%- set colors = {\n  \"Animal\": \"orangered\",\n  \"Vehicle\": \"yellow\",\n  \"Person\":  \"lime\",\n  \"Package\":  \"cyan\",\n  }\n-%}\n{%- set color = colors[type] -%}\n{%- set left = (regions[0]|float)*100 - 2 -%}\n{%- set top = (regions[1]|float)*100 - 2 -%}\n{%- set width = ((regions[2]|float) - (regions[0]|float))*100 + 2 -%}\n{%- set height = ((regions[3]|float) - (regions[1]|float))*100 + 2 -%}\n\n\n.aarlo-base:before {\n  content: \"\";\n  display: block;\n  border: 2.5px solid {{ color }};\n  position: absolute;\n  top: {{ top }}%;\n  left: {{ left }}%;\n  width: {{ width }}%;\n  height: {{ height }}%;\n  z-index:1;\n  border-radius: 3px;\n}\ndiv.aarlo-image, video.aarlo-video {\n  z-index:2\n} div.aarlo-image {\n  width:102%;\n  height: 100%\n}\ndiv.aarlo-image img + div {\n  border-width: 2.5px !important;\n  border-radius: 3px;\n}\n"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "binary_sensor.front_door",
-                          "template": [
-                            "default"
-                          ],
-                          "variables": {
-                            "color": "var(--secondary-accent-color)"
-                          },
-                          "tap_action": {
-                            "action": "more-info"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "binary_sensor.back_door",
-                          "template": [
-                            "default"
-                          ],
-                          "variables": {
-                            "color": "var(--secondary-accent-color)"
-                          },
-                          "tap_action": {
-                            "action": "more-info"
-                          }
-                        },
-                        {
-                          "type": "custom:layout-card",
-                          "layout_type": "custom:grid-layout",
-                          "cards": [
-                            {
-                              "type": "custom:button-card",
-                              "entity": "binary_sensor.bedroom_occupancy",
-                              "name": "Bedroom",
-                              "icon": "mdi:bed-king",
-                              "template": "default",
-                              "tap_action": {
-                                "action": "more-info"
-                              },
-                              "label": "[[[ return helpers.relativeTime(entity.last_changed) ]]]"
-                            },
-                            {
-                              "type": "custom:button-card",
-                              "entity": "binary_sensor.lounge_occupancy",
-                              "name": "Lounge",
-                              "icon": "mdi:sofa",
-                              "template": "default",
-                              "tap_action": {
-                                "action": "more-info"
-                              },
-                              "label": "[[[ return helpers.relativeTime(entity.last_changed) ]]]"
-                            },
-                            {
-                              "type": "custom:button-card",
-                              "entity": "binary_sensor.kitchen_occupancy",
-                              "name": "Kitchen",
-                              "icon": "mdi:silverware-variant",
-                              "template": "default",
-                              "tap_action": {
-                                "action": "more-info"
-                              },
-                              "label": "[[[ return helpers.relativeTime(entity.last_changed) ]]]"
-                            },
-                            {
-                              "type": "custom:button-card",
-                              "entity": "binary_sensor.office_occupancy",
-                              "name": "Office",
-                              "icon": "mdi:desk",
-                              "template": "default",
-                              "tap_action": {
-                                "action": "more-info"
-                              },
-                              "label": "[[[ return helpers.relativeTime(entity.last_changed) ]]]"
-                            }
-                          ],
-                          "layout": {
-                            "grid-template-columns": "repeat(4,1fr)",
-                            "margin": 0
-                          },
-                          "view_layout": {
-                            "grid-column": "1/-1"
-                          }
-                        },
-                        {
-                          "type": "history-graph",
-                          "entities": [
-                            {
-                              "entity": "binary_sensor.lounge_occupancy",
-                              "name": "Lounge"
-                            },
-                            {
-                              "entity": "binary_sensor.office_occupancy",
-                              "name": "Office"
-                            },
-                            {
-                              "entity": "binary_sensor.kitchen_occupancy",
-                              "name": "Kitchen"
-                            },
-                            {
-                              "entity": "binary_sensor.bedroom_occupancy",
-                              "name": "Bedroom"
-                            }
-                          ],
-                          "hours_to_show": 12,
-                          "view_layout": {
-                            "grid-column": "1 / -1"
-                          }
-                        }
-                      ],
-                      "layout": {
-                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 8px), 1fr))",
-                        "grid-column-gap": "var(--grid-column-gap, 16px)",
-                        "grid-row-gap": "var(--grid-row-gap, 13px)",
-                        "margin": "24px 0 0",
-                        "max_width": 600,
-                        "card_margin": 0,
-                        "reflow": true,
-                        "grid-auto-flow": "dense"
-                      }
                     }
                   ]
                 },
