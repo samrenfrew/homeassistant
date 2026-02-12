@@ -225,6 +225,25 @@
         {
           "title": "Home",
           "type": "custom:grid-layout",
+          "layout": {
+            "grid-template-columns": "repeat(4,1fr)",
+            "grid-column-gap": "var(--grid-column-gap, 16px)",
+            "grid-row-gap": "var(--grid-row-gap, 13px)",
+            "grid-template-rows": "1fr calc((124px * 3) + (var(--grid-column-gap, 16px) * 2)) 1px",
+            "grid-template-areas": "\"header header header header\" \"main main main sidebar\" \"footer footer footer footer\"\n",
+            "margin": "28px 20px 0",
+            "mediaquery": {
+              "(max-width: 600px)": {
+                "grid-template-columns": "1fr",
+                "grid-column-gap": "var(--grid-column-gap, 16px)",
+                "grid-row-gap": "var(--grid-row-gap, 13px)",
+                "grid-template-rows": "auto",
+                "margin": "0 16px",
+                "grid-template-areas": "\"header\"  \"sidebar\" \"main\" \"footer\"\n"
+              }
+            }
+          },
+          "theme": "dark",
           "cards": [
             {
               "type": "custom:layout-card",
@@ -1227,6 +1246,113 @@
                     {
                       "type": "custom:bubble-card",
                       "card_type": "pop-up",
+                      "hash": "#lounge",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "#0d0d0d",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      },
+                      "modules": [
+                        "fire_tablet",
+                        "!popup"
+                      ],
+                      "bg_blur": "0",
+                      "slider_fill_orientation": "left",
+                      "slider_value_position": "right"
+                    },
+                    {
+                      "type": "custom:layout-card",
+                      "layout_type": "custom:grid-layout",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-title-card",
+                          "title": "Lounge",
+                          "subtitle": "{% set li = expand(area_entities('Lounge')) | selectattr('domain', 'eq', 'light') | selectattr('state', 'eq', 'on') | rejectattr('entity_id','in','light.lounge_lights') | map(attribute='entity_id') | list | count %}\n\nThe lounge is {{ states('sensor.lounge_temperature') | round | int(default=0)}}°C\n\n{%- if li == 1 -%}\n, 1 light is on \n{%- elif li > 1 -%}\n, {{li}} lights are on\n{%- endif %} and {% if is_state('binary_sensor.lounge_occupancy', 'on') -%}\nit's currently occupied\n{%- else -%} \nit's empty\n{% endif %}\n",
+                          "view_layout": {
+                            "grid-column": "1 / -1"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "entity": "light.big_lamp"
+                          },
+                          "template": "light_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "entity": "light.small_lamp"
+                          },
+                          "template": "light_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "entity": "light.orb_lamp"
+                          },
+                          "template": "light_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "media_player.lg_webos_tv",
+                          "template": [
+                            "default"
+                          ],
+                          "variables": {
+                            "name": "TV"
+                          },
+                          "label": "[[[\n  return entity.attributes.media_title || entity.attributes.source || entity.state;\n]]]\n",
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "#tv",
+                            "haptic": "light"
+                          },
+                          "double_tap_action": {
+                            "action": "none"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "media_player.lounge_speaker",
+                          "template": [
+                            "media_card"
+                          ],
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "#lounge_speaker"
+                          }
+                        }
+                      ],
+                      "layout": {
+                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
+                        "grid-column-gap": "var(--grid-column-gap, 16px)",
+                        "grid-row-gap": "var(--grid-row-gap, 13px)",
+                        "height": "100%",
+                        "margin": 0,
+                        "card_margin": 0,
+                        "reflow": true,
+                        "grid-auto-flow": "dense"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
                       "hash": "#bedroom",
                       "button_type": "name",
                       "name": "",
@@ -1669,7 +1795,12 @@
                       }
                     }
                   ]
-                },
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
                 {
                   "type": "vertical-stack",
                   "cards": [
@@ -1695,7 +1826,9 @@
                       "modules": [
                         "fire_tablet",
                         "!popup"
-                      ]
+                      ],
+                      "slider_fill_orientation": "left",
+                      "slider_value_position": "right"
                     },
                     {
                       "type": "custom:layout-card",
@@ -1930,36 +2063,12 @@
                       "template": "tv_remote"
                     }
                   ]
-                },
-                {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#lounge_speaker",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px",
-                      "bg_color": "111111"
-                    },
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "speaker_popup",
-                      "variables": [
-                        {
-                          "entity": "media_player.lounge_speaker"
-                        }
-                      ]
-                    }
-                  ]
-                },
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
                 {
                   "type": "vertical-stack",
                   "cards": [
@@ -2075,7 +2184,12 @@
                       ]
                     }
                   ]
-                },
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
                 {
                   "type": "vertical-stack",
                   "cards": [
@@ -2286,136 +2400,10 @@
                       }
                     }
                   ]
-                },
-                {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#lounge",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "#0d0d0d",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      },
-                      "modules": [
-                        "fire_tablet",
-                        "!popup"
-                      ],
-                      "bg_blur": "0",
-                      "slider_fill_orientation": "left",
-                      "slider_value_position": "right"
-                    },
-                    {
-                      "type": "custom:layout-card",
-                      "layout_type": "custom:grid-layout",
-                      "cards": [
-                        {
-                          "type": "custom:mushroom-title-card",
-                          "title": "Lounge",
-                          "subtitle": "{% set li = expand(area_entities('Lounge')) | selectattr('domain', 'eq', 'light') | selectattr('state', 'eq', 'on') | rejectattr('entity_id','in','light.lounge_lights') | map(attribute='entity_id') | list | count %}\n\nThe lounge is {{ states('sensor.lounge_temperature') | round | int(default=0)}}°C\n\n{%- if li == 1 -%}\n, 1 light is on \n{%- elif li > 1 -%}\n, {{li}} lights are on\n{%- endif %} and {% if is_state('binary_sensor.lounge_occupancy', 'on') -%}\nit's currently occupied\n{%- else -%} \nit's empty\n{% endif %}\n",
-                          "view_layout": {
-                            "grid-column": "1 / -1"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "entity": "light.big_lamp"
-                          },
-                          "template": "light_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "entity": "light.small_lamp"
-                          },
-                          "template": "light_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "entity": "light.orb_lamp"
-                          },
-                          "template": "light_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "media_player.lg_webos_tv",
-                          "template": [
-                            "default"
-                          ],
-                          "variables": {
-                            "name": "TV"
-                          },
-                          "label": "[[[\n  return entity.attributes.media_title || entity.attributes.source || entity.state;\n]]]\n",
-                          "tap_action": {
-                            "action": "navigate",
-                            "navigation_path": "#tv",
-                            "haptic": "light"
-                          },
-                          "double_tap_action": {
-                            "action": "none"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "media_player.lounge_speaker",
-                          "template": [
-                            "media_card"
-                          ],
-                          "tap_action": {
-                            "action": "navigate",
-                            "navigation_path": "#lounge_speaker"
-                          }
-                        }
-                      ],
-                      "layout": {
-                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
-                        "grid-column-gap": "var(--grid-column-gap, 16px)",
-                        "grid-row-gap": "var(--grid-row-gap, 13px)",
-                        "height": "100%",
-                        "margin": 0,
-                        "card_margin": 0,
-                        "reflow": true,
-                        "grid-auto-flow": "dense"
-                      }
-                    }
-                  ]
                 }
               ]
             }
-          ],
-          "layout": {
-            "grid-template-columns": "repeat(4,1fr)",
-            "grid-column-gap": "var(--grid-column-gap, 16px)",
-            "grid-row-gap": "var(--grid-row-gap, 13px)",
-            "grid-template-rows": "1fr calc((124px * 3) + (var(--grid-column-gap, 16px) * 2)) 1px",
-            "grid-template-areas": "\"header header header header\" \"main main main sidebar\" \"footer footer footer footer\"\n",
-            "margin": "28px 20px 0",
-            "mediaquery": {
-              "(max-width: 600px)": {
-                "grid-template-columns": "1fr",
-                "grid-column-gap": "var(--grid-column-gap, 16px)",
-                "grid-row-gap": "var(--grid-row-gap, 13px)",
-                "grid-template-rows": "auto",
-                "margin": "0 16px",
-                "grid-template-areas": "\"header\"  \"sidebar\" \"main\" \"footer\"\n"
-              }
-            }
-          },
-          "theme": "dark"
+          ]
         }
       ]
     }
