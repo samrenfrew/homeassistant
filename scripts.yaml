@@ -1,0 +1,307 @@
+night_mode_notification:
+  alias: Night Mode Notification
+  sequence:
+  - data:
+      data:
+        actions:
+        - action: enable_night_mode
+          title: Enable Night Mode
+        - action: remind_me
+          title: Remind in 30 mins
+        - action: ignore
+          title: Ignore
+        tag: night-time
+      message: '{% set a = state_attr(''sensor.sam_phone_next_alarm'', ''Time in Milliseconds'')
+        / 1000 | int %} {% set d = (a | timestamp_custom(''%j'') | int) - (now().strftime("%s")
+        | int | timestamp_custom(''%j'', False) | int) %}   {% if d == 1 %} Your alarm
+        is set for {{(a | timestamp_custom(''%H'') | int)}}{{ a | timestamp_custom(":%M%p")
+        | replace('':00'', '''') | lower }} {% else %} You have no alarm set for tomorrow
+        {% endif %}
+
+        '
+      title: Time to start winding down for bed
+    service: notify.mobile_app_sam_phone
+  mode: single
+light_popup:
+  alias: Light Popup
+  icon: mdi:cast
+  mode: single
+  sequence:
+  - data_template:
+      card:
+        entity: '{{ input_light }}'
+        full_width_sliders: true
+        header: ' '
+        hide_header: true
+        persist_features: true
+        type: custom:light-entity-card
+      style:
+        --ha-card-border-radius: 15px
+        border-radius: 15px
+        font-family: Helvetica Neue
+        font-weight: bold
+      title: Light
+    service: browser_mod.popup
+nas_server:
+  alias: Server Control
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: switch.nas_power
+        state: 'on'
+      sequence:
+      - choose:
+        - conditions:
+          - condition: numeric_state
+            entity_id: sensor.plex_nas
+            above: '0'
+          sequence:
+          - service: notify.mobile_app_sam_phone
+            data:
+              message: Turn the server off anyway?
+              title: Plex is currently streaming
+              data:
+                actions:
+                - action: turn_server_off
+                  title: Turn Off
+                notification_icon: mdi:plex
+                requireInteraction: false
+                tag: server
+                url: /
+        default:
+        - service: switch.turn_off
+          data: {}
+          entity_id: switch.nas_power
+    default:
+    - service: switch.turn_on
+      data: {}
+      entity_id: switch.nas_power
+  mode: restart
+  icon: mdi:nas
+morning_alarm:
+  alias: Morning Alarm
+  sequence:
+  - data:
+      kelvin: 2000
+      brightness: 1
+    target:
+      entity_id: light.bedroom_lamp
+    action: light.turn_on
+  - delay:
+      hours: 0
+      minutes: 10
+      seconds: 0
+      milliseconds: 0
+  - data:
+      transition: 300
+      brightness_pct: 20
+    target:
+      entity_id: light.bedroom_lamp
+    action: light.turn_on
+  - delay:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - data:
+      transition: 300
+      brightness_pct: 40
+    target:
+      entity_id: light.bedroom_lamp
+    action: light.turn_on
+  - delay:
+      hours: 0
+      minutes: 5
+      seconds: 0
+      milliseconds: 0
+  - target:
+      entity_id: light.bedroom_lamp
+    data:
+      transition: 300
+      brightness_pct: 60
+    action: light.turn_on
+  mode: single
+  icon: mdi:alarm
+computer:
+  alias: Computer
+  sequence:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: switch.sam_pc
+        state: 'on'
+      sequence:
+      - data:
+          title: Computer is on
+          message: Do you want to turn the computer off?
+          data:
+            tag: computer
+            notification-icon: mdi:desktop-classic
+            requireInteraction: false
+            actions:
+            - action: turn_computer_off
+              title: Turn Off
+            - action: dismiss
+              title: Dismiss
+        action: notify.mobile_app_sam_phone
+    - conditions:
+      - condition: state
+        entity_id: switch.sam_pc
+        state: 'off'
+      sequence:
+      - data:
+          data:
+            tag: computer
+            icon: https://samrenfrew.duckdns.org/static/icons/favicon-192x192.png
+            url: /lovelace/home
+            requireInteraction: false
+            actions:
+            - action: turn_computer_on
+              title: Turn On
+            - action: dismiss
+              title: Dismiss
+          message: Do you want to turn the computer on?
+          title: Computer is off
+        action: notify.mobile_app_sam_phone
+    default: []
+  mode: single
+  icon: mdi:desktop-classic
+speedtest:
+  alias: Speedtest
+  sequence:
+  - repeat:
+      while:
+      - condition: state
+        entity_id: sensor.speedtest_download
+        state: unavailable
+      sequence:
+      - service: speedtestdotnet.speedtest
+  mode: single
+  icon: mdi:speedometer
+force_location_update:
+  sequence:
+  - service: notify.mobile_app_iphone
+    data:
+      message: request_location_update
+  mode: single
+  alias: Force Location Update
+  icon: mdi:apple
+enable_tv_on:
+  alias: Enable TV On
+  sequence:
+  - service: automation.turn_off
+    data: {}
+    target:
+      entity_id: automation.new_automation
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  - service: automation.turn_on
+    data: {}
+    target:
+      entity_id: automation.new_automation
+  mode: single
+  icon: mdi:television
+lounge_lights:
+  alias: Lounge Lights
+  sequence:
+  - variables:
+      count: '{{ states.light | selectattr(''state'', ''eq'', ''on'') | selectattr(''entity_id'',''in'',''light.chair_lamp,
+        light.small_lamp, light.big_lamp'') | map(attribute=''entity_id'') | list
+        | count }}'
+      lights: '{{ states.light | selectattr(''state'', ''eq'', ''on'') | selectattr(''entity_id'',''in'',''light.chair_lamp,
+        light.small_lamp, light.big_lamp'') | map(attribute=''entity_id'') | list
+        }}'
+      brightness: '{{ state_attr(''light.lounge_lights'', ''brightness'') }}'
+  - condition: template
+    value_template: '{{ count }} != 0'
+  description: ''
+  icon: mdi:lightbulb-auto
+turn_on_for_x:
+  alias: Turn switch off after X
+  variables:
+    entity:
+    hours: 0
+    minutes: 0
+    seconds: 0
+  sequence:
+  - delay:
+      hours: '{{ hours }}'
+      minutes: '{{ minutes }}'
+      seconds: '{{ seconds }}'
+      milliseconds: 0
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: '{{ entity }}'
+  fields: {}
+  description: ''
+boost_radiator_for_x:
+  sequence:
+  - action: climate.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: '{{ entity }}'
+  - delay:
+      hours: '{{ hours }}'
+      minutes: '{{ minutes }}'
+      seconds: '{{ seconds }}'
+      milliseconds: 0
+  - action: climate.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: '{{ entity }}'
+  alias: Boost radiator for X
+  variables:
+    entity:
+    hours: 0
+    minutes: 0
+    seconds: 0
+  fields: {}
+  description: ''
+boost_heating_to_x_for_y_minutes:
+  sequence:
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      qos: 0
+      retain: false
+      topic: zigbee2mqtt/Hive/set
+      payload: "{\n   \"system_mode\":\"emergency_heating\",\n   \"temperature_setpoint_hold_duration\":{{minutes}},
+        \ \n   \"temperature_setpoint_hold\": true,\n   \"occupied_heating_setpoint\":
+        {{temperature}}  \n}"
+  alias: Boost Heating to X for Y minutes
+  variables:
+    minutes: 30
+    temperature: 21
+  description: ''
+disable_hive_boosting:
+  sequence:
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.hive_temperature_setpoint_hold
+  - action: number.set_value
+    metadata: {}
+    data:
+      value: '0'
+    target:
+      entity_id: number.hive_temperature_setpoint_hold_duration
+  - action: mqtt.publish
+    metadata: {}
+    data:
+      evaluate_payload: false
+      qos: 0
+      retain: false
+      topic: zigbee2mqtt/Hive/set
+      payload: "{\n  \"system_mode\": \"heat\"\n}"
+  alias: Disable Hive Boosting
+  description: ''

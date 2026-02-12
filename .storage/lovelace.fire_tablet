@@ -1,0 +1,2600 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.fire_tablet",
+  "data": {
+    "config": {
+      "kiosk_mode": {
+        "user_settings": [
+          {
+            "users": [
+              "fire"
+            ],
+            "hide_sidebar": false,
+            "hide_header": false,
+            "kiosk": true
+          }
+        ]
+      },
+      "button_card_templates": {
+        "default": {
+          "show_name": true,
+          "show_icon": true,
+          "show_state": false,
+          "show_label": true,
+          "tap_action": {
+            "action": "toggle",
+            "haptic": "light"
+          },
+          "hold_action": {
+            "action": "more-info"
+          },
+          "double_tap_action": {
+            "action": "none"
+          },
+          "lock": {
+            "enabled": "[[[ return states[\"input_boolean.dashboard_lock\"].state === \"on\"; ]]]",
+            "duration": 10,
+            "unlock": "hold"
+          },
+          "size": "50%",
+          "label": "[[[\n  if (!entity) return \"\";\n  if (entity?.attributes?.device_class == 'door') {\n    if (entity?.state == 'on') return \"Open\";\n    if (entity?.state == 'off') return \"Closed\";\n    return entity.state;\n  }           \n  return entity.state;\n]]]\n",
+          "variables": {
+            "color": "var(--accent-color)"
+          },
+          "state": [
+            {
+              "operator": "regex",
+              "value": "on|normal|armed_|arming|triggered|playing|home",
+              "id": "on",
+              "styles": {
+                "card": [
+                  {
+                    "background": "[[[ \n  return \"linear-gradient(240deg, \" + variables.color + \" -200%, var(--ha-card-background) 30%)\" \n]]]            \n"
+                  },
+                  {
+                    "box-shadow": "var(--box-shadow-on)"
+                  }
+                ],
+                "icon": [
+                  {
+                    "color": "white"
+                  },
+                  {
+                    "background": "[[[ return variables.color ]]]"
+                  }
+                ]
+              }
+            }
+          ],
+          "styles": {
+            "card": [
+              {
+                "margin": "0 0 0 0"
+              },
+              {
+                "padding": "14px"
+              },
+              {
+                "border-radius": "20px"
+              },
+              {
+                "border": "1px solid var(--ha-card-border-color)"
+              },
+              {
+                "height": "100%"
+              },
+              {
+                "box-shadow": "0 0 var(--ha-card-border-color)"
+              },
+              {
+                "--button-card-ripple-hover-opacity": 0
+              },
+              {
+                "--button-card-ripple-color": "[[[ \n  return variables.color\n]]]\n"
+              }
+            ],
+            "img_cell": [
+              {
+                "justify-content": "start"
+              },
+              {
+                "overflow": "visible"
+              }
+            ],
+            "icon": [
+              {
+                "align-self": "start"
+              },
+              {
+                "width": "24px"
+              },
+              {
+                "height": "24px"
+              },
+              {
+                "margin": 0
+              },
+              {
+                "background": "var(--theme-icon-background)"
+              },
+              {
+                "border": "var(--theme-icon-border)"
+              },
+              {
+                "outline": "var(--theme-icon-outline)"
+              },
+              {
+                "padding": "8px"
+              },
+              {
+                "border-radius": "50px"
+              },
+              {
+                "color": "var(--theme-icon-color)"
+              },
+              {
+                "transition-duration": "0.25s"
+              },
+              {
+                "transition-timing-function": "ease-in-out"
+              },
+              {
+                "transition-property": "color, background"
+              }
+            ],
+            "name": [
+              {
+                "text-align": "start"
+              },
+              {
+                "justify-self": "start"
+              },
+              {
+                "align-self": "end"
+              },
+              {
+                "line-height": "20px"
+              },
+              {
+                "font-weight": 600
+              },
+              {
+                "font-size": "15px"
+              },
+              {
+                "letter-spacing": "0.1px"
+              }
+            ],
+            "label": [
+              {
+                "text-align": "start"
+              },
+              {
+                "justify-self": "start"
+              },
+              {
+                "align-self": "end"
+              },
+              {
+                "line-height": "16px"
+              },
+              {
+                "font-weight": 400
+              },
+              {
+                "font-size": "14px"
+              },
+              {
+                "color": "var(--primary-text-color)"
+              },
+              {
+                "letter-spacing": "0.4px"
+              },
+              {
+                "text-transform": "capitalize"
+              },
+              {
+                "max-width": "100%"
+              },
+              {
+                "opacity": "0.6;"
+              }
+            ],
+            "grid": [
+              {
+                "grid-template-areas": "\"i \" \"n\" \"l\""
+              },
+              {
+                "grid-template-columns": "100%"
+              },
+              {
+                "grid-template-rows": "minmax(56px, auto) 20px 16px"
+              },
+              {
+                "margin": "auto 0"
+              },
+              {
+                "align-content": "center"
+              }
+            ]
+          }
+        }
+      },
+      "views": [
+        {
+          "title": "Home",
+          "type": "custom:grid-layout",
+          "cards": [
+            {
+              "type": "custom:layout-card",
+              "layout_type": "custom:grid-layout",
+              "layout": {
+                "grid-template-columns": "max-content 1fr max-content",
+                "grid-template-rows": "1fr 40px",
+                "grid-template-areas": "\"clock . .\" \"clock . chips\"\n",
+                "margin": "0 0 13px 0",
+                "padding": 0,
+                "mediaquery": {
+                  "(max-width: 600px)": {
+                    "grid-template-columns": "max-content",
+                    "grid-template-rows": "1fr 40px",
+                    "grid-row-gap": "20px",
+                    "justify-content": "center",
+                    "grid-template-areas": "\"clock\" \"chips\"\n"
+                  }
+                }
+              },
+              "cards": [
+                {
+                  "type": "custom:button-card",
+                  "entity": "sensor.time",
+                  "icon": "[[[ if (states['input_select.time'].state == \"Morning\") return \"mdi:weather-partly-cloudy\";  else if (states['input_select.time'].state == \"Afternoon\") return \"mdi:weather-sunny\";  else if (states['input_select.time'].state == \"Evening\") return \"mdi:weather-sunset\";  else return \"mdi:weather-night\" ]]]",
+                  "show_name": false,
+                  "show_state": true,
+                  "show_label": true,
+                  "show_icon": false,
+                  "label": "[[[\n  return helpers.formatDateWeekdayDay(states['sensor.date'].state)\n]]]\n",
+                  "tap_action": {
+                    "action": "none"
+                  },
+                  "section_mode": true,
+                  "styles": {
+                    "grid": [
+                      {
+                        "grid-template-areas": "'s' 'l'"
+                      },
+                      {
+                        "grid-template-rows": "100px 28px"
+                      },
+                      {
+                        "align-items": "end"
+                      },
+                      {
+                        "justify-content": "end"
+                      }
+                    ],
+                    "card": [
+                      {
+                        "box-shadow": "none"
+                      },
+                      {
+                        "margin": "0"
+                      },
+                      {
+                        "background": "none"
+                      },
+                      {
+                        "padding": 0
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "width": "60px;"
+                      },
+                      {
+                        "height": "60px;"
+                      }
+                    ],
+                    "label": [
+                      {
+                        "text-align": "left"
+                      },
+                      {
+                        "place-self": "end start"
+                      },
+                      {
+                        "font-size": "24px"
+                      },
+                      {
+                        "padding-left": "8px"
+                      },
+                      {
+                        "font-weight": 500
+                      },
+                      {
+                        "line-height": 1
+                      }
+                    ],
+                    "state": [
+                      {
+                        "text-align": "left"
+                      },
+                      {
+                        "place-self": "end start"
+                      },
+                      {
+                        "font-weight": 600
+                      },
+                      {
+                        "font-size": "100px"
+                      },
+                      {
+                        "line-height": 0.8
+                      }
+                    ]
+                  },
+                  "view_layout": {
+                    "align-self": "end",
+                    "grid-area": "clock"
+                  },
+                  "visibility": [
+                    {
+                      "condition": "screen",
+                      "media_query": "(min-width: 768px)"
+                    }
+                  ]
+                },
+                {
+                  "type": "custom:mushroom-chips-card",
+                  "chips": [
+                    {
+                      "type": "template",
+                      "entity": "input_boolean.dashboard_lock",
+                      "content": "",
+                      "icon": "{% if states(\"input_boolean.dashboard_lock\") == \"on\" %}\nmdi:lock\n{% else %}\nmdi:lock-open\n{% endif %}",
+                      "icon_color": "{% if states(\"input_boolean.dashboard_lock\") == \"on\" %}\nvar(--rgb-red)\n{% endif %}",
+                      "tap_action": {
+                        "action": "toggle"
+                      },
+                      "hold_action": {
+                        "action": "toggle"
+                      },
+                      "double_tap_action": {
+                        "action": "toggle"
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "entity": "alarm_control_panel.alarm",
+                          "state_not": "disarmed"
+                        }
+                      ],
+                      "chip": {
+                        "type": "alarm-control-panel",
+                        "entity": "alarm_control_panel.alarm",
+                        "tap_action": {
+                          "action": "more-info"
+                        },
+                        "hold_action": {
+                          "action": "more-info"
+                        }
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "condition": "state",
+                          "entity": "binary_sensor.black_bin",
+                          "state": "on"
+                        }
+                      ],
+                      "chip": {
+                        "type": "template",
+                        "double_tap_action": {
+                          "action": "none"
+                        },
+                        "icon": "mdi:delete-empty",
+                        "entity": "binary_sensor.black_bin",
+                        "content": "Black Bin",
+                        "tap_action": {
+                          "action": "more-info"
+                        },
+                        "hold_action": {
+                          "action": "none"
+                        },
+                        "icon_color": ""
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "condition": "state",
+                          "entity": "binary_sensor.green_bin",
+                          "state": "on"
+                        }
+                      ],
+                      "chip": {
+                        "type": "template",
+                        "double_tap_action": {
+                          "action": "none"
+                        },
+                        "icon": "mdi:delete-empty",
+                        "entity": "binary_sensor.green_bin",
+                        "content": "Green Bin",
+                        "tap_action": {
+                          "action": "more-info"
+                        },
+                        "hold_action": {
+                          "action": "none"
+                        },
+                        "icon_color": "var(--rgb-green)"
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "condition": "state",
+                          "entity": "binary_sensor.brown_bin",
+                          "state": "on"
+                        }
+                      ],
+                      "chip": {
+                        "type": "template",
+                        "double_tap_action": {
+                          "action": "none"
+                        },
+                        "icon": "mdi:delete-empty",
+                        "entity": "binary_sensor.brown_bin",
+                        "content": "Brown Bin",
+                        "tap_action": {
+                          "action": "more-info"
+                        },
+                        "hold_action": {
+                          "action": "none"
+                        },
+                        "icon_color": "var(--rgb-brown)"
+                      }
+                    },
+                    {
+                      "type": "template",
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "icon": "mdi:brightness-4",
+                      "content": "{{ ((states(entity) | int(default=0)) / 2.55) | int  }}%",
+                      "entity": "number.fire_tablet_screen_brightness"
+                    },
+                    {
+                      "type": "entity",
+                      "entity": "sensor.fire_tablet_battery"
+                    }
+                  ],
+                  "alignment": "center",
+                  "view_layout": {
+                    "align-self": "end",
+                    "grid-area": "chips",
+                    "mediaquery": {
+                      "(max-width: 600px)": {
+                        "align-self": "center"
+                      }
+                    }
+                  },
+                  "card_mod": {
+                    "style": "@media (max-width: 600px) {\n  ::-webkit-scrollbar {\n    # display: none;\n  }\n  .chip-container {\n    # overflow:scroll;\n    # flex-wrap: nowrap !important;\n    # scroll-snap-type: x mandatory;\n    # -ms-overflow-style: none;  /* Internet Explorer 10+ */\n    # scrollbar-width: none;\n    # direction: rtl;\n    # justify-content: flex-start !important;\n  }\n  .chip-container > * {\n    # white-space: nowrap;\n    # scroll-snap-align: start;\n    # direction: ltr\n  }\n}\n"
+                  }
+                }
+              ],
+              "view_layout": {
+                "grid-area": "header"
+              }
+            },
+            {
+              "type": "custom:layout-card",
+              "layout_type": "custom:grid-layout",
+              "layout": {
+                "grid-template-columns": "repeat(3,1fr)",
+                "grid-template-rows": "repeat(3, 122px)",
+                "grid-row-gap": "var(--grid-row-gap, 13px)",
+                "grid-column-gap": "var(--grid-column-gap, 16px)",
+                "margin": "0px !important",
+                "card_margin": "0px !important",
+                "padding": 0,
+                "mediaquery": {
+                  "(max-width: 600px)": {
+                    "grid-template-columns": "repeat(2,1fr)",
+                    "grid-template-rows": "122px"
+                  }
+                }
+              },
+              "cards": [
+                {
+                  "type": "conditional",
+                  "conditions": [
+                    {
+                      "condition": "numeric_state",
+                      "entity": "sensor.speakers_on",
+                      "above": 0
+                    }
+                  ],
+                  "view_layout": {
+                    "grid-column": "span 2",
+                    "grid-row": "span 2",
+                    "mediaquery": {
+                      "(max-width: 600px)": {
+                        "grid-row": "span 2"
+                      }
+                    }
+                  },
+                  "card": {
+                    "type": "custom:auto-entities",
+                    "filter": {
+                      "include": [
+                        {
+                          "entity_id": "media_player.lounge_speaker",
+                          "or": [
+                            {
+                              "state": "playing"
+                            },
+                            {
+                              "state": "paused"
+                            },
+                            {
+                              "state": "buffering"
+                            }
+                          ],
+                          "options": {
+                            "type": "custom:mushroom-media-player-card",
+                            "entity": "this.entity_id",
+                            "use_media_info": true,
+                            "show_volume_level": false,
+                            "media_controls": [
+                              "on_off",
+                              "previous",
+                              "play_pause_stop",
+                              "next"
+                            ],
+                            "volume_controls": [
+                              "volume_set",
+                              "volume_mute"
+                            ],
+                            "collapsible_controls": true,
+                            "icon_type": "none",
+                            "fill_container": false,
+                            "tap_action": {
+                              "action": "navigate",
+                              "navigation_path": "#lounge_speaker"
+                            },
+                            "card_mod": {
+                              "class": [
+                                "media_card",
+                                "fire"
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "entity_id": "media_player.bedroom_speaker",
+                          "or": [
+                            {
+                              "state": "playing"
+                            },
+                            {
+                              "state": "paused"
+                            },
+                            {
+                              "state": "buffering"
+                            }
+                          ],
+                          "options": {
+                            "type": "custom:mushroom-media-player-card",
+                            "entity": "this.entity_id",
+                            "use_media_info": true,
+                            "show_volume_level": false,
+                            "media_controls": [
+                              "on_off",
+                              "previous",
+                              "play_pause_stop",
+                              "next"
+                            ],
+                            "volume_controls": [
+                              "volume_set",
+                              "volume_mute"
+                            ],
+                            "collapsible_controls": true,
+                            "icon_type": "none",
+                            "fill_container": false,
+                            "tap_action": {
+                              "action": "navigate",
+                              "navigation_path": "#bedroom_speaker"
+                            },
+                            "card_mod": {
+                              "class": [
+                                "media_card",
+                                "fire"
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "entity_id": "media_player.kitchen_display",
+                          "or": [
+                            {
+                              "state": "playing"
+                            },
+                            {
+                              "state": "paused"
+                            },
+                            {
+                              "state": "buffering"
+                            }
+                          ],
+                          "options": {
+                            "type": "custom:mushroom-media-player-card",
+                            "entity": "this.entity_id",
+                            "use_media_info": true,
+                            "show_volume_level": false,
+                            "media_controls": [
+                              "on_off",
+                              "previous",
+                              "play_pause_stop",
+                              "next"
+                            ],
+                            "volume_controls": [
+                              "volume_set",
+                              "volume_mute"
+                            ],
+                            "collapsible_controls": true,
+                            "icon_type": "none",
+                            "fill_container": false,
+                            "tap_action": {
+                              "action": "navigate",
+                              "navigation_path": "#kitchen_speaker"
+                            },
+                            "card_mod": {
+                              "class": [
+                                "media_card",
+                                "fire"
+                              ]
+                            }
+                          }
+                        },
+                        {
+                          "entity_id": "media_player.sonos_one",
+                          "or": [
+                            {
+                              "state": "playing"
+                            },
+                            {
+                              "state": "buffering"
+                            }
+                          ],
+                          "options": {
+                            "type": "custom:mushroom-media-player-card",
+                            "entity": "this.entity_id",
+                            "use_media_info": true,
+                            "show_volume_level": false,
+                            "media_controls": [
+                              "on_off",
+                              "previous",
+                              "play_pause_stop",
+                              "next"
+                            ],
+                            "volume_controls": [
+                              "volume_set",
+                              "volume_mute"
+                            ],
+                            "collapsible_controls": true,
+                            "icon_type": "none",
+                            "fill_container": false,
+                            "tap_action": {
+                              "action": "navigate",
+                              "navigation_path": "#dining_room_speaker"
+                            },
+                            "card_mod": {
+                              "class": [
+                                "media_card",
+                                "fire"
+                              ]
+                            }
+                          }
+                        }
+                      ],
+                      "exclude": []
+                    },
+                    "card": {
+                      "type": "custom:simple-swipe-card",
+                      "card_width": "calc(100% - 48px)",
+                      "view_layout": {
+                        "grid-column": "1 / -1"
+                      }
+                    },
+                    "show_empty": false,
+                    "card_param": "cards",
+                    "sort": {
+                      "method": "last_changed"
+                    },
+                    "view_layout": {
+                      "grid-column": "span 2"
+                    }
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "media_player.lg_webos_tv",
+                  "template": [
+                    "default"
+                  ],
+                  "variables": {
+                    "name": "TV"
+                  },
+                  "styles": {
+                    "grid": [
+                      {
+                        "align-content": "end"
+                      }
+                    ]
+                  },
+                  "label": "[[[\n  return entity.attributes.media_title || entity.attributes.source || entity.state;\n]]]\n",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#tv",
+                    "haptic": "light"
+                  },
+                  "double_tap_action": {
+                    "action": "none"
+                  },
+                  "view_layout": {
+                    "grid-column": "span 1",
+                    "mediaquery": {
+                      "(max-width: 600px)": {
+                        "grid-row": "span 2"
+                      }
+                    }
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "template": "default",
+                  "entity": "button.hive_heating_boost",
+                  "section_mode": true,
+                  "name": "Boost?",
+                  "show_label": false,
+                  "show_name": true,
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#heating"
+                  },
+                  "styles": {
+                    "card": [
+                      {
+                        "padding": "0 0 16px 0"
+                      },
+                      {
+                        "height": "100%"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "align-self": "center"
+                      },
+                      {
+                        "margin-top": 0
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "width": "16px"
+                      },
+                      {
+                        "height": "16px"
+                      },
+                      {
+                        "margin-left": "12px"
+                      },
+                      {
+                        "padding": "4px;"
+                      }
+                    ],
+                    "grid": [
+                      {
+                        "grid-template-areas": "\"th th\" \"i n\""
+                      },
+                      {
+                        "grid-template-columns": "50px 1fr"
+                      },
+                      {
+                        "grid-template-rows": "1fr 30px"
+                      },
+                      {
+                        "align-items": "center"
+                      }
+                    ],
+                    "custom_fields": {
+                      "th": [
+                        {
+                          "width": "100%"
+                        },
+                        {
+                          "margin": "0 0 -10px 0 !important;"
+                        },
+                        {
+                          "padding": "0px !important"
+                        },
+                        {
+                          "height": "100%"
+                        },
+                        {
+                          "max-height": "190px"
+                        }
+                      ]
+                    }
+                  },
+                  "custom_fields": {
+                    "th": {
+                      "card": {
+                        "type": "thermostat",
+                        "entity": "climate.hive",
+                        "card_mod": {
+                          "style": "ha-card {\n width:94% !important;\n margin: 0 auto;\n background: none;\n}\n.title, .more-info {\n display:none;\n }\n"
+                        }
+                      }
+                    }
+                  },
+                  "view_layout": {
+                    "grid-column": "span 1",
+                    "grid-row": "span 2"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "weather.pirateweather",
+                  "template": [
+                    "default"
+                  ],
+                  "styles": {
+                    "grid": [
+                      {
+                        "align-content": "end"
+                      }
+                    ]
+                  },
+                  "variables": {
+                    "color": "var(--secondary-accent-color)"
+                  },
+                  "label": "[[[\n  var state = entity.state.replace(\"-night\", \"\").replace(\"partlycloudy\", \"partly cloudy\")\n  return state + \" • \" + entity.attributes.temperature.toFixed(1) + \"°C\";\n]]]\n",
+                  "name": "Weather",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#weather",
+                    "haptic": "light"
+                  },
+                  "state": [
+                    {
+                      "value": "off",
+                      "id": "off",
+                      "icon": "mdi:broadcast"
+                    }
+                  ],
+                  "view_layout": {
+                    "grid-column": "span 1"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "sensor.lights_on",
+                  "name": "All Lights",
+                  "template": [
+                    "default"
+                  ],
+                  "state": [
+                    {
+                      "id": "on",
+                      "operator": ">",
+                      "value": 0
+                    }
+                  ],
+                  "icon": "[[[\n  if (entity.state > 0) return \"mdi:lightbulb-group\";\n  return \"mdi:lightbulb-group-outline\";\n]]]\n",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#lights",
+                    "haptic": "light"
+                  },
+                  "hold_action": {
+                    "action": "none"
+                  },
+                  "double_tap_action": {
+                    "action": "none"
+                  },
+                  "variables": {
+                    "color": "rgb(var(--mush-rgb-orange))"
+                  },
+                  "label": "[[[\n  var lights = entity.state\n  if(lights == 0){\n    return \"Off\"\n  } else if(lights == 1) {\n    return \"1 Light\"\n  } else {\n    return lights + \" Lights\"\n  }\n]]]\n",
+                  "view_layout": {
+                    "grid-column": "span 1"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "sensor.speakers_on",
+                  "template": [
+                    "default"
+                  ],
+                  "variables": {
+                    "color": "var(--secondary-accent-color)"
+                  },
+                  "icon": "mdi:speaker-multiple",
+                  "name": "Speakers",
+                  "state": [
+                    {
+                      "operator": ">=",
+                      "value": 1,
+                      "id": "on"
+                    }
+                  ],
+                  "label": "[[[\n  var speakers = states[\"sensor.speakers_on\"].state\n  if(speakers == 0){\n      return \"Off\"\n  } else if(speakers == 1) {\n      return \"1 Playing\"\n  } else {\n      return speakers + \" Playing\"\n  }\n]]]\n",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#speakers",
+                    "haptic": "light"
+                  },
+                  "view_layout": {
+                    "grid-column": "span 1"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "input_boolean.night_mode",
+                  "template": [
+                    "default"
+                  ],
+                  "variables": {
+                    "color": "var(--secondary-accent-color)"
+                  },
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#night_mode",
+                    "haptic": "light"
+                  },
+                  "view_layout": {
+                    "grid-column": "span 1"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "input_boolean.guest_mode",
+                  "template": [
+                    "default"
+                  ],
+                  "variables": {
+                    "color": "var(--secondary-accent-color)"
+                  },
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#guest_mode",
+                    "haptic": "light"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "input_boolean.mute_broadcasts",
+                  "template": [
+                    "default"
+                  ],
+                  "variables": {
+                    "color": "var(--secondary-accent-color)"
+                  },
+                  "label": "[[[\n  if(entity && entity.state == \"on\") return \"Muted\";\n  if(entity && entity.state == \"off\") return \"On\";\n  return entity.state;\n]]]\n",
+                  "name": "Broadcasts",
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#broadcasts",
+                    "haptic": "light"
+                  },
+                  "state": [
+                    {
+                      "value": "off",
+                      "id": "off",
+                      "icon": "mdi:broadcast"
+                    }
+                  ]
+                }
+              ],
+              "view_layout": {
+                "grid-area": "main"
+              },
+              "card_mod": {
+                "style": {
+                  "grid-layout$": "@media (min-width:601px) {\n  :host {\n      --layout-overflow: scroll;\n      --layout-height: calc((122px * 3) + (var(--grid-column-gap, 16px) * 2))\n  }\n  #root {\n    scroll-snap-type: y mandatory;\n  }\n  #root > * {\n    scroll-snap-align: start;\n  }\n"
+                }
+              }
+            },
+            {
+              "type": "custom:layout-card",
+              "layout_type": "custom:vertical-layout",
+              "layout": {
+                "margin": "0 0 0",
+                "card_margin": 0,
+                "gap": 0,
+                "padding": 0
+              },
+              "cards": [
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#lounge",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "#0d0d0d",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      },
+                      "modules": [
+                        "fire_tablet",
+                        "!popup"
+                      ],
+                      "bg_blur": "0",
+                      "slider_fill_orientation": "left",
+                      "slider_value_position": "right"
+                    },
+                    {
+                      "type": "custom:layout-card",
+                      "layout_type": "custom:grid-layout",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-title-card",
+                          "title": "Lounge",
+                          "subtitle": "{% set li = expand(area_entities('Lounge')) | selectattr('domain', 'eq', 'light') | selectattr('state', 'eq', 'on') | rejectattr('entity_id','in','light.lounge_lights') | map(attribute='entity_id') | list | count %}\n\nThe lounge is {{ states('sensor.lounge_temperature') | round | int(default=0)}}°C\n\n{%- if li == 1 -%}\n, 1 light is on \n{%- elif li > 1 -%}\n, {{li}} lights are on\n{%- endif %} and {% if is_state('binary_sensor.lounge_occupancy', 'on') -%}\nit's currently occupied\n{%- else -%} \nit's empty\n{% endif %}\n",
+                          "view_layout": {
+                            "grid-column": "1 / -1"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "entity": "light.big_lamp"
+                          },
+                          "template": "light_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "entity": "light.small_lamp"
+                          },
+                          "template": "light_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "entity": "light.orb_lamp"
+                          },
+                          "template": "light_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "media_player.lg_webos_tv",
+                          "template": [
+                            "default"
+                          ],
+                          "variables": {
+                            "name": "TV"
+                          },
+                          "label": "[[[\n  return entity.attributes.media_title || entity.attributes.source || entity.state;\n]]]\n",
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "#tv",
+                            "haptic": "light"
+                          },
+                          "double_tap_action": {
+                            "action": "none"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "media_player.lounge_speaker",
+                          "template": [
+                            "media_card"
+                          ],
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "#lounge_speaker"
+                          }
+                        }
+                      ],
+                      "layout": {
+                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
+                        "grid-column-gap": "var(--grid-column-gap, 16px)",
+                        "grid-row-gap": "var(--grid-row-gap, 13px)",
+                        "height": "100%",
+                        "margin": 0,
+                        "card_margin": 0,
+                        "reflow": true,
+                        "grid-auto-flow": "dense"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#bedroom",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "#111111",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      },
+                      "modules": [
+                        "fire_tablet",
+                        "!popup"
+                      ]
+                    },
+                    {
+                      "type": "custom:layout-card",
+                      "layout_type": "custom:grid-layout",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-title-card",
+                          "title": "Bedroom",
+                          "subtitle": "{% set li = expand(area_entities('Bedroom')) | selectattr('domain', 'eq', 'light') | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list | count %}\n\nThe bedroom  is {{ states('sensor.bedroom_temperature') | round | int(default=0)}}°C and {%if is_state('binary_sensor.bedroom_occupancy', 'on')\n%}currently occupied{% else %}empty{% endif %}{%if li != 0%}{% if li == 1 %} and 1 light is on{% else %} and {{li}} lights are on{% endif %}{% endif %}{%if is_state('binary_sensor.bedroom_window', 'on')%}. The window is open{% endif %}\n",
+                          "view_layout": {
+                            "grid-column": "1 / -1"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "number_entity": "input_number.bedroom_trv",
+                            "entity": "climate.bedroom_trv"
+                          },
+                          "template": "climate_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "media_player.bedroom_speaker",
+                          "template": [
+                            "media_card"
+                          ],
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "#bedroom_speaker"
+                          }
+                        }
+                      ],
+                      "layout": {
+                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
+                        "grid-column-gap": "var(--grid-column-gap, 16px)",
+                        "grid-row-gap": "var(--grid-row-gap, 13px)",
+                        "height": "100%",
+                        "margin": 0,
+                        "card_margin": 0,
+                        "reflow": true,
+                        "grid-auto-flow": "dense"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#nursery",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "#111111",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      },
+                      "modules": [
+                        "!popup",
+                        "fire_tablet"
+                      ]
+                    },
+                    {
+                      "type": "custom:layout-card",
+                      "layout_type": "custom:grid-layout",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-title-card",
+                          "title": "Nursery",
+                          "subtitle": "The nursery is {{ states('sensor.nursery_temperature')| round | int(default=0)}}°C with a humidity of {{ states('sensor.nursery_humidity') | int(default=0)}}%",
+                          "view_layout": {
+                            "grid-column": "1 / -1"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "number_entity": "input_number.nursery_trv",
+                            "entity": "climate.nursery_trv"
+                          },
+                          "template": "climate_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "entity": "light.nursery_lamp"
+                          },
+                          "template": "light_card"
+                        }
+                      ],
+                      "layout": {
+                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
+                        "grid-column-gap": "var(--grid-column-gap, 16px)",
+                        "grid-row-gap": "var(--grid-row-gap, 13px)",
+                        "height": "100%",
+                        "margin": 0,
+                        "card_margin": 0,
+                        "reflow": true,
+                        "grid-auto-flow": "dense"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#kitchen",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "#111111",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      },
+                      "modules": [
+                        "fire_tablet",
+                        "!popup"
+                      ]
+                    },
+                    {
+                      "type": "custom:layout-card",
+                      "layout_type": "custom:grid-layout",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-title-card",
+                          "title": "Kitchen",
+                          "subtitle": "The kitchen is {%if is_state('binary_sensor.kitchen_occupancy', 'on')\n%}currently occupied{% else %}empty{% endif %} and the back door is {%if is_state('binary_sensor.back_door', 'on')%}open{% else %}closed{% endif %}\n",
+                          "view_layout": {
+                            "grid-column": "1 / -1"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "media_player.sonos_one",
+                          "template": [
+                            "media_card"
+                          ],
+                          "variables": {
+                            "power_mode": "pause"
+                          },
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "#dining_room_speaker"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "switch.radio",
+                          "template": [
+                            "default"
+                          ],
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "#kitchen_speaker"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "input_select.washing_machine",
+                          "tap_action": {
+                            "action": "more-info"
+                          },
+                          "template": [
+                            "default"
+                          ],
+                          "variables": {
+                            "color": "[[[ \n  if(entity.state == \"On\") return \"var(--running-accent-color)\";\n  return \"var(--stopped-accent-color)\"\n]]]\n"
+                          },
+                          "label": "[[[\n  if(entity.state == \"On\") return \"Running\";\n  if(entity.state == \"Finished\") return \"Done\";\n  return entity.state;\n]]]\n",
+                          "state": [
+                            {
+                              "value": "On|Finished",
+                              "operator": "regex",
+                              "id": "on"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "input_select.tumble_dryer",
+                          "tap_action": {
+                            "action": "more-info"
+                          },
+                          "template": [
+                            "default"
+                          ],
+                          "variables": {
+                            "color": "[[[ \n  if(entity.state == \"On\") return \"var(--running-accent-color)\";\n  return \"var(--stopped-accent-color)\"\n]]]\n"
+                          },
+                          "label": "[[[\n  if(entity.state == \"On\") return \"Running\";\n  if(entity.state == \"Finished\") return \"Done\";\n  return entity.state;\n]]]\n",
+                          "state": [
+                            {
+                              "value": "On|Finished",
+                              "operator": "regex",
+                              "id": "on"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "input_select.dishwasher",
+                          "tap_action": {
+                            "action": "more-info"
+                          },
+                          "template": [
+                            "default"
+                          ],
+                          "variables": {
+                            "color": "[[[ \n  if(entity.state == \"On\") return \"var(--running-accent-color)\";\n  return \"var(--stopped-accent-color)\"\n]]]\n"
+                          },
+                          "label": "[[[\n  if(entity.state == \"On\") return \"Running\";\n  if(entity.state == \"Finished\") return \"Done\";\n  return entity.state;\n]]]\n",
+                          "state": [
+                            {
+                              "value": "On|Finished",
+                              "operator": "regex",
+                              "id": "on"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "media_player.kitchen_display",
+                          "template": [
+                            "media_card"
+                          ],
+                          "variables": {
+                            "name": "Display"
+                          }
+                        }
+                      ],
+                      "layout": {
+                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
+                        "grid-column-gap": "var(--grid-column-gap, 16px)",
+                        "grid-row-gap": "var(--grid-row-gap, 13px)",
+                        "height": "100%",
+                        "margin": 0,
+                        "card_margin": 0,
+                        "reflow": true,
+                        "grid-auto-flow": "dense"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#office",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "#111111",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      },
+                      "modules": [
+                        "fire_tablet",
+                        "!popup"
+                      ]
+                    },
+                    {
+                      "type": "custom:layout-card",
+                      "layout_type": "custom:grid-layout",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-title-card",
+                          "title": "Office",
+                          "subtitle": "The room is {{ states('sensor.office_temperature') | round | int(default=0)}}°C with a humidity of {{ states('sensor.office_humidity') | int(default=0)}}%, and {%if is_state('binary_sensor.office_occupancy', 'on') %}currently occupied{% else %}empty{% endif %}\n",
+                          "view_layout": {
+                            "grid-column": "1 / -1"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.ikea_plug",
+                          "template": [
+                            "default"
+                          ],
+                          "variables": {
+                            "color": "rgb(var(--mush-rgb-orange))"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "number_entity": "input_number.office_trv",
+                            "entity": "climate.office_trv"
+                          },
+                          "template": "climate_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "switch.sam_pc",
+                          "template": [
+                            "default"
+                          ]
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "switch.extension_lead",
+                          "template": [
+                            "default"
+                          ]
+                        }
+                      ],
+                      "layout": {
+                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
+                        "grid-column-gap": "var(--grid-column-gap, 16px)",
+                        "grid-row-gap": "var(--grid-row-gap, 13px)",
+                        "height": "100%",
+                        "margin": 0,
+                        "card_margin": 0,
+                        "reflow": true,
+                        "grid-auto-flow": "dense"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#ella",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "#111111",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      },
+                      "modules": [
+                        "fire_tablet",
+                        "!popup"
+                      ]
+                    },
+                    {
+                      "type": "custom:layout-card",
+                      "layout_type": "custom:grid-layout",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-title-card",
+                          "title": "Ella's Room",
+                          "subtitle": "The room is {{ states('sensor.ella_temperature') | round | int(default=0)}}°C with a humidity of {{ states('sensor.ella_humidity') | int(default=0)}}%\n",
+                          "view_layout": {
+                            "grid-column": "1 / -1"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "number_entity": "input_number.ella_trv",
+                            "entity": "climate.ella_trv"
+                          },
+                          "template": "climate_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.fairy_lights",
+                          "template": [
+                            "default"
+                          ],
+                          "variables": {
+                            "color": "rgb(var(--mush-rgb-orange))"
+                          }
+                        }
+                      ],
+                      "layout": {
+                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
+                        "grid-column-gap": "var(--grid-column-gap, 16px)",
+                        "grid-row-gap": "var(--grid-row-gap, 13px)",
+                        "height": "100%",
+                        "margin": 0,
+                        "card_margin": 0,
+                        "reflow": true,
+                        "grid-auto-flow": "dense"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#lights",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "#111111",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      },
+                      "modules": [
+                        "fire_tablet",
+                        "!popup"
+                      ]
+                    },
+                    {
+                      "type": "custom:layout-card",
+                      "layout_type": "custom:grid-layout",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-title-card",
+                          "title": "Lights",
+                          "subtitle": "{%- set lights = states[\"sensor.lights_on\"].state | int(default=0)  %} \n\n{%- if lights == 0 -%}\nThere are currently no lights\n{%- elif lights == 1 -%}\nThere is 1 light\n{%- else -%}\nThere are {{ lights }} lights\n{%- endif %} on\n",
+                          "view_layout": {
+                            "grid-column": "1/-1"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "entity": "light.big_lamp"
+                          },
+                          "template": "light_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "entity": "light.small_lamp"
+                          },
+                          "template": "light_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "entity": "light.orb_lamp"
+                          },
+                          "template": "light_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "variables": {
+                            "entity": "light.nursery_lamp"
+                          },
+                          "template": "light_card"
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.fairy_lights",
+                          "template": [
+                            "default"
+                          ],
+                          "variables": {
+                            "color": "rgb(var(--mush-rgb-orange))"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "name": "Desk Lamp",
+                          "entity": "light.ikea_plug",
+                          "template": [
+                            "default"
+                          ],
+                          "variables": {
+                            "color": "rgb(var(--mush-rgb-orange))"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "sensor.lights_on",
+                          "name": "All Lights",
+                          "template": [
+                            "default"
+                          ],
+                          "state": [
+                            {
+                              "id": "on",
+                              "operator": ">",
+                              "value": 0
+                            }
+                          ],
+                          "icon": "[[[\n  if (entity.state > 0) return \"mdi:lightbulb-group\";\n  return \"mdi:lightbulb-group-outline\";\n]]]\n",
+                          "tap_action": {
+                            "action": "call-service",
+                            "service": "light.turn_off",
+                            "target": {
+                              "entity_id": "all"
+                            }
+                          },
+                          "variables": {
+                            "color": "rgb(var(--mush-rgb-orange))"
+                          },
+                          "label": "[[[\n  var lights = entity.state\n  if(lights == 0){\n    return \"Off\"\n  } else if(lights == 1) {\n    return \"1 Light\"\n  } else {\n    return lights + \" Lights\"\n  }\n]]]\n"
+                        }
+                      ],
+                      "layout": {
+                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
+                        "grid-column-gap": "var(--grid-column-gap, 16px)",
+                        "grid-row-gap": "var(--grid-row-gap, 13px)",
+                        "margin": 0,
+                        "card_margin": 0,
+                        "reflow": true,
+                        "grid-auto-flow": "dense"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#speakers",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "#111111",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      },
+                      "modules": [
+                        "fire_tablet",
+                        "!popup"
+                      ]
+                    },
+                    {
+                      "type": "custom:layout-card",
+                      "layout_type": "custom:grid-layout",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-title-card",
+                          "title": "Speakers",
+                          "subtitle": "{%- set speakers = states[\"sensor.speakers_on\"].state | int(default=0) -%}\n\n\n{%- if speakers == 0 -%}\nThere is nothing\n{%- elif speakers == 1 -%}\nThere is 1 speaker\n{%- else -%}\nThere are {{ speakers }} speakers\n{%- endif %} playing\n",
+                          "view_layout": {
+                            "grid-column": "1/-1"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "media_player.lounge_speaker",
+                          "name": "Lounge",
+                          "template": [
+                            "media_card"
+                          ],
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "#lounge_speaker"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "media_player.bedroom_speaker",
+                          "name": "Bedroom",
+                          "template": [
+                            "media_card"
+                          ],
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "#bedroom_speaker"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "media_player.sonos_one",
+                          "name": "Dining Room",
+                          "template": [
+                            "media_card"
+                          ],
+                          "variables": {
+                            "power_mode": "pause"
+                          },
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "#dining_room_speaker"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "media_player.kitchen_display",
+                          "name": "Kitchen",
+                          "template": [
+                            "media_card"
+                          ],
+                          "tap_action": {
+                            "action": "navigate",
+                            "navigation_path": "#kitchen_speaker"
+                          }
+                        }
+                      ],
+                      "layout": {
+                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
+                        "grid-column-gap": "var(--grid-column-gap, 16px)",
+                        "grid-row-gap": "var(--grid-row-gap, 13px)",
+                        "margin": 0,
+                        "card_margin": 0,
+                        "reflow": true,
+                        "grid-auto-flow": "dense"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#tv",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  --horizontal-stack-card-gap: 8px !important;\n  padding: 18px 18px 56px 18px !important;\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "",
+                      "background_update": true,
+                      "button_type": "name",
+                      "bg_color": "",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      }
+                    },
+                    {
+                      "type": "custom:streamline-card",
+                      "template": "tv_remote"
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#lounge_speaker",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "750px",
+                      "bg_color": "111111"
+                    },
+                    {
+                      "type": "custom:streamline-card",
+                      "template": "speaker_popup",
+                      "variables": [
+                        {
+                          "entity": "media_player.lounge_speaker"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#dining_room_speaker",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "750px",
+                      "bg_color": "111111"
+                    },
+                    {
+                      "type": "custom:streamline-card",
+                      "template": "speaker_popup",
+                      "variables": [
+                        {
+                          "entity": "media_player.sonos_one"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#bedroom_speaker",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "750px",
+                      "bg_color": "111111"
+                    },
+                    {
+                      "type": "custom:streamline-card",
+                      "template": "speaker_popup",
+                      "variables": [
+                        {
+                          "entity": "media_player.bedroom_speaker"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#kitchen_speaker",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "750px",
+                      "bg_color": "111111"
+                    },
+                    {
+                      "type": "custom:streamline-card",
+                      "template": "speaker_popup",
+                      "variables": [
+                        {
+                          "entity": "media_player.kitchen_display"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#spotify",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "750px",
+                      "bg_color": "111111"
+                    },
+                    {
+                      "type": "custom:streamline-card",
+                      "template": "speaker_popup",
+                      "variables": [
+                        {
+                          "entity": "media_player.spotify_doubleclue"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#weather",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": ""
+                    },
+                    {
+                      "type": "custom:layout-card",
+                      "layout_type": "custom:grid-layout",
+                      "layout": {
+                        "grid-template-columns": "repeat(1, minmax(calc((100%) - 12px), 1fr))",
+                        "grid-column-gap": "var(--grid-column-gap, 16px)",
+                        "grid-row-gap": "var(--grid-row-gap, 13px)",
+                        "margin": 0,
+                        "card_margin": 0,
+                        "reflow": true,
+                        "grid-auto-flow": "dense"
+                      },
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-title-card",
+                          "title": "Weather",
+                          "view_layout": {
+                            "grid-column": "1/-1"
+                          },
+                          "subtitle": ""
+                        },
+                        {
+                          "type": "custom:mushroom-title-card",
+                          "subtitle": "{%- set weather = states('weather.pirateweather') | lower -%}\n\nIt's currently {{state_attr('weather.pirateweather','temperature') | round(default=0)}}°C and {% if weather == \"partlycloudy\" %}partly cloudy{% elif weather == \"clear-night\" %}clear{% elif weather == \"cloudy-night\" %}cloudy{% else %}{{ weather }}{% endif %}, but feels like {{states('sensor.openweathermap_feels_like_temperature') | round(default=0)}}°C. {% if now().hour >= 18 -%}\n Tomorrow it will be {{ state_attr('sensor.daily_forecasts', 'forecast')[1].condition | lower }}, with a high of {{ states(\"sensor.pirateweather_daytime_high_temperature_1d\") | round(default=0) }}°C and low of {{ states(\"sensor.pirateweather_overnight_low_temperature_1d\") | round(default=0) }}°C\n{%- else -%}\n{%- endif %}{%\n  set rain = \n  states.sensor\n  | selectattr('entity_id', 'search', 'precip_probability_[1-6]h')\n  | rejectattr('state', 'eq', '0')\n  | map(attribute='entity_id')\n  | list\n-%}\n{%- if states(\"weather.pirateweather\") != \"rainy\" and rain -%}\n{%- set hours = rain[0] | regex_replace('.*?(\\d)h', '\\\\1') | int -%}\n, and there is a {{ states(rain[0]) }}% chance of rain in {{ hours }} hour{%- if hours > 1 -%}s{%-endif-%}\n{%- endif -%}",
+                          "title": ""
+                        },
+                        {
+                          "type": "custom:more-info-card",
+                          "entity": "weather.pirateweather",
+                          "title": " "
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#alarm",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": ""
+                    },
+                    {
+                      "type": "custom:more-info-card",
+                      "entity": "alarm_control_panel.alarm",
+                      "title": " ",
+                      "card_mod": {
+                        "style": "state-card-content {\n  display:none !important;\n}\n"
+                      }
+                    },
+                    {
+                      "type": "custom:layout-card",
+                      "layout_type": "custom:grid-layout",
+                      "cards": [
+                        {
+                          "type": "custom:mushroom-title-card",
+                          "title": "Security",
+                          "subtitle": "{% set captured = states.sensor.aarlo_captured_today_front_door.state | int (default=0) %}\n{% set p = captured > 0 %}\n\nCamera battery is at {{ states.sensor.aarlo_battery_level_front_door.state }}%. {% if p -%}\nThere {% if captured == 1 -%}has{%- else -%}have{%- endif %} been {{ captured }} recording{% if captured != 1 -%}s{%- endif %} today\n{%- endif -%}\n",
+                          "view_layout": {
+                            "grid-column": "1/-1"
+                          }
+                        },
+                        {
+                          "type": "custom:aarlo-glance",
+                          "entity": "camera.aarlo_front_door",
+                          "name": "Front Door",
+                          "image_bottom": "library,snapshot|stream,battery",
+                          "libary_view": "direct",
+                          "image_click": "recording",
+                          "image_view": "direct",
+                          "library_sizes": "2,1",
+                          "view_layout": {
+                            "grid-column": "1 / -1"
+                          },
+                          "card_mod": {
+                            "style": ".aarlo-image, .aarlo-video {\n  object-fit: cover;\n  height:100%;\n}\n.box {\n  line-height: 40px;\n  backdrop-filter: blur(1px);\n  z-index:3;\n}\n.box ha-icon {\n  padding: 8px;\n  color:#fff;\n}\n{%- set regions =  state_attr(\"sensor.aarlo_last_front_door\", \"object_region\").split(\",\") -%}\n{%- set type =  state_attr(\"sensor.aarlo_last_front_door\", \"object_type\") -%}\n{%- set colors = {\n  \"Animal\": \"orangered\",\n  \"Vehicle\": \"yellow\",\n  \"Person\":  \"lime\",\n  \"Package\":  \"cyan\",\n  }\n-%}\n{%- set color = colors[type] -%}\n{%- set left = (regions[0]|float)*100 - 2 -%}\n{%- set top = (regions[1]|float)*100 - 2 -%}\n{%- set width = ((regions[2]|float) - (regions[0]|float))*100 + 2 -%}\n{%- set height = ((regions[3]|float) - (regions[1]|float))*100 + 2 -%}\n\n\n.aarlo-base:before {\n  content: \"\";\n  display: block;\n  border: 2.5px solid {{ color }};\n  position: absolute;\n  top: {{ top }}%;\n  left: {{ left }}%;\n  width: {{ width }}%;\n  height: {{ height }}%;\n  z-index:1;\n  border-radius: 3px;\n}\ndiv.aarlo-image, video.aarlo-video {\n  z-index:2\n} div.aarlo-image {\n  width:102%;\n  height: 100%\n}\ndiv.aarlo-image img + div {\n  border-width: 2.5px !important;\n  border-radius: 3px;\n}\n"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "binary_sensor.front_door",
+                          "template": [
+                            "default"
+                          ],
+                          "variables": {
+                            "color": "var(--secondary-accent-color)"
+                          },
+                          "tap_action": {
+                            "action": "more-info"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "binary_sensor.back_door",
+                          "template": [
+                            "default"
+                          ],
+                          "variables": {
+                            "color": "var(--secondary-accent-color)"
+                          },
+                          "tap_action": {
+                            "action": "more-info"
+                          }
+                        },
+                        {
+                          "type": "custom:layout-card",
+                          "layout_type": "custom:grid-layout",
+                          "cards": [
+                            {
+                              "type": "custom:button-card",
+                              "entity": "binary_sensor.bedroom_occupancy",
+                              "name": "Bedroom",
+                              "icon": "mdi:bed-king",
+                              "template": "default",
+                              "tap_action": {
+                                "action": "more-info"
+                              },
+                              "label": "[[[ return helpers.relativeTime(entity.last_changed) ]]]"
+                            },
+                            {
+                              "type": "custom:button-card",
+                              "entity": "binary_sensor.lounge_occupancy",
+                              "name": "Lounge",
+                              "icon": "mdi:sofa",
+                              "template": "default",
+                              "tap_action": {
+                                "action": "more-info"
+                              },
+                              "label": "[[[ return helpers.relativeTime(entity.last_changed) ]]]"
+                            },
+                            {
+                              "type": "custom:button-card",
+                              "entity": "binary_sensor.kitchen_occupancy",
+                              "name": "Kitchen",
+                              "icon": "mdi:silverware-variant",
+                              "template": "default",
+                              "tap_action": {
+                                "action": "more-info"
+                              },
+                              "label": "[[[ return helpers.relativeTime(entity.last_changed) ]]]"
+                            },
+                            {
+                              "type": "custom:button-card",
+                              "entity": "binary_sensor.office_occupancy",
+                              "name": "Office",
+                              "icon": "mdi:desk",
+                              "template": "default",
+                              "tap_action": {
+                                "action": "more-info"
+                              },
+                              "label": "[[[ return helpers.relativeTime(entity.last_changed) ]]]"
+                            }
+                          ],
+                          "layout": {
+                            "grid-template-columns": "repeat(4,1fr)",
+                            "margin": 0
+                          },
+                          "view_layout": {
+                            "grid-column": "1/-1"
+                          }
+                        },
+                        {
+                          "type": "history-graph",
+                          "entities": [
+                            {
+                              "entity": "binary_sensor.lounge_occupancy",
+                              "name": "Lounge"
+                            },
+                            {
+                              "entity": "binary_sensor.office_occupancy",
+                              "name": "Office"
+                            },
+                            {
+                              "entity": "binary_sensor.kitchen_occupancy",
+                              "name": "Kitchen"
+                            },
+                            {
+                              "entity": "binary_sensor.bedroom_occupancy",
+                              "name": "Bedroom"
+                            }
+                          ],
+                          "hours_to_show": 12,
+                          "view_layout": {
+                            "grid-column": "1 / -1"
+                          }
+                        }
+                      ],
+                      "layout": {
+                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 8px), 1fr))",
+                        "grid-column-gap": "var(--grid-column-gap, 16px)",
+                        "grid-row-gap": "var(--grid-row-gap, 13px)",
+                        "margin": "24px 0 0",
+                        "max_width": 600,
+                        "card_margin": 0,
+                        "reflow": true,
+                        "grid-auto-flow": "dense"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#night_mode",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      }
+                    },
+                    {
+                      "type": "custom:more-info-card",
+                      "entity": "input_boolean.night_mode",
+                      "title": " ",
+                      "card_mod": {
+                        "style": "state-card-content {\n  display:none !important;\n}\n"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#heating",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      }
+                    },
+                    {
+                      "type": "thermostat",
+                      "entity": "climate.hive",
+                      "name": " "
+                    },
+                    {
+                      "type": "entities",
+                      "entities": [
+                        {
+                          "entity": "button.hive_heating_boost"
+                        },
+                        {
+                          "entity": "number.hive_heating_boost_temperature"
+                        },
+                        {
+                          "entity": "number.hive_heating_boost_duration"
+                        },
+                        {
+                          "entity": "sensor.hive_heating_boost_remaining"
+                        },
+                        {
+                          "entity": "switch.hive_temperature_setpoint_hold"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#guest_mode",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      }
+                    },
+                    {
+                      "type": "custom:more-info-card",
+                      "entity": "input_boolean.guest_mode",
+                      "title": " ",
+                      "card_mod": {
+                        "style": "state-card-content {\n  display:none !important;\n}\n"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "vertical-stack",
+                  "cards": [
+                    {
+                      "type": "custom:bubble-card",
+                      "card_type": "pop-up",
+                      "hash": "#broadcasts",
+                      "button_type": "name",
+                      "name": "",
+                      "icon": "",
+                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                      "show_header": true,
+                      "show_icon": false,
+                      "show_name": false,
+                      "scrolling_effect": true,
+                      "width_desktop": "580px",
+                      "auto_close": "30000",
+                      "bg_color": "",
+                      "sub_button": {
+                        "main": [],
+                        "bottom": []
+                      }
+                    },
+                    {
+                      "type": "custom:more-info-card",
+                      "entity": "input_boolean.mute_broadcasts",
+                      "title": " ",
+                      "card_mod": {
+                        "style": "state-card-content {\n  display:none !important;\n}\n"
+                      }
+                    }
+                  ]
+                }
+              ],
+              "view_layout": {
+                "grid-area": "footer"
+              }
+            },
+            {
+              "type": "custom:layout-card",
+              "layout_type": "custom:grid-layout",
+              "layout": {
+                "grid-gap": "9px",
+                "padding": 0,
+                "margin": 0,
+                "mediaquery": {
+                  "(max-width: 600px)": {
+                    "grid-template-columns": "repeat(2,1fr)"
+                  }
+                }
+              },
+              "cards": [
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "group.lounge",
+                  "icon": "mdi:sofa",
+                  "name": "Lounge",
+                  "template": [
+                    "room_card"
+                  ],
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#lounge",
+                    "haptic": "light"
+                  },
+                  "layout_options": {
+                    "grid_columns": 2
+                  },
+                  "variables": {
+                    "temp": "sensor.lounge_temperature",
+                    "entities": [
+                      "light.big_lamp",
+                      "light.small_lamp",
+                      "light.orb_lamp",
+                      "light.tv",
+                      "media_player.lg_webos_tv",
+                      "media_player.lounge_speaker"
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "group.bedroom",
+                  "icon": "mdi:bed-king",
+                  "name": "Bedroom",
+                  "template": [
+                    "room_card"
+                  ],
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#bedroom"
+                  },
+                  "layout_options": {
+                    "grid_columns": 2
+                  },
+                  "variables": {
+                    "temp": "sensor.bedroom_temperature",
+                    "entities": [
+                      "light.bedroom_lamp",
+                      "media_player.bedroom_speaker"
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "group.nursery",
+                  "icon": "mdi:account-child",
+                  "name": "Nursery",
+                  "template": [
+                    "room_card"
+                  ],
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#nursery"
+                  },
+                  "layout_options": {
+                    "grid_columns": 2
+                  },
+                  "variables": {
+                    "temp": "sensor.nursery_temperature",
+                    "entities": [
+                      "light.nursery_lamp"
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "group.ady_office",
+                  "icon": "mdi:bed-single",
+                  "name": "Ella's Room",
+                  "template": [
+                    "room_card"
+                  ],
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#ella"
+                  },
+                  "layout_options": {
+                    "grid_columns": 2
+                  },
+                  "variables": {
+                    "temp": "sensor.ella_temperature",
+                    "entities": [
+                      "light.fairy_lights"
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "group.office",
+                  "icon": "mdi:desktop-classic",
+                  "name": "Office",
+                  "template": [
+                    "room_card"
+                  ],
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#office"
+                  },
+                  "layout_options": {
+                    "grid_columns": 2
+                  },
+                  "variables": {
+                    "temp": "sensor.office_temperature",
+                    "entities": [
+                      "light.desk_lamp",
+                      "light.ikea_plug",
+                      "light.computer",
+                      "switch.pc_power",
+                      "switch.extension_lead"
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "card_mod": {
+                    "class": "no-hover"
+                  },
+                  "entity": "group.kitchen",
+                  "icon": "mdi:microwave",
+                  "name": "Kitchen",
+                  "template": [
+                    "room_card"
+                  ],
+                  "tap_action": {
+                    "action": "navigate",
+                    "navigation_path": "#kitchen"
+                  },
+                  "layout_options": {
+                    "grid_columns": 2
+                  },
+                  "variables": {
+                    "temp": "sensor.kitchen_temperature",
+                    "entities": [
+                      "media_player.kitchen_display"
+                    ]
+                  }
+                }
+              ],
+              "view_layout": {
+                "grid-area": "sidebar"
+              }
+            }
+          ],
+          "layout": {
+            "grid-template-columns": "repeat(4,1fr)",
+            "grid-column-gap": "var(--grid-column-gap, 16px)",
+            "grid-row-gap": "var(--grid-row-gap, 13px)",
+            "grid-template-rows": "1fr calc((124px * 3) + (var(--grid-column-gap, 16px) * 2)) 1px",
+            "grid-template-areas": "\"header header header header\" \"main main main sidebar\" \"footer footer footer footer\"\n",
+            "margin": "28px 20px 0",
+            "mediaquery": {
+              "(max-width: 600px)": {
+                "grid-template-columns": "1fr",
+                "grid-column-gap": "var(--grid-column-gap, 16px)",
+                "grid-row-gap": "var(--grid-row-gap, 13px)",
+                "grid-template-rows": "auto",
+                "margin": "0 16px",
+                "grid-template-areas": "\"header\"  \"sidebar\" \"main\" \"footer\"\n"
+              }
+            }
+          },
+          "theme": "dark"
+        }
+      ]
+    }
+  }
+}

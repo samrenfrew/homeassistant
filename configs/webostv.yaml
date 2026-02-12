@@ -1,0 +1,18 @@
+## WEBOSTV
+#  name: TV
+#  host: !secret tv_ip
+#  turn_on_action:
+#    service: wake_on_lan.send_magic_packet
+#    data:
+#      mac: !secret tv_mac
+#  customize:
+#    sources:
+#      - "Live TV"
+#      - "TV Guide"
+#      - "Chromecast"
+#      - "Netflix"
+#      - "Plex"
+#      - "All 4"
+#      - "BBC iPlayer"
+#      - "Recordings"
+#      - "Steambox"

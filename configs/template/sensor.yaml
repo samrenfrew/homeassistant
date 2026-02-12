@@ -1,0 +1,550 @@
+- trigger:
+    - trigger: event
+      event_type: bubble_card_update_modules
+  sensor:
+    - name: "Bubble Card Modules"
+      state: "saved"
+      icon: "mdi:puzzle"
+      attributes:
+        modules: "{{ trigger.event.data.modules }}"
+        last_updated: "{{ trigger.event.data.last_updated }}"
+
+# - sensor:
+#   - name: "speakers_on"
+#     unique_id: "speakers_on"
+#     attributes:
+#       friendly_name: "Speakers On"
+#     icon: mdi:speaker-multiple
+#     state: >-
+#       {% set speakers = label_entities('speakers') | select('match', 'media_player') | selectattr('state','in',['playing','paused','buffering']) | expand() %}
+#       {% set multi_state_speakers = speakers | rejectattr('entity_id','eq','media_player.sonos_one') | list | count %}
+#       {% set sonos_playing = speakers | selectattr('entity_id','eq','media_player.sonos_one') | selectattr('state','eq','playing') | list | count %}
+#       {{ multi_state_speakers + sonos_playing }}
+
+# - sensor:
+#   - name: "lights_on"
+#     unique_id: "lights_on"
+#     attributes:
+#       friendly_name: "Lights On"
+#     icon: mdi:lightbulb-group-outline
+#     state: >-
+#       {{ expand(states.light) | selectattr('state', 'eq', 'on') | rejectattr('entity_id','in',['light.all_lights','light.lounge_lights', 'light.aarlo_front_door']) | map(attribute='entity_id') | list | count }}
+
+# - sensor:
+#   - name: "humidifier"
+#     unique_id: "humidifier"
+#     attributes:
+#       friendly_name: "Humidifier"
+#     icon: mdi:water-percent
+#     unit_of_measurement: '%'
+#     state: >-
+#         {%- if is_state('input_select.humidifier_location', 'Office') == true -%}
+#           {{ states('sensor.office_humidity') }}
+#         {%- else -%}
+#           {{ states('sensor.lounge_humidity') }}
+#         {%- endif -%}
+#     device_class: humidity
+
+- sensor:
+  - name: "gh_next_timer"
+    unique_id: "gh_next_timer"
+    icon: mdi:timer
+    device_class: timestamp
+    attributes:
+      friendly_name: "Next Timer"
+      timer_entity: >
+        {%- set timers = expand(['sensor.lounge_speaker_timers','sensor.kitchen_display_timers','sensor.bedroom_speaker_timers'])| rejectattr('state', 'eq', 'unavailable') | list %}
+        {% set ns = namespace(time="",entity="",timer_id="") %}
+        {% for i in timers %}
+          {% if ns.time == ""%}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.timer_id = i.attributes.timers.0.timer_id %}
+          {% elif as_timestamp(i.state) < ns.time %}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.timer_id = i.attributes.timers.0.timer_id %}
+          {% endif %} 
+        {% endfor %}
+
+        {{ ns.entity }}
+      timer_id: >
+        {%- set timers = expand(['sensor.lounge_speaker_timers','sensor.kitchen_display_timers','sensor.bedroom_speaker_timers'])| rejectattr('state', 'eq', 'unavailable') | list %}
+        {% set ns = namespace(time="",entity="",timer_id="") %}
+        {% for i in timers %}
+          {% if ns.time == ""%}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.timer_id = i.attributes.timers.0.timer_id %}
+          {% elif as_timestamp(i.state) < ns.time %}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.timer_id = i.attributes.timers.0.timer_id %}
+          {% endif %} 
+        {% endfor %}
+        {{ ns.timer_id }}
+    state: >-
+      {%- set timers = expand(['sensor.lounge_speaker_timers','sensor.kitchen_display_timers','sensor.bedroom_speaker_timers'])| rejectattr('state', 'eq', 'unavailable') | list %}
+      {% set ns = namespace(time="",entity="",timer_id="") %}
+      {% for i in timers %}
+        {% if ns.time == ""%}
+          {%- set ns.time = as_timestamp(i.state) %}
+          {%- set ns.entity = i.entity_id %}
+          {%- set ns.timer_id = i.attributes.timers.0.timer_id %}
+        {% elif as_timestamp(i.state) < ns.time %}
+          {%- set ns.time = as_timestamp(i.state) %}
+          {%- set ns.entity = i.entity_id %}
+          {%- set ns.timer_id = i.attributes.timers.0.timer_id %}
+        {% endif %} 
+      {% endfor %}
+
+      {{ as_datetime(ns.time) }}
+
+- sensor:
+  - name: "gh_next_alarm"
+    unique_id: "gh_next_alarm"
+    icon: mdi:alarm
+    device_class: timestamp
+    attributes:
+      friendly_name: "Next Alarm"
+      alarm_entity: >
+        {%- set timers = expand(['sensor.lounge_speaker_alarms','sensor.kitchen_display_alarms','sensor.bedroom_speaker_alarms'])| rejectattr('state', 'eq', 'unavailable') | list %}
+        {% set ns = namespace(time="",entity="",alarm_id="") %}
+        {% for i in timers %}
+          {% if ns.time == ""%}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.alarm_id = i.attributes.alarms.0.alarm_id %}
+          {% elif as_timestamp(i.state) < ns.time %}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.alarm_id = i.attributes.alarms.0.alarm_id %}
+          {% endif %} 
+        {% endfor %}
+
+        {{ ns.entity }}
+      alarm_id: >
+        {%- set timers = expand(['sensor.lounge_speaker_alarms','sensor.kitchen_display_alarms','sensor.bedroom_speaker_alarms'])| rejectattr('state', 'eq', 'unavailable') | list %}
+        {% set ns = namespace(time="",entity="",alarm_id="") %}
+        {% for i in timers %}
+          {% if ns.time == ""%}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.alarm_id = i.attributes.alarms.0.alarm_id %}
+          {% elif as_timestamp(i.state) < ns.time %}
+            {%- set ns.time = as_timestamp(i.state) %}
+            {%- set ns.entity = i.entity_id %}
+            {%- set ns.alarm_id = i.attributes.alarms.0.alarm_id %}
+          {% endif %} 
+        {% endfor %}
+        {{ ns.alarm_id }}
+    state: >-
+      {%- set timers = expand(['sensor.lounge_speaker_alarms','sensor.kitchen_display_alarms','sensor.bedroom_speaker_alarms'])| rejectattr('state', 'eq', 'unavailable') | list %}
+      {% set ns = namespace(time="",entity="",alarm_id="") %}
+      {% for i in timers %}
+        {% if ns.time == ""%}
+          {%- set ns.time = as_timestamp(i.state) %}
+          {%- set ns.entity = i.entity_id %}
+          {%- set ns.alarm_id = i.attributes.alarms.0.alarm_id %}
+        {% elif as_timestamp(i.state) < ns.time %}
+          {%- set ns.time = as_timestamp(i.state) %}
+          {%- set ns.entity = i.entity_id %}
+          {%- set ns.alarm_id = i.attributes.alarms.0.alarm_id %}
+        {% endif %} 
+      {% endfor %}
+
+      {{ as_datetime(ns.time) }}
+
+- trigger:
+    - trigger: state
+      entity_id:
+        - binary_sensor.back_door_person_occupancy
+        - binary_sensor.back_door_cat_occupancy
+        - binary_sensor.back_door_bicycle_occupancy
+      from: "off"
+      to: "on"
+  sensor:
+  - name: "Back Door Last Activity"
+    unique_id: "back_door_last_activity"
+    state: >-
+      {{ now().strftime('%m-%d-%Y %H:%M') }}
+    attributes:
+      object_type: >-
+        {% set match = trigger.entity_id | regex_findall_index('binary_sensor.back_door_(.+?)_occupancy', ignorecase=False) %}
+        {{ match if match else 'unknown' }}
+    icon: mdi:cctv
+
+- trigger:
+    - trigger: state
+      entity_id:
+        - binary_sensor.front_door_person_occupancy
+        - binary_sensor.front_door_cat_occupancy
+        - binary_sensor.front_door_car_occupancy
+        - binary_sensor.front_door_package_occupancy
+      from: "off"
+      to: "on"
+  sensor:
+  - name: "Front Door Last Activity"
+    unique_id: "front_door_last_activity"
+    state: >-
+      {{ now().strftime('%m-%d-%Y %H:%M') }}
+    attributes:
+      object_type: >-
+        {% set match = trigger.entity_id | regex_findall_index('binary_sensor.front_door_(.+?)_occupancy', ignorecase=False) %}
+        {{ match if match else 'unknown' }}
+    icon: mdi:cctv
+
+- trigger:
+  - trigger: time
+    id: "midnight"
+    at: "00:00:00"
+  - trigger: state
+    entity_id: sensor.back_door_all_count
+  sensor: 
+  - name: "Back Door Daily Count"
+    unique_id: "back_door_object_daily_count"
+    state: >
+      {% if trigger.id == "midnight" %}
+          0
+        {% elif states('sensor.back_door_all_count') | int(0) %}
+          {{ states('sensor.back_door_daily_count') | int(0) + states('sensor.back_door_all_count') | int(0) }}
+        {% else %}
+          {{ states('sensor.back_door_daily_count') | int(0) }}
+        {% endif %}
+    attributes:
+      last_reset: "{{ now().replace(hour=0, minute=0, second=0, microsecond=0).isoformat() }}"
+    unit_of_measurement: "count"
+    state_class: total
+
+- trigger:
+  - trigger: time
+    id: "midnight"
+    at: "00:00:00"
+  - trigger: state
+    entity_id: sensor.front_door_all_count
+  sensor: 
+  - name: "Front Door Daily Count"
+    unique_id: "front_door_object_daily_count"
+    state: >
+      {% if trigger.id == "midnight" %}
+          0
+        {% elif states('sensor.front_door_all_count') | int(0) %}
+          {{ states('sensor.front_door_daily_count') | int(0) + states('sensor.front_door_all_count') | int(0) }}
+        {% else %}
+          {{ states('sensor.front_door_daily_count') | int(0) }}
+        {% endif %}
+    attributes:
+      last_reset: "{{ now().replace(hour=0, minute=0, second=0, microsecond=0).isoformat() }}"
+    unit_of_measurement: "count"
+    state_class: total
+
+
+- trigger:
+    - platform: time_pattern
+      minutes: /5
+    - platform: homeassistant
+      event: start  
+  action:
+    - service: weather.get_forecasts
+      data:
+        type: daily
+      target:
+        entity_id: weather.pirateweather
+      response_variable: pw_daily  
+  sensor:
+    - name: Daily Forecasts
+      state: "{{ states('weather.pirateweather') }}"
+      attributes:
+        forecast: "{{ pw_daily['weather.pirateweather'].forecast }}"
+
+- trigger:
+    - platform: time_pattern
+      minutes: /5
+    - platform: homeassistant
+      event: start  
+  action:
+    - service: weather.get_forecasts
+      data:
+        type: hourly
+      target:
+        entity_id: weather.pirateweather
+      response_variable: pw_hourly  
+  sensor:
+    - name: Hourly Forecasts
+      state: "{{ states('weather.pirateweather') }}"
+      attributes:
+        forecast: "{{ pw_hourly['weather.pirateweather'].forecast }}"
+
+
+- trigger:
+    - trigger: state
+      entity_id: 
+        - sensor.leeds_18_next_bus
+        - sensor.leeds_19_next_bus
+  sensor:
+    - name: "Next Bus Home"
+      unique_id: next_bus_to_home
+      icon: mdi:bus
+      unit_of_measurement: "minutes"
+      availability: >
+          {{ states('sensor.leeds_18_next_bus') not in ['unknown', 'unavailable'] or 
+             states('sensor.leeds_19_next_bus') not in ['unknown', 'unavailable'] }}
+      state: >
+          {% set stop1 = state_attr('sensor.leeds_18_next_bus', 'buses') or [] %}
+          {% set stop2 = state_attr('sensor.leeds_19_next_bus', 'buses') or [] %}          
+          {# Combine, convert to datetime, filter out past/soon buses, and sort #}
+          {% set next_times = (stop1 + stop2) 
+            | selectattr('due', 'defined')
+            | selectattr('due', 'ne', none)
+            | map(attribute='due')
+            | map('as_datetime')
+            | select('gt', now() + timedelta(minutes=1))
+            | list | sort %}
+          {{ ((next_times[0] - now()).total_seconds() / 60) | int }}
+      attributes:
+        due: >
+          {% set stop1 = state_attr('sensor.leeds_18_next_bus', 'buses') or [] %}
+          {% set stop2 = state_attr('sensor.leeds_19_next_bus', 'buses') or [] %}
+          {% set all = (stop1 + stop2) | sort(attribute='due') %}
+          {{ all[0].due if all | count > 0 else none }}
+        service_number: >
+          {% set stop1 = state_attr('sensor.leeds_18_next_bus', 'buses') or [] %}
+          {% set stop2 = state_attr('sensor.leeds_19_next_bus', 'buses') or [] %}
+          {% set all = (stop1 + stop2) | sort(attribute='due') %}
+          {{ all[0].service_number if all | count > 0 else none }}
+        destination: >
+          {% set stop1 = state_attr('sensor.leeds_18_next_bus', 'buses') or [] %}
+          {% set stop2 = state_attr('sensor.leeds_19_next_bus', 'buses') or [] %}
+          {% set all = (stop1 + stop2) | sort(attribute='due') %}
+          {{ all[0].destination if all | count > 0 else none }}
+        is_live: >
+          {% set stop1 = state_attr('sensor.leeds_18_next_bus', 'buses') or [] %}
+          {% set stop2 = state_attr('sensor.leeds_19_next_bus', 'buses') or [] %}
+          {% set all = (stop1 + stop2) | sort(attribute='due') %}
+          {{ all[0].is_live if all | count > 0 else none }}        
+        buses: >
+            {% set stop1 = state_attr('sensor.leeds_18_next_bus', 'buses') or [] %}
+            {% set stop2 = state_attr('sensor.leeds_19_next_bus', 'buses') or [] %}
+            {% set combined = (stop1 + stop2) | selectattr('due', 'defined') | selectattr('due', 'ne', none) | sort(attribute='due') %}
+            {% set ns = namespace(buses=[]) %}
+            {% for b in combined %}
+              {# Limit to 10 buses to save database space/history #}
+              {% if ns.buses | count < 10 and b.due | as_datetime > now() + timedelta(minutes=1) %}
+                {% set ns.buses = ns.buses + [{
+                  "due": b.due.isoformat() if b.due is datetime else b.due,
+                  "service_number": b.service_number,
+                  "destination": b.destination,
+                  "is_live": b.is_live
+                }] %}
+              {% endif %}
+            {% endfor %}
+            {{ ns.buses }}
+        last_updated: "{{ now().isoformat() }}"
+
+- trigger:
+    - trigger: state
+      entity_id: 
+        - sensor.st_chads_next_bus
+  sensor:
+    - name: "Next Bus to Leeds"
+      unique_id: next_bus_to_leeds
+      icon: mdi:bus
+      unit_of_measurement: "minutes"
+      availability: >
+          {{ states('sensor.st_chads_next_bus') not in ['unknown', 'unavailable'] }}
+      state: >
+          {% set stop = state_attr('sensor.st_chads_next_bus', 'buses') or [] %}        
+          {# Combine, convert to datetime, filter out past/soon buses, and sort #}
+          {% set next_times = (stop) 
+            | selectattr('due', 'defined')
+            | selectattr('due', 'ne', none)
+            | map(attribute='due')
+            | map('as_datetime')
+            | select('gt', now() + timedelta(minutes=1))
+            | list | sort %}
+          {{ ((next_times[0] - now()).total_seconds() / 60) | int }}
+      attributes:
+        due: >
+          {% set stop = state_attr('sensor.st_chads_next_bus', 'buses') or [] %}
+          {% set all = (stop) | sort(attribute='due') %}
+          {{ all[0].due if all | count > 0 else none }}
+        service_number: >
+          {% set stop = state_attr('sensor.st_chads_next_bus', 'buses') or [] %}
+          {% set all = (stop) | sort(attribute='due') %}
+          {{ all[0].service_number if all | count > 0 else none }}
+        destination: >
+          {% set stop = state_attr('sensor.st_chads_next_bus', 'buses') or [] %}
+          {% set all = (stop) | sort(attribute='due') %}
+          {{ all[0].destination if all | count > 0 else none }}
+        is_live: >
+          {% set stop = state_attr('sensor.st_chads_next_bus', 'buses') or [] %}
+          {% set all = (stop) | sort(attribute='due') %}
+          {{ all[0].is_live if all | count > 0 else none }}        
+        buses: >
+            {% set stop = state_attr('sensor.st_chads_next_bus', 'buses') or [] %}
+            {% set combined = (stop) | selectattr('due', 'defined') | selectattr('due', 'ne', none) | sort(attribute='due') %}
+            {% set ns = namespace(buses=[]) %}
+            {% for b in combined %}
+              {# Limit to 10 buses to save database space/history #}
+              {% if ns.buses | count < 10 and b.due | as_datetime > now() + timedelta(minutes=1) %}
+                {% set ns.buses = ns.buses + [{
+                  "due": b.due.isoformat() if b.due is datetime else b.due,
+                  "service_number": b.service_number,
+                  "destination": b.destination,
+                  "is_live": b.is_live
+                }] %}
+              {% endif %}
+            {% endfor %}
+            {{ ns.buses }}
+        last_updated: "{{ now().isoformat() }}"
+
+- sensor: 
+  - name: "Total DNS Queries Blocked"
+    unique_id: total_dns_queries_blocked
+    icon: mdi:shield-outline
+    unit_of_measurement: "queries"
+    state_class: measurement
+    state: >
+      {% set nuc = states('sensor.adguard_nuc_dns_queries_blocked') | float(0) %}
+      {% set nas = states('sensor.adguard_nas_dns_queries_blocked') | float(0) %}
+      {{ (nuc + nas) | int }}
+
+  - name: "Average DNS Blocked Ratio"
+    unique_id: average_dns_blocked_ratio
+    icon: mdi:percent
+    unit_of_measurement: "%"
+    state_class: measurement
+    state: >
+      {% set nuc_r = states('sensor.adguard_nuc_dns_queries_blocked_ratio') | float(0) %}
+      {% set nas_r = states('sensor.adguard_nas_dns_queries_blocked_ratio') | float(0) %}
+      {{ ((nuc_r + nas_r) / 2) | round(2) }}
+
+
+- sensor:
+  - name: "NUC Services Running"
+    unique_id: nuc_services_running
+    icon: mdi:arrow-up-bold-circle
+    state: >
+      {%- set ns = namespace(nuc_running=[]) -%}
+      {%- for entity in states.binary_sensor | selectattr('entity_id', 'search', '_running$') -%}
+        {%- set dev_id = device_id(entity.entity_id) -%}
+        {%- if dev_id -%}
+          {%- set identifiers = device_attr(dev_id, 'identifiers') -%}
+          {%- if identifiers and (identifiers | string is search('nuc_')) -%}
+            {%- set ns.nuc_running = ns.nuc_running + [entity] -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ ns.nuc_running | selectattr('state', 'eq', 'on') | list | count }}
+
+  - name: "NUC Services Down"
+    unique_id: nuc_services_down
+    icon: mdi:arrow-down-bold-circle
+    state: >
+      {%- set ns = namespace(nuc_running=[]) -%}
+      {%- for entity in states.binary_sensor | selectattr('entity_id', 'search', '_running$') -%}
+        {%- set dev_id = device_id(entity.entity_id) -%}
+        {%- if dev_id -%}
+          {%- set identifiers = device_attr(dev_id, 'identifiers') -%}
+          {%- if identifiers and (identifiers | string is search('nuc_')) -%}
+            {%- set ns.nuc_running = ns.nuc_running + [entity] -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ ns.nuc_running | selectattr('state', 'eq', 'off') | list | count }}
+
+  - name: "NUC Services Healthy"
+    unique_id: nuc_services_healthy
+    icon: mdi:heart
+    state: >
+      {%- set ns = namespace(nuc_healthy=[]) -%}
+      {%- for entity in states.sensor | selectattr('entity_id', 'search', '_health$') -%}
+        {%- set dev_id = device_id(entity.entity_id) -%}
+        {%- if dev_id -%}
+          {%- set identifiers = device_attr(dev_id, 'identifiers') -%}
+          {%- if identifiers and (identifiers | string is search('nuc_')) -%}
+            {%- set ns.nuc_healthy = ns.nuc_healthy + [entity] -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ ns.nuc_healthy | selectattr('state', 'eq', 'healthy') | list | count }}
+
+  - name: "NUC Services Unhealthy"
+    unique_id: nuc_services_unhealthy
+    icon: m3rf:heart-broken
+    state: >
+      {%- set ns = namespace(nuc_healthy=[]) -%}
+      {%- for entity in states.sensor | selectattr('entity_id', 'search', '_health$') -%}
+        {%- set dev_id = device_id(entity.entity_id) -%}
+        {%- if dev_id -%}
+          {%- set identifiers = device_attr(dev_id, 'identifiers') -%}
+          {%- if identifiers and (identifiers | string is search('nuc_')) -%}
+            {%- set ns.nuc_healthy = ns.nuc_healthy + [entity] -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ ns.nuc_healthy | selectattr('state', 'eq', 'unhealthy') | list | count }}
+
+  - name: "NAS Services Running"
+    unique_id: nas_services_running
+    icon: mdi:arrow-up-bold-circle
+    state: >
+      {%- set ns = namespace(nas_running=[]) -%}
+      {%- for entity in states.binary_sensor | selectattr('entity_id', 'search', '_running$') -%}
+        {%- set dev_id = device_id(entity.entity_id) -%}
+        {%- if dev_id -%}
+          {%- set identifiers = device_attr(dev_id, 'identifiers') -%}
+          {%- if identifiers and (identifiers | string is search('nas_')) -%}
+            {%- set ns.nas_running = ns.nas_running + [entity] -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ ns.nas_running | selectattr('state', 'eq', 'on') | list | count }}
+
+  - name: "NAS Services Down"
+    unique_id: nas_services_down
+    icon: mdi:arrow-down-bold-circle
+    state: >
+      {%- set ns = namespace(nas_running=[]) -%}
+      {%- for entity in states.binary_sensor | selectattr('entity_id', 'search', '_running$') -%}
+        {%- set dev_id = device_id(entity.entity_id) -%}
+        {%- if dev_id -%}
+          {%- set identifiers = device_attr(dev_id, 'identifiers') -%}
+          {%- if identifiers and (identifiers | string is search('nas_')) -%}
+            {%- set ns.nas_running = ns.nas_running + [entity] -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ ns.nas_running | selectattr('state', 'eq', 'off') | list | count }}
+
+  - name: "NAS Services Healthy"
+    unique_id: nas_services_healthy
+    icon: mdi:heart
+    state: >
+      {%- set ns = namespace(nas_healthy=[]) -%}
+      {%- for entity in states.sensor | selectattr('entity_id', 'search', '_health$') -%}
+        {%- set dev_id = device_id(entity.entity_id) -%}
+        {%- if dev_id -%}
+          {%- set identifiers = device_attr(dev_id, 'identifiers') -%}
+          {%- if identifiers and (identifiers | string is search('nas_')) -%}
+            {%- set ns.nas_healthy = ns.nas_healthy + [entity] -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ ns.nas_healthy | selectattr('state', 'eq', 'healthy') | list | count }}
+
+  - name: "NAS Services Unhealthy"
+    unique_id: nas_services_unhealthy
+    icon: m3rf:heart-broken
+    state: >
+      {%- set ns = namespace(nas_healthy=[]) -%}
+      {%- for entity in states.sensor | selectattr('entity_id', 'search', '_health$') -%}
+        {%- set dev_id = device_id(entity.entity_id) -%}
+        {%- if dev_id -%}
+          {%- set identifiers = device_attr(dev_id, 'identifiers') -%}
+          {%- if identifiers and (identifiers | string is search('nas_')) -%}
+            {%- set ns.nas_healthy = ns.nas_healthy + [entity] -%}
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {{ ns.nas_healthy | selectattr('state', 'eq', 'unhealthy') | list | count }}

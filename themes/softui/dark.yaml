@@ -1,0 +1,422 @@
+slate:
+  # Main colors
+  # accent-color: '#3498db'
+  accent-color: '#2196f3'
+  #secondary-accent-color: '#23608a'
+  secondary-accent-color: '#3498db'
+  # accent-color: '#c27326'
+  primary-color: 'var(--accent-color)'
+  # dark-primary-color: '#9c5b1b'
+  dark-primary-color: '#3498db'
+  light-primary-color: 'var(--accent-color)'
+  # Text colors
+  primary-text-color: '#F2F2F2'
+  text-primary-color: 'var(--primary-text-color)'
+  secondary-text-color: '#ccc'
+  disabled-text-color: '#777777'
+  label-badge-border-color: 'green'
+
+  # Header
+  app-header-background-color: '#222222'
+  app-header-text-color: '#FFFFFF'
+  app-header-edit-background-color: "#23608a"
+  # app-header-edit-text-color: ""
+  paper-tabs-selection-bar-color: var(--accent-color)'
+
+  # Sidebar
+  sidebar-icon-color: '#777777'
+  # Background colors
+  primary-background-color: '#222222'
+  secondary-background-color: '#222222'
+  divider-color: 'rgba(0, 0, 0, .12)'
+  table-row-background-color: '#292929'
+  table-row-alternative-background-color: '#292929'
+  border-color: '#222323'
+
+  # Inputs
+  input-fill-color: "#282828"
+  code-editor-background-color: "#282828"
+  input-ink-color: 'var(--primary-text-color)'
+  input-label-ink-color: 'var(--primary-text-color)'
+  codemirror-keyword: "#C792EA"
+  codemirror-operator: "#89DDFF"
+  codemirror-variable: "#f07178"
+  codemirror-variable-2: "#EEFFFF"
+  codemirror-variable-3: "#DECB6B"
+  codemirror-builtin: "#FFCB6B"
+  codemirror-atom: "#F78C6C"
+  codemirror-number: "#FF5370"
+  codemirror-def: "#82AAFF"
+  codemirror-string: "#C3E88D"
+  codemirror-string-2: "#f07178"
+  codemirror-comment: "#545454"
+  codemirror-tag: "#FF5370"
+  codemirror-meta: "#FFCB6B"
+  codemirror-attribute: "#C792EA"
+  codemirror-property: "#C792EA"
+  codemirror-qualifier: "#DECB6B"
+  codemirror-type: "#DECB6B"
+  mdc-select-dropdown-icon-color: "#9C9C9C"
+  mdc-select-idle-line-color: "#9C9C9C"
+
+  # Nav Menu
+  paper-listbox-color: '#777777'
+  paper-listbox-background-color: '#141414'
+  paper-grey-50: 'var(--primary-text-color)'
+  paper-grey-200: '#222222'
+  # Paper card
+  paper-card-header-color: 'var(--accent-color)'
+  paper-card-background-color: 'var(--primary-background-color)'
+  paper-dialog-background-color: '#292929'
+  paper-item-icon-color: 'var(--primary-text-color)'
+  paper-item-icon-active-color: 'var(--primary-color)'
+  paper-item-icon_-_color: 'green'
+  paper-item-selected_-_background-color: '#292929'
+
+  # Labels
+  label-badge-red: 'var(--primary-color)'
+  label-badge-text-color: 'var(--primary-text-color)'
+  label-badge-background-color: '#222222'
+  # Switches
+  paper-toggle-button-checked-button-color: 'var(--accent-color)'
+  paper-toggle-button-checked-bar-color: 'var(--accent-color)'
+  paper-toggle-button-checked-ink-color: 'var(--accent-color)'
+  paper-toggle-button-unchecked-button-color: 'var(--disabled-text-color)'
+  paper-toggle-button-unchecked-bar-color: 'var(--disabled-text-color)'
+  paper-toggle-button-unchecked-ink-color: 'var(--disabled-text-color)'
+  switch-checked-color: 'var(--paper-toggle-button-checked-button-color)'
+  switch-unchecked-color: 'var(--disabled-text-color)'
+  switch-unchecked-button-color: 'var(--disabled-text-color)'
+  switch-unchecked-track-color: 'var(--disabled-text-color)'
+  # Sliders
+  paper-slider-knob-color: 'var(--accent-color)'
+  paper-slider-knob-start-color: 'var(--accent-color)'
+  paper-slider-pin-color: 'var(--accent-color)'
+  paper-slider-active-color: 'var(--accent-color)'
+  paper-slider-container-color: 'linear-gradient(var(--primary-background-color), var(--secondary-background-color)) no-repeat'
+  paper-slider-secondary-color: 'var(--secondary-background-color)'
+  paper-slider-disabled-active-color: 'var(--disabled-text-color)'
+  paper-slider-disabled-secondary-color: 'var(--disabled-text-color)'
+  # Google colors
+  google-red-500: '#b93829'
+  google-green-500: 'var(--accent-color)'
+  # Changes to fix history/logbook menus
+  lumo-primary-text-color: 'var(--accent-color)'
+  lumo-secondary-text-color: 'var(--accent-color)'
+  lumo-primary-color: 'var(--accent-color)'
+  # Calendar day numbers
+  lumo-body-text-color: 'var(--accent-color)'
+  # Calendar/Date-Picker Background
+  lumo-base-color: '#222222'
+  # Month/Year header
+  lumo-header-text-color: 'var(--lumo-body-text-color)'
+  # DayOfWeek Header
+  lumo-tertiary-text-color: 'var(--lumo-body-text-color)'
+  lumo-shade: '#222222'
+  lumo-shade-90pct: 'rgba(34, 34, 34, .9)'
+  lumo-shade-80pct: 'rgba(34, 34, 34, .8)'
+  lumo-shade-70pct: 'rgba(34, 34, 34, .7)'
+  lumo-shade-60pct: 'rgba(34, 34, 34, .6)'
+  lumo-shade-50pct: 'rgba(34, 34, 34, .5)'
+  lumo-shade-40pct: 'rgba(34, 34, 34, .4)'
+  lumo-shade-30pct: 'rgba(34, 34, 34, .3)'
+  lumo-shade-20pct: 'rgba(34, 34, 34, .2)'
+  lumo-shade-10pct: 'rgba(34, 34, 34, .1)'
+  lumo-shade-5pct: 'rgba(34, 34, 34, .05)'
+  lumo-tint-5pct: '#222222'
+  # fix for device configuration screen
+  card-background-color: "var(--paper-card-background-color)"
+  # Fix for Person Device Chooser - thanks to vajonam!
+  material-background-color: "var(--paper-listbox-background-color)"
+  material-secondary-background-color: '#222222'
+  material-body-text-color: '#FFFFFF'
+  # simple-thermostat buttons
+  st-mode-background: 'var(--primary-background-color)'
+  # fix white on white markdown code sections (eg. the addons infos)
+  markdown-code-background-color: 'var(--secondary-background-color)'
+  dialog-backdrop-filter: blur(5px)
+
+  # Bubble
+  bubble-pop-up-main-background-color: '#222222'
+
+  # Shadows
+  #ha-card-box-shadow: 'none'
+  ha-card-box-shadow: -6px -6px 6px 0 rgba(50, 50, 50,.5),6px 6px 6px 0 rgba(0,0,0,.15)
+  ha-card-border-radius: 15px
+  ha-card-background: none
+  ha-card-border: none
+  # paper-card-background-color: rgba(0, 0, 0, 0.00)
+  card-mod-theme: slate
+  card-mod-card-yaml: |
+    .: |
+      ha-card {
+        font-family: "Roman-55", "Helvetica Neue";
+        background: none;
+        border-radius: 12px;
+        border: none;
+        transition: height 0s, margin 0s;
+      }
+      ha-card.type-custom-search-card #searchContainer {
+        width: calc(100% - 20px) !important;
+        margin-bottom: 10px;
+      }
+      ha-card.type-markdown {
+        --paper-card-background-color: 'rgba(11, 11, 11, 0.00)';
+        box-shadow: none;
+        padding-top: 20px;
+      }
+      ha-card.type-glance, ha-card.media-player, ha-card.type-entities, ha-card.type-custom-uptime-card  {
+        margin-bottom: 10px;
+      }
+      ha-card.chip {
+        letter-spacing: 0.2px;
+      }
+      ha-card.type-custom-mushroom-light-card {
+        padding: 14px;
+        {% if config.entity and states(config.entity) == 'on' -%}
+          box-shadow: inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3);
+        {%- endif %}
+      }
+      .pin, .bar { padding: 10px; }
+      @media screen and (max-width:870px){
+        .top {
+          padding-top: 40px !important;
+        }
+        .pin { 
+          top:0 !important;
+          position: fixed !important;
+          width: calc(100% - 20px) !important;
+        }
+        .bar {
+          bottom: 68px !important;
+          position: sticky !important;
+        }
+      }
+
+    "#searchContainer paper-input$": 
+      paper-input-container$: |
+        :host {
+          // padding:0
+        }
+        .underline {
+          // display:none !important;
+        }
+
+    mushroom-state-info$: |
+      .secondary {
+        line-height:1.2
+      }
+    mushroom-shape-icon$: |
+      .shape {
+        background: none !important;
+      }
+      .shape.disabled ha-icon {
+        color: var(--primary-text-color) !important;
+      }
+      .shape ha-icon {
+        --mdc-icon-size:32px !important
+      }
+    mushroom-light-color-control$: 
+      mushroom-slider$: |
+        .container {
+          height:20px !important;
+        }
+    mushroom-light-brightness-control$:
+      mushroom-slider$: |
+        .container {
+          height:20px !important;
+        }
+        .slider .slider-track-indicator {
+          border-radius: 0 !important;
+        }
+
+    ha-markdown$: |
+        :host {
+          padding-left: 10px !important;
+          padding-right: 10px !important;
+        }
+        ha-markdown-element {
+          font-size:10px;
+          font-family: "Roman-55", "Helvetica Neue";
+          letter-spacing: 0.2px;
+        }
+        h1 {
+          font-size: 22px;
+          margin-bottom:5px;
+          font-weight: 700 !important;
+        }        
+        ha-icon {
+          display: inline-block;
+          transform: translateY(-2px);
+          margin-right: 3px;
+        }
+        h2 {
+          font-size: 15px;
+          margin-top:0;
+          font-weight: 700 !important;
+        }
+
+  card-mod-more-info-yaml: |
+    $: |
+      .mdc-dialog__scrim {
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        # background:none !important;
+      }
+      .mdc-dialog__surface {
+        background:var(--primary-background-color) !important;
+        border-radius:10px !important;
+        box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
+      }
+    ha-header-bar:
+      $: |
+        :host {
+            border-bottom:0 !important;
+        }
+        .mdc-top-app-bar {
+            background:none !important;
+        }
+        .mdc-top-app-bar__title {
+            opacity:0;
+        }
+    mwc-tab-bar:
+      $: |
+        :host {
+            border-bottom:0 !important;
+        }
+
+  ## Header
+  card-mod-root-yaml: |
+    .: |
+      ha-tabs {
+        --paper-tabs-selection-bar-color: var(--accent-color) !important;
+        direction: unset !important;
+        justify-content:center !important;
+      }
+      /* This changes the color of the currently selected tab. */
+      paper-tab {
+        width:calc((100% / 6) - 32px);
+      }
+      paper-tab[aria-selected=true] {
+        color: var(--accent-color) !important;
+      }
+      /* This hides the help button. */
+      a.menu-link[target="_blank"] {
+        display: none;
+      }
+      /* Move header to bottom */
+      @media screen and (max-width:870px){
+        #view {
+          padding-top: 0 !important;
+          height: calc(100vh - 68px) !important;
+        }
+        :not([class="edit-mode"]) .header {
+          top: unset !important;
+          bottom:0;
+          position:fixed;
+          box-shadow: 0 0 20px rgba(0,0,0,0.05);
+          height: 68px !important;
+        }
+        .toolbar {
+          height: 68px !important;
+        }
+        .edit-mode #view {
+          margin-top: calc(var(--header-height) + 60px) !important;
+        }
+        ha-menu-button {
+          display: none !important;
+        }  
+      } 
+    ha-app-layout$: |
+      @media screen and (max-width:870px){
+        #contentContainer {
+          padding-top: 0 !important;
+          padding-bottom: 68px !important;
+        }
+      }
+    ha-tabs$: |
+      @media screen and (max-width:870px){
+        paper-icon-button {
+          display:none !important
+        }
+        #tabsContent {
+          width: 100% !important;
+        }              
+        #selectionBar {
+          bottom: unset !important;
+          border-bottom-width: 2.5px !important;
+        }
+      } 
+
+
+# Mushroom layout
+  mush-spacing: 10px
+  # Title
+  mush-title-padding: 24px 12px 16px
+  mush-title-spacing: 12px
+  mush-title-font-size: 24px
+  mush-title-font-weight: bold
+  mush-title-line-height: 1
+  mush-title-font-family: "Roman-55, Helvetica Neue"
+  mush-subtitle-font-size: 16px
+  mush-subtitle-font-weight: normal
+  mush-subtitle-line-height: 1.2
+  # Card
+  mush-icon-border-radius: 50%
+  mush-control-border-radius: 4px
+  mush-card-primary-font-size: 14px
+  mush-card-secondary-font-size: 12px
+  mush-card-primary-font-weight: bold
+  mush-card-secondary-font-weight: bolder
+  # Chips
+  mush-chip-spacing: 8px
+  mush-chip-padding: 0 12px
+  mush-chip-height: 36px
+  mush-chip-border-radius: 18px
+  mush-chip-font-size: 0.333em # relative to chip height
+  mush-chip-font-weight: bold
+  mush-chip-icon-size: 0.5em # relative to chip height
+  # Slider
+  mush-slider-threshold: 10
+  # Colors
+  mush-rgb-red: 244, 67, 54
+  mush-rgb-pink: 233, 30, 99
+  mush-rgb-purple: 156, 39, 176
+  mush-rgb-deep-purple: 103, 58, 183
+  mush-rgb-indigo: 63, 81, 181
+  mush-rgb-blue: 33, 150, 243
+  mush-rgb-light-blue: 3, 169, 244
+  mush-rgb-cyan: 0, 188, 212
+  mush-rgb-teal: 0, 150, 136
+  mush-rgb-green: 76, 175, 80
+  mush-rgb-light-green: 139, 195, 74
+  mush-rgb-lime: 205, 220, 57
+  mush-rgb-yellow: 255, 235, 59
+  mush-rgb-amber: 255, 193, 7
+  mush-rgb-orange: 33, 150, 243
+  mush-rgb-deep-orange: 255, 87, 34
+  mush-rgb-brown: 121, 85, 72
+  mush-rgb-grey: 158, 158, 158
+  mush-rgb-blue-grey: 96, 125, 139
+  mush-rgb-black: 0, 0, 0
+  mush-rgb-white: 255, 255, 255
+  
+  mush-rgb-info: var(--rgb-blue)
+  mush-rgb-success: var(--rgb-green)
+  mush-rgb-warning: var(--rgb-blue)
+  mush-rgb-danger: var(--rgb-red)
+
+  mush-rgb-state-cover: var(--rgb-blue)
+  mush-rgb-state-fan: var(--rgb-green)
+  mush-rgb-state-light: var(--rgb-orange)
+  mush-rgb-state-entity: var(--rgb-blue)
+  mush-rgb-state-switch: var(--rgb-blue)
+
+  mush-rgb-state-alarm-disarmed: var(--rgb-info)
+  mush-rgb-state-alarm-armed: var(--rgb-success)
+  mush-rgb-state-alarm-triggered: var(--rgb-danger)
+
+  mush-rgb-state-person-home: var(--rgb-success)
+  mush-rgb-state-person-not-home: var(--rgb-danger)
+  mush-rgb-state-person-zone: var(--rgb-info)
+  mush-rgb-state-person-unknown: var(--rgb-grey)

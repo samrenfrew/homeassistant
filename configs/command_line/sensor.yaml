@@ -1,0 +1,21 @@
+- sensor:
+    name: CPU Temp
+    unique_id: cpu_temp
+    command: "cat /sys/class/thermal/thermal_zone2/temp"
+    unit_of_measurement: "°C"
+    value_template: '{{ value | multiply(0.001) | round(2) }}'
+
+# - sensor:
+#     name: Speedtest Ping
+#     unique_id: speedtest_ping
+#     command: "python3 /config/speedtest/speedtest-cli-2ha.py"
+#     value_template: "{{ value_json.ping | round(1) }}"
+#     command_timeout: 30
+#     scan_interval: 3600
+#     unit_of_measurement: ms
+#     state_class: measurement
+#     json_attributes:
+#       - 'download'
+#       - 'upload'
+#       - 'server_name'
+#       - 'isp'

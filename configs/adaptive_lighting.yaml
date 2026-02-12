@@ -1,0 +1,14 @@
+  name: Lounge
+  lights:
+    - light.big_lamp
+    - light.small_lamp
+#    - light.chair_lamp
+    - light.tv_lamp
+  initial_transition: 0
+  transition: 60
+  interval: 90
+  min_color_temp: 2200
+  max_color_temp: 4000
+  sunset_offset: 3600
+  take_over_control: true
+  

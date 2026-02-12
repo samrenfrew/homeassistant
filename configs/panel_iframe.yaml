@@ -1,0 +1,20 @@
+  movies:
+    title: 'Movies'
+    url: 'https://media.samrenfrew.co.uk/movies'
+    icon: mdi:movie-open
+  tv:
+    title: 'TV'
+    url: 'https://media.samrenfrew.co.uk/tv'
+    icon: mdi:television
+  downloads:
+    title: 'Downloads'
+    url: 'https://downloads.samrenfrew.co.uk/'
+    icon: mdi:cloud-download
+  search:
+    title: 'Search'
+    url: 'https://media.samrenfrew.co.uk/search'
+    icon: mdi:movie-search-outline
+  2fa:
+    title: '2FA'
+    url: !secret 2fa_url
+    icon: mdi:two-factor-authentication

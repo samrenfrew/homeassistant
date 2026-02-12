@@ -1,0 +1,17 @@
+# - platform: workday
+#   name: "Work Tomorrow"
+#   country: GB
+#   province: England
+#   days_offset: 1
+#   add_holidays:
+#     - "2022-12-28"
+#     - "2022-12-29"
+#     - "2022-12-30"
+# - platform: workday
+#   name: "Work Today"
+#   country: GB
+#   province: England
+#   add_holidays:
+#     - "2022-12-28"
+#     - "2022-12-29"
+#     - "2022-12-30"

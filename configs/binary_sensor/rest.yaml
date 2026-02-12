@@ -1,0 +1,153 @@
+# #NUC
+# - platform: rest
+#   device_class: running
+#   unique_id: nuc_nodered
+#   resource: http://192.168.0.4:8126/container/nodered
+#   name: nuc_nodered
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nuc_mealie
+#   resource: http://192.168.0.4:8126/container/mealie
+#   name: nuc_mealie
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nuc_portainer
+#   resource: http://192.168.0.4:8126/container/portainer
+#   name: nuc_portainer
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nuc_pihole
+#   resource: http://192.168.0.4:8126/container/pihole
+#   name: nuc_pihole
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nuc_mqtt
+#   resource: http://192.168.0.4:8126/container/mqtt
+#   name: nuc_mqtt
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nuc_syncthing
+#   resource: http://192.168.0.4:8126/container/syncthing
+#   name: nuc_syncthing
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nuc_filebrowser
+#   resource: http://192.168.0.4:8126/container/filebrowser
+#   name: nuc_filebrowser
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nuc_roomassistant
+#   resource: http://192.168.0.4:8126/container/roomassistant
+#   name: nuc_roomassistant
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nuc_overseerr
+#   resource: http://192.168.0.4:8126/container/overseerr
+#   name: nuc_overseerr
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nuc_z2m
+#   resource: http://192.168.0.4:8126/container/z2m
+#   name: nuc_z2m
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nuc_vscode
+#   resource: http://192.168.0.4:8126/container/vscode
+#   name: nuc_vscode
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nuc_glances
+#   resource: http://192.168.0.4:8126/container/glances
+#   name: nuc_glances
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+
+# #NAS
+# - platform: rest
+#   device_class: running
+#   unique_id: nas_transmission
+#   resource: http://192.168.0.5:8126/container/transmission
+#   name: nas_transmission
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nas_vpn
+#   resource: http://192.168.0.5:8126/container/vpn
+#   name: nas_vpn
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nas_portainer
+#   resource: http://192.168.0.5:8126/container/agent
+#   name: nas_portainer
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nas_speedtest
+#   resource: http://192.168.0.5:8126/container/speedtest
+#   name: nas_speedtest
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nas_jackett
+#   resource: http://192.168.0.5:8126/container/jackett
+#   name: nas_jackett
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nas_sonarr
+#   resource: http://192.168.0.5:8126/container/sonarr
+#   name: nas_sonarr
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nas_radarr
+#   resource: http://192.168.0.5:8126/container/radarr
+#   name: nas_radarr
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nas_tdarr
+#   resource: http://192.168.0.5:8126/container/tdarr
+#   name: nas_tdarr
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nas_plex
+#   resource: http://192.168.0.5:8126/container/plex
+#   name: nas_plex
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nas_tautilli
+#   resource: http://192.168.0.5:8126/container/tautilli
+#   name: nas_tautilli
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nas_bazarr
+#   resource: http://192.168.0.5:8126/container/bazarr
+#   name: nas_bazarr
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nas_syncthing
+#   resource: http://192.168.0.5:8126/container/syncthing
+#   name: nas_syncthing
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'
+# - platform: rest
+#   device_class: running
+#   unique_id: nas_immich
+#   resource: http://192.168.0.5:8126/container/immich_server
+#   name: nas_immich
+#   value_template: '{{ value_json is not none and value_json.state == "running" }}'

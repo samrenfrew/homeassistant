@@ -1,0 +1,25 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.config_editor",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "theme": "Backend-selected",
+          "title": "Home",
+          "type": "panel",
+          "badges": [],
+          "cards": [
+            {
+              "type": "custom:config-editor-card",
+              "card_mod": {
+                "class": "config-editor"
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

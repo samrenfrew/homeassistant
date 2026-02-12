@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.vs_code",
+  "data": {
+    "config": {
+      "strategy": {
+        "type": "iframe",
+        "url": "https://code.samrenfrew.co.uk/?folder=/homeassistant"
+      }
+    }
+  }
+}

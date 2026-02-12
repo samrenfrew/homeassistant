@@ -1,0 +1,604 @@
+- id: '1590219311319'
+  alias: Home Assistant Boot
+  description: ''
+  triggers:
+  - event: start
+    trigger: homeassistant
+  conditions: []
+  actions:
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 5
+      milliseconds: 0
+  - data:
+      data:
+        tag: start-up
+      message: A system boot has been initiated at {{ states('sensor.time') }}
+      title: Home Assistant Startup
+    action: notify.mobile_app_sam_phone
+  - data: {}
+    action: frontend.reload_themes
+  - data:
+      name: clear
+    enabled: false
+    action: frontend.set_theme
+  - condition: state
+    entity_id: binary_sensor.home
+    state: 'on'
+  - data: {}
+    entity_id: alarm_control_panel.alarm
+    action: alarm_control_panel.alarm_disarm
+  - data: {}
+    action: switch.turn_off
+    target:
+      entity_id:
+      - switch.humidifier
+      - switch.adaptive_lighting_lounge
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 0
+      milliseconds: 500
+  - data: {}
+    target:
+      entity_id:
+      - switch.extension_lead
+      - switch.extension_lead_2
+      - switch.adaptive_lighting_lounge
+    action: switch.turn_on
+  mode: restart
+- id: '1650046822895'
+  alias: Enable TV Turn On
+  description: ''
+  use_blueprint:
+    path: cvroque/webostv_turn_on.yaml
+    input:
+      webostv: media_player.lg_webos_tv
+      webostv_mac: 00-A1-59-E8-89-08
+- id: '1650834182234'
+  alias: Re-enable TV turn on
+  description: ''
+  trigger:
+  - platform: time_pattern
+    hours: '1'
+  condition: []
+  action:
+  - service: script.enable_tv_on
+    data: {}
+  mode: single
+- id: '1671374342352'
+  alias: Tag Computer is scanned
+  description: ''
+  triggers:
+  - tag_id: computer
+    trigger: tag
+  conditions: []
+  actions:
+  - data: {}
+    action: switch.turn_on
+    target:
+      entity_id: switch.sam_pc
+  - data:
+      profile: relax
+    target:
+      entity_id: light.desk_lamp
+    enabled: false
+    action: light.turn_on
+  mode: single
+- id: '1728277713332'
+  alias: Turn humidifier off after 1 hour
+  description: ''
+  triggers:
+  - entity_id:
+    - switch.humidifier
+    to: 'on'
+    from: 'off'
+    trigger: state
+  conditions: []
+  actions:
+  - action: script.turn_on
+    target:
+      entity_id: script.turn_off_after_x
+    data:
+      variables:
+        entity: switch.humidifier
+        minutes: 60
+  mode: single
+- id: '1728327473723'
+  alias: Clear Dining Room after 30 Mins
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - media_player.sonos_one
+    from:
+    to: paused
+    for:
+      hours: 0
+      minutes: 30
+      seconds: 0
+  conditions: []
+  actions:
+  - action: media_player.clear_playlist
+    metadata: {}
+    data: {}
+    target:
+      entity_id: media_player.sonos_one
+  mode: single
+- id: '1734637425851'
+  alias: Turn on Humidifier every hour
+  description: ''
+  triggers:
+  - trigger: time_pattern
+    minutes: '0'
+  conditions:
+  - condition: time
+    after: '20:00:00'
+    before: 06:00:00
+    weekday:
+    - mon
+    - tue
+    - wed
+    - thu
+    - fri
+    - sat
+    - sun
+  actions:
+  - action: switch.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.humidifier
+  - delay:
+      hours: 0
+      minutes: 10
+      seconds: 0
+      milliseconds: 0
+  - action: switch.turn_off
+    metadata: {}
+    data: {}
+    target:
+      entity_id: switch.humidifier
+  mode: single
+- id: '1741615654446'
+  alias: Frigate Notifications (0.14.0.2w)
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      presence_filter:
+      - ''
+      camera:
+      - camera.front_door
+      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      final_update: true
+      loiter_timer: 3
+      initial_delay: 0
+      final_delay: 5
+      cooldown: 20
+      attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
+      url_2: '{{base_url}}/api/camera_proxy_stream/camera.{{trigger.payload_json[''after''][''camera'']
+        | lower | replace(''-'',''_'')}}?token={{state_attr( ''camera.'' ~ camera,
+        ''access_token'')}}'
+      button_3: Silence
+      button_2: View Live
+      channel: frigate
+      color: '#03a9f4'
+      attachment_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{review_id}}/review_preview.gif'
+      zone_multi: true
+      zone_order_enforced: false
+      zones:
+      - front_drive
+      - door
+      labels: []
+      zone_filter: true
+      debug: true
+      message: A {{ label | lower }} {{ 'was' if type == 'end' else 'is' }} at the
+        {{ camera_name | lower }}
+      update_sub_label: true
+      master_condition:
+      - condition: state
+        entity_id: binary_sensor.home
+        state: 'on'
+      review_severity:
+      - alert
+      disable_times: []
+- id: '1742289426804'
+  alias: Test Shopping List
+  description: ''
+  triggers:
+  - trigger: zone
+    entity_id: person.sam
+    zone: zone.little_sainsburys
+    event: enter
+  conditions:
+  - condition: numeric_state
+    entity_id: todo.google_keep_shopping
+    above: 0
+  actions:
+  - sequence:
+    - action: todo.get_items
+      metadata: {}
+      data:
+        status: needs_action
+      target:
+        entity_id: todo.google_keep_shopping
+      response_variable: list
+    - wait_template: '{% set items = list[''todo.google_keep_shopping''][''items'']
+        %}
+
+        {{ items.length > 0 }}'
+      continue_on_timeout: true
+      enabled: false
+    - action: notify.mobile_app_sam_phone
+      metadata: {}
+      data:
+        title: '{%- set i = states(''todo.google_keep_shopping'') -%} You have {{
+          i }} item{% if i == "1"%}{% else %}s{% endif %} on the shopping list'
+        message: '{%- set items = list[''todo.google_keep_shopping''][''items''] -%}
+          {%- set summaries = items | map(attribute=''summary'') | list -%} {%- if
+          summaries | length == 1 -%} {{ summaries[0][0]|upper}}{{summaries[0][1:]
+          }} {%- else -%} {%- for summary in summaries -%} {{ summary[0]|upper}}{{summary[1:]
+          }} {%- if not loop.last -%} , {% if loop.revindex0 == 1 %}and {% endif -%}
+          {%- endif -%} {%- endfor -%} {%- endif -%}'
+  mode: single
+- id: '1743777829813'
+  alias: Weather
+  description: ''
+  triggers:
+  - trigger: conversation
+    command: What's the weather today
+  conditions: []
+  actions:
+  - set_conversation_response: 'Today it will be {{ states(''weather.pirateweather'')
+      }} '
+  mode: single
+- id: '1743790462805'
+  alias: 'Back Door camera '
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      presence_filter: []
+      camera:
+      - camera.back_door
+      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      final_update: false
+      loiter_timer: 15
+      initial_delay: 1
+      final_delay: 10
+      cooldown: 20
+      attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
+      url_2: '{{base_url}}/api/camera_proxy_stream/camera.{{trigger.payload_json[''after''][''camera'']
+        | lower | replace(''-'',''_'')}}?token={{state_attr( ''camera.'' ~ camera,
+        ''access_token'')}}'
+      button_3: Silence
+      button_2: View Live
+      channel: Frigate
+      color: '#03a9f4'
+      icon: mdi:cctv
+      attachment_2: ''
+      master_condition:
+      - condition: state
+        entity_id: binary_sensor.home
+        state: 'on'
+      zone_order_enforced: true
+      debug: true
+      state_filter_states: []
+      state_filter: true
+      message: A {{ label | lower }} {{ 'was' if type == 'end' else 'is' }} at the
+        {{ camera_name | lower }}
+      zone_filter: true
+      zones:
+      - back_drive
+      - garden
+      zone_multi: true
+- id: '1745693175108'
+  alias: Front Door - Away
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      presence_filter: []
+      camera:
+      - camera.front_door
+      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      final_update: true
+      loiter_timer: 15
+      initial_delay: 1
+      final_delay: 10
+      cooldown: 20
+      attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
+      url_2: '{{base_url}}/api/camera_proxy_stream/camera.{{trigger.payload_json[''after''][''camera'']
+        | lower | replace(''-'',''_'')}}?token={{state_attr( ''camera.'' ~ camera,
+        ''access_token'')}}'
+      button_3: Silence
+      button_2: View Live
+      channel: frigate
+      color: '#03a9f4'
+      icon: mdi:cctv
+      attachment_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{review_id}}/review_preview.gif'
+      zone_multi: false
+      zone_order_enforced: false
+      zones: []
+      labels: []
+      zone_filter: false
+      debug: true
+      master_condition: []
+      critical: 'false'
+      message: A {{ label | lower }} {{ 'was' if type == 'end' else 'is' }} at the
+        {{ camera_name | lower }}
+      android_auto: true
+      video: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/{{camera}}/clip.mp4'
+      review_severity:
+      - alert
+- id: '1747630936897'
+  alias: Back Door - Away
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      presence_filter: []
+      camera:
+      - camera.back_door
+      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      final_update: true
+      loiter_timer: 15
+      initial_delay: 1
+      final_delay: 10
+      cooldown: 20
+      attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
+      url_2: '{{base_url}}/api/camera_proxy_stream/camera.{{trigger.payload_json[''after''][''camera'']
+        | lower | replace(''-'',''_'')}}?token={{state_attr( ''camera.'' ~ camera,
+        ''access_token'')}}'
+      button_3: Silence
+      button_2: View Live
+      channel: frigate
+      color: '#03a9f4'
+      icon: mdi:cctv
+      attachment_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{review_id}}/review_preview.gif'
+      zone_multi: false
+      zone_order_enforced: false
+      zones: []
+      labels: []
+      zone_filter: false
+      debug: true
+      master_condition:
+      - condition: state
+        entity_id: binary_sensor.home
+        state: 'off'
+      critical: 'false'
+      message: A {{ label | lower }} {{ 'was' if type == 'end' else 'is' }} at the
+        {{ camera_name | lower }}
+      android_auto: false
+- id: '1748682769307'
+  alias: Plex is down
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.plex
+    to: 'off'
+    for:
+      hours: 0
+      minutes: 5
+      seconds: 0
+  conditions: []
+  actions:
+  - action: notify.mobile_app_sam_phone
+    metadata: {}
+    data:
+      title: Plex is down!
+      message: 'Check the docker container to see what''s wrong '
+  mode: single
+- id: '1750766484213'
+  alias: Google Meet Mute Toggle
+  description: ''
+  triggers:
+  - trigger: webhook
+    allowed_methods:
+    - POST
+    - PUT
+    local_only: false
+    webhook_id: google-meet-mute-toggle-wCZcPX59LRpBJrBPBVIcMBDA
+    id: unmuted
+  - trigger: webhook
+    allowed_methods:
+    - POST
+    - PUT
+    local_only: false
+    webhook_id: google-meet-mute-toggle-oETcBTBAG3jZxoJBXdABRRn6
+    id: muted
+  - trigger: webhook
+    allowed_methods:
+    - POST
+    - PUT
+    local_only: false
+    webhook_id: google-meet-mute-toggle-6D7mA0QRrbT5YRkLzLA3L0B3
+    id: left
+  conditions:
+  - condition: state
+    entity_id: person.sam
+    state: home
+  actions:
+  - choose:
+    - conditions:
+      - condition: trigger
+        id:
+        - unmuted
+      sequence:
+      - action: light.turn_on
+        metadata: {}
+        data:
+          color_name: green
+          transition: 0
+        target:
+          entity_id: light.computer
+      - action: input_boolean.turn_off
+        metadata: {}
+        data: {}
+        target:
+          entity_id: input_boolean.google_meet_muted
+    - conditions:
+      - condition: trigger
+        id:
+        - muted
+      sequence:
+      - action: light.turn_on
+        metadata: {}
+        data:
+          color_name: red
+          transition: 0
+        target:
+          entity_id: light.computer
+      - action: input_boolean.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: input_boolean.google_meet_muted
+    - conditions:
+      - condition: trigger
+        id:
+        - left
+      sequence:
+      - action: light.turn_on
+        metadata: {}
+        data:
+          xy_color:
+          - 0.517
+          - 0.41
+          brightness: 255
+          transition: 0
+        target:
+          entity_id: light.computer
+      - action: input_boolean.turn_off
+        metadata: {}
+        data: {}
+        target:
+          entity_id: input_boolean.google_meet_muted
+  mode: single
+- id: '1753295905887'
+  alias: Outside Light
+  description: ''
+  triggers:
+  - trigger: sun
+    event: sunset
+    offset: -01:00:00
+    id: sunset
+  - trigger: sun
+    event: sunrise
+    offset: 01:00:00
+    id: sunrise
+  conditions: []
+  actions:
+  - if:
+    - condition: trigger
+      id:
+      - sunset
+    then:
+    - action: light.turn_on
+      metadata: {}
+      data: {}
+      target:
+        entity_id: light.outside
+      enabled: false
+    - action: mqtt.publish
+      metadata: {}
+      data:
+        evaluate_payload: false
+        retain: false
+        topic: zigbee2mqtt/Outside/set
+        payload: '{"state":"ON", "brightness": 127}'
+        qos: '1'
+    else:
+    - action: light.turn_off
+      metadata: {}
+      data: {}
+      target:
+        entity_id: light.outside
+      enabled: false
+    - action: mqtt.publish
+      metadata: {}
+      data:
+        evaluate_payload: false
+        qos: 0
+        retain: false
+        topic: zigbee2mqtt/Outside/set
+        payload: '{"state":"OFF"}'
+  mode: single
+- id: '1765550203758'
+  alias: Katsu @ Back Door
+  description: ''
+  use_blueprint:
+    path: SgtBatten/Stable.yaml
+    input:
+      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      camera:
+      - camera.back_door
+      subtitle: Let her in!
+      alert_once: true
+      attachment_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
+      color: '#4caf50'
+      icon: mdi:cat
+      group: cat-frigate-notification
+      zone_filter: true
+      zones:
+      - door
+      labels:
+      - cat
+      update_sub_label: false
+      title: Katsu is at the back door!
+      message: '{{ label }} detected - {{ camera_name }}'
+- id: '1769916083439'
+  alias: Overnight boost
+  description: ''
+  triggers:
+  - trigger: time
+    at: 02:30:00
+  conditions:
+  - condition: state
+    entity_id: binary_sensor.home
+    state:
+    - 'on'
+  actions:
+  - action: number.set_value
+    metadata: {}
+    target:
+      entity_id: number.hive_heating_boost_duration
+    data:
+      value: '30'
+  - action: number.set_value
+    metadata: {}
+    target:
+      entity_id: number.hive_heating_boost_temperature
+    data:
+      value: '21'
+  - delay:
+      hours: 0
+      minutes: 0
+      seconds: 1
+      milliseconds: 0
+  - action: button.press
+    metadata: {}
+    target:
+      entity_id: button.hive_heating_boost
+    data: {}
+  mode: single
+- id: '1770532957122'
+  alias: AdGuard polling
+  description: ''
+  triggers:
+  - trigger: time_pattern
+    minutes: /1
+  conditions: []
+  actions:
+  - action: homeassistant.update_entity
+    metadata: {}
+    data:
+      entity_id:
+      - sensor.adguard_nuc_dns_queries_blocked
+      - switch.adguard_nas_protection
+      - switch.adguard_nuc_protection
+      - sensor.adguard_nas_dns_queries_blocked
+  mode: single

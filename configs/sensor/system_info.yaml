@@ -1,0 +1,11 @@
+#- platform: uptime
+#  scan_interval: 120
+# - platform: version
+# - platform: version
+#   source: local
+#   scan_interval: 720
+#   name: Current Version
+# - platform: version
+#   source: hassio
+#   scan_interval: 720
+#   name: Latest Version

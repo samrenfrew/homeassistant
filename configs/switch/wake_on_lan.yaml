@@ -1,0 +1,13 @@
+# - platform: wake_on_lan
+#   mac: !secret pc_mac
+#   host: "192.168.0.2"
+#   name: PC Power
+#   turn_off:
+#     service: shell_command.sleep_pc
+
+- platform: wake_on_lan
+  mac: !secret nas_mac
+  host: "192.168.0.5"
+  name: NAS Power
+  turn_off:
+    service: shell_command.shutdown_nas

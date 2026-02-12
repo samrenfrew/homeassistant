@@ -1,0 +1,25 @@
+sensor:
+  - state_topic: "monitor/nuc/ady_bt"
+    value_template: "{{ value_json.confidence }}"
+    unit_of_measurement: "%"
+    state_class: "measurement"
+    name: "Ady (BT) Top Floor"
+    unique_id: ady_bt_nuc
+  - state_topic: "monitor/rpi1/ady_bt"
+    value_template: "{{ value_json.confidence }}"
+    unit_of_measurement: "%"
+    state_class: "measurement"
+    name: "Ady (BT) Ground Floor"
+    unique_id: ady_bt_rpi1
+  - state_topic: "monitor/nuc/sam_bt"
+    value_template: "{{ value_json.confidence }}"
+    unit_of_measurement: "%"
+    state_class: "measurement"
+    name: "Sam (BT) Top Floor"
+    unique_id: sam_bt_nuc
+  - state_topic: "monitor/rpi1/sam_bt"
+    value_template: "{{ value_json.confidence }}"
+    unit_of_measurement: "%"
+    state_class: "measurement"
+    name: "Sam (BT) Ground Floor"
+    unique_id: sam_bt_rpi1

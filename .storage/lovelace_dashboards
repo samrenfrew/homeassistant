@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace_dashboards",
+  "data": {
+    "items": [
+      {
+        "require_admin": false,
+        "show_in_sidebar": true,
+        "icon": "mdi:wrench",
+        "title": "Config Editor",
+        "url_path": "config-editor",
+        "mode": "storage",
+        "id": "config_editor"
+      },
+      {
+        "id": "map",
+        "icon": "mdi:map",
+        "title": "Map",
+        "url_path": "map",
+        "show_in_sidebar": false,
+        "mode": "storage",
+        "require_admin": false
+      },
+      {
+        "id": "dashboard_scheduler",
+        "show_in_sidebar": true,
+        "icon": "mdi:home-clock-outline",
+        "title": "Scheduler",
+        "require_admin": false,
+        "mode": "storage",
+        "url_path": "dashboard-scheduler"
+      },
+      {
+        "id": "fire_tablet",
+        "show_in_sidebar": true,
+        "icon": "mdi:tablet",
+        "title": "Fire Tablet",
+        "require_admin": false,
+        "mode": "storage",
+        "url_path": "fire-tablet"
+      },
+      {
+        "id": "vs_code",
+        "show_in_sidebar": true,
+        "icon": "mdi:microsoft-visual-studio-code",
+        "title": "Code",
+        "require_admin": false,
+        "mode": "storage",
+        "url_path": "vs-code"
+      },
+      {
+        "id": "screen_saver",
+        "show_in_sidebar": true,
+        "icon": "mdi:clock-digital",
+        "title": "Screensaver",
+        "require_admin": false,
+        "mode": "storage",
+        "url_path": "screen-saver"
+      },
+      {
+        "id": "lovelace",
+        "icon": "mdi:view-dashboard",
+        "title": "Overview",
+        "url_path": "lovelace",
+        "show_in_sidebar": true,
+        "require_admin": false,
+        "mode": "storage"
+      }
+    ]
+  }
+}

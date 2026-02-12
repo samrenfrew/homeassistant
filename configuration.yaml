@@ -1,0 +1,166 @@
+# Configuration
+homeassistant:
+  external_url: "https://home.samrenfrew.co.uk"
+  internal_url: "http://192.168.0.4:8123"
+  # customize: !include customize.yaml
+  media_dirs:
+    media: /config/media
+  auth_providers:
+    - type: trusted_networks
+      trusted_networks:
+        - 192.168.0.0/24
+#        - 172.18.0.0/24
+#      trusted_users:
+#        192.168.0.0/24:
+#          - sam
+#          - ady
+#          - fire
+#        172
+#      allow_bypass_login: true
+    - type: homeassistant
+  auth_mfa_modules:
+    - type: totp
+    - type: notify
+      include:
+        - notify.sam_phone_app
+
+default_config:
+media_source:
+frontend:
+  themes: !include_dir_merge_named themes
+  extra_module_url:
+    - /hacsfiles/lovelace-card-mod/card-mod.js?hacstag=190927524421
+    #- /hacsfiles/custom-brand-icons/custom-brand-icons.js
+http:
+  login_attempts_threshold: 5
+  ip_ban_enabled: false
+  use_x_forwarded_for: true
+  trusted_proxies:
+    - 127.0.0.1
+    - 192.168.0.0/24
+    - 172.18.0.0/24
+    - 172.19.0.0/24
+  cors_allowed_origins:
+    - http://localhost:3000
+    - http://192.168.0.4:8001
+
+# Logs
+recorder:
+  purge_keep_days: 30
+  commit_interval: 5
+  exclude:
+    domains:
+      - automation
+      - updater
+      - group
+      - weather
+    entities:
+      - sun.sun
+      - sensor.time
+      - sensor.date
+      - sensor.current_version
+      - sensor.latest_version
+    entity_globs:
+      - sensor.dark_sky_*
+      - sensor.*_next_bus
+      - binary_sensor.*_motion
+
+logbook:
+  exclude:
+    entities:
+      - sensor.time
+    domains:
+      - group
+      - automation
+      - updater
+    entity_globs:
+      - sensor.*_next_bus
+      - sensor.*_last_seen
+      - binary_sensor.*_motion
+
+logger:
+  default: error
+  logs:
+    # pyaarlo: debug
+    # custom_components.aarlo: debug
+    # custom_components.aarlo.alarm_control_panel: debug
+    # custom_components.aarlo.binary_sensor: debug
+    # custom_components.aarlo.camera: debug
+    # custom_components.aarlo.media_player: debug
+    # custom_components.aarlo.sensor: debug
+    # custom_components.aarlo.switch: debug
+    homeassistant.components.sensor.command_line: critical
+    homeassistant.components.device_tracker.nmap_tracker: critical
+    homeassistant.components.switch.command_line: critical
+    homeassistant.loader: info
+    homeassistant.components.mqtt: warn
+    homeassistant.components.rest.switch: critical
+    homeassistant.components.plex: critical
+    # homeassistant.components.sky_hub: critical
+    # homeassistant.components.media_player: debug
+    #custom_components.google_home: debug
+    # custom_components.iphonedetect: debug
+
+# Main Components
+alarm_control_panel: !include_dir_merge_list configs/alarm_control_panel
+automation: !include automations.yaml
+camera: !include_dir_merge_list configs/camera
+command_line: !include_dir_merge_list configs/command_line
+binary_sensor: !include_dir_merge_list configs/binary_sensor
+device_tracker: !include_dir_merge_list configs/device_tracker
+google_assistant: !include configs/google_assistant.yaml
+group: !include groups.yaml
+light: !include_dir_merge_list configs/light
+mqtt: !include_dir_merge_named configs/mqtt
+media_player: !include_dir_merge_list configs/media_player
+notify: !include configs/notify.yaml
+remote: !include configs/remote.yaml
+scene: !include scenes.yaml
+script: !include scripts.yaml
+sensor: !include_dir_merge_list configs/sensor
+shell_command: !include configs/shell_command.yaml
+switch: !include_dir_merge_list configs/switch
+template: !include_dir_merge_list configs/template
+timer: !include configs/timer.yaml
+
+# Additional Components
+tts:
+  - platform: google_translate
+wake_on_lan:
+joaoapps_join:
+- name: android
+  api_key: !secret join_api
+  device_id: group.android
+sonos:
+  media_player:
+    hosts:
+      - 192.168.0.202  
+# waste_collection_schedule: !include configs/waste_collection.yaml
+        
+# zha:
+#   zigpy_config:
+#     ota:
+#       ikea_provider: true
+#       ledvance_provider: true                    # Auto update LEDVANCE/OSRAM devices
+#       salus_provider: true                       # Auto update SALUS/Computime devices
+#       inovelli_provider: true                    # Auto update INOVELLI devices
+#       thirdreality_provider: true   
+
+
+# Custom Components
+#breaking_changes:
+config_editor:
+# browser_mod:
+#   disable:
+#    - all
+# ble_monitor:
+#   active_scan: True
+#   discovery: False
+#   devices:
+#     - mac: 'C4:7C:8D:63:4B:41'
+#       name: 'MiFlora'
+#       temperature_unit: C
+#       decimals: 2
+#       use_median: False
+#       restore_state: True
+

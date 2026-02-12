@@ -1,0 +1,377 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.dashboard_scheduler",
+  "data": {
+    "config": {
+      "views": [
+        {
+          "title": "Scheduler",
+          "cards": [],
+          "type": "sections",
+          "max_columns": 2,
+          "sections": [
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "House",
+                  "subtitle": "The heating is currently {% if states(\"climate.hive\") == \"heat\"%}on at {{ state_attr(\"climate.hive\", \"temperature\")}}°C{% else %}off{% endif %}"
+                },
+                {
+                  "type": "custom:scheduler-card",
+                  "include": [
+                    "binary_sensor.home",
+                    "climate.hive"
+                  ],
+                  "exclude": [
+                    "climate.upstairs"
+                  ],
+                  "tags": [
+                    "Hive"
+                  ],
+                  "discover_existing": false,
+                  "title": false,
+                  "display_options": {
+                    "primary_info": [
+                      "{name} - {days}"
+                    ],
+                    "secondary_info": [
+                      "Next: {action} - {relative-time}"
+                    ],
+                    "icon": "action"
+                  },
+                  "sort_by": [
+                    "state",
+                    "relative-time"
+                  ],
+                  "customize": {
+                    "climate.upstairs": {
+                      "exclude_actions": [
+                        "set preset",
+                        "heat",
+                        "turn off"
+                      ],
+                      "actions": [
+                        {
+                          "service": "turn_on",
+                          "name": "Turn On",
+                          "icon": "mdi:radiator"
+                        },
+                        {
+                          "service": "turn_off",
+                          "name": "Turn Off",
+                          "icon": "mdi:radiator-off"
+                        },
+                        {
+                          "service": "set_temperature",
+                          "service_data": {
+                            "hvac_mode": "heat"
+                          },
+                          "variables": {
+                            "temperature": {
+                              "min": 10,
+                              "max": 25,
+                              "step": 0.5,
+                              "unit": "°C"
+                            }
+                          },
+                          "icon": "mdi:fire",
+                          "name": "Set temperature"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Ady's Office",
+                  "subtitle": "The radiator is currently {% if states(\"climate.upstairs\") == \"heat\"%}on{% else %}off{% endif %}"
+                },
+                {
+                  "include": [
+                    "climate.upstairs",
+                    "climate.upstairs_trv",
+                    "climate.spare_trv"
+                  ],
+                  "exclude": [],
+                  "discover_existing": false,
+                  "title": false,
+                  "show_header_toggle": false,
+                  "time_step": 15,
+                  "default_editor": "single",
+                  "display_options": {
+                    "primary_info": [
+                      "{name} - {days}"
+                    ],
+                    "secondary_info": [
+                      "Next: {action} - {relative-time}"
+                    ],
+                    "icon": "action"
+                  },
+                  "sort_by": [
+                    "state",
+                    "relative-time"
+                  ],
+                  "customize": {
+                    "climate.upstairs": {
+                      "exclude_actions": [
+                        "set preset",
+                        "heat",
+                        "turn off"
+                      ],
+                      "actions": [
+                        {
+                          "service": "turn_on",
+                          "name": "Turn On",
+                          "icon": "mdi:radiator"
+                        },
+                        {
+                          "service": "turn_off",
+                          "name": "Turn Off",
+                          "icon": "mdi:radiator-off"
+                        },
+                        {
+                          "service": "set_temperature",
+                          "service_data": {
+                            "hvac_mode": "heat"
+                          },
+                          "variables": {
+                            "temperature": {
+                              "min": 10,
+                              "max": 25,
+                              "step": 0.5,
+                              "unit": "°C"
+                            }
+                          },
+                          "icon": "mdi:fire",
+                          "name": "Set temperature"
+                        }
+                      ]
+                    }
+                  },
+                  "tags": [],
+                  "exclude_tags": [],
+                  "type": "custom:scheduler-card"
+                },
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Bedroom",
+                  "subtitle": "The radiator is currently {% if states(\"climate.bedroom\") == \"heat\"%}on{% else %}off{% endif %}"
+                },
+                {
+                  "type": "custom:scheduler-card",
+                  "include": [
+                    "climate.bedroom",
+                    "climate.bedroom_trv"
+                  ],
+                  "exclude": [],
+                  "tags": [
+                    "Bedroom"
+                  ],
+                  "discover_existing": false,
+                  "title": false,
+                  "display_options": {
+                    "primary_info": [
+                      "{name} - {days}"
+                    ],
+                    "secondary_info": [
+                      "Next: {action} - {relative-time}"
+                    ],
+                    "icon": "action"
+                  },
+                  "sort_by": [
+                    "state",
+                    "relative-time"
+                  ],
+                  "customize": {
+                    "climate.bedroom": {
+                      "exclude_actions": [
+                        "set preset",
+                        "heat",
+                        "turn off"
+                      ],
+                      "actions": [
+                        {
+                          "service": "turn_on",
+                          "name": "Turn On",
+                          "icon": "mdi:radiator"
+                        },
+                        {
+                          "service": "turn_off",
+                          "name": "Turn Off",
+                          "icon": "mdi:radiator-off"
+                        },
+                        {
+                          "service": "set_temperature",
+                          "service_data": {
+                            "hvac_mode": "heat"
+                          },
+                          "variables": {
+                            "temperature": {
+                              "min": 10,
+                              "max": 25,
+                              "step": 0.5,
+                              "unit": "°C"
+                            }
+                          },
+                          "icon": "mdi:fire",
+                          "name": "Set temperature"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            },
+            {
+              "type": "grid",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Nursery",
+                  "subtitle": "The radiator is currently {% if states(\"climate.nursery\") == \"heat\"%}on{% else %}off{% endif %}"
+                },
+                {
+                  "type": "custom:scheduler-card",
+                  "include": [
+                    "climate.nursery",
+                    "climate.nursery_trv",
+                    "switch.humidifier"
+                  ],
+                  "exclude": [],
+                  "tags": [
+                    "Nursery"
+                  ],
+                  "discover_existing": false,
+                  "title": false,
+                  "display_options": {
+                    "primary_info": [
+                      "{name} - {days}"
+                    ],
+                    "secondary_info": [
+                      "Next: {action} - {relative-time}"
+                    ],
+                    "icon": "action"
+                  },
+                  "sort_by": [
+                    "state",
+                    "relative-time"
+                  ],
+                  "customize": {
+                    "climate.nursery": {
+                      "exclude_actions": [
+                        "set preset",
+                        "heat",
+                        "turn off"
+                      ],
+                      "actions": [
+                        {
+                          "service": "turn_on",
+                          "name": "Turn On",
+                          "icon": "mdi:radiator"
+                        },
+                        {
+                          "service": "turn_off",
+                          "name": "Turn Off",
+                          "icon": "mdi:radiator-off"
+                        },
+                        {
+                          "service": "set_temperature",
+                          "service_data": {
+                            "hvac_mode": "heat"
+                          },
+                          "variables": {
+                            "temperature": {
+                              "min": 10,
+                              "max": 25,
+                              "step": 0.5,
+                              "unit": "°C"
+                            }
+                          },
+                          "icon": "mdi:fire",
+                          "name": "Set temperature"
+                        }
+                      ]
+                    }
+                  }
+                },
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Sam's Office",
+                  "subtitle": "The radiator is currently {% if states(\"climate.office\") == \"heat\"%}on{% else %}off{% endif %}"
+                },
+                {
+                  "type": "custom:scheduler-card",
+                  "include": [
+                    "climate.office",
+                    "climate.office_trv"
+                  ],
+                  "exclude": [],
+                  "tags": [
+                    "Sam Office"
+                  ],
+                  "discover_existing": false,
+                  "title": false,
+                  "display_options": {
+                    "primary_info": [
+                      "{name} - {days}"
+                    ],
+                    "secondary_info": [
+                      "Next: {action} - {relative-time}"
+                    ],
+                    "icon": "action"
+                  },
+                  "sort_by": [
+                    "state",
+                    "relative-time"
+                  ],
+                  "customize": {
+                    "climate.office": {
+                      "exclude_actions": [
+                        "set preset",
+                        "heat",
+                        "turn off"
+                      ],
+                      "actions": [
+                        {
+                          "service": "turn_on",
+                          "name": "Turn On",
+                          "icon": "mdi:radiator"
+                        },
+                        {
+                          "service": "turn_off",
+                          "name": "Turn Off",
+                          "icon": "mdi:radiator-off"
+                        },
+                        {
+                          "service": "set_temperature",
+                          "service_data": {
+                            "hvac_mode": "heat"
+                          },
+                          "variables": {
+                            "temperature": {
+                              "min": 10,
+                              "max": 25,
+                              "step": 0.5,
+                              "unit": "°C"
+                            }
+                          },
+                          "icon": "mdi:fire",
+                          "name": "Set temperature"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "dense_section_placement": false,
+          "icon": "mdi:home-clock-outline"
+        }
+      ]
+    }
+  }
+}

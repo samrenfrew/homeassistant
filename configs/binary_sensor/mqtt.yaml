@@ -1,0 +1,18 @@
+#Phone Charging
+# - platform: mqtt
+#   state_topic: "charging/sam"
+#   name: "Sam Phone Plug"
+#   value_template: '{{ value_json.charging }}'
+#   payload_on: 'charging'
+#   payload_off: 'unplugged'
+#   qos: 0
+#   device_class: plug
+
+#Motion Sensor
+# - platform: mqtt
+#   state_topic: "sensor/node"
+#   name: lounge_motion
+#   device_class: motion
+#   value_template: '{{ value_json.motion }}'
+#   payload_on: "on"
+#   payload_off: "off"

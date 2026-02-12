@@ -1,0 +1,123 @@
+default:
+  entities:
+    - group.lounge
+    - group.bedroom
+    - group.office
+    - input_boolean.night_mode
+
+lounge:
+  name: Lounge
+  icon: mdi:sofa
+  entities:
+    - light.big_lamp
+    - light.orb_lamp
+    - light.chair_lamp
+    # - light.backlight
+    - media_player.lg_webos_tv
+    - media_player.lounge_speaker
+    - switch.tv
+    # - sensor.lounge_humidity
+    - sensor.lounge_temperature
+    - binary_sensor.lounge_motion
+
+bedroom:
+  name: Bedroom
+  icon: mdi:bed-empty
+  entities:
+    - media_player.bedroom_speaker
+    - sensor.bedroom_humidity
+    - sensor.bedroom_temperature
+    - binary_sensor.bedroom_motion
+    - climate.bedroom_trv
+
+office:
+  name: Office
+  icon: mdi:desktop-tower-monitor
+  entities:
+    # - light.computer
+    - light.desk_lamp
+    - light.ikea_plug
+    - switch.sam_pc
+    # - switch.ikea_plug
+    - switch.extension_lead
+    - binary_sensor.office_motion
+    - sensor.office_temperature
+    - sensor.office_humidity
+    - climate.office_trv
+    - switch.extension_lead_2
+
+nursery:
+  name: Nursery
+  icon: mdi:account-child
+  entities:
+    - light.nursery_lamp
+    - switch.humidifier
+    - sensor.nursery_humidity
+    - sensor.nursery_temperature
+    - climate.nursery_trv
+
+ella_bedroom:
+  name: Ella Bedroom
+  icon: mdi:bed-single
+  entities:
+    - climate.ella_trv
+    - sensor.ella_temperature
+    - sensor.ella_humidity
+
+dining_room:
+  name: Dining Room
+  icon: mdi:food
+  entities:
+    - media_player.sonos_one
+
+kitchen:
+  name: Kitchen
+  icon: mdi:silverware-fork-knife
+  entities:
+    - media_player.kitchen_display
+    # - alarm_control_panel.fridge
+    - binary_sensor.back_door
+    - binary_sensor.kitchen_motion
+
+hamenu:
+  name: HAMenu
+  entities:
+    - input_boolean.night_mode
+    - input_boolean.guest_mode
+    # - switch.pc_power
+    # - switch.nas_power
+    # - switch.tplink
+    # - switch.ikea_plug
+    # - switch.extension_lead
+    # - switch.transmission_turtle_mode
+
+timer:
+  name: Timer
+  entities:
+    - switch.tplink
+    - timer.fan_timer
+    - input_number.fan_timer
+
+all_lights:
+  name: Lights
+  icon: mdi:lightbulb-on-outline
+  entities:
+    - light.all_lights
+    - light.ikea_plug
+    # - light.christmas_tree
+
+speakers:
+  name: Speakers
+  icon: mdi:speaker-multiple
+  entities:
+    - media_player.sonos_one
+    - media_player.lounge_speaker
+    - media_player.bedroom_speaker
+    - media_player.kitchen_display
+# motion:
+#   name: Motion
+#   icon: mdi:motion-sensor
+#   entities:
+#     - binary_sensor.lounge_motion
+#     - binary_sensor.bedroom_motion
+#     - binary_sensor.office_motion

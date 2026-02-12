@@ -1,0 +1,110 @@
+@font-face {
+  font-family: "SF Pro Display";
+  font-style: normal;
+  font-weight: 300;
+  src: url("/local/fonts/sf-pro-display_light.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  font-style: normal;
+  font-weight: 500;
+  src: url("/local/fonts/sf-pro-display_medium.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  font-style: normal;
+  font-weight: 600;
+  src: url("/local/fonts/sf-pro-display_semibold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/local/fonts/sf-pro-display_bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/local/fonts/sf-pro-display_regular.woff2") format("woff2");
+}
+*/ @font-face {
+  font-family: "SF Pro Text";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/local/fonts/sf-pro-text_semibold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "SF Pro Text";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/local/fonts/sf-pro-text_regular.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 300;
+  src: url("/local/fonts/HelveticaNeue-Light.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/local/fonts/HelveticaNeue-Regular.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 600;
+  src: url("/local/fonts/HelveticaNeue-Medium.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/local/fonts/HelveticaNeue-Bold.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "OnePlus Sans";
+  font-style: normal;
+  font-weight: 300;
+  src: url("/local/fonts/OnePlusSans-Light.ttf");
+}
+@font-face {
+  font-family: "OnePlus Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/local/fonts/OnePlusSans-Regular.ttf");
+}
+@font-face {
+  font-family: "OnePlus Sans";
+  font-style: normal;
+  font-weight: 700;
+  src: url("/local/fonts/OnePlusSans-Medium.ttf");
+}
+
+@font-face {
+  font-family: "Roman-55";
+  font-style: normal;
+  font-weight: 400;
+  src: url("/local/fonts/NeueHaasGrotTextRound-55Roman.woff2") format("woff2");
+}
+
+body {
+  font-family: "SF Pro Display", "Roman-55", Helvetica, Arial, sans-serif;
+}
+
+h1 {
+  font-size: 26px;
+}
+
+h2 {
+  font-size: 15px;
+}

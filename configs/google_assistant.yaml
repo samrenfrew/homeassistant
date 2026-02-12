@@ -1,0 +1,184 @@
+  project_id: !secret ga_assistant
+  expose_by_default: false
+  service_account: !include service-account.json
+  report_state: true
+  exposed_domains:
+    #- switch
+    #- light
+    #- input_boolean
+    #- media_player
+  entity_config:
+    camera.front_door:
+      expose: true
+      name: Front Door
+      aliases:
+       - Front Camera
+       - Door Camera
+       - Front Door Camera
+    camera.back_door:
+      expose: true
+      name: Back Door
+      aliases:
+        - Back Door Camera
+        - Back Camera 
+        - Garage Camera 
+        - Garage
+    switch.extension_lead:
+      expose: false
+      name: Extension Lead
+      room: Spare Room
+    switch.radio:
+      expose: true
+      name: Radio
+      room: Kitchen
+    switch.humidifier:
+      expose: false
+      name: Humidifier
+      room: Spare Room
+      aliases:
+        - Humidity
+    light.ikea_plug:
+      expose: true
+      name: Office Lamp
+      room: Office
+      aliases:
+        - Cool Lamp
+    switch.pc_power:
+      expose: true
+      name: Computer
+      room: Office
+    switch.nas_power:
+      expose: false
+      name: Server
+      room: Spare Room
+    # light.chair_lamp:
+    #   expose: true
+    #   name: Chair Lamp
+    #   aliases:
+    #     - Other Lamp
+    #     - Left Lamp
+    #     - Chair Light
+    #     - Reading Light
+    #   room: Lounge
+    light.tv:
+      expose: false
+      name: Backlight
+      room: Lounge
+    light.big_lamp:
+      expose: true
+      name: Big Lamp
+      room: Lounge
+      aliases:
+        - White Lamp
+        - Left Lamp
+        - Chair Lamp
+    light.small_lamp:
+      expose: true
+      name: Small Lamp
+      room: Lounge
+      aliases:
+        - Side Lamp
+        - Little Lamp
+        - Wavy Lamp
+        - Right Lamp
+    light.computer:
+      expose: false
+      name: Computer Light
+      room: Office
+      aliases:
+        - PC Light
+    light.desk_lamp:
+      expose: true
+      name: Desk Lamp
+      room: office
+      aliases:
+        - Silver Lamp
+    light.nursery_lamp:
+      expose: true
+      name: Nursery Lamp
+      room: Nursery
+      aliases:
+        - "Ella's Lamp"
+        - "Ella's Room Light"
+        - "Ella's Room Lamp"
+        - The Brain
+    light.orb_lamp:
+      expose: true
+      name: The Orb
+      room: Lounge
+      aliases:
+        - Orb Lamp
+        - Corner Lamp
+    media_player.sonos_one:
+      expose: false
+      name: Dining Room Speaker
+      aliases:
+        - Sonos
+        - Dining Room
+      room: Dining Room
+    media_player.lg_webos_tv:
+      expose: true
+      name: TV
+      aliases:
+        - TV
+        - Telly
+        - Television
+        - Tele
+      room: Lounge
+    input_boolean.night_mode:
+      expose: true
+      name: Night Mode
+      room: House
+    input_boolean.guest_mode:
+      expose: true
+      name: Guest Mode
+      room: House
+    sensor.bedroom_temperature:
+      expose: false
+      name: Bedroom Temperature
+      room: Bedroom
+    sensor.upstairs_temperature:
+      expose: false
+      name: Spare Bedroom Temperature
+      room: Spare Bedroom
+    sensor.nursery_temperature:
+      expose: false
+      name: Nursery Temperature
+      room: Nursery
+    # sensor.lounge_temperature:
+    #   expose: true
+    #   name: Lounge Temperature
+    #   room: Lounge
+    climate.bedroom:
+      expose: true
+      name: Bedroom Radiator
+      room: Bedroom
+    climate.nursery:
+      expose: true
+      name: Nursery Radiator
+      room: Nursery
+      aliases:
+        - Ella Radiator
+    climate.office:
+      expose: true
+      name: Office Radiator
+      room: Office
+    climate.upstairs:
+      expose: true
+      name: Spare Bedroom Radiator
+      room: Spare Bedroom
+      aliases:
+        - Ady Office Radiator
+    climate.hive: 
+      expose: true
+      name: Hive
+      room: Lounge
+      aliases:
+        - Boiler
+        - Heating
+    input_boolean.cbeebies:
+      expose: true
+      name: Cbeebies
+      room: Lounge
+      aliases:
+        - cbeebs

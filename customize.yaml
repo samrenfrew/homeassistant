@@ -1,0 +1,445 @@
+switch.tplink_plug:
+  friendly_name: Plug
+device_tracker.adventuretiiime:
+  hidden: true
+switch.plug:
+  friendly_name: Bedroom Plug
+  google_assistant_name: Bedroom Plug
+sensor.met_office_probability_of_precipitation:
+  friendly_name: Chance of Rain
+  icon: mdi:weather-rainy
+sensor.met_office_weather:
+  friendly_name: Condition
+  icon: mdi:weather-partlycloudy
+sensor.met_office_humidity:
+  friendly_name: Humidity
+  icon: mdi:water-percent
+sensor.met_office_feels_like_temperature:
+  device_class: temperature
+  friendly_name: Temperature (Feels Like)
+sensor.met_office_temperature:
+  friendly_name: Outside Temperature
+sensor.pontefract_hospital:
+  icon: mdi:mdi:car
+sensor.pinderfields_hospital:
+  icon: mdi:car
+sensor.dewsbury_hospital:
+  icon: mdi:car
+sensor.asda_house:
+  icon: mdi:walk
+sensor.adrienne_vinces_iphone_battery_level:
+  friendly_name: Ady's iPhone Battery
+sensor.adrienne_vinces_iphone_battery_state:
+  friendly_name: Ady's iPhone Battery State
+switch.speed_limit:
+  icon: mdi:speedometer
+switch.full_speed:
+  icon: mdi:speedometer
+sensor.transmission_down_speed_kbps:
+  icon: mdi:download
+sensor.transmission_up_speed_kbps:
+  icon: mdi:upload
+sensor.transmission_down_speed:
+  friendly_name: Down Speed
+  icon: mdi:arrow-down-bold-circle
+sensor.transmission_up_speed:
+  friendly_name: Up Speed
+  icon: mdi:arrow-up-bold-circle
+sensor.transmission_status:
+  friendly_name: Download Status
+  icon: mdi:cloud-check
+weblink.sickrage:
+  icon: mdi:television-classic
+weblink.transmission:
+  icon: mdi:cloud-download
+switch.limit_downloads:
+  icon: mdi:speedometer
+  aliases:
+  - Downloads
+sensor.fastcom_download:
+  icon: mdi:speedometer
+group.all_automations:
+  control: hidden
+  hidden: false
+  friendly_name: Automations
+sensor.adriennes_ipad_battery_level:
+  friendly_name: Ady's iPad Battery
+sensor.adriennes_ipad_battery_state:
+  friendly_name: Ady's iPad Battery State
+persistent_notification.001:
+  icon: mdi:battery-alert
+sensor.sam_to_home:
+  icon: mdi:walk
+sensor.ady_to_home:
+  icon: mdi:car
+zone.home:
+  track_ios: 'true'
+sensor.tplink_consumption:
+  icon: mdi:flash-outline
+sensor.tplink_daily_consumption:
+  icon: mdi:flash
+sensor.tplink_total_consumption:
+  icon: mdi:flash-auto
+sensor.sams_ipad_battery_level:
+  friendly_name: Sam's iPad Battery
+sensor.cpu_temp:
+  icon: mdi:thermometer-lines
+switch.ady_plug:
+  icon: mdi:power-socket-uk
+history_graph.battery:
+  hours_to_show: 12
+  refresh: 10
+history_graph.sam_devices:
+  hours_to_show: 48
+sensor.ady_status: {}
+sensor.sam_status: {}
+switch.tplink:
+  device_class: outlet
+sensor.time_to_home:
+  friendly_name: Drive Home
+  icon: mdi:home-map-marker
+sensor.flower_moisture:
+  friendly_name: Plant Moisture
+  icon: mdi:cup-water
+sensor.flower_light_intensity:
+  friendly_name: Plant Light intensity
+  icon: mdi:white-balance-sunny
+  unit_of_measurement: lux
+sensor.flower_conductivity:
+  friendly_name: Plant Conductivity
+  icon: mdi:flash
+sensor.flower_battery:
+  friendly_name: Plant Battery
+  icon: mdi:battery
+input_select.alarm_set:
+  icon: mdi:security
+sensor.flower_temperature:
+  friendly_name: Plant Temperature
+switch.alarm:
+  friendly_name: Alarm
+  icon: mdi:security
+plant.lounge:
+  friendly_name: Plant
+binary_sensor.motion:
+  device_class: motion
+binary_sensor.tv:
+  device_class: moving
+  friendly_name: Lounge Plug On
+binary_sensor.mqtt_on: {}
+sensor.sampc_intel_core_i52500k_load_cpu_total:
+  friendly_name: CPU Total
+sensor.sampc_ram_load_memory:
+  friendly_name: Memory
+sensor.sampc_nvidia_geforce_gtx_1060_6gb_temperatures_gpu_core:
+  friendly_name: GPU Temp
+sensor.sampc_intel_core_i52500k_temperatures_cpu:
+  friendly_name: CPU Temp
+binary_sensor.bed:
+  device_class: occupancy
+  friendly_name: Bed
+  icon: mdi:hotel
+switch.unnamed_device:
+  friendly_name: tplink
+sensor.current_version:
+  icon: mdi:package
+sensor.myipopendnscom:
+  friendly_name: IP Address
+  icon: mdi:help-network
+switch.night:
+  friendly_name: Night Mode
+  icon: mdi:weather-night
+  assumed_state: false
+switch.power:
+  aliases:
+  - Computer
+  friendly_name: PC
+  google_assistant_name: Computer
+switch.flux:
+  google_assistant: false
+group.all_scripts:
+  control: hidden
+  friendly_name: Scripts
+  hidden: false
+group.lights:
+  control: hidden
+sensor.transmission_active_torrents:
+  friendly_name: Torrents
+  icon: mdi:file-check
+sensor.tv_on:
+  friendly_name: Lights On
+  icon: mdi:timelapse
+sensor.computer_on:
+  icon: mdi:timelapse
+light.computer:
+  google_assistant_name: PC Light
+  icon: mdi:monitor-multiple
+device_tracker.sam_phone:
+  friendly_name: Sam's Phone
+  icon: mdi:cellphone
+sensor.location_updated:
+  icon: mdi:clock
+binary_sensor.home:
+  device_class: occupancy
+sensor.sam_phone_battery:
+  friendly_name: Sam Battery
+binary_sensor.sam_phone_plug:
+  device_class: plug
+  friendly_name: Sam Charging
+sensor.light_level:
+  icon: mdi:white-balance-incandescent
+binary_sensor.hallway_light:
+  friendly_name: Light Sensor
+  icon: mdi:white-balance-incandescent
+light.hallway: {}
+sensor.disk_use_mediapistorage1:
+  friendly_name: Backup Drive
+sensor.disk_use_percent_mediapistorage1:
+  friendly_name: Backup Drive
+switch.homeassistant:
+  friendly_name: Restart Home Assistant
+  icon: mdi:restart
+switch.nodered:
+  icon: mdi:shuffle-variant
+switch.pihole:
+  icon: mdi:security
+switch.portainer:
+  icon: mdi:ferry
+switch.duplicati:
+  icon: mdi:cloud-sync
+switch.duckdns:
+  icon: mdi:duck
+switch.transmission:
+  icon: mdi:cloud-download
+sensor.disk_use_percent_mediapistorage:
+  friendly_name: External Drive
+switch.nginx:
+  icon: mdi:server
+sensor.humidity:
+  icon: mdi:water-percent
+binary_sensor.vnc_connected:
+  device_class: connectivity
+  friendly_name: VNC
+binary_sensor.samba_connected:
+  device_class: connectivity
+  friendly_name: Samba
+binary_sensor.ssh_connected:
+  device_class: connectivity
+  friendly_name: SSH
+binary_sensor.vnc:
+  device_class: moving
+sensor.pihole_dns_queries_cached: {}
+sensor.pihole_dns_queries_today: {}
+sensor.pihole_dns_unique_domains: {}
+binary_sensor.pihole:
+  friendly_name: Pi-Hole
+  icon: mdi:shield-check
+switch.cardigann:
+  icon: mdi:tshirt-crew
+switch.ombi:
+  icon: mdi:checkbox-multiple-blank-circle-outline
+weather.yweather:
+  friendly_name: Weather
+sensor.dark_sky_daily_summary:
+  friendly_name: Summary
+  icon: mdi:white-balance-sunny
+sensor.feels_like_temperature:
+  friendly_name: Flat Temperature
+sensor.temperature:
+  friendly_name: Flat Temperature (Real)
+  icon: mdi:thermometer-lines
+sensor.flat_temperature:
+  device_class: temperature
+sensor.flat_temperature_feels_like: {}
+switch.jackett:
+  icon: mdi:cloud-search
+device_tracker.adriennes_macbook_pro:
+  friendly_name: Ady’s MacBook Pro
+input_text.tv:
+  config:
+    player: media_player.tv
+  custom_ui_state_card: state-card-mini-media-player
+  icon: mdi:television-box
+sensor.tv_playing:
+  icon: mdi:play-circle
+sensor.pihole_ads_blocked_today:
+  friendly_name: Ads Blocked Today
+sensor.myip:
+  friendly_name: IP Address
+  icon: mdi:tooltip-account
+input_boolean.guest_mode:
+  icon: mdi:account-supervisor-outline
+input_boolean.night_mode:
+  icon: mdi:sleep
+sensor.work:
+  icon: mdi:walk
+input_number.hallway_light_speed:
+  friendly_name: Backlight Speed
+  icon: mdi:gauge
+input_number.computer_light_speed:
+  icon: mdi:gauge
+sensor.latest_version:
+  icon: mdi:package-up
+sensor.uptime:
+  icon: mdi:update
+sensor.plex:
+  icon: mdi:plex
+sensor.met_probability_of_precipitation:
+  icon: mdi:weather-rainy
+sensor.speedtest_download:
+  icon: mdi:download
+sensor.speedtest_ping:
+  icon: mdi:lan-connect
+sensor.speedtest_upload:
+  icon: mdi:upload
+sensor.pi_hole_ads_percentage_blocked_today:
+  icon: mdi:block-helper
+sensor.memory_use_percent:
+  friendly_name: Memory use
+switch.influxdb:
+  icon: mdi:database
+switch.grafana:
+  icon: mdi:chart-areaspline
+switch.tradfri_outlet:
+  icon: mdi:power-socket-uk
+device_tracker.adriennes_mbp:
+  friendly_name: Ady's Macbook
+  icon: mdi:laptop
+switch.ikea_plug:
+  device_class: outlet
+  icon: mdi:power-socket-uk
+device_tracker.adriennes_ipad:
+  friendly_name: Ady's iPad
+  icon: mdi:tablet
+device_tracker.adrienne_vinces_iphone:
+  friendly_name: Ady's iPhone
+  icon: mdi:cellphone
+sensor.samrenfrew_duckdns_org:
+  friendly_name: IP Address
+  icon: mdi:crosshairs-gps
+timer.fan_timer:
+  friendly_name: Timer
+switch.plex:
+  icon: mdi:plex
+switch.radarr:
+  icon: mdi:theater
+switch.sonarr:
+  icon: mdi:television
+switch.transmission_turtle_mode:
+  friendly_name: Limit Downloads
+  icon: mdi:speedometer
+  templates:
+    icon: if (state === 'on') return 'mdi:speedometer-slow'; else return 'mdi:speedometer';
+sensor.let_s_encrypt:
+  friendly_name: Let's Encrypt
+sensor.potential_breaking_changes:
+  friendly_name: Breaking changes
+  icon: mdi:progress-wrench
+media_player.tv:
+  templates:
+    icon: if (state === 'playing') return 'mdi:television'; return 'mdi:television-off';
+switch.pc_power:
+  friendly_name: PC
+  icon: mdi:desktop-classic
+switch.nas_power:
+  friendly_name: NAS
+  icon: mdi:nas
+sensor.plex_nas:
+  icon: mdi:plex
+light.shelf_lights:
+  friendly_name: Office Lights
+  icon: mdi:string-lights
+light.christmas_tree:
+  friendly_name: Christmas Tree
+  icon: mdi:pine-tree
+device_tracker.sams_mbp:
+  icon: mdi:laptop
+  friendly_name: Sam's Macbook
+device_tracker.adrienne_s_ipad:
+  friendly_name: Adrienne's iPad (App)
+  icon: mdi:apple
+device_tracker.adrienne_vinces_ipad:
+  friendly_name: Adrienne's iPad
+  icon: mdi:tablet
+device_tracker.sam_phone_app:
+  entity_picture: /local/img/sam.jpg
+  icon: mdi:android
+device_tracker.adys_ipad_app:
+  friendly_name: Adrienne's iPad (App)
+  icon: mdi:apple
+device_tracker.adrienne_vinces_iphone_app:
+  entity_picture: /local/img/ady.png
+  friendly_name: Ady's iPhone (App)
+  icon: mdi:apple
+person.sam:
+  entity_picture: /local/img/sam.jpg
+  templates:
+    icon: if (state === 'home') return 'mdi:account'; return 'mdi:account-outline';
+    icon_color: if (state === 'home') return '#FDD835'; return '#44739e';
+person.ady:
+  templates:
+    icon: if (state === 'home') return 'mdi:account'; return 'mdi:account-outline';
+    icon_color: if (state === 'home') return '#FDD835'; return '#44739e';
+alarm_control_panel.alarm:
+  templates:
+    icon_color: if (state === 'disarmed') return '#FDD835'; return '#44739e';
+sensor.last_boot:
+  device_class: timestamp
+input_datetime.alarm:
+  device_class: timestamp
+sensor.bathroom_humidity:
+  friendly_name: Spare Room Humidity
+sensor.bathroom_temperature:
+  friendly_name: Spare Room Temperature
+light.bed_lights:
+  friendly_name: Chair Lamp
+  icon: mdi:floor-lamp
+light.spotlight:
+  icon: mdi:spotlight-beam
+binary_sensor.lounge_motion:
+  friendly_name: Lounge Motion
+  device_class: motion
+switch.humidifier:
+  friendly_name: Humidifier
+  icon: mdi:air-humidifier
+  device_class: switch
+sensor.plant_battery:
+  friendly_name: Plant Battery
+sensor.plant_brightness:
+  friendly_name: Plant Brightness
+sensor.plant_conductivity:
+  friendly_name: Plant Conductivity
+sensor.plant_moisture:
+  friendly_name: Plant Moisture
+sensor.plant_temperature:
+  friendly_name: Plant Temperature
+sensor.plant_timestamp:
+  friendly_name: Plant Updated
+binary_sensor.door_sensor:
+  device_class: door
+binary_sensor.office_window_sensor:
+  friendly_name: Office Window
+  device_class: window
+switch.syncthing:
+  icon: hass:sync-circle
+switch.filebrowser:
+  icon: hass:file-search-outline
+switch.mqtt:
+  icon: hass:wifi-arrow-left-right
+switch.bazarr:
+  icon: hass:subtitles
+binary_sensor.front_door:
+  device_class: door
+binary_sensor.office_window:
+  device_class: window
+binary_sensor.lounge_door:
+  device_class: door
+binary_sensor.bedroom_window:
+  device_class: window
+zone.home:
+  radius: 50
+sensor.sam_bt_office:
+  templates:
+    icon: if (state === 0) return 'mdi:bluetooth-off'; return 'mdi:bluetooth';
+    icon_color: if (state === 0) return '#44739e'; return '#FDD835';
+light.ikea_plug:
+  icon: mdi:lightbulb-cfl-spiral

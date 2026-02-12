@@ -1,0 +1,4 @@
+#- platform: discord_game
+#  token: !secret discord_token
+#  members:
+#    - 212601221230493696

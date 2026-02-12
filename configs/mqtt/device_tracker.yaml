@@ -1,0 +1,67 @@
+device_tracker:
+  - name: "Sam Phone (BT)"
+    unique_id: sam_phone_bt
+    state_topic: "monitor/all/sam_bt"
+    icon: mdi:cellphone-wireless
+    source_type: bluetooth
+    device:
+      connections:
+        - ["mac", "94:45:60:6d:f9:b4"]
+      manufacturer: Google
+  - name: "Ady Phone (BT)"
+    unique_id: ady_phone_bt
+    state_topic: "monitor/all/ady_bt"
+    icon: mdi:cellphone-wireless
+    source_type: bluetooth
+    device:
+      connections:
+        - ["mac", "F4:DB:E3:4D:D2:33"]
+      manufacturer: Apple
+  # - name: "Sam (BT) Office"
+  #   state_topic: "monitor/office/sam_bt/device_tracker"
+  #   icon: mdi:cellphone-wireless
+  #   source_type: bluetooth
+  #   device:
+  #     connections:
+  #       - ["mac", "AC:D6:18:37:10:93"]
+  #     manufacturer: OnePlus
+  # - name: "Sam (BT) Lounge"
+  #   state_topic: "monitor/lounge/sam_bt/device_tracker"
+  #   icon: mdi:cellphone-wireless
+  #   source_type: bluetooth
+  #   device:
+  #     connections:
+  #       - ["mac", "AC:D6:18:37:10:93"]
+  #     manufacturer: OnePlus
+  # - name: "Sam (BT) Bedroom"
+  #   state_topic: "monitor/bedroom/sam_bt/device_tracker"
+  #   icon: mdi:cellphone-wireless
+  #   source_type: bluetooth
+  #   device:
+  #     connections:
+  #       - ["mac", "AC:D6:18:37:10:93"]
+  #     manufacturer: OnePlus
+  # - name: "Ady (BT) Office"
+  #   state_topic: "monitor/office/ady_bt/device_tracker"
+  #   icon: mdi:cellphone-wireless
+  #   source_type: bluetooth
+  #   device:
+  #     connections:
+  #      - ["mac", "F4:DB:E3:4D:D2:33"]
+  #     manufacturer: Apple
+  # - name: "Ady (BT) Lounge"
+  #   state_topic: "monitor/lounge/ady_bt/device_tracker"
+  #   icon: mdi:cellphone-wireless
+  #   source_type: bluetooth
+  #   device:
+  #     connections:
+  #      - ["mac", "F4:DB:E3:4D:D2:33"]
+  #     manufacturer: Apple
+  # - name: "Ady (BT) Bedroom"
+  #   state_topic: "monitor/bedroom/ady_bt/device_tracker"
+  #   icon: mdi:cellphone-wireless
+  #   source_type: bluetooth
+  #   device:
+  #     connections:
+  #      - ["mac", "F4:DB:E3:4D:D2:33"]
+  #     manufacturer: Apple

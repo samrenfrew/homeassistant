@@ -1,0 +1,192 @@
+# Green Bin
+- trigger:
+    - trigger: calendar
+      event: start
+      offset: "-05:00:00"
+      entity_id: calendar.house
+      enabled: true
+    - trigger: calendar
+      event: end 
+      offset: "-14:00:00"
+      entity_id: calendar.house
+      enabled: true
+
+  binary_sensor:
+    - name: Green Bin
+      unique_id: green_bin
+      icon: >
+        {% if is_state("binary_sensor.green_bin", "on") %}
+          mdi:delete-empty
+        {% else %}
+          mdi:delete
+        {% endif %}
+      state: >
+        {% if trigger.event == "start" and 'Green Bin' in trigger.calendar_event.summary %}
+          on
+        {% elif trigger.event == "end" and 'Green Bin' in trigger.calendar_event.summary %}
+          off
+        {% else %}
+          {{ states("binary_sensor.green_bin") | default('off') }}
+        {% endif %}
+    - name: Black Bin
+      unique_id: black_bin
+      icon: >
+        {% if is_state("binary_sensor.black_bin", "on") %}
+          mdi:delete-empty
+        {% else %}
+          mdi:delete
+        {% endif %}
+      state: >
+        {% if trigger.event == "start" and 'Black Bin' in trigger.calendar_event.summary %}
+          on
+        {% elif trigger.event == "end" and 'Black Bin' in trigger.calendar_event.summary %}
+          off
+        {% else %}
+          
+          {{ states("binary_sensor.black_bin") | default('off') }}
+        {% endif %}
+    - name: Brown Bin
+      unique_id: brown_bin
+      icon: >
+        {% if is_state("binary_sensor.brown_bin", "on") %}
+          mdi:delete-empty
+        {% else %}
+          mdi:delete
+        {% endif %}
+      state: >
+        {% if trigger.event == "start" and 'Brown Bin' in trigger.calendar_event.summary %}
+          on
+        {% elif trigger.event == "end" and 'Brown Bin' in trigger.calendar_event.summary %}
+          off
+        {% else %}          
+          {{ states("binary_sensor.brown_bin") | default('off') }}
+        {% endif %}
+    # - name: Cleaners
+    #   unique_id: cleaners
+    #   icon: mdi:hand-wash
+    #   state: >
+    #     {% if trigger.event == "start" and 'Cleaners' in trigger.calendar_event.summary %}
+    #       on
+    #     {% else %}
+    #       off
+    #     {% endif %}
+
+
+
+- binary_sensor:
+  - name: 'home'
+    unique_id: 'home_occupancy'
+    device_class: occupancy
+    state: >-
+        {{ is_state('person.sam', 'home')
+            or is_state('person.ady', 'home') }}
+
+- binary_sensor:
+  - name: 'home2'
+    unique_id: 'home_occupancy2'
+    device_class: occupancy
+    state: >-
+        {{ not is_state('input_select.sam_status_select', 'Out')
+           or not is_state('input_select.ady_status_select', 'Out') }}
+
+
+- trigger:
+    - trigger: state
+      entity_id: binary_sensor.lounge_motion
+  binary_sensor:
+    - name: "lounge_occupancy"
+      unique_id: 'lounge_occupancy'
+      device_class: occupancy
+      delay_off:
+        minutes: 10
+      state: >-
+        {{ is_state('binary_sensor.lounge_motion', 'on') }}
+
+- trigger:
+    - trigger: state
+      entity_id: binary_sensor.bedroom_motion
+  binary_sensor:
+    - name: "bedroom_occupancy"
+      unique_id: 'bedroom_occupancy'
+      device_class: occupancy
+      delay_off:
+        minutes: 10
+      state: >-
+        {{ is_state('binary_sensor.bedroom_motion', 'on') }}
+
+- trigger:
+    - trigger: state
+      entity_id: binary_sensor.kitchen_motion
+  binary_sensor:
+    - name: "kitchen_occupancy"
+      unique_id: 'kitchen_occupancy'
+      device_class: occupancy
+      delay_off:
+        minutes: 10
+      state: >-
+        {{ is_state('binary_sensor.kitchen_motion', 'on') }}
+
+- trigger:
+    - trigger: state
+      entity_id: binary_sensor.office_motion
+  binary_sensor:
+    - name: "office_occupancy"
+      unique_id: 'office_occupancy'
+      device_class: occupancy
+      delay_off:
+        minutes: 10
+      state: >-
+        {{ is_state('binary_sensor.office_motion', 'on') }}
+
+- trigger:
+    - trigger: state
+      entity_id: binary_sensor.home
+  binary_sensor:
+    - name: "home_10_minutes"
+      unique_id: 'home_10_minutes'
+      device_class: occupancy
+      icon: mdi:clock-check-outline
+      state: "{{ is_state('binary_sensor.home', 'on') }}"
+      auto_off: 0:10:00
+
+- trigger:
+    - trigger: state
+      entity_id: binary_sensor.front_door
+  binary_sensor:
+    - name: "door_open_recently"
+      unique_id: 'door_open_recently'
+      device_class: door
+      state: "{{ is_state('binary_sensor.front_door', 'on') }}"
+      auto_off: 0:10:00
+
+# - trigger:
+#     - trigger: state
+#       entity_id: sensor.lounge_speaker_timers
+#     - trigger: state
+#       entity_id: sensor.hallway_speaker_timers
+#     - trigger: state
+#       entity_id: sensor.bedroom_speaker_timers
+#   binary_sensor:
+#     - name: "gh_timer_set"
+#       unique_id: 'gh_timer_set'
+#       state: >-
+#         {{ not is_state('sensor.lounge_speaker_timers', 'unavailable')
+#             or not is_state('sensor.hallway_speaker_timers', 'unavailable')
+#             or not is_state('sensor.bedroom_speaker_timers', 'unavailable') }}
+
+# - trigger:
+#     - trigger: state
+#       entity_id: sensor.lounge_speaker_alarms
+#     - trigger: state
+#       entity_id: sensor.hallway_speaker_alarms
+#     - trigger: state
+#       entity_id: sensor.bedroom_speaker_alarms
+#   binary_sensor:
+#     - name: "gh_alarm_set"
+#       unique_id: 'gh_alarm_set'
+#       attributes:
+#         friendly_name: "Alarm Set"
+#       state: >-
+#         {{ not is_state('sensor.lounge_speaker_alarms', 'unavailable')
+#         or not is_state('sensor.hallway_speaker_alarms', 'unavailable')
+#         or not is_state('sensor.bedroom_speaker_alarms', 'unavailable') }}

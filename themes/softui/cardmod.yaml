@@ -1,0 +1,464 @@
+softmod:
+  ## CSS styling for Sidebar
+  card-mod-drawer-yaml: |
+    .: |
+      * {
+        background: red;
+      }
+  card-mod-sidebar-yaml: |
+    .: |
+      * {
+        font-family: "SF Pro Display", sans-serif;
+      }
+      .menu .title {
+        font-weight: 500;
+      }
+
+  ## CSS styling for Entity cards
+  card-mod-row-yaml: |
+    "*:first-child$": 
+      state-badge$: 
+        .: |
+          :host {
+            border: none;
+            outline: var(--theme-icon-outline);
+            border-radius: 100px;
+            overflow: hidden;
+          }
+          ha-state-icon {
+            background: var(--theme-icon-background);
+            color: var(--theme-icon-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            --mdc-icon-size: 20px;
+            padding: 0 10px;
+            --ha-icon-display: block;
+
+            {% if config.entity and config.entity.endswith('battery') or config.entity.endswith('battery_level') %}
+            {% if config.entity and is_state(config.entity, 'unavailable') -%}
+            background: var(--theme-icon-background) !important;            
+            color: var(--theme-icon-color) !important;
+            {% elif config.entity and (states(config.entity) | int(default=0)) < 30 -%}
+            background: var(--state-sensor-battery-low-color) !important;
+            color: #fff !important;
+            {%- elif config.entity and (states(config.entity) | int(default=0)) < 70 -%}
+            background: var(--state-sensor-battery-medium-color) !important;
+            color: #fff !important;
+            {%- endif %}
+            {% endif %}
+
+            {% if config.entity and '_bt_' in config.entity and is_state(config.entity, '100') %}
+            background: var(--accent-color) !important;
+            color: #fff !important;
+            {% endif %}
+          }
+
+  ## CSS styling for Glance cards
+  card-mod-glance-yaml: |
+    .: |
+      .name {
+        font-weight: 600;
+        order:2;
+      }
+      div {
+        order:3;
+      }
+    state-badge$: |        
+      :host {
+        width: 50px !important;
+        height: 50px !important;
+        order:1;
+      }
+      ha-state-icon {
+        background: var(--theme-icon-background);
+        border: var(--theme-icon-border);
+        outline: var(--theme-icon-outline);
+        padding: 10px;
+        color: var(--theme-icon-color) !important;
+        border-radius: 100px;
+      }
+      ha-state-icon[data-state="normal"], ha-state-icon[data-state="on"] {
+        background: var(--accent-color);
+        color: #fff !important;
+      }
+      ha-state-icon[data-domain="switch"][data-state="on"] {
+        background: var(--secondary-accent-color, var(--state-switch-active-color, var(--state-active-color)));
+        color: #fff !important;
+      }
+      ha-state-icon[data-domain="device_tracker"][data-state="home"] {
+        background: var(--state-device_tracker-home-color, var(--state-device_tracker-active-color, var(--state-active-color)));
+        color: #fff !important;
+      }
+      ha-state-icon[data-domain="sensor"][data-state*="2"], ha-state-icon[data-domain="sensor"][data-state*="1"] {
+        background: var(--state-sensor-battery-low-color);
+        color: #fff !important;
+      }
+      ha-state-icon[data-domain="sensor"][data-state*="3"], ha-state-icon[data-domain="sensor"][data-state*="4"], ha-state-icon[data-domain="sensor"][data-state*="5"], ha-state-icon[data-domain="sensor"][data-state*="6"] {
+        background: var(--state-sensor-battery-medium-color);
+        color: #fff !important;
+      }
+
+  ## CSS styling for all cards
+
+  card-mod-card-yaml: |
+    .: |     
+      ha-card {
+        transition: all 0.2s ease-in-out, height 0s, margin 0s !important;
+      }      
+      .type-glance, .media-player, .type-entities, .type-custom-uptime-card, .type-gauge, .type-custom-mini-graph-card, .type-map, .type-custom-mini-media-player, .type-history-graph, .type-custom-multiple-logbook-card, .type-picture-entity, .type-statistics-graph  {
+        border-width: 1px;
+      }
+      
+      ha-card.type-custom-button-card:not(.no-hover):hover {
+        @media (hover: hover) {
+          transform: scale(1.05);
+          box-shadow:1px 3px 10px rgba(0,0,0,0.05);
+        }
+      }
+
+      ha-card.type-markdown {
+        background: none !important;
+        transition: none !important;
+      }
+
+      ha-card.tv-remote {
+        background: none;
+        box-shadow: none;
+        margin: 10px;
+        font-family: "Roman-55", "Helvetica Neue";
+        letter-spacing: 0.2px;
+      }
+      ha-card.tv-remote .mmp-player__core {
+        flex-direction:column-reverse;
+      }
+      ha-card.tv-remote mmp-powerstrip {
+        justify-content:flex-start;
+        margin-left:0;
+      }
+      ha-card.tv-remote .entity__info {
+        margin-left:0;
+      }
+      ha-card.type-custom-mini-media-player .entity__info__media {
+        max-height: var(--mmp-unit);
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:start;
+        opacity:1;
+      }
+      ha-card.type-custom-mini-media-player [class*="attr_"] {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        flex-basis:100%;
+      }
+      ha-card.type-custom-mini-media-player [class*="attr_"]::before {
+        display:none;
+      }
+      ha-card.type-custom-mini-media-player .attr__media_title {
+        font-weight: 600;
+        padding-right: 8px;
+      }
+
+      ha-card.temperature {
+        flex-direction:row !important;
+        flex-wrap:wrap;
+        min-height:141px;
+        @media screen and (max-width:1199px){
+          min-height: 122px;
+        }
+      }
+      ha-card.temperature:not(.small) .states {
+        padding-right: 0 !important;
+        flex-basis: calc(45% - 16px);
+        padding-bottom:0 !important;
+      }
+      ha-card.temperature .info {
+        padding-left: 0 !important;
+        flex-basis: calc(55% - 16px);
+        padding-bottom:0 !important;
+      }
+      ha-card.temperature .info .info__item__time {
+        display:none;
+      }
+      ha-card.type-custom-mini-graph-card .states .state .state__value {
+        font-weight: 500;
+        letter-spacing: -0.02em;
+      }
+
+      ha-card.type-menu, ha-card.type-back {
+        background:none;
+        border:none;
+      }
+
+      ha-card.type-glance {
+        padding: 14px;
+      }
+      ha-card.type-glance .entities {
+        padding:0;
+      }
+      ha-card.type-glance .entity {
+        flex-direction: column;
+        margin-bottom: 10px;
+      }
+
+      ha-card.type-custom-more-info-card {
+        background:none;
+      }
+      ha-card.type-custom-more-info-card state-card-content {
+        display:none;
+      }
+      ha-card.type-custom-more-info-card h1.card-header {
+        font-size: 26px;
+        font-weight: 600;
+        line-height: 26px;
+        letter-spacing: -0.13px;
+      }
+      
+      ha-card.battery {
+        background: red;
+      }
+
+      @media screen and (max-width: 1199px){
+         ha-card .top {
+          padding-top: 20px !important;
+          padding-bottom:68px !important;
+        }
+        ha-card .pin { 
+          top:0 !important;
+          position: fixed !important;
+          width: 100% !important;
+        }
+        ha-card .bar {
+          bottom: 68px !important;
+          position: sticky !important;
+        }
+      } 
+
+    mmp-media-controls$: |
+      :host {
+        flex-direction:column;
+      }
+      .mmp-media-controls__media {
+        width:100%;
+        gap:10px;
+
+      }
+      .mmp-media-controls__media ha-icon-button {
+        background:var(--background-color) !important;
+        border-radius: 12px;
+        # border: 1px solid var(--ha-card-border-color);
+        justify-content: center;
+        width:100%;
+        display:flex;
+        # --mmp-text-color: #fff;
+      }
+
+    ha-markdown$: |
+      :host {
+        padding-left: 16px !important;
+        padding-right: 10px !important;
+      }
+      ha-markdown-element {
+        font-size:10px;
+        font-family: "SF Pro Display",sans-serif;
+        letter-spacing: 0.2px;
+      }
+      h1 {
+        font-size: 26px;
+        margin-bottom:5px;
+        font-weight: 600 !important;
+        line-height: 1.07143 !important;
+        letter-spacing: -.005em;
+      }
+      h2 {
+        font-size: 16px !important;
+        margin-top:0;
+        font-weight: 500 !important;
+        letter-spacing: -.005em;
+        line-height:1.10722 !important;
+        color: var(--secondary-text-color);
+      }
+
+    $: |
+      h1.card-header {
+        font-family: "SF Pro Display", sans-serif !important;
+        font-size: 26px !important;
+        font-weight: 600 !important;
+        line-height: 26px !important;
+        letter-spacing: -0.13px !important;
+      }
+
+    mmp-powerstrip$: 
+      mmp-source-menu$:
+        .: |
+          :host { max-width: unset !important; }
+        mmp-dropdown$: 
+          mmp-button$: |
+            .container .slot-container {
+              margin-left: 0;
+            }            
+          .: |
+            mmp-button .mmp-dropdown__label {
+              font-weight: 400;
+              font-size: 13px;
+              opacity:0.75;
+            }
+      .: |
+        card-mod {
+          display:none;
+        }
+
+      
+
+  ## More Info
+  card-mod-more-info-yaml: |
+    .: |
+      ha-dialog {  
+        --ha-dialog-border-radius: 16px !important;
+        
+        @media (max-width: 450px), (max-height: 500px) {
+          --ha-dialog-border-radius: 16px 16px 0 0 !important;
+          --mdc-dialog-max-width: 100vw !important;
+          --mdc-dialog-min-width: 100vw !important;
+          --mdc-dialog-min-height: unset !important;
+          --mdc-dialog-max-height: 90vh !important;
+          --vertical-align-dialog: flex-end !important;
+          box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
+        }
+      }
+    $: |     
+      .mdc-dialog {
+        # display:flex !important;
+        # opacity:0;
+        # visibility:hidden;
+      }
+      .mdc-dialog * {
+        font-family: "SF Pro Display", sans-serif;
+      }
+      .mdc-dialog.mdc-dialog--open {
+        # opacity:1;
+        # visibility:visible;
+      }
+      .mdc-dialog__surface {
+        box-shadow: 0px 11px 15px 0 rgba(0, 0, 0, 0.1) !important;
+        background: var(--modal-background) !important;
+        # transform: translateY(100vh) !important;
+        # transition-delay: 0.3s;
+        # transition: transform 0.5s ease-in-out;
+      }
+      .mdc-dialog.mdc-dialog--open .mdc-dialog__surface {
+        # transition-delay: 0.5s !important;
+        # transform: translateY(0) !important;
+      }
+      ha-paper-dialog {
+        border-radius:10px;
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      
+    ha-header-bar:
+      $: |
+        :host {
+            border-bottom:0 !important;
+        }
+        .mdc-top-app-bar {
+            background:none !important;
+        }
+        .mdc-top-app-bar__title {
+            opacity:0;
+        }
+    mwc-tab-bar:
+      $: |
+        :host {
+            border-bottom:0 !important;
+        }
+
+  ## Header
+  card-mod-root-yaml: |
+    .: |
+      # /* Hide the left/right arrows */
+      # mwc-icon-button[slot="trigger"] > ha-svg-icon {
+      #   display: none;
+      # }
+      # mwc-icon-button[slot="trigger"]::after {
+      #   font-size: 22px;
+      #   height: 20px; 
+      #   width: 100px;
+      #   margin-left: 0px;
+      #   margin-right: 0px;
+      #   content: "{{ states('sensor.time') }}";
+      #   position: absolute;
+      #   top: 14px;
+      #   right: 0px;
+      # }
+      /* Change the tabs */
+      ha-tabs {
+        --paper-tabs-selection-bar-color: var(--accent-color) !important;
+        direction: unset !important;
+        justify-content:center !important;
+      }
+      /* This changes the color of the currently selected tab. */
+      paper-tab {
+        # width:calc((100% / 6));
+      }
+      paper-tab[aria-selected=true] {
+        color: var(--accent-color) !important;
+      }
+      /* This hides the help button. */
+      a.menu-link[target="_blank"] {
+        display: none;
+      }
+      /* Move header to bottom */
+
+      @media screen and (max-width:870px){
+        #view {          
+          padding-top: 0 !important;
+          padding-bottom: 68px !important;
+        }
+        
+        #view hui-view vertical-layout$: |
+           #columns {
+              padding-bottom: 68px !important;
+            }
+        div:not(.edit-mode) .header {
+          top: unset !important;
+          bottom:0;
+          position:fixed;
+          box-shadow: 0 0 20px rgba(0,0,0,0.08) !important;
+          # height: 68px !important;
+        }
+        # .edit-mode .header {
+        #   top: 0 !important;
+        #   bottom: unset;
+        # }
+        .toolbar {
+          # height: 68px !important;
+        }
+        .edit-mode #view {
+          margin-top: calc(var(--header-height) + 60px) !important;
+        }
+        ha-menu-button {
+          display: none !important;
+        }  
+      } 
+    ha-app-layout$: |
+      @media screen and (max-width:870px){
+        #contentContainer {
+          padding-top: 0 !important;
+          padding-bottom: 68px !important;
+        }
+      }
+    sl-tab-group$: |
+      @media screen and (max-width:870px){
+        paper-icon-button {
+          display:none !important
+        }
+        .tab-group__indicator {
+          bottom: unset !important;
+          border-bottom-width: 2.5px !important;
+        }
+      }

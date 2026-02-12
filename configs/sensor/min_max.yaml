@@ -1,0 +1,14 @@
+- platform: min_max
+  name: "Ady (BT) Confidence"
+  type: mean
+  round_digits: 0
+  entity_ids:
+    - sensor.ady_bt_ground_floor
+    - sensor.ady_bt_top_floor
+- platform: min_max
+  name: "Sam (BT) Confidence"
+  type: mean
+  round_digits: 0
+  entity_ids:
+    - sensor.sam_bt_ground_floor
+    - sensor.sam_bt_top_floor
