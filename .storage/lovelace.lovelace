@@ -3974,9 +3974,10 @@
                           },
                           "icon": "mdi:restart",
                           "tap_action": {
-                            "action": "navigate",
-                            "navigation_path": "/developer-tools/yaml",
-                            "haptic": "heavy"
+                            "action": "toast",
+                            "toast": {
+                              "message": "This is a toast message"
+                            }
                           }
                         },
                         {
