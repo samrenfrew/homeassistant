@@ -11,7 +11,7 @@ media_player.tv:
 device_tracker.sam_phone_app:
   entity_picture: /local/img/sam.jpg
   icon: mdi:android
-device_tracker.adrienne_vinces_iphone_app:
+device_tracker.iphone:
   entity_picture: /local/img/ady.png
   friendly_name: Ady's iPhone (App)
   icon: mdi:apple
