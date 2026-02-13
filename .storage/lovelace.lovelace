@@ -3986,8 +3986,8 @@
                         },
                         {
                           "type": "custom:mushroom-title-card",
-                          "title": "Restart Home Assistant?",
-                          "subtitle": "Click to restart the system"
+                          "title": "Restart System?",
+                          "subtitle": "Click to reload, hold to restart"
                         }
                       ],
                       "type": "custom:layout-card",
