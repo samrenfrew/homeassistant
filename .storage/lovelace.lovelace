@@ -3969,14 +3969,18 @@
                           "type": "custom:button-card",
                           "template": "large_button",
                           "hold_action": {
-                            "action": "more-info",
-                            "haptic": "heavy"
+                            "action": "perform-action",
+                            "perform_action": "homeassistant.restart",
+                            "confirmation": {
+                              "text": "Restart system? (This will stop all running automations)"
+                            }
                           },
                           "icon": "mdi:restart",
                           "tap_action": {
-                            "action": "toast",
-                            "toast": {
-                              "message": "This is a toast message"
+                            "action": "perform-action",
+                            "perform_action": "homeassistant.reload_all",
+                            "confirmation": {
+                              "text": "Reload all configurations? (System will not restart)"
                             }
                           }
                         },
