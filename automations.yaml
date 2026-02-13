@@ -2,52 +2,92 @@
   alias: Home Assistant Boot
   description: ''
   triggers:
-  - event: start
-    trigger: homeassistant
-  conditions: []
+  - trigger: homeassistant
+    event: start
   actions:
   - delay:
       hours: 0
       minutes: 0
       seconds: 5
       milliseconds: 0
-  - data:
-      data:
-        tag: start-up
-      message: A system boot has been initiated at {{ states('sensor.time') }}
-      title: Home Assistant Startup
-    action: notify.mobile_app_sam_phone
-  - data: {}
-    action: frontend.reload_themes
-  - data:
-      name: clear
-    enabled: false
-    action: frontend.set_theme
-  - condition: state
-    entity_id: binary_sensor.home
-    state: 'on'
-  - data: {}
-    entity_id: alarm_control_panel.alarm
-    action: alarm_control_panel.alarm_disarm
-  - data: {}
-    action: switch.turn_off
-    target:
-      entity_id:
-      - switch.humidifier
-      - switch.adaptive_lighting_lounge
-  - delay:
-      hours: 0
-      minutes: 0
-      seconds: 0
-      milliseconds: 500
-  - data: {}
-    target:
-      entity_id:
-      - switch.extension_lead
-      - switch.extension_lead_2
-      - switch.adaptive_lighting_lounge
-    action: switch.turn_on
+  - parallel:
+    - data:
+        data:
+          tag: start-up
+        message: A system boot has been initiated at {{ states('sensor.time') }}
+        title: Home Assistant Startup
+      action: notify.mobile_app_sam_phone
+    - if:
+      - condition: state
+        entity_id: binary_sensor.home
+        state: 'on'
+      then:
+      - entity_id: alarm_control_panel.alarm
+        data: {}
+        action: alarm_control_panel.alarm_disarm
+      - target:
+          entity_id:
+          - switch.humidifier
+          - switch.adaptive_lighting_lounge
+        data: {}
+        action: switch.turn_off
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 0
+          milliseconds: 500
+      - target:
+          entity_id:
+          - switch.extension_lead
+          - switch.extension_lead_2
+          - switch.adaptive_lighting_lounge
+        data: {}
+        action: switch.turn_on
+      else: []
+    - - data: {}
+        action: frontend.reload_themes
+      - data:
+          name: clear
+        enabled: false
+        action: frontend.set_theme
   mode: restart
+  variables:
+    _cafe_metadata:
+      version: 1
+      strategy: native
+      nodes:
+        trigger_1770969809828_0_0:
+          x: 45
+          y: 15
+        delay_1770969809831_1_1:
+          x: 315
+          y: 15
+        action_1770969809831_2_2:
+          x: 600
+          y: -135
+        action_1770969809831_3_3:
+          x: 705
+          y: 15
+        action_1770969809831_4_4:
+          x: 1035
+          y: 15
+        condition_1770969809831_5_5:
+          x: 555
+          y: 285
+        action_1770969809832_6_6:
+          x: 900
+          y: 180
+        action_1770969809832_7_7:
+          x: 900
+          y: 285
+        delay_1770969809832_8_8:
+          x: 915
+          y: 405
+        action_1770969809832_9_9:
+          x: 1140
+          y: 390
+      graph_id: 8b5a6244-c473-4806-bcbb-66d64f24227a
+      graph_version: 1
 - id: '1650046822895'
   alias: Enable TV Turn On
   description: ''
