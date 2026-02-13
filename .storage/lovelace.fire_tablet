@@ -866,7 +866,7 @@
                         "type": "thermostat",
                         "entity": "climate.hive",
                         "card_mod": {
-                          "style": "ha-card {\n width:94% !important;\n margin: 0 auto;\n background: none;\n}\n.title, .more-info {\n display:none;\n }\n"
+                          "style": "ha-card {\n width:100% !important;\n margin: 0 auto;\n background: none;\n}\n.title, .more-info {\n display:none;\n }\n"
                         }
                       }
                     }
