@@ -3450,7 +3450,7 @@
                           "reverse": false
                         },
                         "filter": {
-                          "template": "[{% for entity in states.sensor | selectattr('entity_id', 'search', '_health$') %}\n  {% set dev_id = device_id(entity.entity_id) %}\n  {% if dev_id %}\n    {% set identifiers = device_attr(dev_id, 'identifiers') %}\n    {% if identifiers and (identifiers | string is search('nas_')) %}\n      {\n        'entity': '{{entity.entity_id}}',\n        'name': '{{entity.name | replace(\"Container \", \"\") | replace(\" Health\", \"\") | capitalize}}',\n      },\n    {% endif %}\n  {% endif %}\n{% endfor %}]\n"
+                          "template": "[{% for entity in states.sensor | selectattr('entity_id', 'search', '_health$') %}\n  {% set dev_id = device_id(entity.entity_id) %}\n  {% if dev_id %}\n    {% set identifiers = device_attr(dev_id, 'identifiers') %}\n    {% if identifiers and (identifiers | string is search('nas_')) %}\n      {\n        'entity': '{{entity.entity_id}}',\n        'name': '{{entity.name | replace(\"Container \", \"\") | replace(\" Health\", \"\") | replace(\"-nas\", \"\") | capitalize}}',\n      },\n    {% endif %}\n  {% endif %}\n{% endfor %}]\n"
                         },
                         "show_empty": true,
                         "card_param": "entities"
