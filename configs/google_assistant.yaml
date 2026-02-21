@@ -98,9 +98,9 @@
       name: Nursery Lamp
       room: Nursery
       aliases:
-        - "Ella's Lamp"
-        - "Ella's Room Light"
-        - "Ella's Room Lamp"
+        - "Seb's Lamp"
+        - "Seb's Room Light"
+        - "Sebs's Room Lamp"
         - The Brain
     light.orb_lamp:
       expose: true
@@ -109,6 +109,9 @@
       aliases:
         - Orb Lamp
         - Corner Lamp
+    light.fairy_lights:
+      expose: true
+      name: Fairy Lights
     media_player.sonos_one:
       expose: false
       name: Dining Room Speaker
