@@ -569,10 +569,7 @@ boiler_card:
               return "switch.turn_on"
             ]]]]
           target:
-            entity_id: |
-              [[[[
-                return entity
-              ]]]]
+            entity_id: switch.hive_boost
           confirmation:
             text: |
               [[[[
