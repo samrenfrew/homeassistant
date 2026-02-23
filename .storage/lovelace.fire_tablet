@@ -177,7 +177,7 @@
                 "align-self": "end"
               },
               {
-                "line-height": "16px"
+                "line-height": "14px"
               },
               {
                 "font-weight": 400
@@ -209,7 +209,7 @@
                 "grid-template-columns": "100%"
               },
               {
-                "grid-template-rows": "minmax(56px, auto) 20px 16px"
+                "grid-template-rows": "minmax(56px, auto) 22px 14px"
               },
               {
                 "margin": "auto 0"
