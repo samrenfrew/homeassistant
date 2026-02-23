@@ -560,36 +560,30 @@ boiler_card:
     boost:
       card:
         type: custom:button-card
-        entity: binary_sensor.hive_heating_boost
+        entity: switch.hive_boost
         tap_action:
           action: call-service
           service: |
-            [[[
-              if(states['binary_sensor.hive_heating_boost'].state == "on") return "climate.set_hvac_mode"
-              return "button.press"
-            ]]]
+            [[[[
+              if(entity?.state == "on") return "switch.turn_off"
+              return "switch.turn_on"
+            ]]]]
           target:
             entity_id: |
-              [[[
-                if(states['binary_sensor.hive_heating_boost'].state == "on") return "climate.hive"
-                return "button.hive_heating_boost"
-              ]]]
-          data: |
-            [[[
-              if(states['binary_sensor.hive_heating_boost'].state == "on") return {"hvac_mode": "auto"}
-              return null
-            ]]]
+              [[[[
+                return entity
+              ]]]]
           confirmation:
             text: |
-              [[[
-                if(states['binary_sensor.hive_heating_boost'].state == "on") return "Turn off boost?"
+              [[[[
+                if(entity?.state == "on") return "Turn off boost?"
                 return `Boost to ${Number(states['number.hive_heating_boost_temperature'].state || 21).toFixed(0)}°C for ${Number(states['number.hive_heating_boost_duration'].state || 60).toFixed(0)} minutes?`
-              ]]]
+              ]]]]
         icon: |
-          [[[
-            if(states['binary_sensor.hive_heating_boost'].state == "on") return "mdi:rocket-launch"
+          [[[[
+            if(entity?.state == "on") return "mdi:rocket-launch"
             return "mdi:rocket-launch-outline"
-          ]]]
+          ]]]]
         show_name: false
         size: 60%
         styles:
