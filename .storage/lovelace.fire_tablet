@@ -131,7 +131,7 @@
                 "border-radius": "50px"
               },
               {
-                "color": "var(--theme-icon-color)"
+                "color": "#fff"
               },
               {
                 "transition-duration": "0.25s"
@@ -154,7 +154,7 @@
                 "align-self": "end"
               },
               {
-                "line-height": "22px"
+                "line-height": "24px"
               },
               {
                 "font-weight": 600
@@ -863,7 +863,7 @@
                         "type": "thermostat",
                         "entity": "climate.hive",
                         "card_mod": {
-                          "style": "ha-card {\n width:100% !important;\n margin: 0 auto;\n background: none;\n}\n.title, .more-info {\n  display:none;\n}\nha-state-control-climate-temperature {\n  max-width: unset !important;\n  aspect-ratio: 1/1;\n}\n"
+                          "style": "ha-card {\n width:100% !important;\n margin: 0 auto;\n background: none;\n}\n.title, .more-info {\n  display:none;\n}\nha-state-control-climate-temperature {\n  max-width: 200px !important;\n}\n"
                         }
                       }
                     }
