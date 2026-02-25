@@ -20,7 +20,7 @@
         "id": "75ed22b8bc404a758fc74c92d9d60268"
       },
       {
-        "url": "/hacsfiles/battery-state-card/battery-state-card.js?hacstag=256292682321",
+        "url": "/hacsfiles/battery-state-card/battery-state-card.js?hacstag=256292682330",
         "type": "module",
         "id": "2374bd6587c74bfcaaa2fff02f5be24d"
       },
@@ -61,7 +61,7 @@
       },
       {
         "id": "3aae99f6c1df4051ba566463629b624f",
-        "url": "/hacsfiles/scheduler-card/scheduler-card.js?hacstag=2862701574013",
+        "url": "/hacsfiles/scheduler-card/scheduler-card.js?hacstag=2862701574014",
         "type": "module"
       },
       {
