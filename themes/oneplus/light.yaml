@@ -1,0 +1,271 @@
+light:
+  # CARD MOD
+  card-mod-theme: cardmod
+
+  masonry-view-card-margin: "0"
+  grid-column-gap: 13px
+  grid-row-gap: 13px
+
+  # Colors 
+  accent-color: '#2a79ff'
+  secondary-accent-color: '#6a5ef2'
+  # running-accent-color: '#f44336'
+  # stopped-accent-color: '#4caf50'
+  running-accent-color: '#4caf50'
+  stopped-accent-color: '#f44336'
+  ha-tab-active-text-color: 'var(--accent-color)'
+  # header-height: 106px
+  app-header-selection-bar-color: 'var(--accent-color)'
+
+  primary-color: '#4A4A4A'
+
+  # masonry-view-card-margin: '0px'
+  box-shadow-off: 'none'
+  box-shadow-on: 'none'
+
+  # state-disabled-background: '#e4e4e4'
+  # state-disable-color: 'var(--primary-color)'
+  # state-background: 'var(--accent-color)'
+  # state-color: "#fff"
+
+  text-color: '#252525'  # Grey text  
+  rgb-primary-text-color: 37,37,37
+  text-medium-color: '#4a4a4a' # Medium grey text
+  text-light-color: '#E4E4E4' # Blue
+  background-color: '#f1f1f1'  # Light grey background
+  background-color-2: '#E4E4E4'  # Light grey background
+  background-card-color: '#f1f1f1' # White background
+  border-color: '#E8E8E8'  # Light grey border
+
+  # Fonts
+  mdc-typography-font-family: "SF Pro Display,sans-serif"
+  # paper-font-headline_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
+  # paper-font-subhead_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
+  # paper-font-body1_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
+  ha-font-family-body: '"SF Pro Display", sans-serif'
+
+  # Header
+  app-header-background-color: '#f1f1f1'
+  app-header-text-color: '#4A4A4A'
+  paper-tabs-selection-bar-color: 'var(--accent-color)'
+  app-header-edit-background-color: "#23608a"
+  # app-header-edit-text-color: ""
+
+  # Left Menu
+  paper-listbox-background-color: 'var(--background-color)' # Background
+  # Sidebar
+  # sidebar-icon-color: '#777777'
+  sidebar-selected-icon-color: 'var(--accent-color)'
+  sidebar-selected-text-color: 'var(--accent-color)'
+
+  # UI
+  paper-card-header-color: 'var(--text-color)' # Title in settings
+  primary-background-color: 'var(--background-color)'
+  iron-icon-fill-color: 'var(--text-color)'
+  iron-icon-stroke-color: 'var(--text-color)'
+
+  # Card
+  paper-card-background-color: 'var(--background-card-color)' # Background
+  dark-primary-color: '#3498db'
+  primary-text-color: 'var(--text-color)'
+  secondary-text-color: 'var(--text-medium-color)'
+  paper-listbox-color: 'var(--text-color)'
+  light-primary-color: 'var(--text-light-color)'
+  disabled-text-color: 'var(--text-light-color)'
+  paper-dialog-button-color: 'var(--text-color)'
+  secondary-background-color: 'var(--background-color-2)' # Background more info title
+
+  # Icons
+  paper-item-icon-color: 'var(--state-icon-color)' # Off
+  paper-item-icon-active-color: 'var(--accent-color)' # On
+  theme-icon-border: '3px solid var(--ha-card-background)'
+  theme-icon-outline: '1px solid var(--ha-card-border-color)'
+  theme-icon-background: 'var(--background-color)'
+  theme-icon-color: 'var(--primary-color)'
+
+  # Switches
+  switch-checked-button-color: '#00a1ff'   # Knob On
+  switch-unchecked-button-color: '#00a1ff'         # Knob Off
+  switch-checked-track-color: '#0077FF' # Background On
+  switch-unchecked-track-color: 'var(--disabled-text-color)' # Background Off
+
+  # Slider
+  paper-slider-active-color: 'var(--accent-color)'    # Line On
+  paper-slider-container-color: '#e5e7ea'   # Line Off
+  paper-slider-knob-color: 'var(--text-light-color)'  # Knob On
+  paper-slider-knob-start-color: 'var(--text-light-color)'  # Knob Off
+
+  # Modal
+  ha-dialog-scrim-backdrop-filter: blur(10px)
+  mdc-dialog-scrim-color: rgba(0,0,0,0.32)
+  dialog-box-shadow: 0px 11px 15px 0 rgba(0, 0, 0, 0.1)
+  # ha-dialog-surface-background: rgba(255,255,255,0.88)
+  ha-dialog-surface-background: rgba(255,255,255,1)
+  ha-dialog-border-radius: 16px
+
+  # Shadows
+  ha-card-box-shadow: 'none'
+  ha-card-border-radius: 20px
+  ha-card-background: '#fff'
+  ha-card-border-color: '#eee'
+  ha-card-border-width: '0px'
+
+  # HACS
+  hacs-badge-color: 'var(--accent-color)'  # New Badge
+  hacs-status-installed: 'var(--text-color)'  # Installed Icon
+  hacs-status-pending-restart: 'var(--text-light-color)'   # Restart Icon
+  hacs-status-pending-update: 'var(--accent-color)'
+
+  # Inputs
+  input-fill-color: var(--ha-card-background)
+
+  # SECTIONS
+  ha-section-grid-column-gap: 16px
+  ha-section-grid-row-gap: 13px
+  ha-view-sections-column-gap: 16px
+  ha-view-sections-row-gap: 13px
+
+  # BUBBLE
+  bubble-backdrop-background-color: 'var(--mdc-dialog-scrim-color)'
+  # bubble-pop-up-main-background-color: 'var(--ha-dialog-surface-background)'
+  bubble-pop-up-main-background-color: 'var(--ha-dialog-surface-background)'
+  bubble-pop-up-border-radius: 16px
+  bubble-backdrop-filter: blur(10px)
+
+# Mushroom layout
+  mush-spacing: 14px
+  # Title
+  #mush-title-padding: 32px 16px 8px
+  mush-title-padding: 8px 16px
+  mush-title-spacing: 5px
+  mush-title-font-size: 26px
+  mush-title-letter-spacing: -0.13px
+  mush-title-font-weight: 600
+  mush-title-line-height: 1
+  mush-title-font-family: "SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial"
+  mush-subtitle-font-size: 16px
+  mush-subtitle-letter-spacing: -0.08px
+  mush-subtitle-font-weight: 500
+  mush-subtitle-line-height: 1.2
+  # Card
+  mush-icon-border-radius: 50%
+  mush-card-primary-font-size: 15px
+  mush-card-secondary-font-size: 14px
+  mush-card-primary-font-weight: 600
+  mush-card-secondary-font-weight: 400
+  # Chips
+  mush-chip-spacing: 8px
+  mush-chip-padding: 0 12px
+  mush-chip-height: 36px
+  mush-chip-border-radius: 18px
+  mush-chip-border-color: var(--ha-card-border-color)
+  mush-chip-border-width: 1px
+  mush-chip-font-size: 13px # relative to chip height
+  mush-chip-font-weight: 600
+  mush-chip-icon-size: 0.5em # relative to chip height
+  # Slider
+  mush-slider-threshold: 20
+  mush-control-border-radius: 8px
+  mush-control-height: 36px
+  # # Colors
+  # mush-rgb-red: 244, 67, 54
+  # mush-rgb-pink: 233, 30, 99
+  mush-rgb-purple: 106, 94, 242
+  # mush-rgb-deep-purple: 103, 58, 183
+  # mush-rgb-indigo: 63, 81, 181
+  # mush-rgb-blue: 33, 150, 243
+  # mush-rgb-light-blue: 3, 169, 244
+  # mush-rgb-cyan: 0, 188, 212
+  # mush-rgb-teal: 0, 150, 136
+  mush-rgb-green: 76, 175, 80
+  # mush-rgb-light-green: 139, 195, 74
+  # mush-rgb-lime: 205, 220, 57
+  # mush-rgb-yellow: 255, 235, 59
+  # mush-rgb-amber: 255, 193, 7
+  mush-rgb-orange: 255, 152, 0
+ # mush-rgb-orange: 106, 94, 242
+  mush-rgb-info: 228, 228, 228
+  # mush-rgb-deep-orange: 255, 87, 34
+  # mush-rgb-brown: 121, 85, 72
+  # mush-rgb-grey: 158, 158, 158
+  # mush-rgb-blue-grey: 96, 125, 139
+  # mush-rgb-black: 0, 0, 0
+  # mush-rgb-white: 255, 255, 255
+  
+  # mush-rgb-info: var(--rgb-blue)
+  mush-rgb-success: var(--mush-rgb-green)
+  # mush-rgb-warning: var(--rgb-blue)
+  # mush-rgb-danger: var(--rgb-red)
+
+  # mush-rgb-state-cover: var(--rgb-blue)
+  # mush-rgb-state-fan: var(--rgb-green)
+  # mush-rgb-state-light: var(--mush-rgb-purple)
+  # mush-rgb-state-entity: var(--rgb-blue)
+  # mush-rgb-state-switch: var(--rgb-blue)
+
+  mush-rgb-state-alarm-disarmed: var(--rgb-info)
+  # mush-rgb-state-alarm-armed: var(--rgb-success)
+  # mush-rgb-state-alarm-triggered: var(--rgb-danger)
+
+  mush-rgb-state-update-on: var(--mush-rgb-green)
+
+  # mush-rgb-state-person-home: var(--rgb-success)
+  # mush-rgb-state-person-not-home: var(--rgb-danger)
+  # mush-rgb-state-person-zone: var(--rgb-info)
+  # mush-rgb-state-person-unknown: var(--rgb-grey)
+
+  color-orange: '#FF9800'
+  color-green: '#4CAF50'
+  color-red: '#F44336'
+
+  #  # New Colours
+  # state-default-color: '#44739E' # Blue-Grey  
+  # state-alarm_control_panel-armed_away-color: 
+  state-alarm_control_panel-armed_home-color: var(--orange-color)
+  # state-alarm-armed-color: '#F44336' # Red
+  # state-alarm-arming-color: '#FF9800' # Orange
+  # state-alarm-pending-color: '#FF9800' # Orange
+  # state-alarm-triggered-color: '#F44336' # Red
+  # state-alert-color: '#F44336' # Red
+  # state-automation-color: '#FFC107' # Amber
+  # state-binary-sensor-color: '#2196F3' # Blue
+  # state-binary-sensor-alerting-color: '#F44336' # Red
+  # state-calendar-color: '#2196F3' # Blue
+  # state-camera-color: '#2196F3' # Blue
+  # state-climate-auto-color: '#4CAF50' # Green
+  # state-climate-cool-color: '#2196F3' # Blue
+  # state-climate-dry-color: '#FF9800' # Orange
+  # state-climate-fan-only-color: '#00BCD4' # Cyan
+  # state-climate-heat-color: '#FF5722' # Deep Orange
+  # state-climate-heat-cool-color: '#FFC107' # Amber
+  # state-climate-idle-color: '#BDBDBD' # Disabled (Light Grey)
+  # state-cover-color: '#9C27B0' # Purple
+  # state-fan-color: '#00BCD4' # Cyan
+  # state-group-color: '#FFC107' # Amber
+  # state-humidifier-color: '#2196F3' # Blue
+  # state-input-boolean-color: '#FFC107' # Amber
+  state-light-color: var(--orange-color) # Amber
+  # state-lock-jammed-color: '#F44336' # Red
+  # state-lock-locked-color: '#4CAF50' # Green
+  # state-lock-pending-color: '#FF9800' # Orange
+  # state-media-player-color: '#3F51B5' # Indigo
+  # state-person-home-color: '#2196F3' # Blue
+  # state-person-zone-color: '#2196F3' # Blue
+  # state-remote-color: '#2196F3' # Blue
+  # state-script-color: '#FFC107' # Amber
+  # state-sensor-battery-high-color: '#4CAF50' # Green
+  # state-sensor-battery-low-color: '#F44336' # Red
+  # state-sensor-battery-medium-color: '#FF9800' # Orange
+  # state-sensor-battery-unknown-color: '#BDBDBD' # Disabled (Light Grey)
+  # state-siren-color: '#F44336' # Red
+  # state-sun-day-color: '#FFC107' # Amber
+  # state-sun-night-color: '#673AB7' # Deep Purple
+  # state-switch-color: '#2196F3' # Blue
+  # state-timer-color: '#FFC107' # Amber
+  # state-unavailable-color: var(--rgb-info)
+  state-update-color: var(--green-color) # Green
+  # state-update-installing-color: '#FF9800' # Orange
+  # state-vacuum-color: '#009688' # Teal  
+  box-shadow: 'inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03)'
+
+  advanced-camera-card-menu-button-active-color: '#FFF'

@@ -1,0 +1,364 @@
+cardmod:
+  ## CSS styling for Sidebar
+  card-mod-sidebar-yaml: |
+    .: |
+      * {
+        font-family: "SF Pro Display", sans-serif;
+      }
+      @media screen and (max-width:870px){
+        .menu {
+          height: var(--header-height) !important;
+        }
+      }
+      .menu .title {
+        font-weight: 500;
+      }
+
+  ## CSS styling for Entity cards
+  card-mod-row-yaml: |
+    hui-generic-entity-row:
+      $:
+        state-badge:
+          $: |
+            :host {
+              border: var(--theme-icon-border);
+              outline: var(--theme-icon-outline);
+              border-radius: 100px;
+              overflow: hidden;
+            }
+            ha-state-icon {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              height: 100%;
+              padding: 0 10px;
+              --mdc-icon-size: 20px;
+              --ha-icon-display: block;
+              background: var(--theme-icon-background);
+              color: var(--theme-icon-color);
+
+              {% set ent = config.entity %}
+              {% if ent and states(ent) not in ['unknown', 'unavailable'] %}
+                {% set state = states(ent) %}
+                {% set class = config.card_mod.class if config.card_mod and config.card_mod.class else '' %}
+                
+                {% if ent is search("sensor.*_battery$") %}
+                  {% set val = state | int(0) %}
+                  background: {{ 'var(--color-red)' if val < 30 else 'var(--color-orange)' if val < 70 else 'var(--color-green)' }} !important;
+                  color: #fff !important;
+                {% elif ent is search("device_tracker.*_bt_tracker$") %}
+                  background: {{ 'var(--color-red)' if state == 'not_home' else 'var(--color-green)' }} !important;
+                  color: #fff !important;
+                {% elif 'drive_time' in class %}
+                  {% set val = state | int(0) %}
+                  background: {{ 'var(--color-green)' if val <= 10 else 'var(--color-orange)' if val <= 20 else 'var(--color-red)' }} !important;
+                  color: #fff !important;
+                {% endif %}
+              {% endif %}
+            }
+
+
+  ## CSS styling for Glance cards
+  card-mod-glance-yaml: |
+    .: |
+      .name {
+        font-weight: 600;
+        order:2;
+      }
+      div {
+        order:3;
+      }
+    state-badge$: |        
+      :host {
+        width: 50px !important;
+        height: 50px !important;
+        order:1;
+      }
+      ha-state-icon {
+        background: var(--theme-icon-background);
+        border: var(--theme-icon-border);
+        outline: var(--theme-icon-outline);
+        padding: 10px;
+        color: var(--theme-icon-color) !important;
+        border-radius: 100px;
+      }
+      ha-state-icon[data-state="normal"], ha-state-icon[data-state="on"] {
+        background: var(--accent-color);
+        color: #fff !important;
+      }
+      ha-state-icon[data-domain="switch"][data-state="on"] {
+        background: var(--secondary-accent-color, var(--state-switch-active-color, var(--state-active-color)));
+        color: #fff !important;
+      }
+      ha-state-icon[data-domain="device_tracker"][data-state="home"] {
+        background: var(--state-device_tracker-home-color, var(--state-device_tracker-active-color, var(--state-active-color)));
+        color: #fff !important;
+      }
+      ha-state-icon[data-domain="sensor"][data-state="healthy"] {
+        background: var(--state-device_tracker-home-color, var(--state-device_tracker-active-color, var(--state-active-color)));
+        color: #fff !important;
+      }
+      ha-state-icon[data-domain="sensor"][data-state="unhealthy"] {
+        background: var(--state-alert-on-color, var(--state-inactive-color));
+        color: #fff !important;
+      }
+
+  ## CSS styling for all cards
+  card-mod-card-yaml: |
+    .: |     
+      {% set bg = config.entity and state_attr(config.entity, "entity_picture") %}
+      ha-card {
+        transition: all 0.2s ease-in-out, height 0s, margin 0s !important;
+      }  
+      ha-card.type-custom-button-card:not(.no-hover):hover {
+        @media (hover: hover) {
+          transform: scale(1.05);
+          box-shadow:1px 3px 10px rgba(0,0,0,0.05);
+        }
+      }
+      .type-glance, .media-player, .type-entities, .type-custom-uptime-card, .type-gauge, .type-custom-mini-graph-card, .type-map, .type-custom-mini-media-player, .type-history-graph, .type-custom-multiple-logbook-card, .type-picture-entity, .type-statistics-graph  {
+        border-width: 1px;
+      }
+
+      {% if config.card_mod and config.card_mod.class and 'media_card' in config.card_mod.class %} 
+      ha-card {
+        border-radius: 20px;
+        border:1px solid var(--ha-card-border-color);
+        min-height: 200px;
+        @media screen and (min-width: 1200px){
+          min-height: 141px;
+        }
+        {% if config.card_mod and config.card_mod.class and 'fire' in config.card_mod.class %}
+        min-height: 122px; 
+        height: 100% !important;
+        {% endif %}
+      }   
+      
+      mushroom-card {
+        justify-content: flex-end;
+        border-radius: 20px;
+        overflow: hidden;
+        background: linear-gradient(240deg, var(--accent-color) -200%, var(--ha-card-background) 30%);
+        {% if bg %}
+        --card-primary-color: #fff;
+        --card-secondary-color: #FFFFFF90;
+        background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.2)), url("{{ bg }}");
+        background-position: center;
+        background-size: 100%, cover;
+        color: #fff;
+        {% endif %}
+      }
+      mushroom-state-item {
+        flex-grow: 0;
+      }
+      mushroom-button {
+        {% if bg %}
+        --bg-color: rgba(255,255,255, 0.15) !important;
+        --bg-color-disabled: rgba(255,255,255, 0.15) !important;
+        --icon-color: #fff;
+        {% endif %}
+      }
+      {% endif %}
+
+      {% if config.card_mod and config.card_mod.class and 'remote_media' in config.card_mod.class %}
+      ha-card {
+        height: 100%;
+        letter-spacing: 0.2px;
+      }
+      ha-card .mmp-player__core {
+        flex-direction:column-reverse;
+      }
+      ha-card .mmp-player {
+        align-self: center;
+      }
+      ha-card mmp-powerstrip {
+        justify-content:flex-start !important;
+        margin-left:0;
+      }
+      ha-card .entity__info {
+        margin-left:0;
+      } 
+      {% endif %}
+    
+    .no_icon$: |
+      state-badge {
+        display: none !important;
+      }
+      .info {
+        padding-left: 0 !important;
+      }
+
+    .scroll$:
+      .: |
+        grid-layout {
+          --layout-margin: 0 -10px;
+          --layout-padding: 4px 16px 4px 10px;
+          position: relative;
+        }      
+        grid-layout::after {
+          display: block;
+          content: "";
+          position: absolute;
+          width: 19px;
+          height: 100%;
+          background: linear-gradient(to left, var(--background-color), transparent);
+          right: -10px;
+          top: 0;
+        }        
+        grid-layout::before {
+          display: block;
+          content: "";
+          position: absolute;
+          width: 18px;
+          height: 100%;
+          background: linear-gradient(to right, var(--background-color), transparent);
+          left: -16px;
+          top: 0;
+          z-index:1;
+        }  
+
+      grid-layout$: |
+        #root {
+          scroll-snap-type: x mandatory;
+          scroll-padding: 24px;
+        } 
+        ::-webkit-scrollbar {
+          display: none;
+        }
+        #root > * {
+          scroll-snap-align: start;
+        }
+
+    mmp-powerstrip$:
+      mmp-source-menu$:
+        mmp-dropdown$:
+          mmp-button$: |
+            .slot-container {
+              margin-left: 0 !important;
+            }       
+
+    mushroom-card$: |
+      {% if config.card_mod and config.card_mod.class and 'media_card' in config.card_mod.class %}
+      .container {
+        justify-content:flex-end !important;
+        flex-grow:0 !important;
+      }   
+      {% endif %} 
+            
+    
+    mushroom-media-player-media-control$: |
+      {% set bg = config.entity and state_attr(config.entity, "entity_picture") %}
+      {% if bg %}
+      mushroom-button {
+        --bg-color: rgba(255,255,255, 0.15) !important;
+        --bg-color-disabled: rgba(255,255,255, 0.15) !important;
+        --icon-color: #fff;
+      }    
+      {% endif %}         
+    mushroom-media-player-volume-control$: |
+      {% set bg = config.entity and state_attr(config.entity, "entity_picture") %}
+      {% if bg %}
+      mushroom-button {
+        --bg-color: rgba(255,255,255, 0.15) !important;
+        --bg-color-disabled: rgba(255,255,255, 0.15) !important;
+        --icon-color: #fff;
+      }
+      mushroom-slider {
+        --bg-color: rgba(255,255,255, 0.15) !important;
+      }
+      {% endif %}   
+ 
+  ## More Info
+  card-mod-more-info-yaml: |
+    .: |
+      ha-dialog {  
+        
+        @media (max-width: 450px), (max-height: 500px) {
+          # --ha-dialog-border-radius: 16px 16px 0 0 !important;
+          --mdc-dialog-max-width: 100vw !important;
+          --mdc-dialog-min-width: 100vw !important;
+          --mdc-dialog-min-height: unset !important;
+          --mdc-dialog-max-height: 90vh !important;
+          --vertical-align-dialog: flex-end !important;
+          box-shadow:var(--mdc-dialog-box-shadow, 0px 11px 15px -7px rgba(0, 0, 0, 0.1), 0px 24px 38px 3px rgba(0, 0, 0, 0.1)) !important;
+        }
+      }
+    $: |  
+      ha-paper-dialog {
+        # border-radius:10px;
+      }
+      @media (max-width: 450px), (max-height: 500px) {
+        .mdc-dialog__surface {
+          padding-top: 0 !important;
+          border-radius: 20px 20px 0 0 !important;
+        }
+      }
+      ::-webkit-scrollbar {
+        display: none;
+      }
+      
+    ha-header-bar:
+      $: |
+        :host {
+            border-bottom:0 !important;
+        }
+        .mdc-top-app-bar {
+            background:none !important;
+        }
+        .mdc-top-app-bar__title {
+            opacity:0;
+        }
+    mwc-tab-bar:
+      $: |
+        :host {
+            border-bottom:0 !important;
+        }
+
+  ## Header
+  card-mod-root-yaml: |
+    .: |
+      @media screen and (max-width:870px){
+        .header {
+          #--header-height: calc(68px);
+          padding-top: 0 !important;
+          box-shadow: var(--mdc-top-app-bar-fixed-box-shadow);
+          # padding-bottom: 24px !important:
+        }
+        .toolbar {
+          # padding-bottom: 24px !important;
+          box-sizing: content-box !important;
+          --mdc-icon-button-size: var(--header-height, 56px)
+        }
+        .edit-mode {
+          padding-top: 160px !important;
+        }
+        .edit-mode .header {
+          transform:translateY(calc(-100vh + 100%));
+          top: 0 !important;
+          bottom: auto !important;
+        }
+        .edit-mode .header .toolbar {
+          padding-top: var(--app-safe-area-inset-top) !important;
+          padding-bottom: 0 !important;
+        }
+        ha-tab-group-tab {
+          --ha-tab-group-tab-height: 50px !important;
+          border-block-end: unset;
+          border-block-start: solid var(--track-width) transparent;
+          margin-block-end: unset;
+          margin-block-start: -var(--track-width);
+        }
+        ha-tab-group-tab[aria-selected="true"] {
+          border-block-end: unset;
+          border-block-start: solid var(--track-width) var(--indicator-color);
+          margin-block-end: unset;
+          margin-block-start: -var(--track-width);
+
+        }
+      }
+      ha-tab-group-tab[aria-selected="true"] {
+        color: var(--accent-color) !important;
+      }
+
+
+  

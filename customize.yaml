@@ -1,0 +1,17 @@
+zone.home:
+  track_ios: 'true'
+group.all_lights:
+  control: hidden
+switch.transmission_turtle_mode:
+  templates:
+    icon: if (state === 'on') return 'mdi:speedometer-slow'; else return 'mdi:speedometer';
+media_player.tv:
+  templates:
+    icon: if (state === 'playing') return 'mdi:television'; return 'mdi:television-off';
+device_tracker.sam_phone_app:
+  entity_picture: /local/img/sam.jpg
+  icon: mdi:android
+device_tracker.iphone:
+  entity_picture: /local/img/ady.png
+  friendly_name: Ady's iPhone (App)
+  icon: mdi:apple

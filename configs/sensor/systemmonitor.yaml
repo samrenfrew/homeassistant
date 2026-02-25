@@ -1,0 +1,14 @@
+# - platform: systemmonitor
+#   resources:
+#     # - type: disk_use
+#     #   arg: '/home/pi/Downloads'
+#     # - type: disk_use
+#     #   arg: '/home/pi/Downloads/Torrents/DL/complete'
+#     # - type: disk_free
+#     #   arg: /
+#     - type: disk_use_percent
+#       arg: /
+#     - type: processor_use
+#     - type: last_boot
+#     - type: memory_use_percent
+#     - type: processor_temperature

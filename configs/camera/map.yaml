@@ -1,0 +1,5 @@
+# ## CAMERAS
+# - platform: generic
+#   name: Sam Phone
+#   still_image_url: !secret phone_img
+#   limit_refetch_to_url_change: true

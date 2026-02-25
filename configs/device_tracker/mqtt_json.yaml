@@ -1,0 +1,5 @@
+# - platform: mqtt_json
+#   devices:
+#     sam_phone: location/sam
+#     sams_macbook_pro: location/macbook
+#   qos: 2

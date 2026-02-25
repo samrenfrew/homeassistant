@@ -1,0 +1,20 @@
+fire_tablet:
+  name: Fire Tablet
+  version: '1.0'
+  creator: ''
+  supported:
+    - pop-up
+  description: ''
+  code: |-
+    .bubble-pop-up {
+      --bubble-pop-up-main-background-color: #0d0d0d;
+      height: unset !important;
+      max-height: 100vh !important;
+      box-shadow: var(--mdc-dialog-box-shadow) !important;
+      z-index: 7 !important;
+    }
+    .bubble-backdrop.is-visible {
+      backdrop-filter: brightness(20%) !important;
+      z-index: 6;
+    }
+  editor: ''

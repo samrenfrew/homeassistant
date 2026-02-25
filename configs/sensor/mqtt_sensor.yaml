@@ -1,0 +1,192 @@
+# # - platform: mqtt
+# #   state_topic: "sensor/node"
+# #   name: "Lounge Light Level"
+# #   unit_of_measurement: "lx"
+# #   device_class: illuminance
+# #   value_template: '{{ value_json.ldr }}'
+
+# # - platform: mqtt
+# #   state_topic: "sensor/node"
+# #   name: "Lounge Real Temperature"
+# #   unit_of_measurement: "°C"
+# #   device_class: temperature
+# #   value_template: >-
+# #       {%- if value_json.temperature|float > 1 -%}
+# #       {{ value_json.temperature | round(1) }}
+# #       {%- else -%}
+# #       nan
+# #       {%- endif -%}
+
+# # - platform: mqtt
+# #   state_topic: "sensor/node"
+# #   name: "Lounge Temperature"
+# #   unit_of_measurement: "°C"
+# #   device_class: temperature
+# #   value_template: >-
+# #       {%- if value_json.heatIndex|float > 1 -%}
+# #       {{ value_json.heatIndex | round(1) }}
+# #       {%- else -%}
+# #       nan
+# #       {%- endif -%}
+
+# # - platform: mqtt
+# #   state_topic: "sensor/node"
+# #   name: "Lounge Humidity"
+# #   unit_of_measurement: "%"
+# #   device_class: humidity
+# #   value_template: >-
+# #       {%- if value_json.humidity|float > 1 -%}
+# #       {{ value_json.humidity | round(1) }}
+# #       {%- else -%}
+# #       nan
+# #       {%- endif -%}
+
+# # - platform: mqtt
+# #   state_topic: 'monitor/office/sam_bt'
+# #   value_template: '{{ value_json.confidence }}'
+# #   unit_of_measurement: '%'
+# #   name: 'Sam (BT) Office'
+
+# - platform: mqtt
+#   state_topic: 'monitor/lounge/sam_bt'
+#   value_template: '{{ value_json.confidence }}'
+#   unit_of_measurement: '%'
+#   name: 'Sam (BT) Lounge'
+  
+# - platform: mqtt
+#   state_topic: 'monitor/bedroom/sam_bt'
+#   value_template: '{{ value_json.confidence }}'
+#   unit_of_measurement: '%'
+#   name: 'Sam (BT) Bedroom'
+
+# - platform: min_max
+#   name: "Sam (BT) Confidence"
+#   type: mean
+#   round_digits: 0
+#   entity_ids:
+#     - sensor.sam_bt_lounge
+#     # - sensor.sam_bt_office
+#     - sensor.sam_bt_bedroom
+
+# # - platform: mqtt
+# #   state_topic: 'monitor/office/ady_bt'
+# #   value_template: '{{ value_json.confidence }}'
+# #   unit_of_measurement: '%'
+# #   name: 'Ady (BT) Office'
+
+# - platform: mqtt
+#   state_topic: 'monitor/lounge/ady_bt'
+#   value_template: '{{ value_json.confidence }}'
+#   unit_of_measurement: '%'
+#   name: 'Ady (BT) Lounge'
+  
+# - platform: mqtt
+#   state_topic: 'monitor/bedroom/ady_bt'
+#   value_template: '{{ value_json.confidence }}'
+#   unit_of_measurement: '%'
+#   name: 'Ady (BT) Bedroom'
+
+# - platform: min_max
+#   name: "Ady (BT) Confidence"
+#   type: mean
+#   round_digits: 0
+#   entity_ids:
+#     - sensor.ady_bt_lounge
+#     # - sensor.ady_bt_office
+#     - sensor.ady_bt_bedroom
+# # - platform: mqtt
+# #   state_topic: "sensor/node"
+# #   name: "Lounge Light Level"
+# #   unit_of_measurement: "lx"
+# #   device_class: illuminance
+# #   value_template: '{{ value_json.ldr }}'
+
+# # - platform: mqtt
+# #   state_topic: "sensor/node"
+# #   name: "Lounge Real Temperature"
+# #   unit_of_measurement: "°C"
+# #   device_class: temperature
+# #   value_template: >-
+# #       {%- if value_json.temperature|float > 1 -%}
+# #       {{ value_json.temperature | round(1) }}
+# #       {%- else -%}
+# #       nan
+# #       {%- endif -%}
+
+# # - platform: mqtt
+# #   state_topic: "sensor/node"
+# #   name: "Lounge Temperature"
+# #   unit_of_measurement: "°C"
+# #   device_class: temperature
+# #   value_template: >-
+# #       {%- if value_json.heatIndex|float > 1 -%}
+# #       {{ value_json.heatIndex | round(1) }}
+# #       {%- else -%}
+# #       nan
+# #       {%- endif -%}
+
+# # - platform: mqtt
+# #   state_topic: "sensor/node"
+# #   name: "Lounge Humidity"
+# #   unit_of_measurement: "%"
+# #   device_class: humidity
+# #   value_template: >-
+# #       {%- if value_json.humidity|float > 1 -%}
+# #       {{ value_json.humidity | round(1) }}
+# #       {%- else -%}
+# #       nan
+# #       {%- endif -%}
+
+# # - platform: mqtt
+# #   state_topic: 'monitor/office/sam_bt'
+# #   value_template: '{{ value_json.confidence }}'
+# #   unit_of_measurement: '%'
+# #   name: 'Sam (BT) Office'
+
+# - platform: mqtt
+#   state_topic: 'monitor/lounge/sam_bt'
+#   value_template: '{{ value_json.confidence }}'
+#   unit_of_measurement: '%'
+#   name: 'Sam (BT) Lounge'
+  
+# - platform: mqtt
+#   state_topic: 'monitor/bedroom/sam_bt'
+#   value_template: '{{ value_json.confidence }}'
+#   unit_of_measurement: '%'
+#   name: 'Sam (BT) Bedroom'
+
+# - platform: min_max
+#   name: "Sam (BT) Confidence"
+#   type: mean
+#   round_digits: 0
+#   entity_ids:
+#     - sensor.sam_bt_lounge
+#     # - sensor.sam_bt_office
+#     - sensor.sam_bt_bedroom
+
+# # - platform: mqtt
+# #   state_topic: 'monitor/office/ady_bt'
+# #   value_template: '{{ value_json.confidence }}'
+# #   unit_of_measurement: '%'
+# #   name: 'Ady (BT) Office'
+
+# - platform: mqtt
+#   state_topic: 'monitor/lounge/ady_bt'
+#   value_template: '{{ value_json.confidence }}'
+#   unit_of_measurement: '%'
+#   name: 'Ady (BT) Lounge'
+  
+# - platform: mqtt
+#   state_topic: 'monitor/bedroom/ady_bt'
+#   value_template: '{{ value_json.confidence }}'
+#   unit_of_measurement: '%'
+#   name: 'Ady (BT) Bedroom'
+
+# - platform: min_max
+#   name: "Ady (BT) Confidence"
+#   type: mean
+#   round_digits: 0
+#   entity_ids:
+#     - sensor.ady_bt_lounge
+#     # - sensor.ady_bt_office
+#     - sensor.ady_bt_bedroom

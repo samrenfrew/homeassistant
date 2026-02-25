@@ -1,0 +1,13 @@
+- light:
+  - unique_id: ikea_plug
+    name: Cool Lamp
+    state: "{{ is_state('switch.ikea_plug', 'on') }}"
+    availability: "{{ is_state('switch.ikea_plug', 'on') or is_state('switch.ikea_plug',
+      'off')}}"
+    turn_on:
+    - action: switch.turn_on
+      entity_id: switch.ikea_plug
+    turn_off:
+    - action: switch.turn_off
+      entity_id: switch.ikea_plug
+    default_entity_id: light.ikea_plug

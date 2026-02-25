@@ -1,0 +1,21 @@
+# - platform: generic
+#   name: "Front Door Latest Image"
+#   still_image_url: >-
+#     {% set entities = states | selectattr('entity_id', 'match', '^image\.front_door_.*') | list %}
+#     {% set latest = entities | sort(attribute='last_updated') | last %}
+#     {% if latest %}
+#       {{ state_attr(latest.entity_id, 'entity_picture') }}
+#     {% else %}
+#       {{ state_attr('camera.front_door', 'entity_picture') }}
+#     {% endif %}
+
+# - platform: generic
+#   name: "Back Door Latest Image"
+#   still_image_url: >-
+#     {% set entities = states | selectattr('entity_id', 'match', '^image\.back_door_.*') | list %}
+#     {% set latest = entities | sort(attribute='last_updated') | last %}
+#     {% if latest %}
+#       {{ state_attr(latest.entity_id, 'entity_picture') }}
+#     {% else %}
+#       {{ state_attr('camera.back_door', 'entity_picture') }}
+#     {% endif %}

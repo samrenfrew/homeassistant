@@ -1,0 +1,35 @@
+  # day_switch_time: "20:00"
+  # sources:
+  #   - name: static
+  #     calendar_title: "Green Bin"
+  #     args:
+  #       type: "Green Bin"
+  #       # dates: DATES
+  #       frequency: WEEKLY
+  #       interval: 2
+  #       start: "2024-01-02"
+  #       count: 100
+  #       # excludes: EXCLUDES
+  #       weekdays: TU
+  #   - name: static
+  #     calendar_title: "Black Bin"
+  #     args:
+  #       type: "Black Bin"
+  #       # dates: DATES
+  #       frequency: WEEKLY
+  #       interval: 1
+  #       start: "2024-01-01"
+  #       count: 100
+  #       # excludes: EXCLUDES
+  #       weekdays: WE
+  #   - name: static
+  #     calendar_title: "Brown Bin"
+  #     args:
+  #       type: "Brown Bin"
+  #       # dates: DATES
+  #       frequency: WEEKLY
+  #       interval: 2
+  #       start: "2024-04-11"
+  #       count: 50
+  #       # excludes: EXCLUDES
+  #       weekdays: TH

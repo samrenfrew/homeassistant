@@ -1,0 +1,35 @@
+  # - platform: waste_collection_schedule
+  #   name: Next Bin
+  #   source_index: [0,1,2]
+  #   details_format: upcoming
+  #   value_template: "{{ value.types[0] }}"
+  #   leadtime: 7
+  #   add_days_to: true
+  #   types:
+  #     - Green Bin
+  #     - Black Bin
+  #     - Brown Bin
+  # - platform: waste_collection_schedule
+  #   name: Next Green Bin
+  #   source_index: 0
+  #   details_format: upcoming
+  #   count: 3
+  #   value_template: "{{ value.daysTo }}"
+  #   types:
+  #     - Green Bin
+  # - platform: waste_collection_schedule
+  #   name: Next Black Bin
+  #   source_index: 1
+  #   details_format: upcoming
+  #   count: 3
+  #   value_template: "{{ value.daysTo }}"
+  #   types:
+  #     - Black Bin
+  # - platform: waste_collection_schedule
+  #   name: Next Brown Bin
+  #   source_index: 2
+  #   details_format: upcoming
+  #   count: 3
+  #   value_template: "{{ value.daysTo }}"
+  #   types:
+  #     - Brown Bin

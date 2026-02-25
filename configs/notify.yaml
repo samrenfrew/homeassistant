@@ -1,0 +1,18 @@
+## NOTIFICATIONS
+  # - name: html5
+  #   platform: html5
+  #   vapid_pub_key: !secret vapid_pub_key
+  #   vapid_prv_key: !secret vapid_prv_key
+  #   vapid_email: !secret vapid_email
+  - platform: joaoapps_join
+    api_key: !secret join_api
+    device_id: !secret join_phone
+    name: Phone
+  - platform: joaoapps_join
+    api_key: !secret join_api
+    device_id: !secret join_laptop
+    name: Laptop
+  - platform: rest
+    name: ga_broadcast
+    resource: http://localhost:8085/broadcast
+    method: POST_JSON

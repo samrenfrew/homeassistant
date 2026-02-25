@@ -1,0 +1,44 @@
+- switch:
+
+  # TV
+  - unique_id: tv
+    name: TV
+    icon: mdi:television
+    state: "{{ is_state('media_player.lg_webos_tv', 'on') }}"
+    turn_on:
+    - action: media_player.turn_on
+      entity_id: media_player.lg_webos_tv      
+    turn_off:
+    - action: media_player.turn_off
+      entity_id: media_player.lg_webos_tv
+
+  # PC
+  - unique_id: pc
+    name: PC
+    state: "{{ is_state('binary_sensor.pc', 'on') }}"
+    turn_on:
+      - action: shell_command.wol_pc
+    turn_off:
+      - action: shell_command.sleep_pc
+
+  - unique_id: master_adguard_protection
+    name: "Adguard Protection"
+    state: "{{ is_state('switch.adguard_nuc_protection', 'on') or is_state('switch.adguard_nas_protection', 'on') }}"
+    turn_on:
+      - action: switch.turn_on
+        target:
+          entity_id:
+            - switch.adguard_nuc_protection
+            - switch.adguard_nas_protection
+    turn_off:
+      - action: switch.turn_off
+        target:
+          entity_id:
+            - switch.adguard_nuc_protection
+            - switch.adguard_nas_protection
+    icon: >-
+      {% if is_state('switch.adguard_protection', 'on') %}
+        mdi:shield-check
+      {% else %}
+        mdi:shield-off
+      {% endif %}

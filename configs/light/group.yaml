@@ -1,0 +1,18 @@
+# - platform: group
+#   name: All
+#   entities:
+#     - light.backlight
+#     - light.big_lamp
+#     - light.chair_lamp
+#     - light.computer
+#     - light.small_lamp
+#     - light.spotlight
+#     - light.tv_lamp
+# - platform: group
+#   name: Lounge
+#   entities:
+#     - light.backlight
+#     - light.big_lamp
+#     - light.chair_lamp
+#     - light.small_lamp
+#     - light.tv_lamp

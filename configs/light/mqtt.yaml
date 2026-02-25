@@ -1,0 +1,59 @@
+# - platform: mqtt
+#   schema: json
+#   name: "Backlight"
+#   state_topic: "light/hallway"
+#   command_topic: "light/hallway/set"
+#   effect: true
+#   effect_list:
+#     - bpm
+#     - candy cane
+#     - confetti
+#     - cyclon rainbow
+#     - dots
+#     - fire
+#     - glitter
+#     - juggle
+#     - lightning
+#     - noise
+#     - police all
+#     - police one
+#     - rainbow
+#     - rainbow with glitter
+#     - ripple
+#     - sinelon
+#     - solid
+#     - twinkle
+#   brightness: true
+#   rgb: true
+#   optimistic: false
+#   qos: 0
+#
+# - platform: mqtt
+#   schema: json
+#   name: "Computer"
+#   state_topic: "light/computer"
+#   command_topic: "light/computer/set"
+#   effect: true
+#   effect_list:
+#     - bpm
+#     - candy cane
+#     - confetti
+#     - cyclon rainbow
+#     - dots
+#     - fire
+#     - glitter
+#     - juggle
+#     - lightning
+#     - noise
+#     - police all
+#     - police one
+#     - rainbow
+#     - rainbow with glitter
+#     - ripple
+#     - sinelon
+#     - solid
+#     - twinkle
+#   brightness: true
+#   rgb: true
+#   optimistic: false
+#   qos: 0

@@ -1,0 +1,494 @@
+{
+  "version": 1,
+  "minor_version": 1,
+  "key": "lovelace.screen_saver",
+  "data": {
+    "config": {
+      "kiosk_mode": {
+        "user_settings": [
+          {
+            "users": [
+              "fire"
+            ],
+            "hide_sidebar": false,
+            "hide_header": false,
+            "kiosk": true
+          }
+        ]
+      },
+      "button_card_templates": {
+        "widget": {
+          "show_name": true,
+          "show_icon": true,
+          "show_state": false,
+          "show_label": true,
+          "tap_action": {
+            "action": "none"
+          },
+          "hold_action": {
+            "action": "none"
+          },
+          "double_tap_action": {
+            "action": "none"
+          },
+          "label": "[[[\n  if (!entity) return \"\";\n  if (entity?.attributes?.device_class == 'door') {\n    if (entity?.state == 'on') return \"Open\";\n    if (entity?.state == 'off') return \"Closed\";\n    return entity.state;\n  }           \n  return entity.state;\n]]]\n",
+          "variables": {
+            "color": "var(--accent-color)"
+          },
+          "state": [
+            {
+              "operator": "regex",
+              "value": "on|normal|armed_|arming|triggered|playing|home",
+              "id": "on",
+              "styles": {
+                "card": [
+                  {
+                    "background": "[[[ \n  return \"linear-gradient(240deg, \" + variables.color + \" -200%, var(--ha-card-background) 30%)\" \n]]]\n"
+                  }
+                ],
+                "icon": [
+                  {
+                    "color": "white"
+                  },
+                  {
+                    "background": "[[[ return variables.color ]]]"
+                  }
+                ]
+              }
+            }
+          ],
+          "styles": {
+            "card": [
+              {
+                "margin": "0 0 0 0"
+              },
+              {
+                "padding": "10px 12px"
+              },
+              {
+                "border-radius": "20px"
+              },
+              {
+                "border": "1px solid var(--ha-card-border-color)"
+              },
+              {
+                "height": "100%"
+              },
+              {
+                "max-width": "fit-content"
+              }
+            ],
+            "img_cell": [
+              {
+                "justify-content": "start"
+              },
+              {
+                "overflow": "visible"
+              }
+            ],
+            "icon": [
+              {
+                "align-self": "start"
+              },
+              {
+                "width": "46px"
+              },
+              {
+                "height": "46px"
+              },
+              {
+                "margin": 0
+              },
+              {
+                "background": "var(--theme-icon-background)"
+              },
+              {
+                "border": "var(--theme-icon-border)"
+              },
+              {
+                "outline": "var(--theme-icon-outline)"
+              },
+              {
+                "padding": "8px"
+              },
+              {
+                "border-radius": "50px"
+              },
+              {
+                "color": "var(--theme-icon-color)"
+              },
+              {
+                "transition-duration": "0.25s"
+              },
+              {
+                "transition-timing-function": "ease-in-out"
+              },
+              {
+                "transition-property": "color, background"
+              }
+            ],
+            "name": [
+              {
+                "text-align": "start"
+              },
+              {
+                "justify-self": "start"
+              },
+              {
+                "align-self": "end"
+              },
+              {
+                "line-height": 1.2
+              },
+              {
+                "font-weight": 600
+              },
+              {
+                "font-size": "28px"
+              },
+              {
+                "letter-spacing": "0.1px"
+              },
+              {
+                "padding-right": "8px"
+              }
+            ],
+            "label": [
+              {
+                "text-align": "start"
+              },
+              {
+                "justify-self": "start"
+              },
+              {
+                "align-self": "start"
+              },
+              {
+                "line-height": 1.2
+              },
+              {
+                "font-weight": 400
+              },
+              {
+                "font-size": "24px"
+              },
+              {
+                "color": "var(--primary-text-color)"
+              },
+              {
+                "letter-spacing": "0.4px"
+              },
+              {
+                "text-transform": "capitalize"
+              },
+              {
+                "max-width": "100%"
+              },
+              {
+                "opacity": "0.6;"
+              },
+              {
+                "padding-right": "8px"
+              }
+            ],
+            "grid": [
+              {
+                "grid-template-areas": "\"i n n\" \"i l l\""
+              },
+              {
+                "grid-template-columns": "68px 1fr 1fr"
+              },
+              {
+                "grid-template-rows": "36px 30px"
+              },
+              {
+                "grid-column-gap": "10px"
+              },
+              {
+                "margin": "auto 0"
+              },
+              {
+                "align-content": "center"
+              }
+            ]
+          }
+        },
+        "no_label": {
+          "label": "",
+          "styles": {
+            "grid": [
+              {
+                "grid-template-areas": "\"i n\""
+              },
+              {
+                "grid-template-columns": "68px 1fr"
+              },
+              {
+                "grid-template-rows": "68px"
+              }
+            ],
+            "name": [
+              {
+                "align-self": "center"
+              }
+            ]
+          }
+        }
+      },
+      "views": [
+        {
+          "title": "Home",
+          "type": "custom:grid-layout",
+          "cards": [
+            {
+              "type": "custom:layout-card",
+              "layout_type": "custom:grid-layout",
+              "cards": [
+                {
+                  "type": "custom:button-card",
+                  "entity": "sensor.time",
+                  "icon": "[[[ if (states['input_select.time'].state == \"Morning\") return \"mdi:weather-partly-cloudy\";  else if (states['input_select.time'].state == \"Afternoon\") return \"mdi:weather-sunny\";  else if (states['input_select.time'].state == \"Evening\") return \"mdi:weather-sunset\";  else return \"mdi:weather-night\" ]]]",
+                  "show_name": false,
+                  "show_state": true,
+                  "show_label": true,
+                  "show_icon": false,
+                  "tap_action": {
+                    "action": "none"
+                  },
+                  "styles": {
+                    "grid": [
+                      {
+                        "grid-template-areas": "'s'"
+                      },
+                      {
+                        "grid-template-rows": "30vw"
+                      },
+                      {
+                        "align-items": "center"
+                      },
+                      {
+                        "justify-content": "center"
+                      }
+                    ],
+                    "card": [
+                      {
+                        "box-shadow": "none"
+                      },
+                      {
+                        "margin": 0
+                      },
+                      {
+                        "background": "none"
+                      },
+                      {
+                        "padding": "16px 0 0 0"
+                      },
+                      {
+                        "place-self": "center"
+                      }
+                    ],
+                    "state": [
+                      {
+                        "text-align": "left"
+                      },
+                      {
+                        "place-self": "center"
+                      },
+                      {
+                        "font-weight": 600
+                      },
+                      {
+                        "font-size": "30vw"
+                      },
+                      {
+                        "line-height": 1.1
+                      }
+                    ]
+                  }
+                },
+                {
+                  "type": "custom:layout-card",
+                  "layout_type": "custom:grid-layout",
+                  "cards": [
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "condition": "state",
+                          "entity": "input_select.washing_machine",
+                          "state": [
+                            "Finished",
+                            "On"
+                          ]
+                        }
+                      ],
+                      "card": {
+                        "type": "custom:button-card",
+                        "entity": "input_select.washing_machine",
+                        "template": [
+                          "widget"
+                        ],
+                        "variables": {
+                          "color": "[[[ \n  if(entity && entity.state == \"On\") return \"var(--running-accent-color)\";\n  return \"var(--stopped-accent-color)\"\n]]]\n"
+                        },
+                        "label": "[[[\n  if(entity && entity.state == \"On\") return \"Running\";\n  if(entity && entity.state == \"Finished\") return \"Done\";\n  return entity.state;\n]]]\n",
+                        "state": [
+                          {
+                            "value": "On|Finished",
+                            "operator": "regex",
+                            "id": "on"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "condition": "state",
+                          "entity": "input_select.dishwasher",
+                          "state": [
+                            "Finished",
+                            "On"
+                          ]
+                        }
+                      ],
+                      "card": {
+                        "type": "custom:button-card",
+                        "entity": "input_select.dishwasher",
+                        "template": [
+                          "widget"
+                        ],
+                        "variables": {
+                          "color": "[[[ \n  if(entity && entity.state == \"On\") return \"var(--running-accent-color)\";\n  return \"var(--stopped-accent-color)\"\n]]]\n"
+                        },
+                        "label": "[[[\n  if(entity && entity.state == \"On\") return \"Running\";\n  if(entity && entity.state == \"Finished\") return \"Done\";\n  return entity.state;\n]]]\n",
+                        "state": [
+                          {
+                            "value": "On|Finished",
+                            "operator": "regex",
+                            "id": "on"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "condition": "state",
+                          "entity": "input_select.tumble_dryer",
+                          "state": [
+                            "Finished",
+                            "On"
+                          ]
+                        }
+                      ],
+                      "card": {
+                        "type": "custom:button-card",
+                        "entity": "input_select.tumble_dryer",
+                        "template": [
+                          "widget"
+                        ],
+                        "variables": {
+                          "color": "[[[ \n  if(entity && entity.state == \"On\") return \"var(--running-accent-color)\";\n  return \"var(--stopped-accent-color)\"\n]]]\n"
+                        },
+                        "label": "[[[\n  if(entity && entity.state == \"On\") return \"Running\";\n  if(entity && entity.state == \"Finished\") return \"Done\";\n  return entity.state;\n]]]\n",
+                        "state": [
+                          {
+                            "value": "On|Finished",
+                            "operator": "regex",
+                            "id": "on"
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "condition": "state",
+                          "entity": "binary_sensor.black_bin",
+                          "state": "on"
+                        }
+                      ],
+                      "card": {
+                        "type": "custom:button-card",
+                        "entity": "binary_sensor.black_bin",
+                        "template": [
+                          "widget",
+                          "no_label"
+                        ],
+                        "variables": {
+                          "color": "#000"
+                        }
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "condition": "state",
+                          "entity": "binary_sensor.green_bin",
+                          "state": "on"
+                        }
+                      ],
+                      "card": {
+                        "type": "custom:button-card",
+                        "entity": "binary_sensor.green_bin",
+                        "template": [
+                          "widget",
+                          "no_label"
+                        ],
+                        "label": "",
+                        "variables": {
+                          "color": "var(--running-accent-color)"
+                        }
+                      }
+                    },
+                    {
+                      "type": "conditional",
+                      "conditions": [
+                        {
+                          "condition": "state",
+                          "entity": "binary_sensor.brown_bin",
+                          "state": "on"
+                        }
+                      ],
+                      "card": {
+                        "type": "custom:button-card",
+                        "entity": "binary_sensor.brown_bin",
+                        "template": [
+                          "widget",
+                          "no_label"
+                        ],
+                        "variables": {
+                          "color": "#6f3131"
+                        }
+                      }
+                    }
+                  ],
+                  "layout": {
+                    "grid-auto-flow": "column dense",
+                    "grid-template-rows": "1fr"
+                  }
+                }
+              ],
+              "layout": {
+                "place-items": "center"
+              },
+              "view_layout": {
+                "place-self": "center"
+              }
+            }
+          ],
+          "theme": "dark",
+          "layout": {
+            "grid-template-columns": "98vw",
+            "grid-template-rows": "98vh"
+          }
+        }
+      ]
+    }
+  }
+}

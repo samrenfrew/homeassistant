@@ -1,0 +1,9 @@
+# - platform: ping
+#   count: 3
+#   consider_home: 300
+#   hosts:
+#     adrienne_vinces_ipad: 192.168.0.18
+#     adriennes_mbp: 192.168.0.23
+#     adrienne_vinces_iphone: 192.168.0.7
+#     sam_phone: 192.168.0.10
+#     sams_mbp: 192.168.0.3

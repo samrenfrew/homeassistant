@@ -1,0 +1,20 @@
+popup:
+  name: Popup
+  version: '1.0'
+  creator: ''
+  supported:
+    - pop-up
+  description: ''
+  code: |-
+    .bubble-pop-up {
+      height: unset !important;
+      max-height: 100vh !important;
+      box-shadow: var(--mdc-dialog-box-shadow) !important;
+      z-index: 7 !important;
+    }
+    .bubble-backdrop.is-visible {
+      backdrop-filter: blur(10px);
+      z-index: 6;
+    }
+  editor: ''
+  is_global: true

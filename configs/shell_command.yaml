@@ -1,0 +1,8 @@
+## SHELL COMMANDS
+  wol_pc: !secret wol_pc
+  shutdown_pc: 'curl -m 3 --http0.9 192.168.0.2:10/shutdown'
+  restart_pc: ''
+  sleep_pc: 'curl -m 3 --http0.9 192.168.0.2:10/suspend'
+  shutdown_nas: !secret shutdown_nas
+  restart_ha: 'ha core restart'
+  ha_start: 'curl http://192.168.0.4:1880/hastart'

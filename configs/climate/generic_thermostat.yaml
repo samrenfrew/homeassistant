@@ -1,0 +1,9 @@
+# - platform: generic_thermostat
+#   name: Bedroom
+#   unique_id: bedroom
+#   heater: switch.sonoff_trvzb_switch
+#   target_sensor: sensor.bedroom_temperature
+#   precision: 0.5
+#   initial_hvac_mode: heat
+#   target_temp: 19.5
+  

@@ -1,0 +1,26 @@
+# - platform: linksys_smart
+#   host: 192.168.1.1
+#   consider_home: 180
+#   new_device_defaults:
+#     track_new_devices: no
+# - platform: ddwrt
+#   host: 192.168.1.1
+#   username: !secret ddwrt_user
+#   password: !secret ddwrt_pass
+#   consider_home: 180
+#   new_device_defaults:
+#     track_new_devices: no
+# - platform: sky_hub
+#   host: 192.168.1.1
+#   consider_home: 180
+#   new_device_defaults:
+#     track_new_devices: false
+
+#- platform: iphonedetect
+#  consider_home: 300
+#  scan_interval: 12
+#  new_device_defaults:
+#    track_new_devices: false
+#  hosts:
+#    ady_wifi: 192.168.0.11
+#    sam_wifi: 192.168.0.6
