@@ -112,6 +112,9 @@
     light.fairy_lights:
       expose: true
       name: Fairy Lights
+    light.ella_lamp:
+      expose: true
+      name: Ella Lamp
     media_player.sonos_one:
       expose: false
       name: Dining Room Speaker
