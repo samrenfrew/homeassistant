@@ -2001,15 +2001,6 @@
               "type": "custom:layout-break"
             },
             {
-              "type": "custom:gap-card",
-              "view_layout": {
-                "show": {
-                  "mediaquery": "(min-width: 700px)"
-                }
-              },
-              "height": 38
-            },
-            {
               "type": "vertical-stack",
               "cards": [
                 {
@@ -2098,6 +2089,15 @@
                   }
                 }
               ]
+            },
+            {
+              "type": "custom:gap-card",
+              "view_layout": {
+                "show": {
+                  "mediaquery": "(min-width: 700px)"
+                }
+              },
+              "height": 38
             },
             {
               "type": "custom:layout-break"
@@ -2264,6 +2264,16 @@
                       "variables": {
                         "color": "rgb(var(--mush-rgb-orange))"
                       }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "light.ella_lamp",
+                      "template": [
+                        "default"
+                      ],
+                      "variables": {
+                        "color": "rgb(var(--mush-rgb-orange))"
+                      }
                     }
                   ],
                   "layout": {
@@ -2277,7 +2287,7 @@
                     "grid-auto-flow": "dense",
                     "mediaquery": {
                       "(max-width: 1199px)": {
-                        "grid-template-columns": "repeat(2, calc((100% / 2) - 16px))",
+                        "grid-template-columns": "repeat(3, calc((100% / 2) - 16px))",
                         "grid-auto-flow": "column"
                       }
                     }
@@ -2861,6 +2871,16 @@
                 {
                   "type": "custom:button-card",
                   "entity": "light.fairy_lights",
+                  "template": [
+                    "default"
+                  ],
+                  "variables": {
+                    "color": "rgb(var(--mush-rgb-orange))"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "entity": "light.ella_lamp",
                   "template": [
                     "default"
                   ],
