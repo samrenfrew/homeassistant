@@ -1174,7 +1174,8 @@
                   "variables": {
                     "temp": "sensor.ella_temperature",
                     "entities": [
-                      "light.fairy_lights"
+                      "light.fairy_lights",
+                      "light.ella_lamp"
                     ]
                   }
                 },
@@ -1750,7 +1751,9 @@
                       "modules": [
                         "fire_tablet",
                         "!popup"
-                      ]
+                      ],
+                      "slider_fill_orientation": "left",
+                      "slider_value_position": "right"
                     },
                     {
                       "type": "custom:layout-card",
@@ -1775,6 +1778,16 @@
                         {
                           "type": "custom:button-card",
                           "entity": "light.fairy_lights",
+                          "template": [
+                            "default"
+                          ],
+                          "variables": {
+                            "color": "rgb(var(--mush-rgb-orange))"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
+                          "entity": "light.ella_lamp",
                           "template": [
                             "default"
                           ],
@@ -1882,6 +1895,16 @@
                         },
                         {
                           "type": "custom:button-card",
+                          "entity": "light.ella_lamp",
+                          "template": [
+                            "default"
+                          ],
+                          "variables": {
+                            "color": "rgb(var(--mush-rgb-orange))"
+                          }
+                        },
+                        {
+                          "type": "custom:button-card",
                           "name": "Desk Lamp",
                           "entity": "light.ikea_plug",
                           "template": [
@@ -1956,7 +1979,9 @@
                       "modules": [
                         "fire_tablet",
                         "!popup"
-                      ]
+                      ],
+                      "slider_fill_orientation": "left",
+                      "slider_value_position": "right"
                     },
                     {
                       "type": "custom:layout-card",
@@ -2055,7 +2080,9 @@
                       "sub_button": {
                         "main": [],
                         "bottom": []
-                      }
+                      },
+                      "slider_fill_orientation": "left",
+                      "slider_value_position": "right"
                     },
                     {
                       "type": "thermostat",
