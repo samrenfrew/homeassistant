@@ -3424,6 +3424,38 @@
                     "logarithmic_scale": false
                   },
                   {
+                    "animate": true,
+                    "entities": [
+                      {
+                        "entity": "sensor.nas_volume_1_used_space",
+                        "index": 0,
+                        "show_state": false
+                      }
+                    ],
+                    "hour24": true,
+                    "hours_to_show": 720,
+                    "name": "Internet Speed",
+                    "points_per_hour": 0.08,
+                    "show": {
+                      "extrema": false,
+                      "icon": false,
+                      "labels": true,
+                      "legend": true,
+                      "name": false
+                    },
+                    "line_color": [
+                      "var(--accent-color)",
+                      "var(--dark-primary-color)"
+                    ],
+                    "type": "custom:mini-graph-card",
+                    "view_layout": {
+                      "grid-column": "1 / -1"
+                    },
+                    "card_mod": {
+                      "style": ".states .state .state__value {\n    font-weight: 500;\n    letter-spacing: -0.02em;\n  }\n"
+                    }
+                  },
+                  {
                     "type": "custom:auto-entities",
                     "filter": {
                       "include": [
