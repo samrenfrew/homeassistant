@@ -1830,6 +1830,9 @@
                   ]
                 }
               ]
+            },
+            {
+              "type": "custom:scheduler-card"
             }
           ],
           "type": "custom:vertical-layout"
