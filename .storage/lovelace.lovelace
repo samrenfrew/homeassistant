@@ -1936,42 +1936,6 @@
                         "action": "navigate",
                         "navigation_path": "#bedroom_speaker"
                       }
-                    },
-                    {
-                      "type": "custom:button-card",
-                      "name": "Heater",
-                      "entity": "climate.bedroom_heater",
-                      "template": "default",
-                      "variables": {
-                        "color": "#FF6F22"
-                      },
-                      "icon": "[[[\n  return entity.state == \"off\" ? \"m3r:mode-heat-off\" : \"m3rf:mode-heat\" \n]]]\n",
-                      "tap_action": {
-                        "action": "more-info"
-                      },
-                      "state": [
-                        {
-                          "id": "on",
-                          "operator": "template",
-                          "value": "[[[ return entity.state == \"heat\" && entity.attributes.hvac_action ==\n\"heating\" ]]] \n",
-                          "label": "[[[ return entity.attributes.current_temperature + \"°C\" ]]]",
-                          "styles": {
-                            "card": [
-                              {
-                                "background": "[[[ return \"linear-gradient(240deg, \" + variables.color + \" -200%, var(--ha-card-background) 30%)\" ]]]"
-                              }
-                            ],
-                            "icon": [
-                              {
-                                "color": "#fff"
-                              },
-                              {
-                                "background": "[[[ return variables.color ]]]"
-                              }
-                            ]
-                          }
-                        }
-                      ]
                     }
                   ],
                   "layout": {
@@ -1986,7 +1950,7 @@
                     "grid-auto-flow": "dense",
                     "mediaquery": {
                       "(max-width: 1199px)": {
-                        "grid-template-columns": "repeat(3, calc((100% / 2) - 16px))",
+                        "grid-template-columns": "repeat(2, calc((100% / 2) - 16px))",
                         "grid-auto-flow": "column"
                       }
                     }
