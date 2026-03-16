@@ -125,11 +125,6 @@
         "type": "module"
       },
       {
-        "id": "9f69daefab594d9fb8814f84b7663d81",
-        "url": "/hacsfiles/lovelace-navbar-card/navbar-card.js?hacstag=871106499150",
-        "type": "module"
-      },
-      {
         "id": "5d2dab02e07d44ac997f1c6acc2ed52f",
         "url": "/hacsfiles/streamline-card/streamline-card.js?hacstag=839495072020",
         "type": "module"
@@ -152,11 +147,6 @@
       {
         "id": "5cec92a319b344e9a751fe977ecd755f",
         "url": "/hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js?hacstag=142051833101",
-        "type": "module"
-      },
-      {
-        "id": "d15256bc9b3545aaa294ca17064f66dd",
-        "url": "/hacsfiles/better-thermostat-ui-card/better-thermostat-ui-card.js?hacstag=439367892221",
         "type": "module"
       },
       {
