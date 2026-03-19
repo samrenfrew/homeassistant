@@ -153,6 +153,11 @@
         "id": "9e40f7ba8136411dbc847f9fdae67f02",
         "url": "/local/button-card.js?test3",
         "type": "module"
+      },
+      {
+        "id": "cd88b4e36bf84c70b8750c3000c62c29",
+        "url": "/hacsfiles/custom-thermostat-card/custom-thermostat-card.js?hacstag=11854716629",
+        "type": "module"
       }
     ]
   }
