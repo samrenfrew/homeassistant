@@ -865,8 +865,8 @@
                         "show_title": false,
                         "card_mod": {
                           "style": {
-                            ".": "ha-card {\n width:100% !important;\n margin: 0 auto;\n background: none;\n}\n.more-info {\n  display:none;\n}\n",
-                            "ha-state-control-climate-temperature$": ":host {\n  max-width: 200px !important;\n}\n.info {\n  gap: 0 !important;\n}\n.md ha-big-number {\n  font-size: 74px !important;\n}\n"
+                            ".": "# ha-card {\n#  width:100% !important;\n#  margin: 0 auto;\n#  background: none;\n# }\n# .more-info {\n#   display:none;\n# }\n",
+                            "ha-state-control-climate-temperature$": "# :host {\n#   max-width: 200px !important;\n# }\n# .info {\n#   gap: 0 !important;\n# }\n# .md ha-big-number {\n#   font-size: 74px !important;\n# }\n"
                           }
                         }
                       }
