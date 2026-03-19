@@ -860,8 +860,9 @@
                   "custom_fields": {
                     "th": {
                       "card": {
-                        "type": "thermostat",
+                        "type": "custom:custom-thermostat-card",
                         "entity": "climate.hive",
+                        "show_title": false,
                         "card_mod": {
                           "style": {
                             ".": "ha-card {\n width:100% !important;\n margin: 0 auto;\n background: none;\n}\n.title, .more-info {\n  display:none;\n}\n",
