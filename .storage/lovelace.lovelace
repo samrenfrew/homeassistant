@@ -3775,7 +3775,7 @@
                   {
                     "options": {
                       "card_mod": {
-                        "style": ":host {\n  --paper-item-icon-color: \n    {% if state_attr(config.entity, 'health') == 'healthy' %}\n      green\n    {% elif state_attr(config.entity, 'health') == 'unhealthy' %}\n      red\n    {% else %}\n      orange\n    {% endif %};\n}\n"
+                        "style": "ha-state-icon {\n  {% if state_attr(config.entity, 'health') == 'healthy' %}\n  background: green;\n  {% elif state_attr(config.entity, 'health') == 'unhealthy' %}\n  background: var(--red);\n  {% else %}\n  background: var(--accent-color);\n  {% endif %}\n  color: #fff !important;\n}\n"
                       }
                     },
                     "entity_id": "sensor.nuc_docker*"
