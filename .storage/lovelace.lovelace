@@ -3466,7 +3466,18 @@
                           "reverse": false
                         },
                         "filter": {
-                          "template": "[{% for entity in states.sensor | selectattr('entity_id', 'search', '_health$') %}\n  {% set dev_id = device_id(entity.entity_id) %}\n  {% if dev_id %}\n    {% set identifiers = device_attr(dev_id, 'identifiers') %}\n    {% if identifiers and (identifiers | string is search('nas_')) %}\n      {\n        'entity': '{{entity.entity_id}}',\n        'name': '{{entity.name | replace(\"Container \", \"\") | replace(\" Health\", \"\") | replace(\"-nas\", \"\") | capitalize}}',\n      },\n    {% endif %}\n  {% endif %}\n{% endfor %}]\n"
+                          "include": [
+                            {
+                              "options": {},
+                              "entity_id": "sensor.nas_docker*"
+                            }
+                          ],
+                          "exclude": [
+                            {
+                              "options": {},
+                              "entity_id": "sensor.nas_docker_containers*"
+                            }
+                          ]
                         },
                         "show_empty": true,
                         "card_param": "entities"
@@ -3608,7 +3619,18 @@
                         "reverse": false
                       },
                       "filter": {
-                        "template": "[{% for entity in states.sensor | selectattr('entity_id', 'search', '_health$') %}\n  {% set dev_id = device_id(entity.entity_id) %}\n  {% if dev_id %}\n    {% set identifiers = device_attr(dev_id, 'identifiers') %}\n    {% if identifiers and (identifiers | string is search('nuc_')) %}\n      {\n        'entity': '{{entity.entity_id}}',\n        'name': '{{entity.name | replace(\"Container \", \"\") | replace(\" Health\", \"\") | capitalize}}',\n      },\n    {% endif %}\n  {% endif %}\n{% endfor %}]\n"
+                        "include": [
+                          {
+                            "options": {},
+                            "entity_id": "sensor.nuc_docker*"
+                          }
+                        ],
+                        "exclude": [
+                          {
+                            "options": {},
+                            "entity_id": "sensor.nuc_docker_containers*"
+                          }
+                        ]
                       },
                       "show_empty": true,
                       "card_param": "entities"
@@ -3767,34 +3789,6 @@
                   }
                 }
               ]
-            },
-            {
-              "type": "custom:auto-entities",
-              "filter": {
-                "include": [
-                  {
-                    "options": {
-                      "card_mod": {
-                        "style": "ha-state-icon {\n  {% if state_attr(config.entity, 'health') == 'healthy' %}\n  background: green;\n  {% elif state_attr(config.entity, 'health') == 'unhealthy' %}\n  background: var(--red);\n  {% else %}\n  background: var(--accent-color);\n  {% endif %}\n  color: #fff !important;\n}\n"
-                      }
-                    },
-                    "entity_id": "sensor.nuc_docker*"
-                  }
-                ],
-                "exclude": [
-                  {
-                    "options": {},
-                    "entity_id": "sensor.nuc_docker_containers*"
-                  }
-                ]
-              },
-              "card": {
-                "type": "glance",
-                "columns": 3,
-                "state_color": true,
-                "show_state": false
-              },
-              "show_empty": false
             }
           ]
         },
