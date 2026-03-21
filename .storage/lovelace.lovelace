@@ -3773,7 +3773,11 @@
               "filter": {
                 "include": [
                   {
-                    "options": {},
+                    "options": {
+                      "card_mod": {
+                        "style": ":host {\n  --paper-item-icon-color: \n    {% if state_attr(config.entity, 'health') == 'healthy' %}\n      green\n    {% elif state_attr(config.entity, 'health') == 'unhealthy' %}\n      red\n    {% else %}\n      orange\n    {% endif %};\n}\n"
+                      }
+                    },
                     "entity_id": "sensor.nuc_docker*"
                   }
                 ],
