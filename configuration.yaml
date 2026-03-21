@@ -170,7 +170,7 @@ monitor_docker:
     switchstate: false
     monitored_conditions:
       - status
-      - healthy
+      - health
       - uptime
       - containers_total
       - containers_running
@@ -182,7 +182,7 @@ monitor_docker:
     switchstate: false
     monitored_conditions:
       - status
-      - healthy
+      - health
       - uptime
       - containers_total
       - containers_running
