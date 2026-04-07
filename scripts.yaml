@@ -305,3 +305,49 @@ disable_hive_boosting:
       payload: "{\n  \"system_mode\": \"heat\"\n}"
   alias: Disable Hive Boosting
   description: ''
+check_bins:
+  alias: Check Bins
+  sequence:
+  - variables:
+      in_window: '{% set h = now().hour %} {{ h >= 18 or h < 9 }}
+
+        '
+  - if:
+    - condition: template
+      value_template: '{{ not in_window }}'
+    then:
+    - action: input_boolean.turn_off
+      target:
+        entity_id:
+        - input_boolean.green_bin
+        - input_boolean.brown_bin
+        - input_boolean.black_bin
+    else:
+    - action: calendar.get_events
+      target:
+        entity_id: calendar.house
+      data:
+        start_date_time: '{{ now().isoformat() }}'
+        end_date_time: '{{ (now() + timedelta(hours=24)).isoformat() }}'
+      response_variable: upcoming
+    - variables:
+        events: '{{ upcoming[''calendar.house''][''events''] }}'
+        green: '{{ events | selectattr(''summary'', ''equalto'', ''Green Bin'') |
+          list | count > 0 }}'
+        brown: '{{ events | selectattr(''summary'', ''equalto'', ''Brown Bin'') |
+          list | count > 0 }}'
+        black: '{{ events | selectattr(''summary'', ''equalto'', ''Black Bin'') |
+          list | count > 0 }}'
+    - action: '{{ ''input_boolean.turn_on'' if green else ''input_boolean.turn_off''
+        }}'
+      target:
+        entity_id: input_boolean.green_bin
+    - action: '{{ ''input_boolean.turn_on'' if brown else ''input_boolean.turn_off''
+        }}'
+      target:
+        entity_id: input_boolean.brown_bin
+    - action: '{{ ''input_boolean.turn_on'' if black else ''input_boolean.turn_off''
+        }}'
+      target:
+        entity_id: input_boolean.black_bin
+  description: ''
