@@ -3374,20 +3374,6 @@
                     "type": "entities"
                   },
                   {
-                    "chart_type": "line",
-                    "period": "day",
-                    "type": "statistics-graph",
-                    "entities": [
-                      "sensor.nas_volume_1_used_space"
-                    ],
-                    "stat_types": [
-                      "mean"
-                    ],
-                    "days_to_show": 30,
-                    "hide_legend": true,
-                    "logarithmic_scale": false
-                  },
-                  {
                     "animate": true,
                     "entities": [
                       {
