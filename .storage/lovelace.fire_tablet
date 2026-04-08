@@ -407,7 +407,7 @@
                       "conditions": [
                         {
                           "condition": "state",
-                          "entity": "binary_sensor.black_bin",
+                          "entity": "input_boolean.black_bin",
                           "state": "on"
                         }
                       ],
@@ -417,7 +417,7 @@
                           "action": "none"
                         },
                         "icon": "mdi:delete-empty",
-                        "entity": "binary_sensor.black_bin",
+                        "entity": "input_boolean.black_bin",
                         "content": "Black Bin",
                         "tap_action": {
                           "action": "more-info"
@@ -433,7 +433,7 @@
                       "conditions": [
                         {
                           "condition": "state",
-                          "entity": "binary_sensor.green_bin",
+                          "entity": "input_boolean.green_bin",
                           "state": "on"
                         }
                       ],
@@ -443,7 +443,7 @@
                           "action": "none"
                         },
                         "icon": "mdi:delete-empty",
-                        "entity": "binary_sensor.green_bin",
+                        "entity": "input_boolean.green_bin",
                         "content": "Green Bin",
                         "tap_action": {
                           "action": "more-info"
@@ -459,7 +459,7 @@
                       "conditions": [
                         {
                           "condition": "state",
-                          "entity": "binary_sensor.brown_bin",
+                          "entity": "input_boolean.brown_bin",
                           "state": "on"
                         }
                       ],
@@ -469,7 +469,7 @@
                           "action": "none"
                         },
                         "icon": "mdi:delete-empty",
-                        "entity": "binary_sensor.brown_bin",
+                        "entity": "input_boolean.brown_bin",
                         "content": "Brown Bin",
                         "tap_action": {
                           "action": "more-info"
