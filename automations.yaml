@@ -649,3 +649,32 @@
     metadata: {}
     data: {}
   mode: single
+- id: '1775679045240'
+  alias: '9am: Disable bins'
+  description: ''
+  triggers:
+  - trigger: time
+    at: 09:00:00
+    weekday:
+    - wed
+    - thu
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: input_boolean.green_bin
+      state:
+      - 'on'
+    - condition: state
+      entity_id: input_boolean.black_bin
+      state:
+      - 'on'
+    - condition: state
+      entity_id: input_boolean.brown_bin
+      state:
+      - 'on'
+  actions:
+  - action: script.check_bins
+    metadata: {}
+    data: {}
+  mode: single
