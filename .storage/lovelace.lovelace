@@ -3474,7 +3474,7 @@
                     },
                     "title_card": {
                       "type": "markdown",
-                      "content": "## <ha-icon icon=\"mdi:progress-check\"></ha-icon> {% set down = states('sensor.nas_services_down') -%} {%- set unhealthy = states('sensor.nas_services_unhealthy') -%} {{ states('sensor.nas_services_running') }} services running{%- if\n    unhealthy | int(0) > 0 -%}, {{ unhealthy }} unhealthy{% endif %}{%- if down | int(0) > 0\n    %}, and {{ down }} down{% endif %}\n",
+                      "content": "## <ha-icon icon=\"mdi:progress-check\"></ha-icon> {% set down = states('sensor.docker_on_nas_stopped_containers') -%} {%- set unhealthy = states('sensor.docker_on_nas_unhealthy_containers') -%} {{ states('sensor.docker_on_nas_running_containers') }} services running{%- if\n    unhealthy | int(0) > 0 -%}, {{ unhealthy }} unhealthy{% endif %}{%- if down | int(0) > 0\n    %}, and {{ down }} down{% endif %}\n",
                       "text_only": true,
                       "card_mod": {
                         "style": {
