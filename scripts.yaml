@@ -332,12 +332,20 @@ check_bins:
       response_variable: upcoming
     - variables:
         events: '{{ upcoming[''calendar.house''][''events''] }}'
-        green: '{{ events | selectattr(''summary'', ''equalto'', ''Green Bin'') |
-          list | count > 0 }}'
-        brown: '{{ events | selectattr(''summary'', ''equalto'', ''Brown Bin'') |
-          list | count > 0 }}'
-        black: '{{ events | selectattr(''summary'', ''equalto'', ''Black Bin'') |
-          list | count > 0 }}'
+        tomorrow_str: '{{ (now().date() + timedelta(days=1)) | string }}'
+        today_str: '{{ now().date() | string }}'
+        green: "{% set matches = events | selectattr('summary', 'equalto', 'Green
+          Bin') | list %} {{ matches | selectattr('start', 'search', tomorrow_str)
+          | list | count > 0\n   or (now().hour < 9 and matches | selectattr('start',
+          'search', today_str) | list | count > 0) }}\n"
+        brown: "{% set matches = events | selectattr('summary', 'equalto', 'Brown
+          Bin') | list %} {{ matches | selectattr('start', 'search', tomorrow_str)
+          | list | count > 0\n   or (now().hour < 9 and matches | selectattr('start',
+          'search', today_str) | list | count > 0) }}\n"
+        black: "{% set matches = events | selectattr('summary', 'equalto', 'Black
+          Bin') | list %} {{ matches | selectattr('start', 'search', tomorrow_str)
+          | list | count > 0\n   or (now().hour < 9 and matches | selectattr('start',
+          'search', today_str) | list | count > 0) }}\n"
     - action: '{{ ''input_boolean.turn_on'' if green else ''input_boolean.turn_off''
         }}'
       target:
@@ -350,4 +358,3 @@ check_bins:
         }}'
       target:
         entity_id: input_boolean.black_bin
-  description: ''
