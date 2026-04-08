@@ -634,3 +634,18 @@
       - switch.adguard_nuc_protection
       - sensor.adguard_nas_dns_queries_blocked
   mode: single
+- id: '1775678674365'
+  alias: '6pm: Check Bins'
+  description: ''
+  triggers:
+  - trigger: time
+    at: '18:00:00'
+    weekday:
+    - tue
+    - wed
+  conditions: []
+  actions:
+  - action: script.check_bins
+    metadata: {}
+    data: {}
+  mode: single
