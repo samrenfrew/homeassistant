@@ -381,7 +381,7 @@
                       "conditions": [
                         {
                           "condition": "state",
-                          "entity": "binary_sensor.brown_bin",
+                          "entity": "input_boolean.brown_bin",
                           "state": "on"
                         }
                       ],
@@ -391,7 +391,7 @@
                           "action": "none"
                         },
                         "icon": "mdi:delete-empty",
-                        "entity": "binary_sensor.brown_bin",
+                        "entity": "input_boolean.brown_bin",
                         "content": "Brown Bin",
                         "tap_action": {
                           "action": "more-info"
