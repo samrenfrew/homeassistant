@@ -269,3 +269,6 @@ light:
   box-shadow: 'inset -4px -4px 8px 0 rgba(255,255,255,.5), inset 4px 4px 8px 0 rgba(0,0,0,.03)'
 
   advanced-camera-card-menu-button-active-color: '#FFF'
+
+  # Form
+  ha-color-form-background: none;
