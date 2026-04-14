@@ -341,4 +341,5 @@ dark:
   # box-shadow: 'inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3)'
 
   # Form
-  ha-color-form-background: 'transparent'
+  ha-color-form-background: '#FFF'
+  ha-color-form-background-hover: '#FFF'
