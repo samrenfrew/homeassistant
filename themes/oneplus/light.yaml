@@ -271,4 +271,5 @@ light:
   advanced-camera-card-menu-button-active-color: '#FFF'
 
   # Form
-  ha-color-form-background: 'transparent'
+  ha-color-form-background: '#FFF'
+  ha-color-form-background-hover: '#FFF'

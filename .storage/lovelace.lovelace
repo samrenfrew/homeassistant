@@ -526,7 +526,11 @@
                     "style": {
                       ".": "ha-card.type-custom-search-card {\n  border-width: 1px;\n}\nha-card.type-custom-search-card #searchContainer {\n  width: calc(100%) !important;\n  border-width: 1px;\n  border-radius: 20px;\n  overflow: hidden;\n}\nha-card.type-custom-search-card #count {\n  padding-right: 20px;\n}\nha-card.type-custom-search-card #searchContainer ha-icon {\n  color: #a5a5a5;\n  transform: translateY(-4px);\n}\n",
                       "#searchContainer": {
-                        "ha-textfield$": "label {\n   background:none !important;\n }\n .mdc-line-ripple, .mdc-text-field__ripple {\n   display:none !important;\n }\n"
+                        "ha-textfield$": {
+                          "ha-input$": {
+                            "wa-input$": "[part=\"base\"]::after {\n  display:none\n}\n"
+                          }
+                        }
                       }
                     }
                   },
