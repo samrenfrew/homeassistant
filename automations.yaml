@@ -327,7 +327,7 @@
       - garden
       zone_multi: true
 - id: '1745693175108'
-  alias: Front Door - Away
+  alias: Front Door
   description: ''
   use_blueprint:
     path: SgtBatten/Stable.yaml
