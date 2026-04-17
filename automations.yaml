@@ -573,15 +573,29 @@
       attachment_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
       color: '#4caf50'
       icon: mdi:cat
-      group: cat-frigate-notification
+      group: katsu
       zone_filter: true
       zones:
+      - garden
       - door
       labels:
       - cat
       update_sub_label: false
       title: Katsu is at the back door!
       message: '{{ label }} detected - {{ camera_name }}'
+      channel: Katsu
+      zone_multi: true
+      zone_order_enforced: true
+      state_filter: false
+      state_filter_states: []
+      disable_times:
+      - '0'
+      - '1'
+      - '2'
+      - '3'
+      - '4'
+      - '5'
+      - '6'
 - id: '1769916083439'
   alias: Overnight boost
   description: ''
