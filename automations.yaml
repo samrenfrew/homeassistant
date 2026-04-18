@@ -336,21 +336,20 @@
       camera:
       - camera.front_door
       notify_device: 0392f3b78fa57ea8933051b62331e81c
-      final_update: true
+      final_update: false
       loiter_timer: 15
       initial_delay: 1
       final_delay: 10
-      cooldown: 20
+      cooldown: 60
       attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
       url_2: '{{base_url}}/api/camera_proxy_stream/camera.{{trigger.payload_json[''after''][''camera'']
         | lower | replace(''-'',''_'')}}?token={{state_attr( ''camera.'' ~ camera,
         ''access_token'')}}'
       button_3: Silence
       button_2: View Live
-      channel: frigate
+      channel: Front Door
       color: '#03a9f4'
-      icon: mdi:cctv
-      attachment_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{review_id}}/review_preview.gif'
+      icon: mdi:door-open
       zone_multi: false
       zone_order_enforced: false
       zones: []
@@ -362,9 +361,10 @@
       message: A {{ label | lower }} {{ 'was' if type == 'end' else 'is' }} at the
         {{ camera_name | lower }}
       android_auto: true
-      video: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/{{camera}}/clip.mp4'
       review_severity:
       - alert
+      group: front_door
+      volume: 0
 - id: '1747630936897'
   alias: Back Door - Away
   description: ''
