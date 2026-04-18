@@ -375,7 +375,7 @@
       camera:
       - camera.back_door
       notify_device: 0392f3b78fa57ea8933051b62331e81c
-      final_update: true
+      final_update: false
       loiter_timer: 15
       initial_delay: 1
       final_delay: 10
@@ -386,14 +386,14 @@
         ''access_token'')}}'
       button_3: Silence
       button_2: View Live
-      channel: frigate
+      channel: Back Door
       color: '#03a9f4'
       icon: mdi:cctv
-      attachment_2: '{{base_url}}/api/frigate{{client_id}}/notifications/{{review_id}}/review_preview.gif'
       zone_multi: false
       zone_order_enforced: false
       zones: []
-      labels: []
+      labels:
+      - person
       zone_filter: false
       debug: true
       master_condition:
@@ -404,6 +404,10 @@
       message: A {{ label | lower }} {{ 'was' if type == 'end' else 'is' }} at the
         {{ camera_name | lower }}
       android_auto: false
+      group: back-door
+      review_severity:
+      - alert
+      - detection
 - id: '1748682769307'
   alias: Plex is down
   description: ''
