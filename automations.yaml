@@ -349,7 +349,7 @@
       button_2: View Live
       channel: Front Door
       color: '#03a9f4'
-      icon: mdi:door-open
+      icon: mdi:cctv
       zone_multi: false
       zone_order_enforced: false
       zones: []
