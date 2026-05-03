@@ -341,7 +341,7 @@
       initial_delay: 1
       final_delay: 10
       cooldown: 60
-      attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/snapshot.jpg'
+      attachment: '{{base_url}}/api/frigate{{client_id}}/notifications/{{id}}/thumbnail.jpg'
       url_2: '{{base_url}}/api/camera_proxy_stream/camera.{{trigger.payload_json[''after''][''camera'']
         | lower | replace(''-'',''_'')}}?token={{state_attr( ''camera.'' ~ camera,
         ''access_token'')}}'
