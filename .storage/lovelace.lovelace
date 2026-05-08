@@ -4120,7 +4120,7 @@
                 {
                   "type": "custom:mushroom-title-card",
                   "title": "Batteries",
-                  "subtitle": "{% set total = expand(states.sensor) | selectattr('entity_id', 'search', '^.*?(battery)$') | map(attribute='entity_id') | list | count %}\n{% set low = expand(states.sensor) \n  | selectattr('entity_id', 'search', '^.*?(battery)$') \n  | selectattr('state', 'in', ['unavailable', 'unknown', 'none'] + (range(0, 51) | map('string') | list))\n  | map(attribute='entity_id') | list | count %}\n\n\nThere are {{ total }} devices with batteries\n{%- if low > 0 %}, {{ low }} of which need{%- if low == 1 -%} s{% endif %} attention{% endif %}"
+                  "subtitle": "{% set total = expand(states.sensor) | selectattr('entity_id', 'search', '^.*?(battery)$') | map(attribute='entity_id') | list | count %}\n{% set low = expand(states.sensor) \n  | selectattr('entity_id', 'search', '^.*?(battery)$') \n  | selectattr('state', 'in', ['unavailable', 'unknown', 'none'] + (range(0, 51) | map('string') | list))\n  | map(attribute='entity_id') | list | count %}\n\n\nThere are {{ total }} devices with batteries\n{%- if low > 0 %}, {{ low }} of which need{{ 's' if low == 1 }} attention{% endif %}"
                 },
                 {
                   "type": "custom:layout-card",
