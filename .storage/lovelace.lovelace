@@ -939,7 +939,7 @@
                 {
                   "type": "custom:mushroom-title-card",
                   "title": "Cameras",
-                  "subtitle": "{% set captured = states('sensor.back_door_daily_count') | int (default=0) + states('sensor.front_door_daily_count') | int (default=0) %}\n{% set p = captured > 0 %}\n\n{% if p -%}\nThere {% if captured == 1 -%}has{%- else -%}have{%- endif %} been {{ captured }} recording{% if captured != 1 -%}s{%- endif %} today\n{%- endif -%}\n",
+                  "subtitle": "{% set captured = states('sensor.back_door_daily_count') | int (default=0) + states('sensor.front_door_daily_count') | int (default=0) %}\n\n{% if captured > 0 -%}\nThere {{ 'has' if captured == 1 else 'have' }} been {{ captured }} recording{{ 's' if captured > 1 }} today\n{%- endif -%}\n",
                   "view_layout": {
                     "grid-column": "1/-1"
                   }
