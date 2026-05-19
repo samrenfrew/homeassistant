@@ -3328,7 +3328,7 @@
                         "entity_row": true,
                         "height": "2.5em",
                         "animation": {
-                          "state": true
+                          "state": "on"
                         },
                         "positions": {
                           "icon": "outside",
