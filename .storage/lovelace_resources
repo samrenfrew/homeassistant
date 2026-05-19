@@ -105,11 +105,6 @@
         "type": "module"
       },
       {
-        "id": "c53c8ca20aad40c79c9f348269205976",
-        "url": "/hacsfiles/bar-card/bar-card.js?hacstag=163363577320",
-        "type": "module"
-      },
-      {
         "id": "9036dd0692134abe9d3197f5da06c3fb",
         "url": "/hacsfiles/simple-swipe-card/simple-swipe-card.js?hacstag=970744650282",
         "type": "module"
@@ -157,6 +152,11 @@
       {
         "id": "cd88b4e36bf84c70b8750c3000c62c29",
         "url": "/local/custom-thermostat.js?v2",
+        "type": "module"
+      },
+      {
+        "id": "6d13765b031343a881d502c7036ab2b2",
+        "url": "/hacsfiles/bar-card/bar-card.js?hacstag=979786390408",
         "type": "module"
       }
     ]
