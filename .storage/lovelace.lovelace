@@ -406,27 +406,6 @@
                       "type": "conditional",
                       "conditions": [
                         {
-                          "entity": "alarm_control_panel.fridge",
-                          "state_not": "disarmed"
-                        }
-                      ],
-                      "chip": {
-                        "type": "alarm-control-panel",
-                        "entity": "alarm_control_panel.fridge",
-                        "tap_action": {
-                          "action": "more-info"
-                        },
-                        "hold_action": {
-                          "action": "more-info"
-                        },
-                        "name": "Fridge Door Open",
-                        "content_info": "name"
-                      }
-                    },
-                    {
-                      "type": "conditional",
-                      "conditions": [
-                        {
                           "condition": "state",
                           "entity": "media_player.spotify_doubleclue",
                           "state": "playing"
