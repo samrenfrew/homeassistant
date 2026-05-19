@@ -1620,28 +1620,25 @@
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#bedroom_speaker",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "modules": [
+                    "default_theme"
+                  ],
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "750px",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#bedroom_speaker",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "modules": [
-                        "default_theme"
-                      ],
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      }
-                    },
                     {
                       "type": "custom:streamline-card",
                       "template": "speaker_popup",
