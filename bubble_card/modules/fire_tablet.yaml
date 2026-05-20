@@ -17,4 +17,7 @@ fire_tablet:
       backdrop-filter: brightness(20%) !important;
       z-index: 6;
     }
+    .bubble-pop-up-container {
+      margin-top: -100px !important
+    }
   editor: ''
