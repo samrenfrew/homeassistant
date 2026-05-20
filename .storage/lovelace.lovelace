@@ -1620,24 +1620,25 @@
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#kitchen_speaker",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "modules": [
+                    "default_theme"
+                  ],
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "750px",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#kitchen_speaker",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "modules": [
-                        "default_theme"
-                      ],
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px"
-                    },
                     {
                       "type": "custom:streamline-card",
                       "template": "speaker_popup",
@@ -1650,24 +1651,25 @@
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#dining_room_speaker",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "modules": [
+                    "default_theme"
+                  ],
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "750px",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#dining_room_speaker",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "modules": [
-                        "default_theme"
-                      ],
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px"
-                    },
                     {
                       "type": "custom:streamline-card",
                       "template": "speaker_popup",
@@ -1716,7 +1718,7 @@
                     {
                       "type": "custom:bubble-card",
                       "card_type": "pop-up",
-                      "hash": "#tv",
+                      "hash": "#tv2",
                       "name": "",
                       "icon": "",
                       "styles": ".bubble-pop-up-container {\n  --horizontal-stack-card-gap: 8px !important;\n  padding: 18px 18px 56px 18px !important;\n}\n.bubble-pop-up {\n  # max-width: 300px !important;\n}",
