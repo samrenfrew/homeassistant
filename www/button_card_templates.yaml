@@ -217,6 +217,7 @@ room_card:
     name:
       - align-self: end
       - padding-bottom: 1px
+      - line-height: 20px
 media_card:
   template:
     - default
