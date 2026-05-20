@@ -2,6 +2,26 @@ default:
   name: Default
   version: ''
   creator: ''
+  supported:
+    - pop-up
   description: Empty and enabled by default. Add your custom styles and/or JS templates here to apply them to all cards by pressing the <ha-icon icon="mdi:pencil"></ha-icon> button above.
-  code: ''
+  code: |-
+    .bubble-pop-up {
+      height: unset !important;
+      max-height: 100vh !important;
+      box-shadow: var(--mdc-dialog-box-shadow) !important;
+      z-index: 7 !important;
+    }
+    .bubble-backdrop.is-visible {
+      backdrop-filter: blur(10px);
+      z-index: 6;
+    }
+    .bubble-backdrop.is-visible {
+      backdrop-filter: ${this.location.href.includes('fire-tablet') ? 'brightness(20%) !important' : 'blur(10px) !important'};
+      z-index: 6;
+    }
+
+    .bubble-pop-up {
+      --bubble-pop-up-main-background-color: #0d0d0d;
+    }
   is_global: true
