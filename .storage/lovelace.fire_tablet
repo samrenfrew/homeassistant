@@ -1606,7 +1606,8 @@
                         }
                       ]
                     }
-                  ]
+                  ],
+                  "styles": ".bubble-pop-up-container {\n  margin-top: -100px !important\n}"
                 },
                 {
                   "type": "custom:bubble-card",
