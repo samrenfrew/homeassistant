@@ -1153,7 +1153,7 @@
               "template": "speaker_popup",
               "variables": [
                 {
-                  "hash": "#lounge_speaker"
+                  "hash": "lounge_speaker"
                 },
                 {
                   "entity": "media_player.lounge_speaker"
@@ -1165,7 +1165,7 @@
               "template": "speaker_popup",
               "variables": [
                 {
-                  "hash": "#kitchen_speaker"
+                  "hash": "kitchen_speaker"
                 },
                 {
                   "entity": "media_player.kitchen_display"
@@ -1177,7 +1177,7 @@
               "template": "speaker_popup",
               "variables": [
                 {
-                  "hash": "#dining_room_speaker"
+                  "hash": "dining_room_speaker"
                 },
                 {
                   "entity": "media_player.sonos_one"
@@ -1192,7 +1192,7 @@
               "template": "speaker_popup",
               "variables": [
                 {
-                  "hash": "#spotify"
+                  "hash": "spotify"
                 },
                 {
                   "entity": "media_player.spotify_doubleclue"
