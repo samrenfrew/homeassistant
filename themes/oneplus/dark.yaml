@@ -344,5 +344,4 @@ dark:
   ha-color-form-background: '#171717'
   ha-color-form-background-hover: '#171717'
 
-  bubble-border-radius: 20px
-  
+  bubble-pop-up-border-radius: 20px
