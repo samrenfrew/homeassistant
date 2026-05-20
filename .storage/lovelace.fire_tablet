@@ -1270,79 +1270,8 @@
                   "slider_value_position": "right",
                   "cards": [
                     {
-                      "type": "custom:layout-card",
-                      "layout_type": "custom:grid-layout",
-                      "cards": [
-                        {
-                          "type": "custom:mushroom-title-card",
-                          "title": "Lounge",
-                          "subtitle": "{% set li = expand(area_entities('Lounge')) | selectattr('domain', 'eq', 'light') | selectattr('state', 'eq', 'on') | rejectattr('entity_id','in','light.lounge_lights') | map(attribute='entity_id') | list | count %}\n\nThe lounge is {{ states('sensor.lounge_temperature') | round | int(default=0)}}°C\n\n{%- if li == 1 -%}\n, 1 light is on \n{%- elif li > 1 -%}\n, {{li}} lights are on\n{%- endif %} and {% if is_state('binary_sensor.lounge_occupancy', 'on') -%}\nit's currently occupied\n{%- else -%} \nit's empty\n{% endif %}\n",
-                          "view_layout": {
-                            "grid-column": "1 / -1"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "entity": "light.big_lamp"
-                          },
-                          "template": "light_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "entity": "light.small_lamp"
-                          },
-                          "template": "light_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "entity": "light.orb_lamp"
-                          },
-                          "template": "light_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "media_player.lg_webos_tv",
-                          "template": [
-                            "default"
-                          ],
-                          "variables": {
-                            "name": "TV"
-                          },
-                          "label": "[[[\n  return entity.attributes.media_title || entity.attributes.source || entity.state;\n]]]\n",
-                          "tap_action": {
-                            "action": "navigate",
-                            "navigation_path": "#tv",
-                            "haptic": "light"
-                          },
-                          "double_tap_action": {
-                            "action": "none"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "media_player.lounge_speaker",
-                          "template": [
-                            "media_card"
-                          ],
-                          "tap_action": {
-                            "action": "navigate",
-                            "navigation_path": "#lounge_speaker"
-                          }
-                        }
-                      ],
-                      "layout": {
-                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
-                        "grid-column-gap": "var(--grid-column-gap, 16px)",
-                        "grid-row-gap": "var(--grid-row-gap, 13px)",
-                        "height": "100%",
-                        "margin": 0,
-                        "card_margin": 0,
-                        "reflow": true,
-                        "grid-auto-flow": "dense"
-                      }
+                      "type": "custom:streamline-card",
+                      "template": "lounge"
                     }
                   ]
                 },
@@ -1373,47 +1302,8 @@
                   "slider_value_position": "right",
                   "cards": [
                     {
-                      "type": "custom:layout-card",
-                      "layout_type": "custom:grid-layout",
-                      "cards": [
-                        {
-                          "type": "custom:mushroom-title-card",
-                          "title": "Bedroom",
-                          "subtitle": "{% set li = expand(area_entities('Bedroom')) | selectattr('domain', 'eq', 'light') | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list | count %}\n\nThe bedroom  is {{ states('sensor.bedroom_temperature') | round | int(default=0)}}°C and {%if is_state('binary_sensor.bedroom_occupancy', 'on')\n%}currently occupied{% else %}empty{% endif %}{%if li != 0%}{% if li == 1 %} and 1 light is on{% else %} and {{li}} lights are on{% endif %}{% endif %}{%if is_state('binary_sensor.bedroom_window', 'on')%}. The window is open{% endif %}\n",
-                          "view_layout": {
-                            "grid-column": "1 / -1"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "number_entity": "input_number.bedroom_trv",
-                            "entity": "climate.bedroom_trv"
-                          },
-                          "template": "climate_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "media_player.bedroom_speaker",
-                          "template": [
-                            "media_card"
-                          ],
-                          "tap_action": {
-                            "action": "navigate",
-                            "navigation_path": "#bedroom_speaker"
-                          }
-                        }
-                      ],
-                      "layout": {
-                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
-                        "grid-column-gap": "var(--grid-column-gap, 16px)",
-                        "grid-row-gap": "var(--grid-row-gap, 13px)",
-                        "height": "100%",
-                        "margin": 0,
-                        "card_margin": 0,
-                        "reflow": true,
-                        "grid-auto-flow": "dense"
-                      }
+                      "type": "custom:streamline-card",
+                      "template": "bedroom"
                     }
                   ]
                 },
@@ -1442,43 +1332,8 @@
                   ],
                   "cards": [
                     {
-                      "type": "custom:layout-card",
-                      "layout_type": "custom:grid-layout",
-                      "cards": [
-                        {
-                          "type": "custom:mushroom-title-card",
-                          "title": "Nursery",
-                          "subtitle": "The nursery is {{ states('sensor.nursery_temperature')| round | int(default=0)}}°C with a humidity of {{ states('sensor.nursery_humidity') | int(default=0)}}%",
-                          "view_layout": {
-                            "grid-column": "1 / -1"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "number_entity": "input_number.nursery_trv",
-                            "entity": "climate.nursery_trv"
-                          },
-                          "template": "climate_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "entity": "light.nursery_lamp"
-                          },
-                          "template": "light_card"
-                        }
-                      ],
-                      "layout": {
-                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
-                        "grid-column-gap": "var(--grid-column-gap, 16px)",
-                        "grid-row-gap": "var(--grid-row-gap, 13px)",
-                        "height": "100%",
-                        "margin": 0,
-                        "card_margin": 0,
-                        "reflow": true,
-                        "grid-auto-flow": "dense"
-                      }
+                      "type": "custom:streamline-card",
+                      "template": "nursery"
                     }
                   ]
                 },
@@ -1507,126 +1362,8 @@
                   ],
                   "cards": [
                     {
-                      "type": "custom:layout-card",
-                      "layout_type": "custom:grid-layout",
-                      "cards": [
-                        {
-                          "type": "custom:mushroom-title-card",
-                          "title": "Kitchen",
-                          "subtitle": "The kitchen is {%if is_state('binary_sensor.kitchen_occupancy', 'on')\n%}currently occupied{% else %}empty{% endif %} and the back door is {%if is_state('binary_sensor.back_door', 'on')%}open{% else %}closed{% endif %}\n",
-                          "view_layout": {
-                            "grid-column": "1 / -1"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "media_player.sonos_one",
-                          "template": [
-                            "media_card"
-                          ],
-                          "variables": {
-                            "power_mode": "pause"
-                          },
-                          "tap_action": {
-                            "action": "navigate",
-                            "navigation_path": "#dining_room_speaker"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "switch.radio",
-                          "template": [
-                            "default"
-                          ],
-                          "tap_action": {
-                            "action": "navigate",
-                            "navigation_path": "#kitchen_speaker"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "input_select.washing_machine",
-                          "tap_action": {
-                            "action": "more-info"
-                          },
-                          "template": [
-                            "default"
-                          ],
-                          "variables": {
-                            "color": "[[[ \n  if(entity.state == \"On\") return \"var(--running-accent-color)\";\n  return \"var(--stopped-accent-color)\"\n]]]\n"
-                          },
-                          "label": "[[[\n  if(entity.state == \"On\") return \"Running\";\n  if(entity.state == \"Finished\") return \"Done\";\n  return entity.state;\n]]]\n",
-                          "state": [
-                            {
-                              "value": "On|Finished",
-                              "operator": "regex",
-                              "id": "on"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "input_select.tumble_dryer",
-                          "tap_action": {
-                            "action": "more-info"
-                          },
-                          "template": [
-                            "default"
-                          ],
-                          "variables": {
-                            "color": "[[[ \n  if(entity.state == \"On\") return \"var(--running-accent-color)\";\n  return \"var(--stopped-accent-color)\"\n]]]\n"
-                          },
-                          "label": "[[[\n  if(entity.state == \"On\") return \"Running\";\n  if(entity.state == \"Finished\") return \"Done\";\n  return entity.state;\n]]]\n",
-                          "state": [
-                            {
-                              "value": "On|Finished",
-                              "operator": "regex",
-                              "id": "on"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "input_select.dishwasher",
-                          "tap_action": {
-                            "action": "more-info"
-                          },
-                          "template": [
-                            "default"
-                          ],
-                          "variables": {
-                            "color": "[[[ \n  if(entity.state == \"On\") return \"var(--running-accent-color)\";\n  return \"var(--stopped-accent-color)\"\n]]]\n"
-                          },
-                          "label": "[[[\n  if(entity.state == \"On\") return \"Running\";\n  if(entity.state == \"Finished\") return \"Done\";\n  return entity.state;\n]]]\n",
-                          "state": [
-                            {
-                              "value": "On|Finished",
-                              "operator": "regex",
-                              "id": "on"
-                            }
-                          ]
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "media_player.kitchen_display",
-                          "template": [
-                            "media_card"
-                          ],
-                          "variables": {
-                            "name": "Display"
-                          }
-                        }
-                      ],
-                      "layout": {
-                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
-                        "grid-column-gap": "var(--grid-column-gap, 16px)",
-                        "grid-row-gap": "var(--grid-row-gap, 13px)",
-                        "height": "100%",
-                        "margin": 0,
-                        "card_margin": 0,
-                        "reflow": true,
-                        "grid-auto-flow": "dense"
-                      }
+                      "type": "custom:streamline-card",
+                      "template": "kitchen"
                     }
                   ]
                 },
@@ -1655,60 +1392,8 @@
                   ],
                   "cards": [
                     {
-                      "type": "custom:layout-card",
-                      "layout_type": "custom:grid-layout",
-                      "cards": [
-                        {
-                          "type": "custom:mushroom-title-card",
-                          "title": "Office",
-                          "subtitle": "The room is {{ states('sensor.office_temperature') | round | int(default=0)}}°C with a humidity of {{ states('sensor.office_humidity') | int(default=0)}}%, and {%if is_state('binary_sensor.office_occupancy', 'on') %}currently occupied{% else %}empty{% endif %}\n",
-                          "view_layout": {
-                            "grid-column": "1 / -1"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "light.ikea_plug",
-                          "template": [
-                            "default"
-                          ],
-                          "variables": {
-                            "color": "rgb(var(--mush-rgb-orange))"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "number_entity": "input_number.office_trv",
-                            "entity": "climate.office_trv"
-                          },
-                          "template": "climate_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "switch.sam_pc",
-                          "template": [
-                            "default"
-                          ]
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "switch.extension_lead",
-                          "template": [
-                            "default"
-                          ]
-                        }
-                      ],
-                      "layout": {
-                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
-                        "grid-column-gap": "var(--grid-column-gap, 16px)",
-                        "grid-row-gap": "var(--grid-row-gap, 13px)",
-                        "height": "100%",
-                        "margin": 0,
-                        "card_margin": 0,
-                        "reflow": true,
-                        "grid-auto-flow": "dense"
-                      }
+                      "type": "custom:streamline-card",
+                      "template": "office"
                     }
                   ]
                 },
@@ -1739,56 +1424,8 @@
                   "slider_value_position": "right",
                   "cards": [
                     {
-                      "type": "custom:layout-card",
-                      "layout_type": "custom:grid-layout",
-                      "cards": [
-                        {
-                          "type": "custom:mushroom-title-card",
-                          "title": "Ella's Room",
-                          "subtitle": "The room is {{ states('sensor.ella_temperature') | round | int(default=0)}}°C with a humidity of {{ states('sensor.ella_humidity') | int(default=0)}}%\n",
-                          "view_layout": {
-                            "grid-column": "1 / -1"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "number_entity": "input_number.ella_trv",
-                            "entity": "climate.ella_trv"
-                          },
-                          "template": "climate_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "light.fairy_lights",
-                          "template": [
-                            "default"
-                          ],
-                          "variables": {
-                            "color": "rgb(var(--mush-rgb-orange))"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "light.ella_lamp",
-                          "template": [
-                            "default"
-                          ],
-                          "variables": {
-                            "color": "rgb(var(--mush-rgb-orange))"
-                          }
-                        }
-                      ],
-                      "layout": {
-                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
-                        "grid-column-gap": "var(--grid-column-gap, 16px)",
-                        "grid-row-gap": "var(--grid-row-gap, 13px)",
-                        "height": "100%",
-                        "margin": 0,
-                        "card_margin": 0,
-                        "reflow": true,
-                        "grid-auto-flow": "dense"
-                      }
+                      "type": "custom:streamline-card",
+                      "template": "ella"
                     }
                   ]
                 }
