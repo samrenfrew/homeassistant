@@ -1243,35 +1243,32 @@
               "type": "vertical-stack",
               "cards": [
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#lounge",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n",
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "580px",
+                  "auto_close": "30000",
+                  "bg_color": "#0d0d0d",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
+                  "modules": [
+                    "fire_tablet",
+                    "!popup"
+                  ],
+                  "bg_blur": "0",
+                  "slider_fill_orientation": "left",
+                  "slider_value_position": "right",
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#lounge",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "#0d0d0d",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      },
-                      "modules": [
-                        "fire_tablet",
-                        "!popup"
-                      ],
-                      "bg_blur": "0",
-                      "slider_fill_orientation": "left",
-                      "slider_value_position": "right"
-                    },
                     {
                       "type": "custom:layout-card",
                       "layout_type": "custom:grid-layout",
@@ -1350,34 +1347,31 @@
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#bedroom",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n",
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "580px",
+                  "auto_close": "30000",
+                  "bg_color": "#111111",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
+                  "modules": [
+                    "fire_tablet",
+                    "!popup"
+                  ],
+                  "slider_fill_orientation": "left",
+                  "slider_value_position": "right",
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#bedroom",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "#111111",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      },
-                      "modules": [
-                        "fire_tablet",
-                        "!popup"
-                      ],
-                      "slider_fill_orientation": "left",
-                      "slider_value_position": "right"
-                    },
                     {
                       "type": "custom:layout-card",
                       "layout_type": "custom:grid-layout",
@@ -1424,32 +1418,29 @@
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#nursery",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "580px",
+                  "auto_close": "30000",
+                  "bg_color": "#111111",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
+                  "modules": [
+                    "!popup",
+                    "fire_tablet"
+                  ],
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#nursery",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "#111111",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      },
-                      "modules": [
-                        "!popup",
-                        "fire_tablet"
-                      ]
-                    },
                     {
                       "type": "custom:layout-card",
                       "layout_type": "custom:grid-layout",
@@ -1492,32 +1483,29 @@
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#kitchen",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "580px",
+                  "auto_close": "30000",
+                  "bg_color": "#111111",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
+                  "modules": [
+                    "fire_tablet",
+                    "!popup"
+                  ],
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#kitchen",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "#111111",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      },
-                      "modules": [
-                        "fire_tablet",
-                        "!popup"
-                      ]
-                    },
                     {
                       "type": "custom:layout-card",
                       "layout_type": "custom:grid-layout",
@@ -1643,32 +1631,29 @@
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#office",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "580px",
+                  "auto_close": "30000",
+                  "bg_color": "#111111",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
+                  "modules": [
+                    "fire_tablet",
+                    "!popup"
+                  ],
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#office",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "#111111",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      },
-                      "modules": [
-                        "fire_tablet",
-                        "!popup"
-                      ]
-                    },
                     {
                       "type": "custom:layout-card",
                       "layout_type": "custom:grid-layout",
@@ -1728,34 +1713,31 @@
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#ella",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "580px",
+                  "auto_close": "30000",
+                  "bg_color": "#111111",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
+                  "modules": [
+                    "fire_tablet",
+                    "!popup"
+                  ],
+                  "slider_fill_orientation": "left",
+                  "slider_value_position": "right",
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#ella",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "#111111",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      },
-                      "modules": [
-                        "fire_tablet",
-                        "!popup"
-                      ],
-                      "slider_fill_orientation": "left",
-                      "slider_value_position": "right"
-                    },
                     {
                       "type": "custom:layout-card",
                       "layout_type": "custom:grid-layout",
