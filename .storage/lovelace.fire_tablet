@@ -1461,113 +1461,8 @@
                   "slider_value_position": "right",
                   "cards": [
                     {
-                      "type": "custom:layout-card",
-                      "layout_type": "custom:grid-layout",
-                      "cards": [
-                        {
-                          "type": "custom:mushroom-title-card",
-                          "title": "Lights",
-                          "subtitle": "{%- set lights = states[\"sensor.lights_on\"].state | int(default=0)  %} \n\n{%- if lights == 0 -%}\nThere are currently no lights\n{%- elif lights == 1 -%}\nThere is 1 light\n{%- else -%}\nThere are {{ lights }} lights\n{%- endif %} on\n",
-                          "view_layout": {
-                            "grid-column": "1/-1"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "entity": "light.big_lamp"
-                          },
-                          "template": "light_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "entity": "light.small_lamp"
-                          },
-                          "template": "light_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "entity": "light.orb_lamp"
-                          },
-                          "template": "light_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "variables": {
-                            "entity": "light.nursery_lamp"
-                          },
-                          "template": "light_card"
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "light.fairy_lights",
-                          "template": [
-                            "default"
-                          ],
-                          "variables": {
-                            "color": "rgb(var(--mush-rgb-orange))"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "light.ella_lamp",
-                          "template": [
-                            "default"
-                          ],
-                          "variables": {
-                            "color": "rgb(var(--mush-rgb-orange))"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "name": "Desk Lamp",
-                          "entity": "light.ikea_plug",
-                          "template": [
-                            "default"
-                          ],
-                          "variables": {
-                            "color": "rgb(var(--mush-rgb-orange))"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "sensor.lights_on",
-                          "name": "All Lights",
-                          "template": [
-                            "default"
-                          ],
-                          "state": [
-                            {
-                              "id": "on",
-                              "operator": ">",
-                              "value": 0
-                            }
-                          ],
-                          "icon": "[[[\n  if (entity.state > 0) return \"mdi:lightbulb-group\";\n  return \"mdi:lightbulb-group-outline\";\n]]]\n",
-                          "tap_action": {
-                            "action": "call-service",
-                            "service": "light.turn_off",
-                            "target": {
-                              "entity_id": "all"
-                            }
-                          },
-                          "variables": {
-                            "color": "rgb(var(--mush-rgb-orange))"
-                          },
-                          "label": "[[[\n  var lights = entity.state\n  if(lights == 0){\n    return \"Off\"\n  } else if(lights == 1) {\n    return \"1 Light\"\n  } else {\n    return lights + \" Lights\"\n  }\n]]]\n"
-                        }
-                      ],
-                      "layout": {
-                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
-                        "grid-column-gap": "var(--grid-column-gap, 16px)",
-                        "grid-row-gap": "var(--grid-row-gap, 13px)",
-                        "margin": 0,
-                        "card_margin": 0,
-                        "reflow": true,
-                        "grid-auto-flow": "dense"
-                      }
+                      "type": "custom:streamline-card",
+                      "template": "lights"
                     }
                   ]
                 },
@@ -1598,106 +1493,33 @@
                   "slider_value_position": "right",
                   "cards": [
                     {
-                      "type": "custom:layout-card",
-                      "layout_type": "custom:grid-layout",
-                      "cards": [
-                        {
-                          "type": "custom:mushroom-title-card",
-                          "title": "Speakers",
-                          "subtitle": "{%- set speakers = states[\"sensor.speakers_on\"].state | int(default=0) -%}\n\n\n{%- if speakers == 0 -%}\nThere is nothing\n{%- elif speakers == 1 -%}\nThere is 1 speaker\n{%- else -%}\nThere are {{ speakers }} speakers\n{%- endif %} playing\n",
-                          "view_layout": {
-                            "grid-column": "1/-1"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "media_player.lounge_speaker",
-                          "name": "Lounge",
-                          "template": [
-                            "media_card"
-                          ],
-                          "tap_action": {
-                            "action": "navigate",
-                            "navigation_path": "#lounge_speaker"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "media_player.bedroom_speaker",
-                          "name": "Bedroom",
-                          "template": [
-                            "media_card"
-                          ],
-                          "tap_action": {
-                            "action": "navigate",
-                            "navigation_path": "#bedroom_speaker"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "media_player.sonos_one",
-                          "name": "Dining Room",
-                          "template": [
-                            "media_card"
-                          ],
-                          "variables": {
-                            "power_mode": "pause"
-                          },
-                          "tap_action": {
-                            "action": "navigate",
-                            "navigation_path": "#dining_room_speaker"
-                          }
-                        },
-                        {
-                          "type": "custom:button-card",
-                          "entity": "media_player.kitchen_display",
-                          "name": "Kitchen",
-                          "template": [
-                            "media_card"
-                          ],
-                          "tap_action": {
-                            "action": "navigate",
-                            "navigation_path": "#kitchen_speaker"
-                          }
-                        }
-                      ],
-                      "layout": {
-                        "grid-template-columns": "repeat(2, minmax(calc((100% / 2) - 12px), 1fr))",
-                        "grid-column-gap": "var(--grid-column-gap, 16px)",
-                        "grid-row-gap": "var(--grid-row-gap, 13px)",
-                        "margin": 0,
-                        "card_margin": 0,
-                        "reflow": true,
-                        "grid-auto-flow": "dense"
-                      }
+                      "type": "custom:streamline-card",
+                      "template": "speakers"
                     }
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#heating",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "580px",
+                  "auto_close": "30000",
+                  "bg_color": "",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
+                  "slider_fill_orientation": "left",
+                  "slider_value_position": "right",
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#heating",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      },
-                      "slider_fill_orientation": "left",
-                      "slider_value_position": "right"
-                    },
                     {
                       "type": "thermostat",
                       "entity": "climate.hive",
