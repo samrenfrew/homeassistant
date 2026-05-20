@@ -503,10 +503,12 @@
                   "max_results": 20,
                   "card_mod": {
                     "style": {
-                      ".": "ha-card.type-custom-search-card {\n  border-width: 1px;\n}\n#searchContainer {\n  width: calc(100%) !important;\n  border-width: 1px;\n  border-radius: 20px;\n  overflow: hidden;\n  padding-bottom: 0\n}\nha-input {\n  padding-bottom: 0;\n}\nha-card.type-custom-search-card #count {\n  padding-right: 20px;\n}\nha-card.type-custom-search-card #searchContainer ha-icon {\n  color: #a5a5a5;\n  transform: translateY(-4px);\n}\n",
+                      ".": "ha-card.type-custom-search-card {\n  border-width: 1px;\n}\nha-card.type-custom-search-card #searchContainer {\n  width: calc(100%) !important;\n  border-width: 1px;\n  border-radius: 20px;\n  overflow: hidden;\n}\nha-card.type-custom-search-card #count {\n  padding-right: 20px;\n}\nha-card.type-custom-search-card #searchContainer ha-icon {\n  color: #a5a5a5;\n  transform: translateY(-4px);\n}\n",
                       "#searchContainer": {
-                        "ha-input$": {
-                          "wa-input$": ".text-field::after {\n  display:none !important;\n}\n"
+                        "ha-textfield$": {
+                          "ha-input$": {
+                            "wa-input$": "[part=\"base\"]::after {\n  display:none\n}\n"
+                          }
                         }
                       }
                     }
@@ -1173,46 +1175,6 @@
               "type": "custom:streamline-card",
               "template": "heating_popup",
               "variables": {}
-            },
-            {
-              "type": "custom:bubble-card",
-              "card_type": "pop-up",
-              "name": "Living room",
-              "icon": "mdi:sofa-outline",
-              "hash": "#test",
-              "cards": [
-                {
-                  "type": "custom:bubble-card",
-                  "card_type": "separator",
-                  "name": "Lights (example)",
-                  "icon": "mdi:lightbulb-outline"
-                },
-                {
-                  "type": "custom:bubble-card",
-                  "card_type": "button",
-                  "button_type": "switch",
-                  "entity": "light.home_assistant_voice_096aed_led_ring",
-                  "show_state": true,
-                  "grid_options": {
-                    "columns": 6
-                  }
-                },
-                {
-                  "type": "custom:bubble-card",
-                  "card_type": "button",
-                  "button_type": "switch",
-                  "entity": "light.desk_lamp",
-                  "show_state": true,
-                  "grid_options": {
-                    "columns": 6
-                  }
-                }
-              ],
-              "button_type": "name",
-              "sub_button": {
-                "main": [],
-                "bottom": []
-              }
             }
           ],
           "type": "custom:vertical-layout"
@@ -1873,233 +1835,32 @@
               ]
             },
             {
-              "type": "custom:layout-card",
-              "layout_type": "custom:vertical-layout",
-              "layout": {
-                "margin": "0 0 0",
-                "card_margin": 0,
-                "gap": 0
-              },
-              "cards": [
-                {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#lounge_speaker",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "modules": [
-                        "default"
-                      ],
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      }
-                    },
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "speaker_popup",
-                      "variables": [
-                        {
-                          "entity": "media_player.lounge_speaker"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#bedroom_speaker",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "modules": [
-                        "default_theme"
-                      ],
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px"
-                    },
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "speaker_popup",
-                      "variables": [
-                        {
-                          "entity": "media_player.bedroom_speaker"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#kitchen_speaker",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "modules": [
-                        "default_theme"
-                      ],
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      }
-                    },
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "speaker_popup",
-                      "variables": [
-                        {
-                          "entity": "media_player.kitchen_display"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#dining_room_speaker",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "modules": [
-                        "default_theme"
-                      ],
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      }
-                    },
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "speaker_popup",
-                      "variables": [
-                        {
-                          "entity": "media_player.sonos_one"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#spotify",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "modules": [
-                        "default_theme"
-                      ],
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px"
-                    },
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "speaker_popup",
-                      "variables": [
-                        {
-                          "entity": "media_player.spotify_doubleclue"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#tv",
-                      "name": "",
-                      "icon": "",
-                      "styles": "\n.bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  --horizontal-stack-card-gap: 8px !important;\n  padding: 18px 18px 56px 18px !important;\n}\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "300px",
-                      "auto_close": "",
-                      "background_update": true,
-                      "button_type": "name",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      }
-                    },
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "tv_remote"
-                    }
-                  ]
-                },
-                {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#heating",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "modules": [
-                        "default_theme"
-                      ],
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": ""
-                    },
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "boiler_popup"
-                    }
-                  ]
-                }
-              ]
+              "type": "custom:streamline-card",
+              "template": "lounge_speaker_popup"
+            },
+            {
+              "type": "custom:streamline-card",
+              "template": "bedroom_speaker_popup"
+            },
+            {
+              "type": "custom:streamline-card",
+              "template": "kitchen_speaker_popup"
+            },
+            {
+              "type": "custom:streamline-card",
+              "template": "dining_room_speaker_popup"
+            },
+            {
+              "type": "custom:streamline-card",
+              "template": "spotify_popup"
+            },
+            {
+              "type": "custom:streamline-card",
+              "template": "tv_popup"
+            },
+            {
+              "type": "custom:streamline-card",
+              "template": "heating_popup"
             }
           ]
         },
