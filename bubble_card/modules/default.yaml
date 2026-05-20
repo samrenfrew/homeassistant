@@ -21,6 +21,4 @@ default:
       backdrop-filter: ${this.location.href.includes('fire-tablet') ? 'brightness(20%) !important' : 'blur(10px) !important'};
       z-index: 6;
     }
-
-    ${console.log(this)}
   is_global: true
