@@ -7,7 +7,6 @@ default:
   description: Empty and enabled by default. Add your custom styles and/or JS templates here to apply them to all cards by pressing the <ha-icon icon="mdi:pencil"></ha-icon> button above.
   code: |-
     .bubble-pop-up {
-      --bubble-pop-up-main-background-color: ${hass.panelUrl == 'fire-tablet' ? '#0d0d0d' : 'var(--ha-dialog-surface-background)'};
       height: unset !important;
       max-height: 100vh !important;
       box-shadow: var(--mdc-dialog-box-shadow) !important;

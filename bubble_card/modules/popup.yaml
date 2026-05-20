@@ -18,8 +18,6 @@ popup:
     }
     .bubble-backdrop.is-visible {
       backdrop-filter: ${hass.panelUrl == 'fire-tablet' ? 'brightness(20%) !important' : 'blur(10px) !important'};
-      background: ${hass.hassUrl()};
-      margin: ${JSON.stringify(hass)};
       z-index: 6;
     }
   editor: ''
