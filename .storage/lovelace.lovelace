@@ -1620,37 +1620,6 @@
                   ]
                 },
                 {
-                  "type": "custom:bubble-card",
-                  "card_type": "pop-up",
-                  "hash": "#bedroom_speaker",
-                  "button_type": "name",
-                  "name": "",
-                  "icon": "",
-                  "modules": [
-                    "default_theme"
-                  ],
-                  "show_header": true,
-                  "show_icon": false,
-                  "show_name": false,
-                  "scrolling_effect": true,
-                  "width_desktop": "750px",
-                  "sub_button": {
-                    "main": [],
-                    "bottom": []
-                  },
-                  "cards": [
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "speaker_popup",
-                      "variables": [
-                        {
-                          "entity": "media_player.bedroom_speaker"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
                   "type": "vertical-stack",
                   "cards": [
                     {
@@ -1711,28 +1680,25 @@
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#spotify",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "modules": [
+                    "default_theme"
+                  ],
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "750px",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#spotify",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "modules": [
-                        "default_theme"
-                      ],
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      }
-                    },
                     {
                       "type": "custom:streamline-card",
                       "template": "speaker_popup",
@@ -1774,32 +1740,29 @@
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#heating",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "modules": [
+                    "default_theme"
+                  ],
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "580px",
+                  "auto_close": "30000",
+                  "bg_color": "",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
+                  "bg_blur": "",
+                  "bg_opacity": "",
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#heating",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "modules": [
-                        "default_theme"
-                      ],
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      },
-                      "bg_blur": "",
-                      "bg_opacity": ""
-                    },
                     {
                       "type": "custom:streamline-card",
                       "template": "boiler_popup"
