@@ -540,7 +540,12 @@
                     },
                     "card_mod": {
                       "style": {
-                        ".": "ha-card {\n  border-width: 1px;\n}\nmmp-powerstrip {\n  justify-content: space-between !important;\n}    \n",
+                        ".": "ha-card {\n  border-width: 1px;\n}\nmmp-powerstrip {\n  justify-content: space-between !important;\n}  \n",
+                        "mmp-powerstrip$": {
+                          "mmp-source-menu$": {
+                            "mmp-dropdown$": ".mmp-dropdown__menu {\n  left:0;\n}\n"
+                          }
+                        },
                         "mmp-media-controls$": ":host {\n  flex-direction:row;\n}\n.mmp-media-controls__media {\n  width:100%;\n  gap:10px;\n\n}\n.mmp-media-controls__media ha-icon-button {\n  background:var(--background-color) !important;\n  border-radius: 12px;\n  border: 1px solid var(--ha-card-border-color);\n  justify-content: center;\n  width:100%;\n  display:flex;\n  # --mmp-text-color: #fff;\n}\n"
                       }
                     }
