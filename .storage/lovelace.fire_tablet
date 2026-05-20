@@ -1499,57 +1499,13 @@
                   ]
                 },
                 {
-                  "type": "custom:bubble-card",
-                  "card_type": "pop-up",
-                  "hash": "#heating",
-                  "button_type": "name",
-                  "name": "",
-                  "icon": "",
-                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
-                  "show_header": true,
-                  "show_icon": false,
-                  "show_name": false,
-                  "scrolling_effect": true,
-                  "width_desktop": "580px",
-                  "auto_close": "30000",
-                  "bg_color": "",
-                  "sub_button": {
-                    "main": [],
-                    "bottom": []
-                  },
-                  "slider_fill_orientation": "left",
-                  "slider_value_position": "right",
-                  "cards": [
-                    {
-                      "type": "thermostat",
-                      "entity": "climate.hive",
-                      "name": " "
-                    },
-                    {
-                      "type": "entities",
-                      "entities": [
-                        {
-                          "entity": "button.hive_heating_boost"
-                        },
-                        {
-                          "entity": "number.hive_heating_boost_temperature"
-                        },
-                        {
-                          "entity": "number.hive_heating_boost_duration"
-                        },
-                        {
-                          "entity": "sensor.hive_heating_boost_remaining"
-                        },
-                        {
-                          "entity": "switch.hive_temperature_setpoint_hold"
-                        }
-                      ]
-                    }
-                  ]
+                  "type": "custom:streamline-card",
+                  "template": "heating_popup"
                 },
                 {
                   "type": "custom:streamline-card",
-                  "template": "tv_popup"
+                  "template": "tv_popup",
+                  "variables": {}
                 }
               ]
             },
