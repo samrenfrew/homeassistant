@@ -1266,6 +1266,7 @@
                     "!popup"
                   ],
                   "bg_blur": "0",
+                  "performance_mode": "performance",
                   "slider_fill_orientation": "left",
                   "slider_value_position": "right",
                   "cards": [
