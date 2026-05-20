@@ -1150,54 +1150,22 @@
             },
             {
               "type": "custom:streamline-card",
-              "template": "speaker_popup2",
-              "variables": [
-                {
-                  "hash": "lounge_speaker"
-                },
-                {
-                  "entity": "media_player.lounge_speaker"
-                }
-              ]
+              "template": "lounge_speaker_popup"
             },
             {
               "type": "custom:streamline-card",
-              "template": "speaker_popup",
-              "variables": [
-                {
-                  "hash": "kitchen_speaker"
-                },
-                {
-                  "entity": "media_player.kitchen_display"
-                }
-              ]
+              "template": "kitchen_speaker_popup"
             },
             {
               "type": "custom:streamline-card",
-              "template": "speaker_popup",
-              "variables": [
-                {
-                  "hash": "dining_room_speaker"
-                },
-                {
-                  "entity": "media_player.sonos_one"
-                }
-              ]
+              "template": "dining_room_speaker_popup"
+            },
+            {
+              "type": "custom:streamline-card",
+              "template": "spotify_popup"
             },
             {
               "type": "custom:layout-break"
-            },
-            {
-              "type": "custom:streamline-card",
-              "template": "speaker_popup",
-              "variables": [
-                {
-                  "hash": "spotify"
-                },
-                {
-                  "entity": "media_player.spotify_doubleclue"
-                }
-              ]
             },
             {
               "type": "custom:streamline-card",
