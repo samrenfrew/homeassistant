@@ -1161,11 +1161,11 @@
               "template": "dining_room_speaker_popup"
             },
             {
-              "type": "custom:streamline-card",
-              "template": "spotify_popup"
+              "type": "custom:layout-break"
             },
             {
-              "type": "custom:layout-break"
+              "type": "custom:streamline-card",
+              "template": "spotify_popup"
             },
             {
               "type": "custom:streamline-card",
@@ -1175,6 +1175,46 @@
               "type": "custom:streamline-card",
               "template": "heating_popup",
               "variables": {}
+            },
+            {
+              "type": "custom:bubble-card",
+              "card_type": "pop-up",
+              "name": "Living room",
+              "icon": "mdi:sofa-outline",
+              "hash": "#test",
+              "cards": [
+                {
+                  "type": "custom:bubble-card",
+                  "card_type": "separator",
+                  "name": "Lights (example)",
+                  "icon": "mdi:lightbulb-outline"
+                },
+                {
+                  "type": "custom:bubble-card",
+                  "card_type": "button",
+                  "button_type": "switch",
+                  "entity": "light.home_assistant_voice_096aed_led_ring",
+                  "show_state": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                },
+                {
+                  "type": "custom:bubble-card",
+                  "card_type": "button",
+                  "button_type": "switch",
+                  "entity": "light.desk_lamp",
+                  "show_state": true,
+                  "grid_options": {
+                    "columns": 6
+                  }
+                }
+              ],
+              "button_type": "name",
+              "sub_button": {
+                "main": [],
+                "bottom": []
+              }
             }
           ],
           "type": "custom:vertical-layout"
