@@ -1662,20 +1662,12 @@
                   "button_type": "name",
                   "name": "",
                   "icon": "",
-                  "styles": "\n",
                   "show_header": true,
                   "show_icon": false,
                   "show_name": false,
                   "scrolling_effect": true,
-                  "width_desktop": "580px",
                   "auto_close": "30000",
                   "bg_color": "",
-                  "sub_button": {
-                    "main": [],
-                    "bottom": []
-                  },
-                  "slider_fill_orientation": "left",
-                  "slider_value_position": "right",
                   "cards": [
                     {
                       "type": "custom:more-info-card",

@@ -345,3 +345,4 @@ dark:
   ha-color-form-background-hover: '#171717'
 
   bubble-pop-up-border-radius: 20px
+  desktop-width: 600px !important
