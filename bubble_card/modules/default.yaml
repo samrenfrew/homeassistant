@@ -22,6 +22,8 @@ default:
     }
 
     .bubble-pop-up {
-      --bubble-pop-up-main-background-color: #0d0d0d;
+      --bubble-pop-up-main-background-color: #0d0d0d : var(--ha-dialog-surface-background);
+
+      var(--bubble-pop-up-main-background-color, var(--bubble-pop-up-background-color, var(--bubble-secondary-background-color, var(--background-color, var(--secondary-background-color)))))
     }
   is_global: true
