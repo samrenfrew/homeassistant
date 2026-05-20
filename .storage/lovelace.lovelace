@@ -503,12 +503,10 @@
                   "max_results": 20,
                   "card_mod": {
                     "style": {
-                      ".": "ha-card.type-custom-search-card {\n  border-width: 1px;\n}\nha-card.type-custom-search-card #searchContainer {\n  width: calc(100%) !important;\n  border-width: 1px;\n  border-radius: 20px;\n  overflow: hidden;\n}\nha-card.type-custom-search-card #count {\n  padding-right: 20px;\n}\nha-card.type-custom-search-card #searchContainer ha-icon {\n  color: #a5a5a5;\n  transform: translateY(-4px);\n}\n",
+                      ".": "ha-card.type-custom-search-card {\n  border-width: 1px;\n}\n#searchContainer {\n  width: calc(96%) !important;\n  border-width: 1px;\n  border-radius: 20px;\n  overflow: hidden;\n}\nha-input {\n  padding-bottom: 0;\n}\n#count {\n  padding-right: 20px;\n}\n#searchContainer ha-icon {\n  color: #a5a5a5;\n  transform: translateY(-4px);\n}\n",
                       "#searchContainer": {
-                        "ha-textfield$": {
-                          "ha-input$": {
-                            "wa-input$": "[part=\"base\"]::after {\n  display:none\n}\n"
-                          }
+                        "ha-input$": {
+                          "wa-input$": "[part=\"base\"]::after {\n  display:none\n}\n"
                         }
                       }
                     }
