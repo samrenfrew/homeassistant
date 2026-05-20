@@ -1150,7 +1150,7 @@
             },
             {
               "type": "custom:streamline-card",
-              "template": "speaker_popup",
+              "template": "speaker_popup2",
               "variables": [
                 {
                   "hash": "lounge_speaker"
