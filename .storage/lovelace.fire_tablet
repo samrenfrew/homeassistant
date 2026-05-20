@@ -1662,7 +1662,7 @@
                   "button_type": "name",
                   "name": "",
                   "icon": "",
-                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                  "styles": "\n",
                   "show_header": true,
                   "show_icon": false,
                   "show_name": false,
