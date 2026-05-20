@@ -343,3 +343,6 @@ dark:
   # Form
   ha-color-form-background: '#171717'
   ha-color-form-background-hover: '#171717'
+
+  bubble-border-radius: 20px
+  
