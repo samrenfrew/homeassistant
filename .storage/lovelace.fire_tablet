@@ -1513,150 +1513,24 @@
               "type": "vertical-stack",
               "cards": [
                 {
-                  "type": "custom:bubble-card",
-                  "card_type": "pop-up",
-                  "hash": "#lounge_speaker",
-                  "button_type": "name",
-                  "name": "",
-                  "icon": "",
-                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
-                  "show_header": true,
-                  "show_icon": false,
-                  "show_name": false,
-                  "scrolling_effect": true,
-                  "width_desktop": "750px",
-                  "bg_color": "111111",
-                  "sub_button": {
-                    "main": [],
-                    "bottom": []
-                  },
-                  "cards": [
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "speaker_popup",
-                      "variables": [
-                        {
-                          "entity": "media_player.lounge_speaker"
-                        }
-                      ]
-                    }
-                  ]
+                  "type": "custom:streamline-card",
+                  "template": "lounge_speaker_popup"
                 },
                 {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#dining_room_speaker",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px",
-                      "bg_color": "111111"
-                    },
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "speaker_popup",
-                      "variables": [
-                        {
-                          "entity": "media_player.sonos_one"
-                        }
-                      ]
-                    }
-                  ]
+                  "type": "custom:streamline-card",
+                  "template": "bedroom_speaker_popup"
                 },
                 {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#bedroom_speaker",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px",
-                      "bg_color": "111111"
-                    },
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "speaker_popup",
-                      "variables": [
-                        {
-                          "entity": "media_player.bedroom_speaker"
-                        }
-                      ]
-                    }
-                  ]
+                  "type": "custom:streamline-card",
+                  "template": "kitchen_speaker_popup"
                 },
                 {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#kitchen_speaker",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px",
-                      "bg_color": "111111"
-                    },
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "speaker_popup",
-                      "variables": [
-                        {
-                          "entity": "media_player.kitchen_display"
-                        }
-                      ]
-                    }
-                  ]
+                  "type": "custom:streamline-card",
+                  "template": "dining_room_speaker_popup"
                 },
                 {
-                  "type": "vertical-stack",
-                  "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#spotify",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "750px",
-                      "bg_color": "111111"
-                    },
-                    {
-                      "type": "custom:streamline-card",
-                      "template": "speaker_popup",
-                      "variables": [
-                        {
-                          "entity": "media_player.spotify_doubleclue"
-                        }
-                      ]
-                    }
-                  ]
+                  "type": "custom:streamline-card",
+                  "template": "spotify_popup"
                 }
               ]
             },
@@ -1664,30 +1538,27 @@
               "type": "vertical-stack",
               "cards": [
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#weather",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "580px",
+                  "auto_close": "30000",
+                  "bg_color": "",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
+                  "slider_fill_orientation": "left",
+                  "slider_value_position": "right",
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#weather",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n.bubble-pop-up-container {\n  margin-top: -100px !important\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      },
-                      "slider_fill_orientation": "left",
-                      "slider_value_position": "right"
-                    },
                     {
                       "type": "custom:layout-card",
                       "layout_type": "custom:grid-layout",
@@ -1724,28 +1595,25 @@
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#night_mode",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "580px",
+                  "auto_close": "30000",
+                  "bg_color": "",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#night_mode",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      }
-                    },
                     {
                       "type": "custom:more-info-card",
                       "entity": "input_boolean.night_mode",
@@ -1757,28 +1625,25 @@
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#guest_mode",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "580px",
+                  "auto_close": "30000",
+                  "bg_color": "",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#guest_mode",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      }
-                    },
                     {
                       "type": "custom:more-info-card",
                       "entity": "input_boolean.guest_mode",
@@ -1790,30 +1655,27 @@
                   ]
                 },
                 {
-                  "type": "vertical-stack",
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#broadcasts",
+                  "button_type": "name",
+                  "name": "",
+                  "icon": "",
+                  "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "580px",
+                  "auto_close": "30000",
+                  "bg_color": "",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
+                  "slider_fill_orientation": "left",
+                  "slider_value_position": "right",
                   "cards": [
-                    {
-                      "type": "custom:bubble-card",
-                      "card_type": "pop-up",
-                      "hash": "#broadcasts",
-                      "button_type": "name",
-                      "name": "",
-                      "icon": "",
-                      "styles": ".bubble-pop-up {\n  border-radius: 20px !important;\n  height: unset !important;\n  max-height: 100vh !important;\n  box-shadow: var(--mdc-dialog-box-shadow) !important;\n}\n\n",
-                      "show_header": true,
-                      "show_icon": false,
-                      "show_name": false,
-                      "scrolling_effect": true,
-                      "width_desktop": "580px",
-                      "auto_close": "30000",
-                      "bg_color": "",
-                      "sub_button": {
-                        "main": [],
-                        "bottom": []
-                      },
-                      "slider_fill_orientation": "left",
-                      "slider_value_position": "right"
-                    },
                     {
                       "type": "custom:more-info-card",
                       "entity": "input_boolean.mute_broadcasts",
