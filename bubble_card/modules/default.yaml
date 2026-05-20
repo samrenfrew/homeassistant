@@ -7,6 +7,7 @@ default:
   description: Empty and enabled by default. Add your custom styles and/or JS templates here to apply them to all cards by pressing the <ha-icon icon="mdi:pencil"></ha-icon> button above.
   code: |-
     .bubble-pop-up {
+      --bubble-pop-up-main-background-color: ${this.location.href.includes('fire-tablet') ? '#0d0d0d' : 'var(--ha-dialog-surface-background)'};
       height: unset !important;
       max-height: 100vh !important;
       box-shadow: var(--mdc-dialog-box-shadow) !important;
@@ -21,9 +22,5 @@ default:
       z-index: 6;
     }
 
-    .bubble-pop-up {
-      --bubble-pop-up-main-background-color: #0d0d0d : var(--ha-dialog-surface-background);
-
-      var(--bubble-pop-up-main-background-color, var(--bubble-pop-up-background-color, var(--bubble-secondary-background-color, var(--background-color, var(--secondary-background-color)))))
-    }
+    ${console.log(this)}
   is_global: true
