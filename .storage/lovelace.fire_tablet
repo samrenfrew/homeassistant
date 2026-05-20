@@ -1498,9 +1498,31 @@
                   "template": "heating_popup"
                 },
                 {
-                  "type": "custom:streamline-card",
-                  "template": "tv_popup",
-                  "variables": {}
+                  "type": "custom:bubble-card",
+                  "card_type": "pop-up",
+                  "hash": "#tv",
+                  "name": "",
+                  "icon": "",
+                  "styles": ".bubble-pop-up-container {\n  --horizontal-stack-card-gap: 8px !important;\n  padding: 18px 18px 56px 18px !important;\n}\n.bubble-pop-up {\n  # max-width: 300px !important;\n}",
+                  "show_header": true,
+                  "show_icon": false,
+                  "show_name": false,
+                  "scrolling_effect": true,
+                  "width_desktop": "580px",
+                  "auto_close": "",
+                  "background_update": true,
+                  "button_type": "name",
+                  "sub_button": {
+                    "main": [],
+                    "bottom": []
+                  },
+                  "performance_mode": "performance",
+                  "cards": [
+                    {
+                      "type": "custom:streamline-card",
+                      "template": "tv_remote"
+                    }
+                  ]
                 }
               ]
             },
