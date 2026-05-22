@@ -146,9 +146,6 @@ sonos:
 #       inovelli_provider: true                    # Auto update INOVELLI devices
 #       thirdreality_provider: true   
 
-bubble_card:
-  modules: !include bubble_modules.yaml
-
 # Custom Components
 #breaking_changes:
 config_editor:
