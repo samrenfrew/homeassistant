@@ -711,7 +711,7 @@
         entity_id: binary_sensor.front_door
         state:
         - 'off'
-        enabled: false
+        enabled: true
       camera_entities:
       - camera.front_door
       motion_sensors:
@@ -721,3 +721,4 @@
       notify_device:
       - 0392f3b78fa57ea8933051b62331e81c
       model: gemini-2.5-flash
+      file_path: /config/www/snapshots/{{ camera_file_path }}/last_motion.jpg
