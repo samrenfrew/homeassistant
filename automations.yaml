@@ -696,3 +696,27 @@
     metadata: {}
     data: {}
   mode: single
+- id: '1779715419232'
+  alias: AI Event Summary (v1.6.0)
+  description: ''
+  use_blueprint:
+    path: valentinfrlch/event_summary.yaml
+    input:
+      cooldown:
+        hours: 0
+        minutes: 5
+        seconds: 0
+      run_conditions:
+      - condition: state
+        entity_id: binary_sensor.front_door
+        state:
+        - 'off'
+      camera_entities:
+      - camera.front_door
+      motion_sensors:
+      - binary_sensor.front_door_motion
+      provider: 01KSFFCAGBQD39EKMJRFX28G6S
+      target_width: 640
+      notify_device:
+      - 0392f3b78fa57ea8933051b62331e81c
+      model: gemini-2.5-flash
