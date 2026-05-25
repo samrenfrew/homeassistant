@@ -711,6 +711,7 @@
         entity_id: binary_sensor.front_door
         state:
         - 'off'
+        enabled: false
       camera_entities:
       - camera.front_door
       motion_sensors:
