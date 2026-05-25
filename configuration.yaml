@@ -5,6 +5,9 @@ homeassistant:
   customize: !include customize.yaml
   media_dirs:
     media: /config/media
+    llmvision: /media/llmvision
+  allowlist_external_dirs:
+    - /media/llmvision
   auth_providers:
     - type: trusted_networks
       trusted_networks:
