@@ -712,6 +712,9 @@
         state:
         - 'off'
         enabled: true
+      - condition: numeric_state
+        entity_id: sensor.front_door_person_count
+        above: 0
       camera_entities:
       - camera.front_door
       motion_sensors:
