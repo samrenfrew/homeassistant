@@ -712,14 +712,10 @@
         state:
         - 'off'
         enabled: true
-      - condition: state
-        entity_id: binary_sensor.front_door_person_occupancy
-        state:
-        - 'on'
       camera_entities:
       - camera.front_door
       motion_sensors:
-      - binary_sensor.front_door_motion
+      - binary_sensor.front_door_person_occupancy
       provider: 01KSFFCAGBQD39EKMJRFX28G6S
       target_width: 640
       notify_device:
