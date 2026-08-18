@@ -1,0 +1,446 @@
+# ============================================================================
+# Ember · 5a Home — the hub (glance & jump).
+# status bar → greeting/weather → status pills → now-playing (conditional)
+#   → favourites rail → rooms rows → dashboards rows.
+# Components are the ember_* button-card templates (www/button_card_templates.yaml).
+# ============================================================================
+title: Home
+path: home
+icon: mdi:home-outline
+theme: Ember
+type: custom:vertical-layout
+layout:
+  width: 360
+  max_width: 600
+  margin: 0 auto
+  card_margin: 7px 0
+
+cards:
+  # --- Menu bar (replaces the hidden HA header; opens the sidebar) -----------
+  - type: custom:mushroom-chips-card
+    alignment: start
+    chips:
+      - type: menu
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          border: none !important;
+          box-shadow: none !important;
+          padding: 4px 24px 0 22px !important;
+        }
+        .chip-container { padding: 0 !important; --chip-spacing: 0; }
+        mushroom-chip {
+          --chip-background: transparent;
+          --chip-border-width: 0;
+          --chip-box-shadow: none;
+          --chip-icon-size: 24px;
+          --card-primary-color: var(--ember-text-muted);
+        }
+
+  # --- Greeting + weather -----------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Good {{ states('input_select.time') | lower }}, {{ user }}
+    subtitle: >-
+      {% set t = state_attr('weather.pirateweather','temperature') %}{% set c =
+      states('weather.pirateweather') %}{% if t is not none %}It's {{ t | round
+      }}° and {{ c | replace('-',' ') }}.{% endif %}
+    card_mod:
+      style: |
+        ha-card { padding: 16px 24px 6px 24px !important; }
+        .title {
+          font-family: var(--ha-font-family-body) !important;
+          font-size: 24px !important; line-height: 1.15 !important; font-weight: 600 !important;
+          letter-spacing: -0.01em; color: var(--ember-text);
+        }
+        .subtitle {
+          font-family: var(--ha-font-family-body) !important;
+          font-size: 13px !important; line-height: 1.4 !important; font-weight: 400 !important;
+          margin-top: 4px; color: var(--ember-text-muted);
+        }
+
+  # --- Status pills rail ------------------------------------------------------
+  - type: horizontal-stack
+    card_mod: &rail
+      style: |
+        #root {
+          overflow-x: auto;
+          flex-wrap: nowrap !important;
+          scroll-snap-type: x mandatory;
+          scrollbar-width: none;
+          gap: 8px !important;
+          padding: 2px 0 4px 0;
+          -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+          mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+        }
+        #root::-webkit-scrollbar { display: none; }
+        #root > * { flex: 0 0 auto !important; min-width: max-content; }
+        #root > *:first-child { margin-left: 24px !important; }
+        #root > *:last-child { margin-right: 24px !important; }
+    cards:
+      - type: custom:button-card
+        template: ember_pill
+        entity: binary_sensor.home
+        name: '[[[ return entity.state === "on" ? "Home" : "Away"; ]]]'
+        variables:
+          dot: '[[[ return entity.state === "on" ? "green" : "none"; ]]]'
+      - type: custom:button-card
+        template: ember_pill
+        entity: alarm_control_panel.alarm
+        tap_action:
+          action: navigate
+          navigation_path: '#alarm'
+          haptic: light
+        name: >-
+          [[[ var s = entity.state;
+            if(s === "disarmed") return "Disarmed";
+            if(s === "armed_home") return "Armed Home";
+            if(s === "armed_away") return "Armed Away";
+            if(s === "armed_night") return "Armed Night";
+            if(s === "armed_vacation") return "Armed Vacation";
+            if(s === "triggered") return "Triggered";
+            if(s === "arming") return "Arming";
+            if(s === "pending") return "Pending";
+            return s; ]]]
+        variables:
+          caret: true
+          dot: '[[[ return entity.state === "disarmed" ? "none" : "red"; ]]]'
+          icon: '[[[ return entity.state === "disarmed" ? "mdi:shield-outline" : "mdi:shield"; ]]]'
+      - type: conditional
+        conditions:
+          - condition: numeric_state
+            entity: sensor.lights_on
+            above: 0
+        card:
+          type: custom:button-card
+          template: ember_pill
+          entity: sensor.lights_on
+          tap_action:
+            action: navigate
+            navigation_path: /refactor-dash/lights
+          name: '[[[ return states["sensor.lights_on"].state + " on"; ]]]'
+          variables:
+            icon: mdi:lightbulb-outline
+      - type: conditional
+        conditions:
+          - condition: numeric_state
+            entity: sensor.appliances_running
+            above: 0
+        card:
+          type: custom:button-card
+          template: ember_pill
+          entity: sensor.appliances_running
+          name: '[[[ return states["sensor.appliances_running"].state + " running"; ]]]'
+          variables:
+            dot: amber
+            icon: mdi:washing-machine
+      - type: conditional
+        conditions:
+          - entity: sensor.bin_tonight
+            state_not: 'none'
+        card:
+          type: custom:button-card
+          template: ember_pill
+          entity: sensor.bin_tonight
+          name: '[[[ return states["sensor.bin_tonight"].state; ]]]'
+          variables:
+            icon: mdi:trash-can-outline
+
+  # --- Now-playing mini strip (conditional) -----------------------------------
+  - type: conditional
+    conditions:
+      - entity: sensor.now_playing
+        state_not: 'none'
+    card:
+      type: vertical-stack
+      card_mod:
+        style: |
+          #root { margin: 0 24px; }
+      cards:
+        - type: custom:button-card
+          template: ember_mini_media
+
+  # --- Favourites -------------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Favourites
+    card_mod: &section_title
+      style: |
+        ha-card { padding: 14px 24px 2px 24px !important; }
+        .title { font-family: var(--ha-font-family-body) !important; font-size: 15px !important;
+          font-weight: 600 !important; color: var(--ember-text); }
+  - type: horizontal-stack
+    card_mod: *rail
+    cards:
+      - type: custom:button-card
+        template: ember_tile
+        entity: input_boolean.night_mode
+        name: Night Mode
+        icon: mdi:weather-night
+      - type: custom:button-card
+        template: ember_tile
+        entity: input_boolean.mute_broadcasts
+        name: Broadcasts
+        icon: mdi:bullhorn-outline
+      - type: custom:button-card
+        template: ember_tile
+        entity: input_boolean.guest_mode
+        name: Guest Mode
+        icon: mdi:account-group-outline
+      - type: custom:button-card
+        template: ember_scene_tile
+        entity: scene.evening
+        name: Evening
+        icon: mdi:weather-sunset
+      - type: custom:button-card
+        template: ember_tile
+        entity: input_boolean.dark_mode
+        name: Dark Mode
+        icon: mdi:theme-light-dark
+
+  # --- Rooms ------------------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Rooms
+    card_mod: *section_title
+  - type: vertical-stack
+    card_mod: &row_group
+      style: |
+        #root {
+          background: var(--ember-surface);
+          border: 1px solid var(--ember-border);
+          border-radius: 22px;
+          box-shadow: var(--ember-card-shadow);
+          margin: 0 24px;
+          padding: 2px 16px;
+          gap: 0 !important;
+        }
+        #root > *:not(:last-child) { border-bottom: 1px solid var(--ember-divider); }
+    cards:
+      - type: custom:button-card
+        template: ember_room_row
+        name: Lounge
+        icon: mdi:sofa
+        variables:
+          target: /refactor-dash/lounge
+          temp: climate.hive
+          entities:
+            - light.orb_lamp
+            - light.big_lamp
+            - light.small_lamp
+          media:
+            - media_player.lounge_speaker
+            - media_player.lg_webos_tv
+      - type: custom:button-card
+        template: ember_room_row
+        name: Kitchen
+        icon: mdi:fridge-outline
+        variables:
+          target: /refactor-dash/kitchen
+          temp: sensor.kitchen_temperature
+          media:
+            - media_player.kitchen_display
+            - media_player.sonos_one
+      - type: custom:button-card
+        template: ember_room_row
+        name: Bedroom
+        icon: mdi:bed
+        variables:
+          target: /refactor-dash/bedroom
+          temp: sensor.bedroom_temperature
+          media:
+            - media_player.bedroom_speaker
+      - type: custom:button-card
+        template: ember_room_row
+        name: Nursery
+        icon: mdi:teddy-bear
+        variables:
+          target: /refactor-dash/nursery
+          temp: sensor.nursery_temperature
+          entities:
+            - light.nursery_lamp
+      - type: custom:button-card
+        template: ember_room_row
+        name: Ella's Room
+        icon: mdi:baby-face-outline
+        variables:
+          target: /refactor-dash/ella
+          temp: sensor.ella_temperature
+          entities:
+            - light.ella_lamp
+            - light.fairy_lights
+      - type: custom:button-card
+        template: ember_room_row
+        name: Office
+        icon: mdi:desk
+        variables:
+          target: /refactor-dash/office
+          temp: sensor.office_temperature
+          entities:
+            - light.ikea_plug
+
+  # --- Dashboards -------------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Dashboards
+    card_mod: *section_title
+  - type: vertical-stack
+    card_mod: *row_group
+    cards:
+      - type: custom:button-card
+        template: ember_row
+        name: Lights & Scenes
+        icon: mdi:lightbulb-group-outline
+        label: '[[[ return states["sensor.lights_on"].state + " on"; ]]]'
+        tap_action:
+          action: navigate
+          navigation_path: /refactor-dash/lights
+      - type: custom:button-card
+        template: ember_row
+        name: Network & Systems
+        icon: mdi:lan
+        label: >-
+          [[[ var down = Number(states["sensor.nuc_services_down"]?.state) || 0;
+            var bad = Number(states["sensor.docker_on_nuc_unhealthy_containers"]?.state) || 0;
+            var n = down + bad;
+            return n > 0 ? (n + " issue" + (n > 1 ? "s" : "")) : "No issues detected"; ]]]
+        tap_action:
+          action: navigate
+          navigation_path: /refactor-dash/systems
+
+  # --- Alarm sheet (5m, hash #alarm, opened by the alarm pill) ------------------
+  - type: custom:bubble-card
+    card_type: pop-up
+    hash: '#alarm'
+    name: Alarm
+    icon: mdi:shield-outline
+    show_header: true
+    entity: alarm_control_panel.alarm
+    card_mod:
+      style: |
+        .bubble-pop-up { --bubble-border-radius: 28px; }
+    cards:
+      # Disarmed → arm buttons
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: alarm_control_panel.alarm
+            state: disarmed
+        card:
+          type: vertical-stack
+          cards:
+            - type: grid
+              columns: 2
+              square: false
+              cards:
+                - type: custom:button-card
+                  name: Home
+                  show_icon: false
+                  tap_action:
+                    action: call-service
+                    service: alarm_control_panel.alarm_arm_home
+                    target:
+                      entity_id: alarm_control_panel.alarm
+                    haptic: medium
+                  styles: &arm_btn
+                    card:
+                      - background: var(--ember-surface-2)
+                      - border: 1px solid var(--ember-border)
+                      - border-radius: 16px
+                      - height: 56px
+                      - box-shadow: none
+                    name:
+                      - font-size: 15px
+                      - font-weight: 600
+                      - color: var(--ember-text)
+                - type: custom:button-card
+                  name: Away
+                  show_icon: false
+                  tap_action:
+                    action: call-service
+                    service: alarm_control_panel.alarm_arm_away
+                    target:
+                      entity_id: alarm_control_panel.alarm
+                    haptic: medium
+                  styles: *arm_btn
+            - type: custom:button-card
+              name: Tap to arm · 15s exit delay
+              show_icon: false
+              tap_action:
+                action: none
+              styles:
+                card:
+                  - background: none
+                  - border: none
+                  - box-shadow: none
+                  - padding: 6px 0 10px
+                name:
+                  - font-size: 12.5px
+                  - color: var(--ember-text-dim)
+      # Armed / arming / triggered → red status + Disarm
+      - type: conditional
+        conditions:
+          - condition: state
+            entity: alarm_control_panel.alarm
+            state_not: disarmed
+        card:
+          type: vertical-stack
+          cards:
+            - type: custom:button-card
+              entity: alarm_control_panel.alarm
+              show_icon: true
+              show_name: true
+              icon: mdi:shield-alert-outline
+              tap_action:
+                action: none
+              name: >-
+                [[[ var s = entity.state;
+                  if(s === "armed_home") return "Armed · Home";
+                  if(s === "armed_away") return "Armed · Away";
+                  if(s === "arming") return "Arming…";
+                  if(s === "pending") return "Alarm pending";
+                  if(s === "triggered") return "TRIGGERED";
+                  return s; ]]]
+              styles:
+                card:
+                  - background: color-mix(in srgb, var(--ember-red) 10%, transparent)
+                  - border: 1px solid color-mix(in srgb, var(--ember-red) 45%, transparent)
+                  - border-radius: 16px
+                  - box-shadow: none
+                  - padding: 14px 16px
+                  - margin: 8px 14px 2px
+                grid:
+                  - grid-template-areas: '"i n"'
+                  - grid-template-columns: min-content 1fr
+                  - grid-column-gap: 10px
+                  - align-items: center
+                icon:
+                  - width: 20px
+                  - height: 20px
+                  - color: var(--ember-red)
+                name:
+                  - justify-self: start
+                  - font-size: 15px
+                  - font-weight: 600
+                  - color: var(--ember-red)
+            - type: custom:button-card
+              name: Disarm
+              show_icon: false
+              tap_action:
+                action: call-service
+                service: alarm_control_panel.alarm_disarm
+                target:
+                  entity_id: alarm_control_panel.alarm
+                haptic: heavy
+              styles:
+                card:
+                  - background: var(--ember-red)
+                  - border: none
+                  - border-radius: 999px
+                  - height: 56px
+                  - box-shadow: none
+                  - margin: 8px 14px 14px
+                name:
+                  - font-size: 16px
+                  - font-weight: 700
+                  - color: '#1a0d0d'
+
+  # --- Navigation (shared bottom bar / side rail) --------------------------
+  - !include _navbar.yaml

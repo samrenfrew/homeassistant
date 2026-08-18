@@ -1,0 +1,176 @@
+# ============================================================================
+# Refactor sandbox — Ember redesign (YAML mode).
+# The live "Overview" dashboard (.storage/lovelace.lovelace, storage mode) is the
+# UNTOUCHED fallback — never edited. All Ember work happens here.
+#
+# Views are split into per-screen files under dashboards/ember/ and pulled in with
+# !include (HA resolves !include relative to THIS file's directory).
+#
+# button-card templates: the custom /local/button-card.js build auto-fetches
+# /local/button_card_templates.yaml by URL for every button-card, independent of
+# dashboard mode — so no `button_card_templates:` include is needed here.
+# ============================================================================
+# Cache-buster for the button-card template library: this build reads the fetch
+# URL from lovelace.config.button_card_templates_url. Bump ?v= after editing
+# www/button_card_templates.yaml so browsers re-fetch instead of serving a stale copy.
+button_card_templates_url: /local/button_card_templates.yaml?v=11
+
+kiosk_mode:
+  mobile_settings:
+    hide_header: true
+    hide_menubutton: true
+    custom_width: 768
+
+# ----------------------------------------------------------------------------
+# streamline-card templates. ember_light_sheet = the 5k long-press light popup
+# (brightness bar + warmth slider), written once, instantiated per light with
+#   type: custom:streamline-card / template: ember_light_sheet /
+#   variables: {entity, name, icon, hash}
+# Only used for lights with brightness+color_temp; on/off lights keep more-info.
+# ----------------------------------------------------------------------------
+streamline_templates:
+  ember_light_sheet:
+    card:
+      type: custom:bubble-card
+      card_type: pop-up
+      hash: '[[hash]]'
+      name: '[[name]]'
+      icon: '[[icon]]'
+      show_header: true
+      entity: '[[entity]]'
+      card_mod:
+        style: |
+          .bubble-pop-up { --bubble-border-radius: 28px; }
+      cards:
+        # Brightness: full-height amber gradient fill, % readout injected top-right.
+        - type: custom:my-slider-v2
+          entity: '[[entity]]'
+          mode: brightness
+          allowTapping: true
+          # my-slider-v2 styles are plain maps, not button-card style lists
+          styles:
+            card:
+              height: 64px
+              border-radius: 18px
+              background: var(--ember-surface-2)
+              border: none
+              box-shadow: none
+              margin: 8px 14px 6px
+            container:
+              height: 64px
+              border-radius: 18px
+            track:
+              height: 64px
+              background: var(--ember-surface-2)
+            progress:
+              height: 64px
+              background: linear-gradient(90deg, #8a5a33, var(--ember-amber))
+              border-radius: 18px 0 0 18px
+            thumb:
+              width: 0px
+              height: 0px
+              border: none
+              background: none
+          card_mod:
+            style: |
+              ha-card { position: relative; overflow: hidden; }
+              ha-card::before {
+                content: ""; position: absolute; left: 18px; top: 50%;
+                transform: translateY(-50%); width: 22px; height: 22px;
+                background: var(--ember-text);
+                -webkit-mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,1 19,9C19,11.38 17.81,13.47 16,14.74V17A1,1 0 0,1 15,18H9A1,1 0 0,1 8,17V14.74C6.19,13.47 5,11.38 5,9A7,7 0 0,1 12,2M9,21V20H15V21A1,1 0 0,1 14,22H10A1,1 0 0,1 9,21Z"/></svg>') center / contain no-repeat;
+                mask: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,1 19,9C19,11.38 17.81,13.47 16,14.74V17A1,1 0 0,1 15,18H9A1,1 0 0,1 8,17V14.74C6.19,13.47 5,11.38 5,9A7,7 0 0,1 12,2M9,21V20H15V21A1,1 0 0,1 14,22H10A1,1 0 0,1 9,21Z"/></svg>') center / contain no-repeat;
+                pointer-events: none;
+              }
+              ha-card::after {
+                content: "{% if is_state('[[entity]]','on') %}{{ ((state_attr('[[entity]]','brightness') | int(0)) / 255 * 100) | round }}%{% else %}Off{% endif %}";
+                position: absolute; right: 18px; top: 50%; transform: translateY(-50%);
+                font-size: 15px; font-weight: 600; color: var(--ember-text);
+                pointer-events: none;
+              }
+        # Warmth: label + colour-temp slider + live colour swatch.
+        # (button-card grid with an embedded slider card — layout-card collapses
+        # as a direct bubble-popup child, this pattern doesn't)
+        - type: custom:button-card
+          entity: '[[entity]]'
+          show_icon: false
+          show_name: false
+          show_label: false
+          show_state: false
+          tap_action:
+            action: none
+          styles:
+            card:
+              - background: none
+              - border: none
+              - box-shadow: none
+              - padding: 0
+              - margin: 4px 14px 14px
+            grid:
+              - grid-template-areas: '"lbl slider swatch"'
+              - grid-template-columns: 64px 1fr 32px
+              - grid-column-gap: 10px
+              - align-items: center
+            custom_fields:
+              lbl:
+                - justify-self: start
+              slider:
+                - width: 100%
+              swatch:
+                - justify-self: end
+          custom_fields:
+            lbl: |
+              [[[ return `<span style="font-size:13px;color:var(--ember-text-muted);">Warmth</span>`; ]]]
+            slider:
+              card:
+                type: custom:my-slider-v2
+                entity: '[[entity]]'
+                mode: temperature
+                allowTapping: true
+                styles:
+                  card:
+                    height: 40px
+                    background: none
+                    border: none
+                    box-shadow: none
+                    display: flex
+                    align-items: center
+                  container:
+                    height: 14px
+                    border-radius: 999px
+                    overflow: visible
+                  track:
+                    height: 14px
+                    background: linear-gradient(90deg, #f4b168, #fff7ea, #bcd7ff)
+                    border-radius: 999px
+                  progress:
+                    background: none
+                  thumb:
+                    background: '#ffffff'
+                    width: 20px
+                    height: 20px
+                    border-radius: 999px
+                    box-shadow: 0 0 0 2px rgba(0,0,0,.35)
+                    top: -3px
+                    right: -10px
+            swatch: |
+              [[[
+                var k = Number(entity.attributes.color_temp_kelvin);
+                if(isNaN(k)) k = 3000;
+                var f = Math.max(0, Math.min(1, (k - 2000) / 4500));
+                var warm = [255, 180, 107], cool = [207, 226, 255];
+                var c = warm.map((w, i) => Math.round(w + (cool[i] - w) * f));
+                return `<span style="display:inline-block;width:26px;height:26px;border-radius:999px;background:rgb(${c[0]},${c[1]},${c[2]});border:1px solid var(--ember-border);"></span>`;
+              ]]]
+
+views:
+  - !include ember/view-home.yaml
+  - !include ember/view-lights.yaml
+  - !include ember/view-media.yaml
+  - !include ember/view-room-lounge.yaml
+  - !include ember/view-room-kitchen.yaml
+  - !include ember/view-room-bedroom.yaml
+  - !include ember/view-room-nursery.yaml
+  - !include ember/view-room-ella.yaml
+  - !include ember/view-room-office.yaml
+  - !include ember/view-systems.yaml

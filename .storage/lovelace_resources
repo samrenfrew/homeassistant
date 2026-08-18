@@ -15,7 +15,7 @@
         "id": "879dd767345d4c9f8c31ad7d4a675c8e"
       },
       {
-        "url": "/local/stylesheet.css",
+        "url": "/local/stylesheet.css?v=1",
         "type": "css",
         "id": "75ed22b8bc404a758fc74c92d9d60268"
       },
@@ -30,12 +30,12 @@
         "id": "d37e2eac4a9748ac97438defea2ee03f"
       },
       {
-        "url": "/hacsfiles/config-editor-card/config-editor-card.js?hacstag=433577603520",
+        "url": "/hacsfiles/config-editor-card/config-editor-card.js?hacstag=433577603522",
         "type": "module",
         "id": "ea4c4aa5138a49d3896824ddaecf38d4"
       },
       {
-        "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375511",
+        "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375522",
         "type": "module",
         "id": "ae3513acf9db42ce971a7ffebaf670ef"
       },
@@ -61,12 +61,12 @@
       },
       {
         "id": "3aae99f6c1df4051ba566463629b624f",
-        "url": "/hacsfiles/scheduler-card/scheduler-card.js?hacstag=2862701574018",
+        "url": "/hacsfiles/scheduler-card/scheduler-card.js?hacstag=2862701574019",
         "type": "module"
       },
       {
         "id": "6235f027b66744a7852d604373a47101",
-        "url": "/hacsfiles/kiosk-mode/kiosk-mode.js?hacstag=4973191281310",
+        "url": "/hacsfiles/kiosk-mode/kiosk-mode.js?hacstag=4973191281402",
         "type": "module"
       },
       {
@@ -80,18 +80,13 @@
         "type": "module"
       },
       {
-        "id": "3be89b6b72664c9e9366cc026939df0c",
-        "url": "/hacsfiles/lovelace-card-mod/card-mod.js?hacstag=190927524421",
-        "type": "module"
-      },
-      {
         "id": "2c3628290c63479ea2ee0c8973945e1f",
         "url": "/hacsfiles/logbook-card/logbook-card.js?hacstag=216008446256",
         "type": "module"
       },
       {
         "id": "dbcdd8f6d1114288b24487693a5beba1",
-        "url": "/hacsfiles/Bubble-Card/bubble-card.js?hacstag=680112919322",
+        "url": "/hacsfiles/Bubble-Card/bubble-card.js?hacstag=680112919325",
         "type": "module"
       },
       {
@@ -106,7 +101,7 @@
       },
       {
         "id": "9036dd0692134abe9d3197f5da06c3fb",
-        "url": "/hacsfiles/simple-swipe-card/simple-swipe-card.js?hacstag=970744650282",
+        "url": "/hacsfiles/simple-swipe-card/simple-swipe-card.js?hacstag=970744650310",
         "type": "module"
       },
       {
@@ -116,7 +111,7 @@
       },
       {
         "id": "48a3b9b1429740d8a0a491e55bae3a51",
-        "url": "/ha_washdata/ha-washdata-card.js?v=1779513337",
+        "url": "/ha_washdata/ha-washdata-card.js?v=1785169104",
         "type": "module"
       },
       {
@@ -131,7 +126,7 @@
       },
       {
         "id": "bf4fa9f9a71d4cd19a319e56e6c9a9f2",
-        "url": "/hacsfiles/frigate-events-card/frigate-events-card.js?hacstag=1111882479202",
+        "url": "/hacsfiles/frigate-events-card/frigate-events-card.js?hacstag=1111882479231",
         "type": "module"
       },
       {
@@ -141,7 +136,7 @@
       },
       {
         "id": "5cec92a319b344e9a751fe977ecd755f",
-        "url": "/hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js?hacstag=142051833101",
+        "url": "/hacsfiles/vertical-stack-in-card/vertical-stack-in-card.js?hacstag=142051833112",
         "type": "module"
       },
       {
@@ -157,6 +152,16 @@
       {
         "id": "6d13765b031343a881d502c7036ab2b2",
         "url": "/hacsfiles/bar-card/bar-card.js?hacstag=979786390408",
+        "type": "module"
+      },
+      {
+        "id": "1490f0e2c8354d219bbe831d848599ba",
+        "url": "/hacsfiles/lovelace-navbar-card/navbar-card.js?hacstag=871106499161",
+        "type": "module"
+      },
+      {
+        "id": "2fdbe9f67d0245d2b4af1cb0d0cc17e5",
+        "url": "/uix/uix.js?v=8.0.1",
         "type": "module"
       }
     ]

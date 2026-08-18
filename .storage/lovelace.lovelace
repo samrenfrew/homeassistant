@@ -961,6 +961,7 @@
                   "type": "custom:frigate-events-card",
                   "frigate_client_id": "frigate",
                   "event_count": 6,
+                  "scroll": false,
                   "cameras": [
                     "front_door"
                   ],
@@ -968,12 +969,13 @@
                     "grid-column": "1 / -1"
                   },
                   "card_mod": {
-                    "style": "ha-card {\n  border-radius: unset;\n  padding: 0 4px;\n}\n.events {\n  --event-count: 5 !important;\n  direction: rtl;\n}\n.events .event {\n  border-radius: 10px;      \n  aspect-ratio: 16/12;\n}\n.events .event:first-of-type {\n  # display:none;\n  border-radius: 16px;\n  grid-column: 1 / -1;\n  grid-row: 2;\n  aspect-ratio: 16/9;\n}\n"
+                    "style": "ha-card {\n  border-radius: unset;\n  padding: 0 4px;\n}\n.events {\n  --visible-count: 5 !important;\n}\n.events .event {\n  border-radius: 10px;      \n  aspect-ratio: 16/12;\n}\n.events .event:first-of-type {\n  # display:none;\n  border-radius: 16px;\n  grid-column: 1 / -1;\n  grid-row: 1;\n  aspect-ratio: 16/9;\n}\n"
                   }
                 },
                 {
                   "type": "custom:frigate-events-card",
                   "frigate_client_id": "frigate",
+                  "scroll": false,
                   "event_count": 6,
                   "cameras": [
                     "back_door"
@@ -982,7 +984,7 @@
                     "grid-column": "1 / -1"
                   },
                   "card_mod": {
-                    "style": "ha-card {\n  border-radius: unset;\n  padding: 0 4px;\n}\n.events {\n  --event-count: 5 !important;\n  direction: rtl;\n}\n.events .event {\n  border-radius: 10px;      \n  aspect-ratio: 16/12;\n}\n.events .event:first-of-type {\n  # display:none;\n  border-radius: 16px;\n  grid-column: 1 / -1;\n  grid-row: 1;\n  aspect-ratio: 16/9;\n}\n"
+                    "style": "ha-card {\n  border-radius: unset;\n  padding: 0 4px;\n}\n.events {\n  --visible-count: 5 !important;\n}\n.events .event {\n  border-radius: 10px;      \n  aspect-ratio: 16/12;\n}\n.events .event:first-of-type {\n  # display:none;\n  border-radius: 16px;\n  grid-column: 1 / -1;\n  grid-row: 1;\n  aspect-ratio: 16/9;\n}\n"
                   }
                 }
               ],

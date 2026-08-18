@@ -1062,6 +1062,1099 @@ remote_button_small:
   styles:
     card:
       - height: 40px
+# ============================================================================
+# EMBER variants — warm monochrome dark language (amber = on/active/running).
+# Standalone (not inheriting `default`) for full layout control. Colours pull
+# from the Ember theme tokens (--ember-*). Loaded globally via /local/button-card.js.
+# ============================================================================
+
+# --- Rail tile: favourites / light tiles. Vertical: chip top, name+status bottom.
+ember_tile:
+  show_icon: true
+  show_name: true
+  show_label: true
+  show_state: false
+  tap_action:
+    action: toggle
+    haptic: light
+  hold_action:
+    action: more-info
+  double_tap_action:
+    action: none
+  size: 40%
+  variables:
+    color: var(--ember-amber)
+  label: |
+    [[[
+      if(!entity) return "Unavailable";
+      var s = entity.state;
+      if(s === "on") return "On";
+      if(s === "off") return "Off";
+      if(s === "unavailable" || s === "unknown") return "Unavailable";
+      return s;
+    ]]]
+  styles:
+    card:
+      - width: 112px
+      - height: 112px
+      - padding: 14px
+      - margin: 0
+      - border: 1px solid var(--ember-border)
+      - border-radius: 22px
+      - background: var(--ember-surface)
+      - box-shadow: none
+      - scroll-snap-align: start
+    grid:
+      - grid-template-areas: '"i" "n" "l"'
+      - grid-template-columns: 1fr
+      - grid-template-rows: 1fr 20px 16px
+    img_cell:
+      - justify-content: start
+    icon:
+      - justify-self: start
+      - align-self: start
+      - width: 22px
+      - height: 22px
+      - padding: 9px
+      - margin: 0
+      - border-radius: 12px
+      - background: var(--ember-surface-2)
+      - color: var(--ember-text-muted)
+      - transition: color .15s ease, background .15s ease
+    name:
+      - justify-self: start
+      - text-align: start
+      - align-self: end
+      - font-size: 14.5px
+      - font-weight: 600
+      - line-height: 18px
+      - color: var(--ember-text)
+    label:
+      - justify-self: start
+      - text-align: start
+      - align-self: end
+      - font-size: 12px
+      - font-weight: 400
+      - line-height: 15px
+      - color: var(--ember-text-dim)
+      - text-transform: none
+  state:
+    - operator: regex
+      value: on|home|playing|buffering|heat|armed_
+      id: 'on'
+      styles:
+        card:
+          - background: var(--ember-active-tile-bg)
+          - border-color: var(--ember-active-tile-border)
+        icon:
+          - background: var(--ember-amber)
+          - color: var(--ember-amber-ink)
+        label:
+          - color: var(--ember-amber-text)
+    - operator: regex
+      value: unavailable|unknown
+      id: 'unavailable'
+      styles:
+        card:
+          - opacity: 0.5
+
+# --- Scene tile: like ember_tile but tap activates a scene (never "on/off").
+ember_scene_tile:
+  template: ember_tile
+  tap_action:
+    action: call-service
+    service: scene.turn_on
+    target:
+      entity_id: '[[[ return entity.entity_id ]]]'
+    haptic: medium
+  label: 'Scene'
+  state: []
+
+# --- Scene chip (5b/5c): pill-shaped scene activator. Amber-filled while the
+#     scene was activated within the last 2h (scene.state = last-activated time).
+ember_scene_chip:
+  show_icon: true
+  show_name: true
+  show_label: false
+  show_state: false
+  tap_action:
+    action: call-service
+    service: scene.turn_on
+    target:
+      entity_id: '[[[ return entity.entity_id ]]]'
+    haptic: medium
+  hold_action:
+    action: none
+  styles:
+    card:
+      - height: 40px
+      - padding: 0 16px 0 13px
+      - margin: 0
+      - border-radius: 999px
+      - background: var(--ember-surface)
+      - border: 1px solid var(--ember-border)
+      - box-shadow: none
+      - width: max-content
+      - scroll-snap-align: start
+    grid:
+      - grid-template-areas: '"i n"'
+      - grid-template-columns: min-content max-content
+      - grid-column-gap: 8px
+      - align-items: center
+    img_cell:
+      - justify-content: start
+      - width: min-content
+    icon:
+      - width: 16px
+      - height: 16px
+      - color: var(--ember-amber)
+    name:
+      - font-size: 13.5px
+      - font-weight: 600
+      - line-height: 40px
+      - color: var(--ember-text-strong)
+      - white-space: nowrap
+  state:
+    - operator: template
+      value: '[[[ return entity && (Date.now() - Date.parse(entity.state)) < 7200000; ]]]'
+      id: active
+      styles:
+        card:
+          - background: var(--ember-amber)
+          - border-color: var(--ember-amber)
+        icon:
+          - color: var(--ember-amber-ink)
+        name:
+          - color: var(--ember-amber-ink)
+
+# --- Status pill: tiny rounded pill, optional coloured dot + optional caret.
+#     variables.dot: green | amber | red | none    variables.caret: true|false
+ember_pill:
+  show_icon: false
+  show_name: true
+  show_label: false
+  show_state: false
+  tap_action:
+    action: none
+  variables:
+    dot: none
+    caret: false
+    icon: ''
+  styles:
+    card:
+      - height: 34px
+      - padding: 0 14px
+      - margin: 0
+      - border-radius: 999px
+      - background: var(--ember-surface)
+      - border: 1px solid var(--ember-border)
+      - box-shadow: none
+      - width: max-content
+      - scroll-snap-align: start
+    grid:
+      - grid-template-areas: '"pi dot n end"'
+      - grid-template-columns: min-content min-content max-content min-content
+      - grid-column-gap: 0
+      - align-items: center
+    name:
+      - font-size: 13px
+      - font-weight: 600
+      - line-height: 34px
+      - color: var(--ember-text-strong)
+      - white-space: nowrap
+    custom_fields:
+      pi:
+        - align-self: center
+        - display: flex
+      dot:
+        - align-self: center
+        - display: flex
+      end:
+        - align-self: center
+        - display: flex
+  custom_fields:
+    pi: |
+      [[[
+        if(!variables.icon) return "";
+        return `<ha-icon icon="${variables.icon}" style="--mdc-icon-size:16px;color:var(--ember-text-muted);margin-right:7px;display:flex;"></ha-icon>`;
+      ]]]
+    dot: |
+      [[[
+        var m = {green:"var(--ember-green)", amber:"var(--ember-amber)", red:"var(--ember-red)"};
+        var c = m[variables.dot];
+        if(!c) return "";
+        return `<span style="display:inline-block;width:8px;height:8px;border-radius:999px;background:${c};margin-right:8px;"></span>`;
+      ]]]
+    end: |
+      [[[
+        if(!variables.caret) return "";
+        return `<ha-icon icon="mdi:chevron-down" style="--mdc-icon-size:16px;color:var(--ember-text-dim);margin-left:6px;"></ha-icon>`;
+      ]]]
+
+# --- Full-width row: chip + name + status + trailing chevron. Neutral/navigational.
+#     Grouped inside a surface container that draws the hairline dividers.
+ember_row:
+  show_icon: true
+  show_name: true
+  show_label: true
+  show_state: false
+  tap_action:
+    action: none
+  hold_action:
+    action: more-info
+  label: ''
+  variables:
+    color: var(--ember-amber)
+  styles:
+    card:
+      - background: none
+      - border: none
+      - border-radius: 0
+      - box-shadow: none
+      - padding: 13px 2px
+      - margin: 0
+    grid:
+      - grid-template-areas: '"i n end" "i l end"'
+      - grid-template-columns: 42px 1fr min-content
+      - grid-template-rows: auto auto
+      - grid-column-gap: 13px
+      - align-items: center
+    img_cell:
+      - justify-content: center
+    icon:
+      - width: 20px
+      - height: 20px
+      - padding: 11px
+      - margin: 0
+      - border-radius: 12px
+      - background: var(--ember-surface-2)
+      - color: var(--ember-text-muted)
+      - transition: color .15s ease, background .15s ease
+    name:
+      - justify-self: start
+      - text-align: start
+      - align-self: end
+      - font-size: 15px
+      - font-weight: 600
+      - line-height: 19px
+      - color: var(--ember-text)
+    label:
+      - justify-self: start
+      - text-align: start
+      - align-self: start
+      - font-size: 13px
+      - line-height: 17px
+      - color: var(--ember-text-muted)
+      - text-transform: none
+    custom_fields:
+      end:
+        - align-self: center
+        - display: flex
+  custom_fields:
+    end: |
+      [[[ return `<ha-icon icon="mdi:chevron-right" style="--mdc-icon-size:20px;color:var(--ember-text-dim);"></ha-icon>`; ]]]
+
+# --- Room row: navigates to the room subview; computes "23° · 1 light · playing".
+ember_room_row:
+  template: ember_row
+  entity: null
+  tap_action:
+    action: navigate
+    navigation_path: '[[[ return variables.target ]]]'
+    haptic: light
+  hold_action:
+    action: none
+  triggers_update:
+    - '[[[ return variables.temp || null ]]]'
+    - '[[[ return variables.entities?.[0] || null ]]]'
+    - '[[[ return variables.entities?.[1] || null ]]]'
+    - '[[[ return variables.entities?.[2] || null ]]]'
+    - '[[[ return variables.entities?.[3] || null ]]]'
+    - '[[[ return variables.media?.[0] || null ]]]'
+    - '[[[ return variables.media?.[1] || null ]]]'
+  label: |
+    [[[
+      const { temp, entities, media } = variables;
+      let parts = [];
+      let t = null;
+      if(temp && states[temp]) {
+        if(!isNaN(Number(states[temp].state))) t = Number(states[temp].state);
+        else if(states[temp].attributes?.current_temperature != null)
+          t = Number(states[temp].attributes.current_temperature);
+      }
+      if(t != null && !isNaN(t)) parts.push(`${t.toFixed(0)}°`);
+      const lights = (entities||[]).filter(e => /^light\./.test(e) && states[e]?.state === "on").length;
+      if(lights > 0) parts.push(`${lights} light${lights > 1 ? "s" : ""}`);
+      const playing = (media||[]).some(e => /playing|buffering/.test(states[e]?.state || ""));
+      if(playing) parts.push("playing");
+      return parts.length ? parts.join(" · ") : "All quiet";
+    ]]]
+
+# --- Now-playing mini strip (5i): artwork + title/artist + play-pause + chevron.
+#     Driven by sensor.now_playing (state = active player entity_id).
+ember_mini_media:
+  entity: sensor.now_playing
+  show_icon: false
+  show_name: true
+  show_label: true
+  show_state: false
+  tap_action:
+    action: more-info
+    entity: '[[[ return entity.state !== "none" ? entity.state : "sensor.now_playing" ]]]'
+  name: '[[[ return entity.attributes.title || entity.attributes.player_name || "Nothing playing"; ]]]'
+  label: '[[[ return entity.attributes.artist || entity.attributes.source || ""; ]]]'
+  styles:
+    card:
+      - background: var(--ember-surface)
+      - border: 1px solid var(--ember-border)
+      - border-radius: 16px
+      - padding: 8px 10px
+      - margin: 0
+      - box-shadow: none
+    grid:
+      - grid-template-areas: '"art n btn" "art l btn"'
+      - grid-template-columns: 40px 1fr 44px
+      - grid-template-rows: auto auto
+      - grid-column-gap: 12px
+      - align-items: center
+    name:
+      - justify-self: start
+      - align-self: end
+      - font-size: 14px
+      - font-weight: 600
+      - line-height: 18px
+      - color: var(--ember-text)
+      - overflow: hidden
+      - text-overflow: ellipsis
+      - white-space: nowrap
+      - max-width: 100%
+    label:
+      - justify-self: start
+      - align-self: start
+      - font-size: 12px
+      - line-height: 15px
+      - color: var(--ember-text-muted)
+      - overflow: hidden
+      - text-overflow: ellipsis
+      - white-space: nowrap
+      - max-width: 100%
+      - text-transform: none
+    custom_fields:
+      art:
+        - align-self: center
+        - width: 40px
+        - height: 40px
+        - border-radius: 10px
+        - background-size: cover
+        - background-position: center
+        - background-image: |
+            [[[
+              return entity.attributes.artwork
+                ? `url("${entity.attributes.artwork}")`
+                : "var(--ember-active-tile-bg)";
+            ]]]
+      btn:
+        - align-self: center
+  custom_fields:
+    art: ' '
+    btn:
+      card:
+        type: custom:button-card
+        show_icon: true
+        show_name: false
+        icon: mdi:pause
+        tap_action:
+          action: call-service
+          service: media_player.media_play_pause
+          target:
+            entity_id: '[[[ return states["sensor.now_playing"].state; ]]]'
+          haptic: medium
+        styles:
+          card:
+            - background: var(--ember-amber)
+            - border-radius: 999px
+            - width: 40px
+            - height: 40px
+            - box-shadow: none
+          icon:
+            - width: 20px
+            - height: 20px
+            - color: var(--ember-amber-ink)
+
+# --- Light rail tile: like ember_tile but shows brightness %; hold = brightness slider.
+ember_light_tile:
+  template: ember_tile
+  hold_action:
+    action: more-info
+  label: |
+    [[[
+      if(!entity) return "Unavailable";
+      if(entity.state === "on") {
+        var b = entity.attributes.brightness;
+        return (b != null) ? Math.round(b / 255 * 100) + "%" : "On";
+      }
+      if(entity.state === "off") return "Off";
+      return entity.state;
+    ]]]
+
+# --- Full-width device row WITH a toggle switch (tap toggles; amber when on).
+ember_toggle_row:
+  template: ember_row
+  tap_action:
+    action: toggle
+    haptic: light
+  hold_action:
+    action: more-info
+  custom_fields:
+    end: |
+      [[[
+        var on = entity && /^(on|home|playing|buffering|heat|armed_)/.test(entity.state);
+        var track = on ? "var(--ember-amber)" : "var(--ember-surface-2)";
+        var knob  = on ? "var(--ember-amber-ink)" : "var(--ember-text-dim)";
+        var pos   = on ? "right:3px" : "left:3px";
+        return `<div style="width:42px;height:25px;border-radius:999px;background:${track};position:relative;transition:background .15s ease;">
+          <div style="position:absolute;top:3px;${pos};width:19px;height:19px;border-radius:999px;background:${knob};transition:all .15s ease;"></div>
+        </div>`;
+      ]]]
+  state:
+    - operator: regex
+      value: on|home|playing|buffering|heat|armed_
+      id: 'on'
+      styles:
+        icon:
+          - background: var(--ember-amber)
+          - color: var(--ember-amber-ink)
+
+# --- Climate · Hive (5b/5j) — big card: icon+name+status, −/target/+ steppers, boost.
+#     Target is the input_number.hive proxy (existing setup); current temp + hvac_action
+#     come from climate.hive. Boost toggles switch.hive_boost.
+ember_climate:
+  entity: climate.hive
+  show_icon: true
+  show_name: true
+  show_label: true
+  show_state: false
+  tap_action:
+    action: none
+  triggers_update:
+    - input_number.hive
+    - switch.hive_boost
+  name: Hive · whole-home
+  icon: '[[[ return entity.attributes.hvac_action === "heating" ? "mdi:fire" : "mdi:radiator"; ]]]'
+  label: |
+    [[[
+      var a = entity.attributes.hvac_action;
+      var cur = entity.attributes.current_temperature;
+      var tgt = Number(states["input_number.hive"]?.state);
+      var status = (a === "heating") ? "Heating" : (entity.state === "off" ? "Off" : "Idle");
+      var t = isNaN(tgt) ? "–" : (tgt % 1 === 0 ? tgt.toFixed(0) : tgt.toFixed(1));
+      return status + " · target " + t + "° · now " + (cur != null ? Math.round(cur) : "–") + "°";
+    ]]]
+  styles:
+    card:
+      - padding: 16px 18px 14px
+      - margin: 0
+      - border: 1px solid var(--ember-border)
+      - border-radius: 24px
+      - background: var(--ember-surface)
+      - box-shadow: var(--ember-card-shadow)
+    grid:
+      - grid-template-areas: '"i n boost" "i l boost" "controls controls controls"'
+      - grid-template-columns: 44px 1fr auto
+      - grid-template-rows: auto auto auto
+      - grid-column-gap: 13px
+      - grid-row-gap: 1px
+      - align-items: center
+    img_cell:
+      - justify-content: center
+      - align-self: start
+    icon:
+      - width: 22px
+      - height: 22px
+      - padding: 11px
+      - margin: 0
+      - border-radius: 12px
+      - background: var(--ember-surface-2)
+      - color: var(--ember-text-muted)
+      - transition: color .15s ease, background .15s ease
+    name:
+      - justify-self: start
+      - align-self: end
+      - font-size: 16px
+      - font-weight: 600
+      - line-height: 20px
+      - color: var(--ember-text)
+    label:
+      - justify-self: start
+      - align-self: start
+      - font-size: 13px
+      - line-height: 17px
+      - color: var(--ember-text-muted)
+      - text-transform: none
+    custom_fields:
+      boost:
+        - align-self: start
+      controls:
+        - margin-top: 14px
+  state:
+    - operator: template
+      value: '[[[ return entity.attributes.hvac_action === "heating"; ]]]'
+      id: heating
+      styles:
+        icon:
+          - background: var(--ember-amber)
+          - color: var(--ember-amber-ink)
+        label:
+          - color: var(--ember-amber-text)
+  custom_fields:
+    boost:
+      card:
+        type: custom:button-card
+        entity: switch.hive_boost
+        show_icon: true
+        show_name: true
+        name: Boost
+        icon: '[[[[ return entity?.state === "on" ? "mdi:rocket-launch" : "mdi:rocket-launch-outline"; ]]]]'
+        tap_action:
+          action: call-service
+          service: |
+            [[[[ return entity?.state === "on" ? "switch.turn_off" : "switch.turn_on"; ]]]]
+          target:
+            entity_id: switch.hive_boost
+          haptic: medium
+        styles:
+          card:
+            - background: var(--ember-surface-2)
+            - border: 1px solid var(--ember-border)
+            - border-radius: 999px
+            - height: 34px
+            - padding: 0 12px
+            - box-shadow: none
+          grid:
+            - grid-template-areas: '"i n"'
+            - grid-template-columns: min-content max-content
+            - grid-column-gap: 6px
+            - align-items: center
+          icon:
+            - width: 15px
+            - height: 15px
+            - color: var(--ember-text-muted)
+          name:
+            - font-size: 12px
+            - font-weight: 600
+            - color: var(--ember-text-strong)
+        state:
+          - operator: regex
+            value: 'on'
+            id: 'on'
+            styles:
+              card:
+                - background: var(--ember-amber)
+                - border-color: var(--ember-amber)
+              icon:
+                - color: var(--ember-amber-ink)
+              name:
+                - color: var(--ember-amber-ink)
+    controls:
+      card:
+        type: custom:layout-card
+        layout_type: custom:grid-layout
+        layout:
+          grid-template-columns: 46px 1fr 46px
+          grid-template-rows: 46px
+          place-items: center
+          grid-gap: 12px
+          margin: 0
+          padding: 0
+        cards:
+          - type: custom:button-card
+            show_icon: true
+            show_name: false
+            icon: mdi:minus
+            tap_action:
+              action: call-service
+              service: input_number.decrement
+              target:
+                entity_id: input_number.hive
+              haptic: light
+            styles:
+              card:
+                - background: var(--ember-surface-2)
+                - border: 1px solid var(--ember-border)
+                - border-radius: 999px
+                - height: 46px
+                - width: 46px
+                - box-shadow: none
+              icon:
+                - color: var(--ember-text)
+                - width: 20px
+                - height: 20px
+          - type: custom:my-slider-v2
+            entity: input_number.hive
+            allowTapping: true
+            showMin: false
+            # my-slider-v2 styles are plain maps (NOT button-card style lists —
+            # lists are silently ignored by its Object.assign merge)
+            styles:
+              card:
+                height: 46px
+                background: none
+                border: none
+                box-shadow: none
+                display: flex
+                align-items: center
+              container:
+                height: 6px
+                border-radius: 999px
+                overflow: visible
+              track:
+                height: 6px
+                background: var(--ember-surface-2)
+                border-radius: 999px
+              progress:
+                height: 6px
+                background: var(--ember-amber)
+                border-radius: 999px
+              thumb:
+                background: var(--ember-amber-text)
+                width: 18px
+                height: 18px
+                border-radius: 999px
+                top: -6px
+                right: -9px
+          - type: custom:button-card
+            show_icon: true
+            show_name: false
+            icon: mdi:plus
+            tap_action:
+              action: call-service
+              service: input_number.increment
+              target:
+                entity_id: input_number.hive
+              haptic: light
+            styles:
+              card:
+                - background: var(--ember-amber)
+                - border: 1px solid var(--ember-amber)
+                - border-radius: 999px
+                - height: 46px
+                - width: 46px
+                - box-shadow: none
+              icon:
+                - color: var(--ember-amber-ink)
+                - width: 20px
+                - height: 20px
+
+# --- Climate · TRV (5f/5j) — compact per-room radiator valve. variables.entity =
+#     the climate.<room>_trv. −/target/+ steppers call climate.set_temperature (step
+#     variables.step, default 0.5). No boost (TRVs expose none). Tap target → dial.
+ember_trv:
+  entity: '[[[ return variables.entity ]]]'
+  show_icon: true
+  show_name: true
+  show_label: true
+  show_state: false
+  tap_action:
+    action: none
+  triggers_update: '[[[ return variables.entity ]]]'
+  name: Radiator
+  icon: '[[[ return entity.attributes.hvac_action === "heating" ? "mdi:fire" : "mdi:radiator"; ]]]'
+  variables:
+    step: 0.5
+  label: |
+    [[[
+      var a = entity.attributes;
+      var cur = a.current_temperature;
+      var tgt = a.temperature;
+      var now = (cur != null ? "now " + Math.round(cur) + "°" : "");
+      var s;
+      if(entity.state === "off") s = "Off";
+      else if(a.hvac_action === "heating") s = "Heating to " + (tgt != null ? Math.round(tgt) : "–") + "°";
+      else s = "Idle · target " + (tgt != null ? Math.round(tgt) + "°" : "–");
+      return now ? s + " · " + now : s;
+    ]]]
+  styles:
+    card:
+      - padding: 15px 16px 13px
+      - margin: 0
+      - border: 1px solid var(--ember-border)
+      - border-radius: 22px
+      - background: var(--ember-surface)
+      - box-shadow: var(--ember-card-shadow)
+    grid:
+      - grid-template-areas: '"i n" "i l" "controls controls"'
+      - grid-template-columns: 42px 1fr
+      - grid-template-rows: auto auto auto
+      - grid-column-gap: 13px
+      - grid-row-gap: 1px
+      - align-items: center
+    custom_fields:
+      controls:
+        - margin-top: 12px
+    img_cell:
+      - justify-content: center
+    icon:
+      - width: 20px
+      - height: 20px
+      - padding: 11px
+      - margin: 0
+      - border-radius: 12px
+      - background: var(--ember-surface-2)
+      - color: var(--ember-text-muted)
+      - transition: color .15s ease, background .15s ease
+    name:
+      - justify-self: start
+      - align-self: end
+      - font-size: 15px
+      - font-weight: 600
+      - line-height: 19px
+      - color: var(--ember-text)
+    label:
+      - justify-self: start
+      - align-self: start
+      - font-size: 13px
+      - line-height: 17px
+      - color: var(--ember-text-muted)
+      - text-transform: none
+  state:
+    - operator: template
+      value: '[[[ return entity.attributes.hvac_action === "heating"; ]]]'
+      id: heating
+      styles:
+        icon:
+          - background: var(--ember-amber)
+          - color: var(--ember-amber-ink)
+        label:
+          - color: var(--ember-amber-text)
+    - operator: template
+      value: '[[[ return entity.state === "off" || entity.state === "unavailable"; ]]]'
+      id: 'off'
+      styles:
+        label:
+          - color: var(--ember-text-dim)
+  custom_fields:
+    controls:
+      card:
+        type: custom:layout-card
+        layout_type: custom:grid-layout
+        layout:
+          grid-template-columns: 40px 1fr 40px
+          grid-template-rows: 40px
+          place-items: center
+          grid-gap: 12px
+          margin: 0
+          padding: 0
+        cards:
+          - type: custom:button-card
+            show_icon: true
+            show_name: false
+            icon: mdi:minus
+            entity: '[[[ return variables.entity ]]]'
+            tap_action:
+              action: call-service
+              service: climate.set_temperature
+              target:
+                entity_id: '[[[ return variables.entity ]]]'
+              data:
+                temperature: |
+                  [[[[ var t = Number(entity?.attributes?.temperature); if(isNaN(t)) t = 18;
+                    return Math.round((t - 0.5) * 2) / 2; ]]]]
+              haptic: light
+            styles:
+              card:
+                - background: var(--ember-surface-2)
+                - border: 1px solid var(--ember-border)
+                - border-radius: 999px
+                - height: 40px
+                - width: 40px
+                - box-shadow: none
+              icon:
+                - color: var(--ember-text)
+                - width: 18px
+                - height: 18px
+          # Drag slider on the Node-RED-synced input_number proxy
+          # (climate.<room>_trv ↔ input_number.<room>_trv).
+          - type: custom:my-slider-v2
+            entity: '[[[ return "input_number." + variables.entity.split(".")[1] ]]]'
+            allowTapping: true
+            showMin: false
+            styles:
+              card:
+                height: 40px
+                background: none
+                border: none
+                box-shadow: none
+                display: flex
+                align-items: center
+              container:
+                height: 6px
+                border-radius: 999px
+                overflow: visible
+              track:
+                height: 6px
+                background: var(--ember-surface-2)
+                border-radius: 999px
+              progress:
+                height: 6px
+                background: var(--ember-amber)
+                border-radius: 999px
+              thumb:
+                background: var(--ember-amber-text)
+                width: 16px
+                height: 16px
+                border-radius: 999px
+                top: -5px
+                right: -8px
+          - type: custom:button-card
+            show_icon: true
+            show_name: false
+            icon: mdi:plus
+            entity: '[[[ return variables.entity ]]]'
+            tap_action:
+              action: call-service
+              service: climate.set_temperature
+              target:
+                entity_id: '[[[ return variables.entity ]]]'
+              data:
+                temperature: |
+                  [[[[ var t = Number(entity?.attributes?.temperature); if(isNaN(t)) t = 18;
+                    return Math.round((t + 0.5) * 2) / 2; ]]]]
+              haptic: light
+            styles:
+              card:
+                - background: var(--ember-amber)
+                - border: 1px solid var(--ember-amber)
+                - border-radius: 999px
+                - height: 40px
+                - width: 40px
+                - box-shadow: none
+              icon:
+                - color: var(--ember-amber-ink)
+                - width: 18px
+                - height: 18px
+
+# --- Read-only stat row: chip + name + trailing value (no chevron, no toggle).
+#     Used for temp/humidity/occupancy inside a room's sensor group.
+ember_stat_row:
+  template: ember_row
+  show_label: false
+  tap_action:
+    action: more-info
+  hold_action:
+    action: more-info
+  styles:
+    grid:
+      - grid-template-areas: '"i n end"'
+      - grid-template-columns: 42px 1fr min-content
+      - grid-template-rows: auto
+      - grid-column-gap: 13px
+      - align-items: center
+    name:
+      - align-self: center
+  custom_fields:
+    end: |
+      [[[
+        if(!entity) return "";
+        var s = entity.state, u = entity.attributes.unit_of_measurement || "";
+        if(s === "on" || s === "off") {
+          var dc = entity.attributes.device_class;
+          if(dc === "occupancy" || dc === "motion" || dc === "presence")
+            s = (s === "on") ? "Occupied" : "Empty";
+          else s = (s === "on") ? "On" : "Off";
+          u = "";
+        }
+        return `<span style="font-size:15px;font-weight:600;color:var(--ember-text-strong);white-space:nowrap;">${s}${u}</span>`;
+      ]]]
+
+# --- Usage bar row (5d): name + thin amber fill bar + value outside right.
+#     Replaces bar-card (its inside-values were unreadable). Fill turns red at
+#     variables.warn % (default 85).
+ember_bar:
+  show_icon: false
+  show_name: true
+  show_label: false
+  show_state: false
+  tap_action:
+    action: more-info
+  hold_action:
+    action: more-info
+  variables:
+    warn: 85
+  styles:
+    card:
+      - background: none
+      - border: none
+      - border-radius: 0
+      - box-shadow: none
+      - padding: 12px 2px
+      - margin: 0
+    grid:
+      - grid-template-areas: '"n bar val"'
+      - grid-template-columns: 44px 1fr 44px
+      - grid-column-gap: 14px
+      - align-items: center
+    name:
+      - justify-self: start
+      - font-size: 13px
+      - font-weight: 400
+      - color: var(--ember-text-muted)
+    custom_fields:
+      bar:
+        - width: 100%
+      val:
+        - justify-self: end
+  custom_fields:
+    bar: |
+      [[[
+        var v = Math.max(0, Math.min(100, Number(entity.state) || 0));
+        var c = v >= (variables.warn || 85) ? "var(--ember-red)" : "var(--ember-amber)";
+        return `<div style="width:100%;height:8px;border-radius:999px;background:var(--ember-surface-2);overflow:hidden;">
+          <div style="width:${v}%;height:100%;border-radius:999px;background:${c};"></div></div>`;
+      ]]]
+    val: |
+      [[[ var v = Number(entity.state);
+        return `<span style="font-size:13px;font-weight:600;color:var(--ember-text-strong);">${isNaN(v) ? "–" : Math.round(v) + "%"}</span>`; ]]]
+
+# --- Appliance row (5d) — status from an input_select (Off/On/Finished).
+#     Running = amber, Finished = green, Off = dim (the "two on-states read apart"
+#     colour rule). variables.state_entity = the input_select; variables.detail =
+#     optional sensor (e.g. time remaining) appended when running.
+ember_appliance:
+  template: ember_row
+  entity: '[[[ return variables.state_entity ]]]'
+  show_label: true
+  tap_action:
+    action: more-info
+  hold_action:
+    action: more-info
+  triggers_update:
+    - '[[[ return variables.state_entity ]]]'
+    - '[[[ return variables.detail || null ]]]'
+  label: |
+    [[[
+      var s = (entity && entity.state || "").toLowerCase();
+      var base = {on: "Running", finished: "Finished", off: "Idle"}[s] || (entity ? entity.state : "");
+      if(s === "on" && variables.detail) {
+        var d = states[variables.detail];
+        if(d && !["unknown","unavailable","","0"].includes(d.state))
+          return base + " · " + d.state + (d.attributes.unit_of_measurement ? " " + d.attributes.unit_of_measurement : "");
+      }
+      return base;
+    ]]]
+  custom_fields:
+    end: |
+      [[[
+        var s = (entity && entity.state || "").toLowerCase();
+        var c = s === "on" ? "var(--ember-amber)" : (s === "finished" ? "var(--ember-green)" : null);
+        if(!c) return "";
+        return `<span style="display:inline-block;width:9px;height:9px;border-radius:999px;background:${c};align-self:center;"></span>`;
+      ]]]
+  state:
+    - operator: template
+      value: '[[[ return (entity && entity.state || "").toLowerCase() === "on"; ]]]'
+      id: running
+      styles:
+        icon:
+          - background: var(--ember-amber)
+          - color: var(--ember-amber-ink)
+        label:
+          - color: var(--ember-amber-text)
+    - operator: template
+      value: '[[[ return (entity && entity.state || "").toLowerCase() === "finished"; ]]]'
+      id: done
+      styles:
+        icon:
+          - background: var(--ember-green)
+          - color: '#0e1f0d'
+        label:
+          - color: var(--ember-green-text)
+
+# --- Appliance tile (5d) — 2-up grid variant of ember_appliance: icon chip
+#     top-left, status dot top-right, name + status line at the bottom.
+ember_appliance_tile:
+  template: ember_appliance
+  styles:
+    card:
+      - background: var(--ember-surface)
+      - border: 1px solid var(--ember-border)
+      - border-radius: 22px
+      - box-shadow: none
+      - padding: 14px
+      - margin: 0
+      - height: 128px
+    grid:
+      - grid-template-areas: '"i end" "n n" "l l"'
+      - grid-template-columns: 1fr min-content
+      - grid-template-rows: 1fr 20px 16px
+      - grid-column-gap: 0
+    img_cell:
+      - justify-content: start
+    icon:
+      - justify-self: start
+      - align-self: start
+      - width: 22px
+      - height: 22px
+      - padding: 9px
+    name:
+      - justify-self: start
+      - text-align: start
+      - align-self: end
+      - font-size: 14.5px
+      - font-weight: 600
+      - line-height: 18px
+      - color: var(--ember-text)
+    label:
+      - justify-self: start
+      - text-align: start
+      - align-self: end
+      - font-size: 12px
+      - line-height: 15px
+      - color: var(--ember-text-dim)
+    custom_fields:
+      end:
+        - justify-self: end
+        - align-self: start
+
+# --- TV remote button (5n): dark rounded key. variables.button = webostv.button
+#     name (UP/DOWN/ENTER/0-9/BACK/HOME/EXIT/MUTE/…); omit for custom tap_action.
+#     Set name for text keys (digits) or icon for symbol keys.
+ember_remote_btn:
+  show_name: false
+  show_icon: false
+  variables:
+    button: ''
+    label: ''
+    icon: ''
+  tap_action:
+    action: call-service
+    service: webostv.button
+    data:
+      entity_id: media_player.lg_webos_tv
+      button: '[[[ return variables.button ]]]'
+    haptic: light
+  styles:
+    card:
+      - background: var(--ember-surface-2)
+      - border: 1px solid var(--ember-border)
+      - border-radius: 16px
+      - height: 52px
+      - box-shadow: none
+      - padding: 0
+    grid:
+      - grid-template-areas: '"key"'
+      - place-items: center
+    custom_fields:
+      key:
+        - display: flex
+        - align-items: center
+        - justify-content: center
+  custom_fields:
+    key: |
+      [[[
+        if(variables.icon) return `<ha-icon icon="${variables.icon}" style="--mdc-icon-size:20px;color:var(--ember-text);"></ha-icon>`;
+        return `<span style="font-size:17px;font-weight:600;color:var(--ember-text);">${variables.label || ""}</span>`;
+      ]]]
+
 button:
   tap_action:
     action: toggle

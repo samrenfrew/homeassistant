@@ -1,0 +1,173 @@
+# ============================================================================
+# Ember · 5f Room · Office — TRV climate + lights + switches + sensors.
+# ============================================================================
+title: Office
+path: office
+icon: mdi:desk
+subview: true
+theme: Ember
+type: custom:vertical-layout
+layout:
+  width: 360
+  max_width: 600
+  margin: 0 auto
+  card_margin: 7px 0
+
+cards:
+  # --- Back to Home -----------------------------------------------------------
+  - type: custom:mushroom-chips-card
+    alignment: start
+    chips:
+      - type: back
+    card_mod: &back_chip
+      style: |
+        ha-card { background: none !important; border: none !important; box-shadow: none !important;
+          padding: 8px 24px 0 22px !important; }
+        .chip-container { padding: 0 !important; --chip-spacing: 0; }
+        mushroom-chip { --chip-background: transparent; --chip-border-width: 0;
+          --chip-box-shadow: none; --chip-icon-size: 24px; --card-primary-color: var(--ember-text-muted); }
+
+  - type: custom:mushroom-title-card
+    title: Office
+    subtitle: >-
+      {% set t = states('sensor.office_temperature') %}{% set occ =
+      is_state('binary_sensor.office_occupancy','on') %}{% if t not in
+      ['unknown','unavailable'] %}{{ t | round }}° · {% endif %}{{ 'Occupied' if occ else 'Empty' }}
+    card_mod: &screen_title
+      style: |
+        ha-card { padding: 4px 24px 6px 24px !important; }
+        .title { font-family: var(--ha-font-family-body) !important; font-size: 28px !important;
+          font-weight: 600 !important; letter-spacing: -0.01em; color: var(--ember-text); }
+        .subtitle { font-family: var(--ha-font-family-body) !important; font-size: 13px !important;
+          font-weight: 400 !important; line-height: 1.4 !important; margin-top: 2px; color: var(--ember-text-muted); }
+
+  # --- Climate (TRV) ----------------------------------------------------------
+  - type: vertical-stack
+    card_mod:
+      style: |
+        #root { margin: 0 24px; }
+    cards:
+      - type: custom:button-card
+        template: ember_trv
+        name: Radiator
+        variables:
+          entity: climate.office_trv
+
+  # --- Lights -----------------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Lights
+    subtitle: >-
+      {% set n = ['light.ikea_plug','light.desk_lamp','light.computer']
+      | select('is_state','on') | list | count %}{{ (n ~ ' on') if n > 0 else '' }}
+    card_mod: &section_head
+      style: |
+        ha-card { padding: 14px 24px 2px 24px !important; display: flex !important;
+          flex-direction: row !important; justify-content: space-between !important;
+          align-items: baseline !important; }
+        .title { font-family: var(--ha-font-family-body) !important; font-size: 15px !important;
+          font-weight: 600 !important; color: var(--ember-text); }
+        .subtitle { font-family: var(--ha-font-family-body) !important; font-size: 12.5px !important;
+          font-weight: 400 !important; margin-top: 0 !important; color: var(--ember-text-muted); }
+  - type: horizontal-stack
+    card_mod: &rail
+      style: |
+        #root {
+          overflow-x: auto; flex-wrap: nowrap !important; scroll-snap-type: x mandatory;
+          scrollbar-width: none; gap: 10px !important; padding: 2px 0 4px 0;
+          -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+          mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+        }
+        #root::-webkit-scrollbar { display: none; }
+        #root > * { flex: 0 0 auto !important; min-width: max-content; }
+        #root > *:first-child { margin-left: 24px !important; }
+        #root > *:last-child { margin-right: 24px !important; }
+    cards:
+      - type: custom:button-card
+        template: ember_light_tile
+        entity: light.ikea_plug
+        name: Cool Lamp
+        icon: mdi:desk-lamp
+      - type: custom:button-card
+        template: ember_light_tile
+        entity: light.desk_lamp
+        hold_action:
+          action: navigate
+          navigation_path: '#light-desk'
+          haptic: light
+        name: Desk Lamp
+        icon: mdi:desk-lamp
+      - type: custom:button-card
+        template: ember_light_tile
+        entity: light.computer
+        hold_action:
+          action: navigate
+          navigation_path: '#light-computer'
+          haptic: light
+        name: Desk
+        icon: mdi:monitor
+
+  # --- Switches ---------------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Switches
+    card_mod: *section_head
+  - type: vertical-stack
+    card_mod: &row_group
+      style: |
+        #root {
+          background: var(--ember-surface);
+          border: 1px solid var(--ember-border);
+          border-radius: 22px;
+          box-shadow: var(--ember-card-shadow);
+          margin: 0 24px;
+          padding: 2px 16px;
+          gap: 0 !important;
+        }
+        #root > *:not(:last-child) { border-bottom: 1px solid var(--ember-divider); }
+    cards:
+      - type: custom:button-card
+        template: ember_toggle_row
+        entity: switch.extension_lead
+        name: Extension Lead
+        icon: mdi:power-socket-uk
+      - type: custom:button-card
+        template: ember_toggle_row
+        entity: switch.extension_lead_2
+        name: Extension Lead 2
+        icon: mdi:power-socket-uk
+
+  # --- Sensors ----------------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Sensors
+    card_mod: *section_head
+  - type: vertical-stack
+    card_mod: *row_group
+    cards:
+      - type: custom:button-card
+        template: ember_stat_row
+        entity: sensor.office_humidity
+        name: Humidity
+        icon: mdi:water-percent
+      - type: custom:button-card
+        template: ember_stat_row
+        entity: binary_sensor.office_occupancy
+        name: Occupancy
+        icon: mdi:motion-sensor
+
+  # --- Light sheets (5k long-press popups) -------------------------------------
+  - type: custom:streamline-card
+    template: ember_light_sheet
+    variables:
+      entity: light.desk_lamp
+      name: Desk Lamp
+      icon: mdi:desk-lamp
+      hash: '#light-desk'
+  - type: custom:streamline-card
+    template: ember_light_sheet
+    variables:
+      entity: light.computer
+      name: Desk
+      icon: mdi:monitor
+      hash: '#light-computer'
+
+  # --- Navigation (shared bottom bar / side rail) --------------------------
+  - !include _navbar.yaml

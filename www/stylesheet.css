@@ -1,3 +1,30 @@
+/* === EMBER FONTS === */
+/* Hanken Grotesk — variable font (single file covers weights 300–700) */
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/local/fonts/hanken-grotesk.woff2") format("woff2");
+}
+
+/* Space Mono — static, used only for tiny uppercase micro-labels */
+@font-face {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/local/fonts/space-mono-400.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Space Mono";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("/local/fonts/space-mono-700.woff2") format("woff2");
+}
+
 @font-face {
   font-family: "SF Pro Display";
   font-style: normal;
@@ -32,7 +59,7 @@
   font-weight: 400;
   src: url("/local/fonts/sf-pro-display_regular.woff2") format("woff2");
 }
-*/ @font-face {
+@font-face {
   font-family: "SF Pro Text";
   font-style: normal;
   font-weight: 700;
@@ -98,7 +125,7 @@
 }
 
 body {
-  font-family: "SF Pro Display", "Roman-55", Helvetica, Arial, sans-serif;
+  font-family: var(--ha-font-family-body, "SF Pro Display", "Roman-55", Helvetica, Arial, sans-serif);
 }
 
 h1 {

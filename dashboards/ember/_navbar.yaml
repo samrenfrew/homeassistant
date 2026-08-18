@@ -1,0 +1,80 @@
+# ============================================================================
+# Ember · 5o Navigation — shared navbar (bottom bar on mobile, left rail on
+# desktop). Included as the last card of every view via `!include _navbar.yaml`.
+# 5 tabs with labels: Home / Rooms (popup of the 6 spokes) / Lights / Media /
+# Systems. Active route gets the amber treatment via navbar-card CSS props.
+# ============================================================================
+type: custom:navbar-card
+desktop:
+  position: left
+  show_labels: true
+  min_width: 768
+mobile:
+  position: bottom
+  show_labels: true
+styles: |
+  :host {
+    --navbar-background-color: var(--ember-surface);
+    --navbar-primary-color: var(--ember-amber);
+    --navbar-border-radius: 26px;
+    --navbar-route-icon-size: 24px;
+    --navbar-box-shadow-mobile-floating: var(--ember-card-shadow);
+    --navbar-box-shadow-desktop: var(--ember-card-shadow);
+  }
+  .navbar {
+    border: 1px solid var(--ember-border);
+  }
+  .route .label {
+    font-size: 11px;
+    font-weight: 600;
+  }
+  .route.active .button {
+    background: color-mix(in srgb, var(--ember-amber) 16%, transparent);
+    border-radius: 14px;
+  }
+  .navbar-popup-backdrop {
+    background: rgba(10, 8, 6, 0.72) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+routes:
+  - url: /refactor-dash/home
+    icon: mdi:home-outline
+    icon_selected: mdi:home
+    label: Home
+  - icon: mdi:sofa-outline
+    icon_selected: mdi:sofa
+    label: Rooms
+    tap_action:
+      action: open-popup
+    popup:
+      - url: /refactor-dash/lounge
+        icon: mdi:sofa
+        label: Lounge
+      - url: /refactor-dash/kitchen
+        icon: mdi:fridge-outline
+        label: Kitchen
+      - url: /refactor-dash/bedroom
+        icon: mdi:bed
+        label: Bedroom
+      - url: /refactor-dash/nursery
+        icon: mdi:teddy-bear
+        label: Nursery
+      - url: /refactor-dash/ella
+        icon: mdi:baby-face-outline
+        label: Ella
+      - url: /refactor-dash/office
+        icon: mdi:desk
+        label: Office
+  - url: /refactor-dash/lights
+    icon: mdi:lightbulb-group-outline
+    icon_selected: mdi:lightbulb-group
+    label: Lights
+  - url: /refactor-dash/media
+    icon: mdi:play-circle-outline
+    icon_selected: mdi:play-circle
+    label: Media
+  - url: /refactor-dash/systems
+    icon: mdi:lan
+    icon_selected: mdi:lan-connect
+    label: Systems

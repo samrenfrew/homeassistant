@@ -1,0 +1,200 @@
+# ============================================================================
+# Ember · 5d Network & Systems — Internet 2-stat + chips → NAS bars → NUC bars
+# → Appliances 2-up tiles. Bars are ember_bar (button-card), not bar-card.
+# ============================================================================
+title: Network & Systems
+path: systems
+icon: mdi:lan
+theme: Ember
+type: custom:vertical-layout
+layout:
+  width: 360
+  max_width: 600
+  margin: 0 auto
+  card_margin: 7px 0
+
+cards:
+  - type: custom:mushroom-title-card
+    title: Network & Systems
+    subtitle: >-
+      {% set down = states('sensor.nuc_services_down') | int(0) %}{% set bad =
+      states('sensor.docker_on_nuc_unhealthy_containers') | int(0) %}{% set up =
+      states('sensor.nuc_services_running') | int(0) %}{% set n = down + bad %}{%
+      if n > 0 %}{{ n }} issue{{ 's' if n > 1 else '' }} · {{ up }} services up{%
+      else %}No issues detected · {{ up }} services up{% endif %}
+    card_mod:
+      style: |
+        ha-card { padding: 20px 24px 6px 24px !important; }
+        .title { font-family: var(--ha-font-family-body) !important; font-size: 28px !important;
+          font-weight: 600 !important; letter-spacing: -0.01em; color: var(--ember-text); }
+        .subtitle { font-family: var(--ha-font-family-body) !important; font-size: 13px !important;
+          font-weight: 400 !important; line-height: 1.4 !important; margin-top: 2px; color: var(--ember-text-muted); }
+
+  # --- Internet: ↓/↑ big stats + Ping / AdGuard chips (5d) ----------------------
+  - type: vertical-stack
+    card_mod:
+      style: |
+        #root { margin: 0 24px; }
+    cards:
+      - type: custom:button-card
+        entity: sensor.speedtest_download
+        show_icon: false
+        show_name: false
+        show_label: false
+        show_state: false
+        tap_action:
+          action: more-info
+        triggers_update:
+          - sensor.speedtest_download
+          - sensor.speedtest_upload
+          - sensor.speedtest_ping
+          - sensor.adguard_nuc_dns_queries_blocked_ratio
+        styles:
+          card:
+            - background: var(--ember-surface)
+            - border: 1px solid var(--ember-border)
+            - border-radius: 22px
+            - box-shadow: var(--ember-card-shadow)
+            - padding: 18px
+          grid:
+            - grid-template-areas: '"down up" "chips chips"'
+            - grid-template-columns: 1fr 1fr
+            - grid-row-gap: 16px
+            - align-items: baseline
+          custom_fields:
+            down:
+              - justify-self: start
+            up:
+              - justify-self: end
+            chips:
+              - justify-self: start
+        custom_fields:
+          down: |
+            [[[
+              var v = Number(states["sensor.speedtest_download"]?.state);
+              return `<span style="display:flex;align-items:baseline;gap:6px;">
+                <ha-icon icon="mdi:arrow-down" style="--mdc-icon-size:18px;color:var(--ember-text-muted);align-self:center;"></ha-icon>
+                <span style="font-size:30px;font-weight:600;letter-spacing:-0.02em;color:var(--ember-text);">${isNaN(v) ? "–" : Math.round(v)}</span>
+                <span style="font-size:12px;color:var(--ember-text-dim);">Mbit/s</span></span>`;
+            ]]]
+          up: |
+            [[[
+              var v = Number(states["sensor.speedtest_upload"]?.state);
+              return `<span style="display:flex;align-items:baseline;gap:6px;">
+                <ha-icon icon="mdi:arrow-up" style="--mdc-icon-size:18px;color:var(--ember-text-muted);align-self:center;"></ha-icon>
+                <span style="font-size:30px;font-weight:600;letter-spacing:-0.02em;color:var(--ember-text);">${isNaN(v) ? "–" : Math.round(v)}</span>
+                <span style="font-size:12px;color:var(--ember-text-dim);">Mbit/s</span></span>`;
+            ]]]
+          chips: |
+            [[[
+              var ping = Number(states["sensor.speedtest_ping"]?.state);
+              var ag = Number(states["sensor.adguard_nuc_dns_queries_blocked_ratio"]?.state);
+              var chip = "display:inline-flex;align-items:center;gap:7px;height:30px;padding:0 12px;border-radius:999px;background:var(--ember-surface-2);font-size:12px;font-weight:600;color:var(--ember-text-strong);white-space:nowrap;";
+              var out = "<span style='display:flex;gap:8px;flex-wrap:wrap;'>";
+              out += `<span style="${chip}"><span style="width:7px;height:7px;border-radius:999px;background:var(--ember-green);"></span>Ping ${isNaN(ping) ? "–" : Math.round(ping)} ms</span>`;
+              out += `<span style="${chip}">AdGuard · ${isNaN(ag) ? "–" : ag.toFixed(1)}% blocked</span>`;
+              return out + "</span>";
+            ]]]
+
+  # --- AdGuard protection toggle (kept from previous layout; not in 5d) --------
+  - type: vertical-stack
+    card_mod: &row_group
+      style: |
+        #root {
+          background: var(--ember-surface);
+          border: 1px solid var(--ember-border);
+          border-radius: 22px;
+          box-shadow: var(--ember-card-shadow);
+          margin: 0 24px;
+          padding: 2px 16px;
+          gap: 0 !important;
+        }
+        #root > *:not(:last-child) { border-bottom: 1px solid var(--ember-divider); }
+    cards:
+      - type: custom:button-card
+        template: ember_toggle_row
+        entity: switch.adguard_nuc_protection
+        name: AdGuard Protection
+        icon: mdi:shield-half-full
+
+  # --- Synology NAS -----------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Synology NAS
+    subtitle: >-
+      {% set d = states('sensor.nas_volume_1_volume_used') %}{% set t =
+      states('sensor.nas_temperature') %}{% if d not in ['unknown','unavailable'] %}{{
+      d | round }}% used{% endif %}{% if t not in ['unknown','unavailable'] %} · {{ t | round }}°{% endif %}
+    card_mod: &section_head
+      style: |
+        ha-card { padding: 14px 24px 2px 24px !important; display: flex !important;
+          flex-direction: row !important; justify-content: space-between !important;
+          align-items: baseline !important; }
+        .title { font-family: var(--ha-font-family-body) !important; font-size: 15px !important;
+          font-weight: 600 !important; color: var(--ember-text); }
+        .subtitle { font-family: var(--ha-font-family-body) !important; font-size: 12.5px !important;
+          font-weight: 400 !important; margin-top: 0 !important; color: var(--ember-text-muted); }
+  - type: vertical-stack
+    card_mod: *row_group
+    cards:
+      - type: custom:button-card
+        template: ember_bar
+        entity: sensor.nas_cpu_utilization_total
+        name: CPU
+      - type: custom:button-card
+        template: ember_bar
+        entity: sensor.nas_memory_usage_real
+        name: RAM
+      - type: custom:button-card
+        template: ember_bar
+        entity: sensor.nas_volume_1_volume_used
+        name: Disk
+
+  # --- NUC (Home Assistant host) ----------------------------------------------
+  - type: custom:mushroom-title-card
+    title: NUC
+    subtitle: >-
+      {% set t = states('sensor.cpu_temp') %}{% if t not in
+      ['unknown','unavailable'] %}{{ t | round }}°{% endif %}
+    card_mod: *section_head
+  - type: vertical-stack
+    card_mod: *row_group
+    cards:
+      - type: custom:button-card
+        template: ember_bar
+        entity: sensor.processor_use_percent
+        name: CPU
+      - type: custom:button-card
+        template: ember_bar
+        entity: sensor.memory_use_percent
+        name: RAM
+      - type: custom:button-card
+        template: ember_bar
+        entity: sensor.disk_use_percent
+        name: Disk
+
+  # --- Appliances (2-up tiles) --------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Appliances
+    card_mod: *section_head
+  - type: horizontal-stack
+    card_mod:
+      style: |
+        #root { margin: 0 24px; gap: 10px !important; }
+        #root > * { flex: 1 1 0 !important; }
+    cards:
+      - type: custom:button-card
+        template: ember_appliance_tile
+        name: Washer
+        icon: mdi:washing-machine
+        variables:
+          state_entity: input_select.washing_machine
+          detail: sensor.washing_machine_time_remaining
+      - type: custom:button-card
+        template: ember_appliance_tile
+        name: Dryer
+        icon: mdi:tumble-dryer
+        variables:
+          state_entity: input_select.tumble_dryer
+
+  # --- Navigation (shared bottom bar / side rail) --------------------------
+  - !include _navbar.yaml

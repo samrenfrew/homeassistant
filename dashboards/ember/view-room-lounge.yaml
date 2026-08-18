@@ -1,0 +1,510 @@
+# ============================================================================
+# Ember · 5b Room · Lounge — the room-screen pattern (control).
+# title/subtitle → Hive climate → Lights rail → Scenes → Playing (media,
+# conditional) → Devices (TV → remote popup).
+# ============================================================================
+title: Lounge
+path: lounge
+icon: mdi:sofa
+subview: true
+theme: Ember
+type: custom:vertical-layout
+layout:
+  width: 360
+  max_width: 600
+  margin: 0 auto
+  card_margin: 7px 0
+
+cards:
+  # --- Back to Home -----------------------------------------------------------
+  - type: custom:mushroom-chips-card
+    alignment: start
+    chips:
+      - type: back
+    card_mod: &back_chip
+      style: |
+        ha-card { background: none !important; border: none !important; box-shadow: none !important;
+          padding: 8px 24px 0 22px !important; }
+        .chip-container { padding: 0 !important; --chip-spacing: 0; }
+        mushroom-chip { --chip-background: transparent; --chip-border-width: 0;
+          --chip-box-shadow: none; --chip-icon-size: 24px; --card-primary-color: var(--ember-text-muted); }
+
+  # --- Title + subtitle -------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Lounge
+    subtitle: >-
+      {% set t = state_attr('climate.hive','current_temperature') %}{% set occ =
+      is_state('binary_sensor.lounge_occupancy','on') %}{% if t is not none %}{{
+      t | round }}° · {% endif %}{{ 'Occupied' if occ else 'Empty' }}
+    card_mod: &screen_title
+      style: |
+        ha-card { padding: 4px 24px 6px 24px !important; }
+        .title { font-family: var(--ha-font-family-body) !important; font-size: 28px !important;
+          font-weight: 600 !important; letter-spacing: -0.01em; color: var(--ember-text); }
+        .subtitle { font-family: var(--ha-font-family-body) !important; font-size: 13px !important;
+          font-weight: 400 !important; line-height: 1.4 !important; margin-top: 2px; color: var(--ember-text-muted); }
+
+  # --- Climate (Hive) ---------------------------------------------------------
+  - type: vertical-stack
+    card_mod:
+      style: |
+        #root { margin: 0 24px; }
+    cards:
+      - type: custom:button-card
+        template: ember_climate
+
+  # --- Lights -----------------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Lights
+    subtitle: >-
+      {% set n = ['light.orb_lamp','light.big_lamp','light.small_lamp','light.chair_lamp','light.tv']
+      | select('is_state','on') | list | count %}{{ (n ~ ' on') if n > 0 else '' }}
+    card_mod: &section_head
+      style: |
+        ha-card { padding: 14px 24px 2px 24px !important; display: flex !important;
+          flex-direction: row !important; justify-content: space-between !important;
+          align-items: baseline !important; }
+        .title { font-family: var(--ha-font-family-body) !important; font-size: 15px !important;
+          font-weight: 600 !important; color: var(--ember-text); }
+        .subtitle { font-family: var(--ha-font-family-body) !important; font-size: 12.5px !important;
+          font-weight: 400 !important; margin-top: 0 !important; color: var(--ember-text-muted); }
+  - type: horizontal-stack
+    card_mod: &rail
+      style: |
+        #root {
+          overflow-x: auto; flex-wrap: nowrap !important; scroll-snap-type: x mandatory;
+          scrollbar-width: none; gap: 10px !important; padding: 2px 0 4px 0;
+          -webkit-mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+          mask-image: linear-gradient(to right, #000 calc(100% - 40px), transparent);
+        }
+        #root::-webkit-scrollbar { display: none; }
+        #root > * { flex: 0 0 auto !important; min-width: max-content; }
+        #root > *:first-child { margin-left: 24px !important; }
+        #root > *:last-child { margin-right: 24px !important; }
+    cards:
+      - type: custom:button-card
+        template: ember_light_tile
+        entity: light.orb_lamp
+        hold_action:
+          action: navigate
+          navigation_path: '#light-orb'
+          haptic: light
+        name: Orb
+        icon: mdi:lava-lamp
+      - type: custom:button-card
+        template: ember_light_tile
+        entity: light.big_lamp
+        hold_action:
+          action: navigate
+          navigation_path: '#light-big'
+          haptic: light
+        name: Big Lamp
+        icon: mdi:floor-lamp
+      - type: custom:button-card
+        template: ember_light_tile
+        entity: light.small_lamp
+        hold_action:
+          action: navigate
+          navigation_path: '#light-small'
+          haptic: light
+        name: Small Lamp
+        icon: mdi:lamp
+      - type: custom:button-card
+        template: ember_light_tile
+        entity: light.chair_lamp
+        hold_action:
+          action: navigate
+          navigation_path: '#light-chair'
+          haptic: light
+        name: Chair
+        icon: mdi:lamp
+      - type: custom:button-card
+        template: ember_light_tile
+        entity: light.tv
+        hold_action:
+          action: navigate
+          navigation_path: '#light-tvback'
+          haptic: light
+        name: TV Backlight
+        icon: mdi:television-ambient-light
+
+  # --- Scenes -----------------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Scenes
+    card_mod: *section_head
+  - type: horizontal-stack
+    card_mod: *rail
+    cards:
+      - type: custom:button-card
+        template: ember_scene_chip
+        entity: scene.evening
+        name: Evening
+        icon: mdi:weather-sunset
+      - type: custom:button-card
+        template: ember_scene_chip
+        entity: scene.movie
+        name: Movie
+        icon: mdi:movie-open
+      - type: custom:button-card
+        template: ember_scene_chip
+        entity: scene.relax
+        name: Relax
+        icon: mdi:sofa-single
+      - type: custom:button-card
+        template: ember_scene_chip
+        name: Add preset
+        icon: mdi:plus
+        tap_action:
+          action: none
+        styles:
+          card:
+            - background: none
+            - border-style: dashed
+          icon:
+            - color: var(--ember-text-dim)
+          name:
+            - color: var(--ember-text-dim)
+
+  # --- Playing (conditional: only while the speaker is active) ----------------
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.lounge_speaker
+        state_not: 'off'
+      - condition: state
+        entity: media_player.lounge_speaker
+        state_not: 'unavailable'
+      - condition: state
+        entity: media_player.lounge_speaker
+        state_not: 'idle'
+      - condition: state
+        entity: media_player.lounge_speaker
+        state_not: 'standby'
+    card:
+      type: vertical-stack
+      cards:
+        - type: custom:mushroom-title-card
+          title: Playing
+          card_mod: *section_head
+        - type: custom:mediocre-massive-media-player-card
+          entity_id: media_player.lounge_speaker
+          use_art_colors: true
+          speaker_group:
+            entities:
+              - media_player.lounge_speaker
+              - media_player.sonos_one
+              - media_player.dining_room
+              - media_player.bedroom_speaker
+          card_mod:
+            style: |
+              ha-card { background: var(--ember-surface); border: 1px solid var(--ember-border);
+                border-radius: 20px; box-shadow: var(--ember-card-shadow); overflow: hidden;
+                margin: 0 24px; }
+
+  # --- Devices ----------------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Devices
+    card_mod: *section_head
+  - type: vertical-stack
+    card_mod: &row_group
+      style: |
+        #root {
+          background: var(--ember-surface);
+          border: 1px solid var(--ember-border);
+          border-radius: 22px;
+          box-shadow: var(--ember-card-shadow);
+          margin: 0 24px;
+          padding: 2px 16px;
+          gap: 0 !important;
+        }
+        #root > *:not(:last-child) { border-bottom: 1px solid var(--ember-divider); }
+    cards:
+      - type: custom:button-card
+        template: ember_row
+        entity: media_player.lg_webos_tv
+        name: TV
+        icon: mdi:television
+        label: >-
+          [[[ var s = entity.state;
+            if(s === "off" || s === "unavailable" || s === "standby") return "Off · tap for remote";
+            var app = entity.attributes.source || entity.attributes.media_title;
+            return (app ? app + " · " : "On · ") + "tap for remote"; ]]]
+        tap_action:
+          action: navigate
+          navigation_path: '#tv-remote'
+          haptic: light
+        hold_action:
+          action: more-info
+
+  # --- TV remote popup (5n, bubble-card, hash #tv-remote) ----------------------
+  - type: custom:bubble-card
+    card_type: pop-up
+    hash: '#tv-remote'
+    name: Lounge TV
+    icon: mdi:television
+    show_header: true
+    entity: media_player.lg_webos_tv
+    sub_button:
+      - icon: mdi:power
+        tap_action:
+          action: call-service
+          service: media_player.toggle
+          target:
+            entity_id: media_player.lg_webos_tv
+    card_mod:
+      style: |
+        .bubble-pop-up { --bubble-border-radius: 28px; }
+    cards:
+      # Number pad 1-9 + enter/0/exit
+      - type: grid
+        columns: 3
+        square: false
+        cards:
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: '1', label: '1' }
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: '2', label: '2' }
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: '3', label: '3' }
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: '4', label: '4' }
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: '5', label: '5' }
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: '6', label: '6' }
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: '7', label: '7' }
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: '8', label: '8' }
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: '9', label: '9' }
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: 'ENTER', icon: 'mdi:keyboard-return' }
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: '0', label: '0' }
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: 'EXIT', icon: 'mdi:close' }
+      # D-pad (3x3 with transparent fillers)
+      - type: grid
+        columns: 3
+        square: false
+        cards:
+          - type: custom:button-card
+            show_icon: false
+            show_name: false
+            tap_action: { action: none }
+            styles: &dpad_filler
+              card:
+                - background: none
+                - border: none
+                - box-shadow: none
+                - height: 64px
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: 'UP', icon: 'mdi:chevron-up' }
+            styles: &dpad_key
+              card:
+                - height: 64px
+                - border-radius: 20px
+          - type: custom:button-card
+            show_icon: false
+            show_name: false
+            tap_action: { action: none }
+            styles: *dpad_filler
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: 'LEFT', icon: 'mdi:chevron-left' }
+            styles: *dpad_key
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: 'ENTER', label: 'OK' }
+            styles:
+              card:
+                - height: 64px
+                - background: var(--ember-amber)
+                - border-color: var(--ember-amber)
+                - border-radius: 20px
+            custom_fields:
+              key: |
+                [[[ return `<span style="font-size:16px;font-weight:700;color:var(--ember-amber-ink);">OK</span>`; ]]]
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: 'RIGHT', icon: 'mdi:chevron-right' }
+            styles: *dpad_key
+          - type: custom:button-card
+            show_icon: false
+            show_name: false
+            tap_action: { action: none }
+            styles: *dpad_filler
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: 'DOWN', icon: 'mdi:chevron-down' }
+            styles: *dpad_key
+          - type: custom:button-card
+            show_icon: false
+            show_name: false
+            tap_action: { action: none }
+            styles: *dpad_filler
+      # Back / Home / Mute
+      - type: grid
+        columns: 3
+        square: false
+        cards:
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: 'BACK', icon: 'mdi:arrow-left' }
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: 'HOME', icon: 'mdi:home-outline' }
+          - type: custom:button-card
+            template: ember_remote_btn
+            variables: { button: 'MUTE', icon: 'mdi:volume-mute' }
+      # VOL − / + and CH − / +
+      - type: grid
+        columns: 2
+        square: false
+        cards:
+          - type: custom:button-card
+            show_icon: false
+            show_name: false
+            tap_action:
+              action: none
+            styles: &pill_styles
+              card:
+                - background: var(--ember-surface-2)
+                - border: 1px solid var(--ember-border)
+                - border-radius: 999px
+                - height: 52px
+                - box-shadow: none
+                - padding: 0 6px
+              grid:
+                - grid-template-areas: '"minus lbl plus"'
+                - grid-template-columns: 1fr auto 1fr
+                - align-items: center
+            custom_fields:
+              minus:
+                card:
+                  type: custom:button-card
+                  show_icon: true
+                  show_name: false
+                  icon: mdi:minus
+                  tap_action:
+                    action: call-service
+                    service: media_player.volume_down
+                    target:
+                      entity_id: media_player.lg_webos_tv
+                    haptic: light
+                  styles: &pill_btn
+                    card:
+                      - background: none
+                      - border: none
+                      - box-shadow: none
+                      - height: 44px
+                    icon:
+                      - width: 18px
+                      - height: 18px
+                      - color: var(--ember-text)
+              lbl: |
+                [[[ return `<span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--ember-text-dim);">VOL</span>`; ]]]
+              plus:
+                card:
+                  type: custom:button-card
+                  show_icon: true
+                  show_name: false
+                  icon: mdi:plus
+                  tap_action:
+                    action: call-service
+                    service: media_player.volume_up
+                    target:
+                      entity_id: media_player.lg_webos_tv
+                    haptic: light
+                  styles: *pill_btn
+          - type: custom:button-card
+            show_icon: false
+            show_name: false
+            tap_action:
+              action: none
+            styles: *pill_styles
+            custom_fields:
+              minus:
+                card:
+                  type: custom:button-card
+                  show_icon: true
+                  show_name: false
+                  icon: mdi:minus
+                  tap_action:
+                    action: call-service
+                    service: webostv.button
+                    data:
+                      entity_id: media_player.lg_webos_tv
+                      button: CHANNELDOWN
+                    haptic: light
+                  styles: *pill_btn
+              lbl: |
+                [[[ return `<span style="font-family:'Space Mono',monospace;font-size:11px;letter-spacing:.14em;color:var(--ember-text-dim);">CH</span>`; ]]]
+              plus:
+                card:
+                  type: custom:button-card
+                  show_icon: true
+                  show_name: false
+                  icon: mdi:plus
+                  tap_action:
+                    action: call-service
+                    service: webostv.button
+                    data:
+                      entity_id: media_player.lg_webos_tv
+                      button: CHANNELUP
+                    haptic: light
+                  styles: *pill_btn
+
+  # --- Light sheets (5k long-press popups) -------------------------------------
+  - type: custom:streamline-card
+    template: ember_light_sheet
+    variables:
+      entity: light.orb_lamp
+      name: Orb Lamp
+      icon: mdi:lava-lamp
+      hash: '#light-orb'
+  - type: custom:streamline-card
+    template: ember_light_sheet
+    variables:
+      entity: light.big_lamp
+      name: Big Lamp
+      icon: mdi:floor-lamp
+      hash: '#light-big'
+  - type: custom:streamline-card
+    template: ember_light_sheet
+    variables:
+      entity: light.small_lamp
+      name: Small Lamp
+      icon: mdi:lamp
+      hash: '#light-small'
+  - type: custom:streamline-card
+    template: ember_light_sheet
+    variables:
+      entity: light.chair_lamp
+      name: Chair Lamp
+      icon: mdi:lamp
+      hash: '#light-chair'
+  - type: custom:streamline-card
+    template: ember_light_sheet
+    variables:
+      entity: light.tv
+      name: TV Backlight
+      icon: mdi:television-ambient-light
+      hash: '#light-tvback'
+
+  # --- Navigation (shared bottom bar / side rail) --------------------------
+  - !include _navbar.yaml

@@ -1,51 +1,87 @@
-dark2:
-  # Colors 
-  accent-color: '#2a79ff'
-  secondary-accent-color: '#6a5ef2'
-  running-accent-color: '#f44336'
-  stopped-accent-color: '#4caf50'
-  ha-tab-active-text-color: 'var(--accent-color)'
-  
-  map-filter: 'invert(0.9) hue-rotate(170deg) brightness(1.5) contrast(1.2) saturate(0.3)'
+Ember:
+  # CARD MOD — Ember: warm monochrome dark theme with a single amber accent
+  card-mod-theme: embercardmod
 
-  primary-color: '#808080'
-  # dark-primary-color: '#9c5b1b'
-  dark-primary-color: '#3498db'
+  #box-shadow-off: '-6px -6px 6px 0 rgba(50, 50, 50,.5),6px 6px 6px 0 rgba(0,0,0,.15)'
+  #box-shaxow-on: 'inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3)'
+  masonry-view-card-margin: "0"
+  grid-column-gap: 13px
+  grid-row-gap: 13px
+
+  # Colors 
+  # === EMBER PALETTE ===
+  accent-color: '#e08f5a'            # amber = ON / active / running
+  secondary-accent-color: '#e0a878'  # amber text on dark
+  running-accent-color: '#5fae6e'    # green = good / finished
+  stopped-accent-color: '#e0655c'    # red = alert / open / fault
+  ha-tab-active-text-color: 'var(--accent-color)'
+  app-header-selection-bar-color: 'var(--accent-color)'
+
+  # Ember semantic tokens — referenced by card-mod / button-card variants
+  ember-bg: '#161310'
+  ember-surface: '#1e1a15'
+  ember-surface-2: '#26201a'
+  ember-border: '#2a2419'
+  ember-divider: '#221d16'
+  ember-text: '#f3ede4'
+  ember-text-strong: '#c9c1b4'
+  ember-text-muted: '#9c9488'
+  ember-text-dim: '#8a8175'
+  ember-amber: '#e08f5a'
+  ember-amber-ink: '#231206'
+  ember-amber-text: '#e0a878'
+  ember-light-icon: '#f2c79c'
+  ember-green: '#5fae6e'
+  ember-green-text: '#7fc98d'
+  ember-red: '#e0655c'
+  ember-red-text: '#f0938c'
+  ember-on-mono: '#e8ded0'
+  ember-active-tile-bg: 'linear-gradient(160deg,#3a2414,#2a1a10)'
+  ember-active-tile-border: '#6b3d1e'
+  ember-active-tile-glow: '0 12px 26px -16px rgba(224,143,90,.6)'
+  ember-card-shadow: '0 30px 70px -30px rgba(0,0,0,.5), 0 0 0 1px rgba(0,0,0,.04)'
+
+  map-filter: 'invert(0.92) hue-rotate(150deg) brightness(1.4) contrast(1.1) saturate(0.25)'
+
+  primary-color: '#e08f5a'
+  dark-primary-color: '#6b3d1e'
   light-primary-color: 'var(--accent-color)'
   # Text colors
-  primary-text-color: '#fff'
-  rgb-primary-text-color: 255,255,255
+  primary-text-color: '#f3ede4'
+  rgb-primary-text-color: 243,237,228
   text-primary-color: 'var(--primary-text-color)'
-  secondary-text-color: rgba(255,255,255,0.75)
-  disabled-text-color: '#777777'
-  label-badge-border-color: 'green'
+  secondary-text-color: '#9c9488'
+  disabled-text-color: '#8a8175'
+  label-badge-border-color: '#2a2419'
+  ha-color-neutral-05: 'var(--secondary-text-color)'
+  ha-color-neutral-90: '#3b3b3b'
 
   # Fonts
-  mdc-typography-font-family: "SF Pro Display, sans-serif"
+  mdc-typography-font-family: '"Hanken Grotesk", sans-serif'
   # paper-font-headline_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
   # paper-font-subhead_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
   # paper-font-body1_-_font-family: "SF Pro Display, Roman-55, Helvetica Neue, sans-serif" 
-  ha-font-family-body: '"SF Pro Display", sans-serif'
+  ha-font-family-body: '"Hanken Grotesk", sans-serif'
+  ha-font-family-heading: '"Hanken Grotesk", sans-serif'
 
   # Header
-  app-header-background-color: '#0d0d0d'
-  app-header-text-color: '#FFFFFF'
-  app-header-edit-background-color: "#23608a"
-  # app-header-edit-text-color: ""
-  paper-tabs-selection-bar-color: var(--accent-color)'
+  app-header-background-color: '#161310'
+  app-header-text-color: '#f3ede4'
+  app-header-edit-background-color: "#26201a"
+  paper-tabs-selection-bar-color: 'var(--accent-color)'
 
   # Sidebar
-  sidebar-icon-color: '#777777'
+  sidebar-icon-color: '#8a8175'
   sidebar-selected-icon-color: 'var(--accent-color)'
   sidebar-selected-text-color: 'var(--accent-color)'
   # Background colors
-  background-color: '#0d0d0d'
-  primary-background-color: '#0d0d0d'
-  secondary-background-color: '#0d0d0d'
-  divider-color: 'rgba(0, 0, 0, .12)'
-  table-row-background-color: '#292929'
-  table-row-alternative-background-color: '#292929'
-  border-color: '#222323'
+  background-color: '#161310'
+  primary-background-color: '#161310'
+  secondary-background-color: '#1e1a15'
+  divider-color: '#221d16'
+  table-row-background-color: '#1e1a15'
+  table-row-alternative-background-color: '#26201a'
+  border-color: '#2a2419'
 
   # Inputs
   code-editor-background-color: "#282828"
@@ -74,13 +110,13 @@ dark2:
 
   # Nav Menu
   paper-listbox-color: '#777777'
-  paper-listbox-background-color: '#141414'
+  paper-listbox-background-color: '#1e1a15'
   paper-grey-50: 'var(--primary-text-color)'
   paper-grey-200: '#222222'
   # Paper card
   paper-card-header-color: 'var(--accent-color)'
-  paper-card-background-color: '#171717'
-  paper-dialog-background-color: '#292929'
+  paper-card-background-color: '#1e1a15'
+  paper-dialog-background-color: '#26201a'
   paper-item-icon-color: 'var(--primary-text-color)'
   paper-item-icon-active-color: 'var(--primary-color)'
   paper-item-icon_-_color: 'green'
@@ -153,10 +189,11 @@ dark2:
   markdown-code-background-color: 'var(--secondary-background-color)'
 
   #Modal
-  dialog-backdrop-filter: blur(10px)
-  mdc-dialog-scrim-color: rgba(0,0,0,0)
-  mdc-dialog-box-shadow: 0px 11px 15px 0 rgba(0, 0, 0, 0.1)
-  modal-background: rgba(23,23,23,0.88)
+  ha-dialog-scrim-backdrop-filter: blur(10px)
+  mdc-dialog-scrim-color: rgba(0,0,0,0.32)
+  dialog-box-shadow: 0px 11px 15px 0 rgba(0, 0, 0, 0.1)
+  ha-dialog-surface-background: var(--card-background-color)
+  # ha-dialog-border-radius: 16px
 
     # Inputs
   input-fill-color: var(--ha-card-background)
@@ -164,9 +201,9 @@ dark2:
   # Shadows
   ha-card-box-shadow: 'none'
   ha-card-border-radius: 20px
-  ha-card-background: '#171717'
-  ha-card-border-color: '#232323'
-  ha-card-border-width: '0px'
+  ha-card-background: '#1e1a15'
+  ha-card-border-color: '#2a2419'
+  ha-card-border-width: '1px'
 
     # HACS
   hacs-badge-color: 'var(--accent-color)'  # New Badge
@@ -174,15 +211,18 @@ dark2:
   hacs-status-pending-restart: 'var(--text-light-color)'   # Restart Icon
   hacs-status-pending-update: 'var(--accent-color)'
 
-  # CARD MOD
-  card-mod-theme: cardmod2
-
   # SECTIONS
   ha-section-grid-column-gap: 16px
   ha-section-grid-row-gap: 13px
   ha-view-sections-column-gap: 16px
   ha-view-sections-row-gap: 13px
 
+  # BUBBLE
+  bubble-backdrop-background-color: 'var(--mdc-dialog-scrim-color)'
+  # bubble-pop-up-main-background-color: 'var(--ha-dialog-surface-background)'
+  bubble-pop-up-main-background-color: 'var(--ha-dialog-surface-background)'
+  # bubble-pop-up-border-radius: 16px
+  #bubble-backdrop-filter: blur(10px)
 
 # Mushroom layout
   mush-spacing: 14px
@@ -193,7 +233,7 @@ dark2:
   mush-title-letter-spacing: -0.13px
   mush-title-font-weight: 600
   mush-title-line-height: 1
-  mush-title-font-family: "SF Pro Display, SF Pro Icons, Helvetica Neue, Helvetica, Arial"
+  mush-title-font-family: '"Hanken Grotesk", sans-serif'
   mush-subtitle-font-size: 16px
   mush-subtitle-letter-spacing: -0.08px
   mush-subtitle-font-weight: 500
@@ -260,9 +300,9 @@ dark2:
 
   mush-rgb-state-update-on: var(--mush-rgb-green)
 
-  color-orange: '#FF9800'
-  color-green: '#4CAF50'
-  color-red: '#F44336'
+  color-orange: '#e08f5a'
+  color-green: '#5fae6e'
+  color-red: '#e0655c'
 
   # mush-rgb-state-person-home: var(--rgb-success)
   # mush-rgb-state-person-not-home: var(--rgb-danger)
@@ -319,4 +359,13 @@ dark2:
   # state-vacuum-color: '#009688' # Teal
   # state-device_tracker-not_home-color: var(--color-red)
   # state-device_tracker-home-color: var(--color-green)
-  box-shadow: 'inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3)'
+  # box-shadow: 'inset -4px -4px 10px 0 rgba(50, 50, 50,.5), inset 4px 4px 12px 0 rgba(0,0,0,.3)'
+
+  # Form
+  ha-color-form-background: '#1e1a15'
+  ha-color-form-background-hover: '#1e1a15'
+
+  bubble-pop-up-border-radius: 20px
+  desktop-width: 600px !important
+
+  navbar-popup-backdrop-z-index: 2

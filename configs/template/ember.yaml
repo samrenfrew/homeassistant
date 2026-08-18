@@ -1,0 +1,77 @@
+# ============================================================================
+# Ember dashboard — derived summary sensors
+# ----------------------------------------------------------------------------
+# Reused as-is (already exist, do NOT redefine):
+#   sensor.lights_on      -> Home "N on" lights pill / Lights master
+#   sensor.speakers_on    -> speakers count
+#   input_select.time     -> greeting time-of-day ("Good <time>, Sam")
+# Design scope: washer + dryer only (no dishwasher). Dark theme only.
+# ============================================================================
+
+# --- Any media player actively playing? (drives Home now-playing strip) ---
+- binary_sensor:
+    - name: "Media Playing Any"
+      unique_id: ember_media_playing_any
+      icon: mdi:play-circle-outline
+      state: >-
+        {{ (states.media_player
+            | selectattr('state', 'eq', 'playing')
+            | rejectattr('entity_id', 'in', ['media_player.all_speakers'])
+            | list | count) > 0 }}
+
+# --- First active player + its now-playing details for the mini strip ---
+- sensor:
+    - name: "Now Playing"
+      unique_id: ember_now_playing
+      icon: mdi:cast
+      # state = entity_id of the active player, or 'none'
+      state: >-
+        {% set p = states.media_player
+             | selectattr('state', 'eq', 'playing')
+             | rejectattr('entity_id', 'in', ['media_player.all_speakers'])
+             | list %}
+        {{ p[0].entity_id if p else 'none' }}
+      attributes:
+        title: >-
+          {% set p = states.media_player | selectattr('state','eq','playing')
+               | rejectattr('entity_id','in',['media_player.all_speakers']) | list %}
+          {{ state_attr(p[0].entity_id, 'media_title') if p else '' }}
+        artist: >-
+          {% set p = states.media_player | selectattr('state','eq','playing')
+               | rejectattr('entity_id','in',['media_player.all_speakers']) | list %}
+          {{ state_attr(p[0].entity_id, 'media_artist')
+             or state_attr(p[0].entity_id, 'app_name') if p else '' }}
+        artwork: >-
+          {% set p = states.media_player | selectattr('state','eq','playing')
+               | rejectattr('entity_id','in',['media_player.all_speakers']) | list %}
+          {{ state_attr(p[0].entity_id, 'entity_picture') if p else '' }}
+        source: >-
+          {% set p = states.media_player | selectattr('state','eq','playing')
+               | rejectattr('entity_id','in',['media_player.all_speakers']) | list %}
+          {{ state_attr(p[0].entity_id, 'source')
+             or state_attr(p[0].entity_id, 'app_name') if p else '' }}
+        player_name: >-
+          {% set p = states.media_player | selectattr('state','eq','playing')
+               | rejectattr('entity_id','in',['media_player.all_speakers']) | list %}
+          {{ p[0].name if p else '' }}
+
+# --- Which bin is out tonight (mono unless one is due) ---
+- sensor:
+    - name: "Bin Tonight"
+      unique_id: ember_bin_tonight
+      icon: mdi:delete-outline
+      state: >-
+        {% if is_state('input_boolean.green_bin', 'on') %}Green bin tonight
+        {% elif is_state('input_boolean.black_bin', 'on') %}Black bin tonight
+        {% elif is_state('input_boolean.brown_bin', 'on') %}Brown bin tonight
+        {% else %}none{% endif %}
+
+# --- Count of appliances currently running (Home "N running" amber pill) ---
+- sensor:
+    - name: "Appliances Running"
+      unique_id: ember_appliances_running
+      icon: mdi:washing-machine
+      state: >-
+        {% set washer = is_state('binary_sensor.washing_machine_running', 'on') %}
+        {% set dryer  = is_state('switch.tumble_dryer', 'on') %}
+        {{ [washer, dryer] | select | list | count }}

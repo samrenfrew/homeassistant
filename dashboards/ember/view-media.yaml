@@ -1,0 +1,358 @@
+# ============================================================================
+# Ember · Media — all players, state-aware (decision 7).
+# Each player renders as a 5g compact row and swaps to the 5h massive card
+# while playing/paused/buffering (conditional pair per player).
+# TV row navigates to the lounge remote popup (5n lives on the lounge view).
+# ============================================================================
+title: Media
+path: media
+icon: mdi:play-circle-outline
+theme: Ember
+type: custom:vertical-layout
+layout:
+  width: 360
+  max_width: 600
+  margin: 0 auto
+  card_margin: 7px 0
+
+cards:
+  # --- Menu bar (top-level view: sidebar chip, same as Home) -------------------
+  - type: custom:mushroom-chips-card
+    alignment: start
+    chips:
+      - type: menu
+    card_mod:
+      style: |
+        ha-card {
+          background: none !important;
+          border: none !important;
+          box-shadow: none !important;
+          padding: 4px 24px 0 22px !important;
+        }
+        .chip-container { padding: 0 !important; --chip-spacing: 0; }
+        mushroom-chip {
+          --chip-background: transparent;
+          --chip-border-width: 0;
+          --chip-box-shadow: none;
+          --chip-icon-size: 24px;
+          --card-primary-color: var(--ember-text-muted);
+        }
+
+  # --- Title + count ------------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Media
+    subtitle: >-
+      {% set ps = ['media_player.lounge_speaker','media_player.sonos_one',
+      'media_player.dining_room','media_player.bedroom_speaker',
+      'media_player.kitchen_display','media_player.chromecast',
+      'media_player.fire_tablet','media_player.lg_webos_tv'] %}{% set n = ps
+      | select('is_state','playing') | list | count %}{{ (n ~ ' playing') if n > 0
+      else 'Nothing playing' }}
+    card_mod:
+      style: |
+        ha-card { padding: 20px 24px 6px 24px !important; }
+        .title { font-family: var(--ha-font-family-body) !important; font-size: 28px !important;
+          font-weight: 600 !important; letter-spacing: -0.01em; color: var(--ember-text); }
+        .subtitle { font-family: var(--ha-font-family-body) !important; font-size: 13px !important;
+          font-weight: 400 !important; line-height: 1.4 !important; margin-top: 2px; color: var(--ember-text-muted); }
+
+  # --- Speakers -------------------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Speakers
+    card_mod: &section_head
+      style: |
+        ha-card { padding: 14px 24px 2px 24px !important; display: flex !important;
+          flex-direction: row !important; justify-content: space-between !important;
+          align-items: baseline !important; }
+        .title { font-family: var(--ha-font-family-body) !important; font-size: 15px !important;
+          font-weight: 600 !important; color: var(--ember-text); }
+        .subtitle { font-family: var(--ha-font-family-body) !important; font-size: 12.5px !important;
+          font-weight: 400 !important; margin-top: 0 !important; color: var(--ember-text-muted); }
+
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.lounge_speaker
+        state:
+          - playing
+          - paused
+          - buffering
+    card:
+      type: custom:mediocre-massive-media-player-card
+      entity_id: media_player.lounge_speaker
+      use_art_colors: true
+      speaker_group: &sonos_group
+        entities:
+          - media_player.lounge_speaker
+          - media_player.sonos_one
+          - media_player.dining_room
+          - media_player.bedroom_speaker
+      card_mod: &media_mod
+        style: |
+          ha-card { background: var(--ember-surface); border: 1px solid var(--ember-border);
+            border-radius: 20px; box-shadow: var(--ember-card-shadow); overflow: hidden;
+            margin: 0 24px; }
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.lounge_speaker
+        state_not: playing
+      - condition: state
+        entity: media_player.lounge_speaker
+        state_not: paused
+      - condition: state
+        entity: media_player.lounge_speaker
+        state_not: buffering
+    card:
+      type: custom:mediocre-media-player-card
+      entity_id: media_player.lounge_speaker
+      speaker_group: *sonos_group
+      card_mod: *media_mod
+
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.sonos_one
+        state:
+          - playing
+          - paused
+          - buffering
+    card:
+      type: custom:mediocre-massive-media-player-card
+      entity_id: media_player.sonos_one
+      use_art_colors: true
+      speaker_group: *sonos_group
+      card_mod: *media_mod
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.sonos_one
+        state_not: playing
+      - condition: state
+        entity: media_player.sonos_one
+        state_not: paused
+      - condition: state
+        entity: media_player.sonos_one
+        state_not: buffering
+    card:
+      type: custom:mediocre-media-player-card
+      entity_id: media_player.sonos_one
+      speaker_group: *sonos_group
+      card_mod: *media_mod
+
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.dining_room
+        state:
+          - playing
+          - paused
+          - buffering
+    card:
+      type: custom:mediocre-massive-media-player-card
+      entity_id: media_player.dining_room
+      use_art_colors: true
+      speaker_group: *sonos_group
+      card_mod: *media_mod
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.dining_room
+        state_not: playing
+      - condition: state
+        entity: media_player.dining_room
+        state_not: paused
+      - condition: state
+        entity: media_player.dining_room
+        state_not: buffering
+    card:
+      type: custom:mediocre-media-player-card
+      entity_id: media_player.dining_room
+      speaker_group: *sonos_group
+      card_mod: *media_mod
+
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.bedroom_speaker
+        state:
+          - playing
+          - paused
+          - buffering
+    card:
+      type: custom:mediocre-massive-media-player-card
+      entity_id: media_player.bedroom_speaker
+      use_art_colors: true
+      speaker_group: *sonos_group
+      card_mod: *media_mod
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.bedroom_speaker
+        state_not: playing
+      - condition: state
+        entity: media_player.bedroom_speaker
+        state_not: paused
+      - condition: state
+        entity: media_player.bedroom_speaker
+        state_not: buffering
+    card:
+      type: custom:mediocre-media-player-card
+      entity_id: media_player.bedroom_speaker
+      speaker_group: *sonos_group
+      card_mod: *media_mod
+
+  # --- Displays & casting -----------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: Displays & Casting
+    card_mod: *section_head
+
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.kitchen_display
+        state:
+          - playing
+          - paused
+          - buffering
+    card:
+      type: custom:mediocre-massive-media-player-card
+      entity_id: media_player.kitchen_display
+      use_art_colors: true
+      card_mod: *media_mod
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.kitchen_display
+        state_not: playing
+      - condition: state
+        entity: media_player.kitchen_display
+        state_not: paused
+      - condition: state
+        entity: media_player.kitchen_display
+        state_not: buffering
+    card:
+      type: custom:mediocre-media-player-card
+      entity_id: media_player.kitchen_display
+      card_mod: *media_mod
+
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.chromecast
+        state:
+          - playing
+          - paused
+          - buffering
+    card:
+      type: custom:mediocre-massive-media-player-card
+      entity_id: media_player.chromecast
+      use_art_colors: true
+      card_mod: *media_mod
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.chromecast
+        state_not: playing
+      - condition: state
+        entity: media_player.chromecast
+        state_not: paused
+      - condition: state
+        entity: media_player.chromecast
+        state_not: buffering
+    card:
+      type: custom:mediocre-media-player-card
+      entity_id: media_player.chromecast
+      card_mod: *media_mod
+
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.fire_tablet
+        state:
+          - playing
+          - paused
+          - buffering
+    card:
+      type: custom:mediocre-massive-media-player-card
+      entity_id: media_player.fire_tablet
+      use_art_colors: true
+      card_mod: *media_mod
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.fire_tablet
+        state_not: playing
+      - condition: state
+        entity: media_player.fire_tablet
+        state_not: paused
+      - condition: state
+        entity: media_player.fire_tablet
+        state_not: buffering
+    card:
+      type: custom:mediocre-media-player-card
+      entity_id: media_player.fire_tablet
+      card_mod: *media_mod
+
+  # --- TV ------------------------------------------------------------------------
+  - type: custom:mushroom-title-card
+    title: TV
+    card_mod: *section_head
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.lg_webos_tv
+        state:
+          - playing
+          - paused
+          - buffering
+    card:
+      type: custom:mediocre-massive-media-player-card
+      entity_id: media_player.lg_webos_tv
+      use_art_colors: true
+      card_mod: *media_mod
+  - type: conditional
+    conditions:
+      - condition: state
+        entity: media_player.lg_webos_tv
+        state_not: playing
+      - condition: state
+        entity: media_player.lg_webos_tv
+        state_not: paused
+      - condition: state
+        entity: media_player.lg_webos_tv
+        state_not: buffering
+    card:
+      type: vertical-stack
+      card_mod: &row_group
+        style: |
+          #root {
+            background: var(--ember-surface);
+            border: 1px solid var(--ember-border);
+            border-radius: 22px;
+            box-shadow: var(--ember-card-shadow);
+            margin: 0 24px;
+            padding: 2px 16px;
+            gap: 0 !important;
+          }
+          #root > *:not(:last-child) { border-bottom: 1px solid var(--ember-divider); }
+      cards:
+        - type: custom:button-card
+          template: ember_row
+          entity: media_player.lg_webos_tv
+          name: TV
+          icon: mdi:television
+          label: >-
+            [[[ var s = entity.state;
+              if(s === "off" || s === "unavailable" || s === "standby") return "Off · tap for remote";
+              var app = entity.attributes.source || entity.attributes.media_title;
+              return (app ? app + " · " : "On · ") + "tap for remote"; ]]]
+          tap_action:
+            action: navigate
+            navigation_path: '/refactor-dash/lounge#tv-remote'
+            haptic: light
+          hold_action:
+            action: more-info
+
+  # --- Navigation (shared bottom bar / side rail) --------------------------
+  - !include _navbar.yaml
