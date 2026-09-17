@@ -86,8 +86,9 @@
   use_blueprint:
     path: cvroque/webostv_turn_on.yaml
     input:
-      webostv: media_player.lg_webos_tv
+      webostv: cd39fdb823930e618ec157543de3b89a
       webostv_mac: 00-A1-59-E8-89-08
+      on_action: []
 - id: '1650834182234'
   alias: Re-enable TV turn on
   description: ''
@@ -203,7 +204,7 @@
       - ''
       camera:
       - camera.front_door
-      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      notify_device: 7c379dc63cd21e5b5fc403138ab48fac
       final_update: true
       loiter_timer: 3
       initial_delay: 0
@@ -295,7 +296,7 @@
       presence_filter: []
       camera:
       - camera.back_door
-      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      notify_device: 7c379dc63cd21e5b5fc403138ab48fac
       final_update: false
       loiter_timer: 15
       initial_delay: 1
@@ -335,7 +336,7 @@
       presence_filter: []
       camera:
       - camera.front_door
-      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      notify_device: 7c379dc63cd21e5b5fc403138ab48fac
       final_update: false
       loiter_timer: 15
       initial_delay: 1
@@ -374,7 +375,7 @@
       presence_filter: []
       camera:
       - camera.back_door
-      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      notify_device: 7c379dc63cd21e5b5fc403138ab48fac
       final_update: false
       loiter_timer: 15
       initial_delay: 1
@@ -569,7 +570,7 @@
   use_blueprint:
     path: SgtBatten/Stable.yaml
     input:
-      notify_device: 0392f3b78fa57ea8933051b62331e81c
+      notify_device: 7c379dc63cd21e5b5fc403138ab48fac
       camera:
       - camera.back_door
       subtitle: Let her in!

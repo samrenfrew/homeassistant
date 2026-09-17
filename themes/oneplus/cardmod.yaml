@@ -16,6 +16,27 @@ cardmod:
 
   ## CSS styling for Entity cards
   card-mod-row-yaml: |
+    ## class: bar_card. bar-card as an entity row; the class lands on the row element.
+    .: |
+      :host(.bar_card) bar-card-card {
+        --paper-item-icon-active-color: var(--accent-color);
+      }
+      :host(.bar_card) bar-card-value {
+        font-weight: 300;
+        line-height: 36px;
+        padding-right: 5px;
+      }
+      :host(.bar_card) bar-card-indicator {
+        margin-top: 5px;
+        border-radius: 0;
+      }
+      :host(.bar_card) bar-card-backgroundbar {
+        background: var(--paper-card-background-color);
+        border-radius: 5px;
+      }
+      :host(.bar_card) bar-card-currentbar {
+        border-radius: 5px;
+      }
     hui-generic-entity-row:
       $:
         state-badge:
@@ -105,88 +126,170 @@ cardmod:
 
   ## CSS styling for all cards
   card-mod-card-yaml: |
-    .: |     
-      {% set bg = config.entity and state_attr(config.entity, "entity_picture") %}
+    ## Static — every card renders this, so it must contain no Jinja.
+    ## Anything templated here costs one server render_template subscription PER CARD.
+    ## Shared classes live here too. Inside a layout-card, `card_mod: {class: x}` lands on
+    ## the card's ha-card and nowhere else, so gate rules with `ha-card.x`. `:host(.x)` does
+    ## not match, and cards with no ha-card (layout-card, chips card) cannot use a class.
+    .: |
       ha-card {
         transition: all 0.2s ease-in-out, height 0s, margin 0s !important;
-      }  
+      }
       ha-card.type-custom-button-card:not(.no-hover):hover {
         @media (hover: hover) {
           transform: scale(1.05);
-          box-shadow:1px 3px 10px rgba(0,0,0,0.05);
+          box-shadow: 1px 3px 10px rgba(0,0,0,0.05);
         }
       }
-      .type-glance, .media-player, .type-entities, .type-custom-uptime-card, .type-gauge, .type-custom-mini-graph-card, .type-map, .type-custom-mini-media-player, .type-history-graph, .type-custom-multiple-logbook-card, .type-picture-entity, .type-statistics-graph  {
+      .type-glance, .media-player, .type-entities, .type-custom-uptime-card, .type-gauge, .type-custom-mini-graph-card, .type-map, .type-custom-mini-media-player, .type-history-graph, .type-custom-multiple-logbook-card, .type-picture-entity, .type-statistics-graph {
         border-width: 1px;
       }
 
-      {% if config.card_mod and config.card_mod.class and 'media_card' in config.card_mod.class %} 
-      ha-card {
-        border-radius: 20px;
-        border:1px solid var(--ha-card-border-color);
-        min-height: 200px;
-        @media screen and (min-width: 1200px){
-          min-height: 141px;
-        }
-        {% if config.card_mod and config.card_mod.class and 'fire' in config.card_mod.class %}
-        min-height: 122px; 
-        height: 100% !important;
-        {% endif %}
-      }   
-      
-      mushroom-card {
-        justify-content: flex-end;
-        border-radius: 20px;
-        overflow: hidden;
-        background: linear-gradient(240deg, var(--accent-color) -200%, var(--ha-card-background) 30%);
-        {% if bg %}
-        --card-primary-color: #fff;
-        --card-secondary-color: #FFFFFF90;
-        background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.2)), url("{{ bg }}");
-        background-position: center;
-        background-size: 100%, cover;
-        color: #fff;
-        {% endif %}
-      }
-      mushroom-state-item {
-        flex-grow: 0;
-      }
-      mushroom-button {
-        {% if bg %}
-        --bg-color: rgba(255,255,255, 0.15) !important;
-        --bg-color-disabled: rgba(255,255,255, 0.15) !important;
-        --icon-color: #fff;
-        {% endif %}
-      }
-      {% endif %}
 
-      {% if config.card_mod and config.card_mod.class and 'remote_media' in config.card_mod.class %}
-      ha-card {
+      ha-card.mini-graph .header {
+        padding: 8px 14px 0 !important;
+        align-items: center;
+      }
+      ha-card.mini-graph .name {
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        color: var(--primary-text-color) !important;
+      }
+      ha-card.mini-graph .icon {
+        color: var(--theme-icon-color) !important;
+        background: var(--primary-background-color);
+        border-radius: 999px;
+        width: 32px;
+        height: 32px;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        outline: 1px solid var(--primary-background-color);
+        outline-offset: 3px;
+      }
+      ha-card.mini-graph .info {
+        padding: 0 14px 14px !important;
+      }
+
+      /* class: bare */
+      ha-card.bare {
+        background: none !important;
+        border: 1px solid transparent !important;
+      }
+
+      ha-card.chip-entity {
+        background-color: {{ 'var(--secondary-accent-color)' if config.entity and is_state(config.entity, 'on') else 'var(--card-background-color)' }} !important;
+        --text-color: {{ '#fff' if config.entity and is_state(config.entity, 'on') else 'unset' }} !important;
+        --icon-primary-color: {{ '#fff' if config.entity and is_state(config.entity, 'on') else 'unset' }} !important;
+      }
+
+      /* class: frigate_events */
+      ha-card.frigate_events {
+        border-radius: unset;
+        padding: 0 4px;
+      }
+      ha-card.frigate_events .events {
+        --visible-count: 5 !important;
+      }
+      ha-card.frigate_events .events .event {
+        border-radius: 10px;
+        aspect-ratio: 16/12;
+      }
+      ha-card.frigate_events .events .event:first-of-type {
+        border-radius: 16px;
+        grid-column: 1 / -1;
+        grid-row: 1;
+        aspect-ratio: 16/9;
+      }
+
+      /* class: state_value (mini-graph-card) */
+      ha-card.state_value .states .state .state__value {
+        font-weight: 500;
+        letter-spacing: -0.02em;
+      }
+
+      /* class: dim_icon (collapsable-cards) */
+      ha-card.dim_icon ha-icon {
+        color: var(--secondary-text-color) !important;
+      }
+      ha-card.dim_icon button:focus {
+        background: none !important;
+      }
+
+      /* class: no_icon */
+      ha-card.no_icon state-badge {
+        display: none !important;
+      }
+      ha-card.no_icon .info {
+        padding-left: 0 !important;
+      }
+
+      /* class: remote_media (mini-media-player) */
+      ha-card.remote_media {
         height: 100%;
         letter-spacing: 0.2px;
       }
-      ha-card .mmp-player__core {
-        flex-direction:column-reverse;
+      ha-card.remote_media .mmp-player__core {
+        flex-direction: column-reverse;
       }
-      ha-card .mmp-player {
+      ha-card.remote_media .mmp-player {
         align-self: center;
       }
-      ha-card mmp-powerstrip {
-        justify-content:flex-start !important;
-        margin-left:0;
+      ha-card.remote_media mmp-powerstrip {
+        justify-content: flex-start !important;
+        margin-left: 0;
       }
-      ha-card .entity__info {
-        margin-left:0;
-      } 
-      {% endif %}
-    
-    .no_icon$: |
-      state-badge {
-        display: none !important;
+      ha-card.remote_media .entity__info {
+        margin-left: 0;
       }
-      .info {
-        padding-left: 0 !important;
-      }
+
+    ## `&.class` is UIX's host filter: the path only runs when the card carries the class.
+    ## Keeps the Jinja scoped so only these cards open a render_template subscription.
+    "&.media_card":
+      .: |
+        {% set bg = config.entity and state_attr(config.entity, "entity_picture") %}
+        ha-card {
+          border-radius: 20px;
+          border: 1px solid var(--ha-card-border-color);
+          min-height: 200px;
+          @media screen and (min-width: 1200px) {
+            min-height: 141px;
+          }
+        }
+        ha-card.fire {
+          min-height: 122px;
+          height: 100% !important;
+        }
+        mushroom-card {
+          justify-content: flex-end;
+          border-radius: 20px;
+          overflow: hidden;
+          background: linear-gradient(240deg, var(--accent-color) -200%, var(--ha-card-background) 30%);
+          {% if bg %}
+          --card-primary-color: #fff;
+          --card-secondary-color: #FFFFFF90;
+          background: linear-gradient(to top, rgba(0,0,0,1), rgba(0,0,0,0.2)), url("{{ bg }}");
+          background-position: center;
+          background-size: 100%, cover;
+          color: #fff;
+          {% endif %}
+        }
+        mushroom-state-item {
+          flex-grow: 0;
+        }
+        mushroom-button {
+          {% if bg %}
+          --bg-color: rgba(255,255,255, 0.15) !important;
+          --bg-color-disabled: rgba(255,255,255, 0.15) !important;
+          --icon-color: #fff;
+          {% endif %}
+        }
+
+      mushroom-card$: |
+        .container {
+          justify-content: flex-end !important;
+          flex-grow: 0 !important;
+        }
 
     .scroll$:
       .: |
@@ -237,15 +340,6 @@ cardmod:
               margin-left: 0 !important;
             }       
 
-    mushroom-card$: |
-      {% if config.card_mod and config.card_mod.class and 'media_card' in config.card_mod.class %}
-      .container {
-        justify-content:flex-end !important;
-        flex-grow:0 !important;
-      }   
-      {% endif %} 
-            
-    
     mushroom-media-player-media-control$: |
       {% set bg = config.entity and state_attr(config.entity, "entity_picture") %}
       {% if bg %}
@@ -319,13 +413,12 @@ cardmod:
     .: |
       @media screen and (max-width:870px){
         .header {
-          #--header-height: calc(68px);
           padding-top: 0 !important;
           box-shadow: var(--mdc-top-app-bar-fixed-box-shadow);
-          # padding-bottom: 24px !important:
+          /* clears the Android gesture bar when the navbar sits at the bottom; 12px is the fallback knob */
+          padding-bottom: max(env(safe-area-inset-bottom, 0px), 12px) !important;
         }
         .toolbar {
-          # padding-bottom: 24px !important;
           box-sizing: content-box !important;
           --mdc-icon-button-size: var(--header-height, 56px)
         }

@@ -61,6 +61,7 @@ dark:
   table-row-background-color: '#292929'
   table-row-alternative-background-color: '#292929'
   border-color: '#222323'
+  ha-color-fill-neutral-quiet-resting: var(--background-color)
 
   # Inputs
   code-editor-background-color: "#282828"

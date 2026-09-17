@@ -4,6 +4,7 @@
   "key": "lovelace.lovelace",
   "data": {
     "config": {
+      "button_card_templates_url": "/local/button_card_templates.yaml?v=1",
       "kiosk_mode": {
         "mobile_settings": {
           "hide_header": false,
@@ -29,7 +30,7 @@
               "type": "custom:layout-card",
               "layout_type": "custom:grid-layout",
               "layout": {
-                "grid-template-columns": "48px minmax(calc(100% - (48px*1)), auto)",
+                "grid-template-columns": "48px minmax(calc(100% - (48px*2)), auto) 48px",
                 "grid-column-gap": 0,
                 "margin": 0,
                 "card_margin": 0,
@@ -44,7 +45,7 @@
                       "type": "menu",
                       "icon_color": "var(--rgb-blue)",
                       "card_mod": {
-                        "style": "ha-card {\n  background: none !important;\n  border:1px solid transparent !important\n}\n"
+                        "class": "bare"
                       }
                     }
                   ]
@@ -177,7 +178,7 @@
                             "option": "Off"
                           },
                           "target": {
-                            "entity_id": "input_select.dishwasher"
+                            "entity_id": "input_select.tumble_dryer"
                           }
                         }
                       }
@@ -287,7 +288,7 @@
                       "chip": {
                         "type": "template",
                         "icon": "mdi:alarm",
-                        "content": "{% if states['sensor.gh_next_alarm']?.state != \"unavailable\" %}\n{%- set alarm = as_timestamp(now()) - as_timestamp(states('sensor.gh_next_alarm')) | int(default=0) %} {% set a = (( alarm / 60 / 60) | round(2) | string).split('.') %} {% set b = ((('0.' + a[1])|round(2)) | string).split('.') %} {% set h = b[0] | int(default=0) %} {% set m = (('0.' + b[1]) | round(2) * 60) | int(default=0) %} {% if h > 0 %}{{ h }} hour{% if h > 1 %}s{% endif %} and {% endif %}{{ m }} minute alarm\n{% endif %}",
+                        "content": "{% if states['sensor.gh_next_alarm'].state != \"unavailable\" %}\n{%- set alarm = as_timestamp(now()) - as_timestamp(states('sensor.gh_next_alarm')) | int(default=0) %} {% set a = (( alarm / 60 / 60) | round(2) | string).split('.') %} {% set b = ((('0.' + a[1])|round(2)) | string).split('.') %} {% set h = b[0] | int(default=0) %} {% set m = (('0.' + b[1]) | round(2) * 60) | int(default=0) %} {% if h > 0 %}{{ h }} hour{% if h > 1 %}s{% endif %} and {% endif %}{{ m }} minute alarm\n{% endif %}",
                         "entity": "sensor.gh_next_alarm",
                         "tap_action": {
                           "action": "more-info"
@@ -428,12 +429,14 @@
                   "card_mod": {
                     "style": "::-webkit-scrollbar {\n  display: none;\n}\n.chip-container {\n  overflow:scroll;\n  flex-wrap: nowrap !important;\n  scroll-snap-type: x mandatory;\n  -ms-overflow-style: none;  /* Internet Explorer 10+ */\n  scrollbar-width: none;\n}\n.chip-container > * {\n  white-space: nowrap;\n  scroll-snap-align: start;\n}\n"
                   }
+                },
+                {
+                  "type": "custom:button-card",
+                  "template": "search"
                 }
               ],
               "card_mod": {
-                "style": {
-                  ".": "grid-layout {\n  overflow:hidden;\n}\n"
-                }
+                "class": "no_overflow"
               }
             },
             {
@@ -490,31 +493,164 @@
                 {
                   "type": "custom:mushroom-title-card",
                   "title": "Good {{ states('input_select.time') | lower }}, {{ user }}",
-                  "subtitle": "{%- set weather = states('weather.pirateweather') | lower -%}\n{%- set work = states('sensor.next_bus_to_leeds') -%}\n{%- set home = states('sensor.next_bus_home') -%}\n\nIt's currently {{state_attr('weather.pirateweather','temperature') | round(default=0)}}°C and {% if weather == \"partlycloudy\" %}partly cloudy{% elif weather == \"clear-night\" %}clear{% elif weather == \"cloudy-night\" %}cloudy{% else %}{{ weather }}{% endif %}, but feels like {{states('sensor.openweathermap_feels_like_temperature') | round(default=0)}}°C. {% if now().hour >= 18 -%}\n Tomorrow it will be {{ state_attr('sensor.daily_forecasts', 'forecast')[1].condition | lower }}, with a high of {{ states(\"sensor.pirateweather_daytime_high_temperature_1d\") | round(default=0) }}°C and low of {{ states(\"sensor.pirateweather_overnight_low_temperature_1d\") | round(default=0) }}°C\n{%- else -%}\nToday it will be {{ state_attr('sensor.daily_forecasts', 'forecast')[0].condition | lower }}, with a high of {{ states(\"sensor.pirateweather_daytime_high_temperature_0d\") | round(default=0) }}°C and low of {{ states(\"sensor.pirateweather_overnight_low_temperature_0d\") | round(default=0) }}°C\n{%- endif %}{%\n  set rain = \n  states.sensor\n  | selectattr('entity_id', 'search', 'precip_probability_[1-6]h')\n  | rejectattr('state', 'eq', '0')\n  | map(attribute='entity_id')\n  | list\n-%}\n{%- if states(\"weather.pirateweather\") != \"rainy\" and rain -%}\n{%- set hours = rain[0] | regex_replace('.*?(\\d)h', '\\\\1') | int -%}\n, and there is a {{ states(rain[0]) }}% chance of rain in {{ hours }} hour{%- if hours > 1 -%}s{%-endif-%}\n{%- endif -%}\n{%- if not is_state('sensor.sam_phone_next_alarm', 'unavailable') -%}{%- set a = state_attr('sensor.sam_phone_next_alarm', 'Time in Milliseconds') | int(default=0) / 1000 -%} {%- set d = (a | timestamp_custom('%j') | int(default=0)) - (now().strftime(\"%s\") | int(default=0) | timestamp_custom('%j', False) | int(default=0)) -%} {%- if  states('input_select.time') == 'Evening' or states('input_select.time') == 'Night' %}. Your next alarm is {{(a | timestamp_custom('%H') | int(default=0))}}{{ a | timestamp_custom(\":%M%p\") | replace(':00', '') | lower }}{%- if d == 0 %} today.{%- elif d == 1 %} tomorrow.{%- else %} on {{a | timestamp_custom('%A')}}.{% endif %}{%- endif -%}{%- endif -%}\n{%- if is_state('binary_sensor.work_today', 'on') -%}\n{%- if is_state('input_select.time', 'Morning') and not is_state('input_select.sam_status_select', 'Out') %}. The next bus to work {%- if work == '-1' %} has not departed yet {%- else %} is {{ work }} minutes away{%- endif -%}\n{%- elif is_state('input_select.sam_status_select', 'Afternoon') and is_state('input_select.sam_status_select', 'Out') %}\n The next bus home {%- if home == '-1' %} has not departed yet {%- else %} is {{ home }} minutes away{%- endif -%}\n{%- endif -%}{%- endif -%}"
+                  "subtitle": "{%- set weather = states('weather.pirateweather') | lower -%}\n{%- set work = states('sensor.next_bus_to_leeds') -%}\n{%- set home = states('sensor.next_bus_home') -%}\n{%- set daily = state_attr('sensor.daily_forecasts', 'forecast') -%}\n{%- set hourly = state_attr('sensor.hourly_forecasts', 'forecast') -%}\n\nIt's currently {{ state_attr('weather.pirateweather', 'temperature') | round(default=0) }}°C and {% if weather == \"partlycloudy\" %}partly cloudy{% elif weather == \"clear-night\" %}clear{% elif weather == \"cloudy-night\" %}cloudy{% else %}{{ weather }}{% endif %}, but feels like {{ state_attr('weather.pirateweather', 'apparent_temperature') | round(default=0) }}°C. {% if now().hour >= 18 -%}\n Tomorrow it will be {{ daily[1].condition | lower }}, feeling like {{ states(\"sensor.pirateweather_daytime_high_apparent_temperature_1d\") | round(default=0) }}°C during the day and {{ states(\"sensor.pirateweather_overnight_low_apparent_temperature_1d\") | round(default=0) }}°C overnight\n{%- else -%}\n It will be {{ states(\"sensor.pirateweather_hourly_summary\") | lower | regex_replace(\"\\.$\", \"\") }}, feeling like {{ states(\"sensor.pirateweather_daytime_high_apparent_temperature_0d\") | round(default=0) }}°C during the day and {{ states(\"sensor.pirateweather_overnight_low_apparent_temperature_0d\") | round(default=0) }}°C overnight\n{%- endif -%}\n\n{%- set rain = hourly[:6] | selectattr('precipitation_probability', 'gt', 0) | list -%}\n{%- if weather != \"rainy\" and rain | length > 0 -%}\n  {%- set next_rain = rain | first -%}\n  {%- set hours = [((as_datetime(next_rain.datetime) | as_local - now()).total_seconds() / 3600) | round(0, 'ceil') | int, 1] | max -%}\n  . There is a {{ next_rain.precipitation_probability | int }}% chance of rain in {{ hours }} hour{%- if hours > 1 -%}s{%- endif -%}\n{%- endif -%}\n\n{%- if not is_state('sensor.sam_phone_next_alarm', 'unavailable') -%}\n  {%- set a = state_attr('sensor.sam_phone_next_alarm', 'Time in Milliseconds') | int(default=0) / 1000 -%} \n  {%- set d = (a | timestamp_custom('%j') | int(default=0)) - (now().strftime(\"%s\") | int(default=0) | timestamp_custom('%j', False) | int(default=0)) -%} \n  {%- if states('input_select.time') in ['Evening', 'Night'] -%}\n    . Your next alarm is {{ (a | timestamp_custom('%H') | int(default=0)) }}{{ a | timestamp_custom(\":%M%p\") | replace(':00', '') | lower }}\n    {%- if d == 0 %} today.\n    {%- elif d == 1 %} tomorrow.\n    {%- else %} on {{ a | timestamp_custom('%A') }}.\n    {%- endif -%}\n  {%- endif -%}\n{%- endif -%}\n\n{%- if is_state('binary_sensor.work_today', 'on') -%}\n  {%- if is_state('input_select.time', 'Morning') and not is_state('input_select.sam_status_select', 'Out') -%}\n    . The next bus to work {%- if work == '-1' %} has not departed yet {%- else %} is {{ work }} minutes away{%- endif -%}\n  {%- elif is_state('input_select.time', 'Afternoon') and is_state('input_select.sam_status_select', 'Out') -%}\n    . The next bus home {%- if home == '-1' %} has not departed yet {%- else %} is {{ home }} minutes away{%- endif -%}\n  {%- endif -%}\n{%- endif -%}"
                 }
               ]
             },
             {
               "type": "custom:layout-card",
-              "layout_type": "custom:grid-layout",
+              "layout_type": "masonry",
+              "layout": {},
               "cards": [
                 {
-                  "type": "custom:search-card",
-                  "max_results": 20,
-                  "card_mod": {
-                    "style": {
-                      ".": "ha-card.type-custom-search-card {\n  border-width: 1px;\n}\n#searchContainer {\n  width: calc(96%) !important;\n  border-width: 1px;\n  border-radius: 20px;\n  overflow: hidden;\n}\nha-input {\n  padding-bottom: 0;\n}\n#count {\n  padding-right: 20px;\n}\n#searchContainer ha-icon {\n  color: #a5a5a5;\n  transform: translateY(-4px);\n}\n",
-                      "#searchContainer": {
-                        "ha-input$": {
-                          "wa-input$": "[part=\"base\"]::after {\n  display:none\n}\n"
-                        }
-                      }
-                    }
+                  "type": "custom:button-card",
+                  "entity": "input_boolean.mute_broadcasts",
+                  "variables": {
+                    "name_on": "Muted Broadcasts",
+                    "name_off": "Broadcasts On",
+                    "icon_on": "mdi:broadcast-off",
+                    "icon_off": "mdi:broadcast",
+                    "color_on": "var(--rgb-green, 76, 175, 80)",
+                    "color_off": "var(--rgb-disabled, 114, 137, 218)"
                   },
-                  "view_layout": {
-                    "grid-column": "1 / -1"
-                  }
+                  "tap_action": {
+                    "action": "toggle"
+                  },
+                  "show_icon": true,
+                  "show_name": true,
+                  "layout": "icon_name",
+                  "styles": {
+                    "card": [
+                      {
+                        "width": "max-content"
+                      },
+                      {
+                        "height": "36px"
+                      },
+                      {
+                        "padding": "0px"
+                      },
+                      {
+                        "border-radius": "18px"
+                      },
+                      {
+                        "background": "[[[\n  return entity.state === 'on'\n    ? `rgba(${variables.color_on}, 0.2)`\n    : 'var(--card-background-color, rgba(255, 255, 255, 0.05))';\n]]]"
+                      },
+                      {
+                        "box-shadow": "var(--chip-box-shadow, none)"
+                      },
+                      {
+                        "border": "var(--chip-border-width, 1px) solid var(--chip-border-color, rgba(255, 255, 255, 0.1))"
+                      },
+                      {
+                        "display": "inline-flex"
+                      },
+                      {
+                        "flex-direction": "row"
+                      },
+                      {
+                        "align-items": "center"
+                      },
+                      {
+                        "justify-content": "center"
+                      },
+                      {
+                        "gap": 0
+                      }
+                    ],
+                    "img_cell": [
+                      {
+                        "width": "20px"
+                      },
+                      {
+                        "height": "20px"
+                      },
+                      {
+                        "display": "flex"
+                      },
+                      {
+                        "align-items": "center"
+                      },
+                      {
+                        "justify-content": "center"
+                      }
+                    ],
+                    "icon": [
+                      {
+                        "width": "20px"
+                      },
+                      {
+                        "height": "20px"
+                      },
+                      {
+                        "color": "[[[\n  return entity.state === 'on'\n    ? `rgb(${variables.color_on})`\n    : 'var(--secondary-text-color)';\n]]]"
+                      }
+                    ],
+                    "name": [
+                      {
+                        "font-size": "12px"
+                      },
+                      {
+                        "font-weight": 500
+                      },
+                      {
+                        "font-family": "var(--mdc-typography-button-font-family, inherit)"
+                      },
+                      {
+                        "color": "var(--primary-text-color)"
+                      },
+                      {
+                        "line-height": 1
+                      },
+                      {
+                        "padding": 0
+                      },
+                      {
+                        "margin": 0
+                      },
+                      {
+                        "text-overflow": "unset"
+                      },
+                      {
+                        "overflow": "unset"
+                      }
+                    ]
+                  },
+                  "icon": "[[[\n  return entity.state === 'on' ? variables.icon_on : variables.icon_off;\n]]]",
+                  "name": "[[[\n  return entity.state === 'on' ? variables.name_on : variables.name_off;\n]]]"
+                }
+              ]
+            },
+            {
+              "type": "custom:mushroom-chips-card",
+              "chips": [
+                {
+                  "type": "entity",
+                  "entity": "input_boolean.night_mode",
+                  "use_entity_picture": false,
+                  "content_info": "name"
                 },
+                {
+                  "type": "entity",
+                  "entity": "input_boolean.guest_mode",
+                  "content_info": "name"
+                },
+                {
+                  "type": "entity",
+                  "entity": "input_boolean.mute_broadcasts",
+                  "use_entity_picture": false,
+                  "content_info": "name"
+                }
+              ],
+              "alignment": "start",
+              "card_mod": {
+                "style": "::-webkit-scrollbar {\n  display: none;\n}\n.chip-container {\n  overflow:scroll;\n  flex-wrap: nowrap !important;\n  scroll-snap-type: x mandatory;\n  -ms-overflow-style: none;  /* Internet Explorer 10+ */\n  scrollbar-width: none;\n}\n.chip-container > * {\n  white-space: nowrap;\n  scroll-snap-align: start;\n}\n"
+              }
+            },
+            {
+              "type": "custom:layout-card",
+              "layout_type": "custom:grid-layout",
+              "cards": [
                 {
                   "card": {
                     "hide": {
@@ -546,7 +682,7 @@
                             "mmp-dropdown$": ".mmp-dropdown__menu {\n  left:0;\n}\n"
                           }
                         },
-                        "mmp-media-controls$": ":host {\n  flex-direction:row;\n}\n.mmp-media-controls__media {\n  width:100%;\n  gap:10px;\n\n}\n.mmp-media-controls__media ha-icon-button {\n  background:var(--background-color) !important;\n  border-radius: 12px;\n  border: 1px solid var(--ha-card-border-color);\n  justify-content: center;\n  width:100%;\n  display:flex;\n  # --mmp-text-color: #fff;\n}\n"
+                        "mmp-media-controls$": ":host {\n  flex-direction:row;\n}\n.mmp-media-controls__media {\n  width:100%;\n  gap:10px;\n\n}\n.mmp-media-controls__media ha-icon-button {\n  background:var(--background-color) !important;\n  border-radius: 12px;\n  border: 1px solid var(--ha-card-border-color);\n  justify-content: center;\n  width:100%;\n  display:flex;\n  /* --mmp-text-color: #fff; */\n}\n"
                       }
                     }
                   },
@@ -817,19 +953,6 @@
                 },
                 {
                   "type": "custom:button-card",
-                  "entity": "input_boolean.night_mode",
-                  "template": [
-                    "default"
-                  ],
-                  "variables": {
-                    "color": "var(--secondary-accent-color)"
-                  },
-                  "tap_action": {
-                    "action": "more-info"
-                  }
-                },
-                {
-                  "type": "custom:button-card",
                   "variables": {
                     "number_entity": "input_number.hive",
                     "entity": "climate.hive"
@@ -842,48 +965,26 @@
                 },
                 {
                   "type": "custom:button-card",
-                  "entity": "alarm_control_panel.alarm",
+                  "entity": "light.fairy_lights",
                   "template": [
-                    "alarm_card"
+                    "default"
                   ],
+                  "variables": {
+                    "color": "rgb(var(--mush-rgb-orange))"
+                  }
+                },
+                {
+                  "type": "custom:button-card",
+                  "entity": "switch.sam_pc",
                   "tap_action": {
                     "action": "more-info"
-                  }
-                },
-                {
-                  "type": "custom:button-card",
-                  "entity": "input_boolean.guest_mode",
+                  },
                   "template": [
                     "default"
                   ],
                   "variables": {
-                    "color": "var(--secondary-accent-color)"
-                  },
-                  "tap_action": {
-                    "action": "toggle"
+                    "color": "rgb(var(--mush-rgb-orange))"
                   }
-                },
-                {
-                  "type": "custom:button-card",
-                  "entity": "input_boolean.mute_broadcasts",
-                  "template": [
-                    "default"
-                  ],
-                  "variables": {
-                    "color": "var(--secondary-accent-color)"
-                  },
-                  "label": "[[[\n  if(entity && entity.state == \"on\") return \"Muted\";\n  if(entity && entity.state == \"off\") return \"On\";\n  return entity.state;\n]]]\n",
-                  "name": "Broadcasts",
-                  "tap_action": {
-                    "action": "toggle"
-                  },
-                  "state": [
-                    {
-                      "value": "off",
-                      "id": "off",
-                      "icon": "mdi:broadcast"
-                    }
-                  ]
                 }
               ],
               "layout": {
@@ -969,7 +1070,7 @@
                     "grid-column": "1 / -1"
                   },
                   "card_mod": {
-                    "style": "ha-card {\n  border-radius: unset;\n  padding: 0 4px;\n}\n.events {\n  --visible-count: 5 !important;\n}\n.events .event {\n  border-radius: 10px;      \n  aspect-ratio: 16/12;\n}\n.events .event:first-of-type {\n  # display:none;\n  border-radius: 16px;\n  grid-column: 1 / -1;\n  grid-row: 1;\n  aspect-ratio: 16/9;\n}\n"
+                    "class": "frigate_events"
                   }
                 },
                 {
@@ -984,7 +1085,7 @@
                     "grid-column": "1 / -1"
                   },
                   "card_mod": {
-                    "style": "ha-card {\n  border-radius: unset;\n  padding: 0 4px;\n}\n.events {\n  --visible-count: 5 !important;\n}\n.events .event {\n  border-radius: 10px;      \n  aspect-ratio: 16/12;\n}\n.events .event:first-of-type {\n  # display:none;\n  border-radius: 16px;\n  grid-column: 1 / -1;\n  grid-row: 1;\n  aspect-ratio: 16/9;\n}\n"
+                    "class": "frigate_events"
                   }
                 }
               ],
@@ -1220,7 +1321,7 @@
                       },
                       "icon": "mdi:arrow-left",
                       "card_mod": {
-                        "style": "ha-card {\n  background: none !important;\n  border:1px solid transparent !important\n}\n"
+                        "class": "bare"
                       }
                     }
                   ]
@@ -1234,25 +1335,16 @@
                   ],
                   "alignment": "start",
                   "card_mod": {
-                    "style": "ha-card {\n  # width: calc(100% - 48px);\n  overflow:scroll;\n  -ms-overflow-style: none;  /* Internet Explorer 10+ */\n  scrollbar-width: none;\n}\n::-webkit-scrollbar {\n  display: none;\n}\n.chip-container {\n  overflow:scroll;\n  flex-wrap: nowrap !important;\n}\n.chip-container > * {\n  white-space: nowrap;\n}\n"
+                    "class": "chip_rail"
                   }
                 },
                 {
-                  "type": "custom:mushroom-chips-card",
-                  "chips": [
-                    {
-                      "type": "quickbar",
-                      "card_mod": {
-                        "style": "ha-card {\n  background: none !important;\n  border:1px solid transparent !important\n}\n"
-                      }
-                    }
-                  ]
+                  "type": "custom:button-card",
+                  "template": "search"
                 }
               ],
               "card_mod": {
-                "style": {
-                  ".": "grid-layout {\n  overflow:hidden;\n}\n"
-                }
+                "class": "no_overflow"
               }
             },
             {
@@ -1261,7 +1353,7 @@
                 {
                   "type": "custom:mushroom-title-card",
                   "title": "Bedroom",
-                  "subtitle": "{% set li = expand(area_entities('Bedroom')) | selectattr('domain', 'eq', 'light') | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list | count %}\n\nThe bedroom  is {{ states('sensor.bedroom_temperature') | round | int(default=0)}}°C and {%if is_state('binary_sensor.bedroom_occupancy', 'on')\n%}currently occupied{% else %}empty{% endif %}{%if li != 0%}{% if li == 1 %} and 1 light is on{% else %} and {{li}} lights are on{% endif %}{% endif %}{%if is_state('binary_sensor.bedroom_window', 'on')%}. The window is open{% endif %}\n"
+                  "subtitle": "{% set li = expand(area_entities('Bedroom')) | selectattr('domain', 'eq', 'light') | selectattr('state', 'eq', 'on') | map(attribute='entity_id') | list | count %}\n\nThe room  is {{ states('sensor.bedroom_temperature') | round | int(default=0)}}°C, {{ states('sensor.bedroom_humidity') | int(default=0)}}% humidity and {%if is_state('binary_sensor.bedroom_occupancy', 'on')\n%}currently occupied{% else %}empty{% endif %}{%if li != 0%}{% if li == 1 %} and 1 light is on{% else %} and {{li}} lights are on{% endif %}{% endif %}{%if is_state('binary_sensor.bedroom_window', 'on')%}. The window is open{% endif %}\n"
                 },
                 {
                   "type": "custom:layout-card",
@@ -1294,12 +1386,193 @@
                     "height": "100%",
                     "margin": 0,
                     "card_margin": 0,
-                    "padding": "0 12px 0 24px",
                     "reflow": true,
                     "grid-auto-flow": "dense",
                     "mediaquery": {
                       "(max-width: 1199px)": {
                         "grid-template-columns": "repeat(2, calc((100% / 2) - 16px))",
+                        "grid-auto-flow": "column"
+                      }
+                    }
+                  },
+                  "card_mod": {
+                    "class": "scroll"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card",
+                  "title": "Ella's Room",
+                  "subtitle": " The room is {{ states('sensor.ella_temperature') | round | int(default=0)}}°C with a humidity of {{ states('sensor.ella_humidity') | int(default=0)}}%\n",
+                  "view_layout": {
+                    "grid-column": "1 / -1"
+                  }
+                },
+                {
+                  "type": "custom:layout-card",
+                  "layout_type": "custom:grid-layout",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "variables": {
+                        "number_entity": "input_number.ella_trv",
+                        "entity": "climate.ella_trv"
+                      },
+                      "template": "climate_card"
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "light.fairy_lights",
+                      "template": [
+                        "default"
+                      ],
+                      "variables": {
+                        "color": "rgb(var(--mush-rgb-orange))"
+                      }
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "entity": "light.ella_lamp",
+                      "template": [
+                        "default"
+                      ],
+                      "variables": {
+                        "color": "rgb(var(--mush-rgb-orange))"
+                      }
+                    },
+                    {
+                      "graph": "line",
+                      "type": "sensor",
+                      "entity": "sensor.ella_humidity",
+                      "detail": 1,
+                      "hours_to_show": 12,
+                      "name": "Humidity",
+                      "unit": "%",
+                      "limits": {
+                        "min": 40,
+                        "max": 90
+                      },
+                      "card_mod": {
+                        "class": "mini-graph"
+                      }
+                    },
+                    {
+                      "graph": "line",
+                      "type": "sensor",
+                      "entity": "sensor.ella_temperature",
+                      "detail": 2,
+                      "hours_to_show": 12,
+                      "limits": {
+                        "min": 15,
+                        "max": 26
+                      },
+                      "name": "Temp",
+                      "card_mod": {
+                        "class": "mini-graph",
+                        "style": ".icon {\n  \n}\n"
+                      }
+                    }
+                  ],
+                  "layout": {
+                    "grid-template-columns": "repeat(3, minmax(calc((100% / 3) - 12px), 1fr))",
+                    "grid-column-gap": "var(--grid-column-gap, 16px)",
+                    "grid-row-gap": "var(--grid-row-gap, 13px)",
+                    "height": "100%",
+                    "margin": 0,
+                    "card_margin": 0,
+                    "reflow": true,
+                    "grid-auto-flow": "dense",
+                    "mediaquery": {
+                      "(max-width: 1199px)": {
+                        "grid-template-columns": "repeat(5, calc((100% / 2) - 16px))",
+                        "grid-auto-flow": "column"
+                      }
+                    }
+                  },
+                  "card_mod": {
+                    "class": "scroll"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "vertical-stack",
+              "cards": [
+                {
+                  "type": "custom:mushroom-title-card",
+                  "subtitle": "The room is {{ states('sensor.nursery_temperature')| round | int(default=0)}}°C with a humidity of {{ states('sensor.nursery_humidity') | int(default=0)}}%",
+                  "title": "Seb's room",
+                  "view_layout": {
+                    "grid-column": "1 / -1"
+                  }
+                },
+                {
+                  "type": "custom:layout-card",
+                  "layout_type": "custom:grid-layout",
+                  "cards": [
+                    {
+                      "type": "custom:button-card",
+                      "variables": {
+                        "number_entity": "input_number.nursery_trv",
+                        "entity": "climate.nursery_trv"
+                      },
+                      "template": "climate_card"
+                    },
+                    {
+                      "type": "custom:button-card",
+                      "variables": {
+                        "entity": "light.nursery_lamp"
+                      },
+                      "template": "light_card"
+                    },
+                    {
+                      "graph": "line",
+                      "type": "sensor",
+                      "entity": "sensor.nursery_humidity",
+                      "detail": 1,
+                      "hours_to_show": 12,
+                      "name": "Humidity",
+                      "unit": "%",
+                      "limits": {
+                        "min": 40,
+                        "max": 90
+                      },
+                      "card_mod": {
+                        "class": "mini-graph"
+                      }
+                    },
+                    {
+                      "graph": "line",
+                      "type": "sensor",
+                      "entity": "sensor.nursery_temperature",
+                      "detail": 1,
+                      "hours_to_show": 12,
+                      "name": "Temp",
+                      "limits": {
+                        "min": 15,
+                        "max": 25
+                      },
+                      "card_mod": {
+                        "class": "mini-graph"
+                      }
+                    }
+                  ],
+                  "layout": {
+                    "grid-template-columns": "repeat(3, minmax(calc((100% / 3) - 12px), 1fr))",
+                    "grid-column-gap": "var(--grid-column-gap, 16px)",
+                    "grid-row-gap": "var(--grid-row-gap, 13px)",
+                    "height": "100%",
+                    "margin": 0,
+                    "card_margin": 0,
+                    "reflow": true,
+                    "grid-auto-flow": "dense",
+                    "mediaquery": {
+                      "(max-width: 1199px)": {
+                        "grid-template-columns": "repeat(4, calc((100% / 2) - 16px))",
                         "grid-auto-flow": "column"
                       }
                     }
@@ -1319,7 +1592,7 @@
                 {
                   "type": "custom:mushroom-title-card",
                   "title": "Lounge",
-                  "subtitle": "{% set li = expand(area_entities('Lounge')) | selectattr('domain', 'eq', 'light') | selectattr('state', 'eq', 'on') | rejectattr('entity_id','in','light.lounge_lights') | map(attribute='entity_id') | list | count %}\nThe lounge is {{ state_attr('climate.hive', 'current_temperature')| round | int(default=0)}}°C {% if li == 1 -%}\n and 1 light is on \n{%- elif li > 1 -%}\n and {{li}} lights are on\n{%- endif %}",
+                  "subtitle": "{% set li = expand(area_entities('Lounge')) | selectattr('domain', 'eq', 'light') | selectattr('state', 'eq', 'on') | rejectattr('entity_id','in','light.lounge_lights') | map(attribute='entity_id') | list | count %}\nThe room is {{ state_attr('climate.hive', 'current_temperature')| round | int(default=0)}}°C {% if li == 1 -%}\n and 1 light is on \n{%- elif li > 1 -%}\n and {{li}} lights are on\n{%- endif %}",
                   "view_layout": {
                     "grid-column": "1 / -1"
                   }
@@ -1420,59 +1693,6 @@
               "cards": [
                 {
                   "type": "custom:mushroom-title-card",
-                  "title": "Nursery",
-                  "subtitle": "The nursery is {{ states('sensor.nursery_temperature')| round | int(default=0)}}°C with a humidity of {{ states('sensor.nursery_humidity') | int(default=0)}}%",
-                  "view_layout": {
-                    "grid-column": "1 / -1"
-                  }
-                },
-                {
-                  "type": "custom:layout-card",
-                  "layout_type": "custom:grid-layout",
-                  "cards": [
-                    {
-                      "type": "custom:button-card",
-                      "variables": {
-                        "number_entity": "input_number.nursery_trv",
-                        "entity": "climate.nursery_trv"
-                      },
-                      "template": "climate_card"
-                    },
-                    {
-                      "type": "custom:button-card",
-                      "variables": {
-                        "entity": "light.nursery_lamp"
-                      },
-                      "template": "light_card"
-                    }
-                  ],
-                  "layout": {
-                    "grid-template-columns": "repeat(3, minmax(calc((100% / 3) - 12px), 1fr))",
-                    "grid-column-gap": "var(--grid-column-gap, 16px)",
-                    "grid-row-gap": "var(--grid-row-gap, 13px)",
-                    "height": "100%",
-                    "margin": 0,
-                    "card_margin": 0,
-                    "reflow": true,
-                    "grid-auto-flow": "dense",
-                    "mediaquery": {
-                      "(max-width: 1199px)": {
-                        "grid-template-columns": "repeat(2, calc((100% / 2) - 16px))",
-                        "grid-auto-flow": "column"
-                      }
-                    }
-                  },
-                  "card_mod": {
-                    "class": "scroll"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "vertical-stack",
-              "cards": [
-                {
-                  "type": "custom:mushroom-title-card",
                   "title": "Office",
                   "subtitle": "The room is {{ states('sensor.office_temperature') | round | int(default=0)}}°C with a humidity of {{ states('sensor.office_humidity') | int(default=0)}}%, and {%if is_state('binary_sensor.office_occupancy', 'on') %}currently occupied{% else %}empty{% endif %}\n",
                   "view_layout": {
@@ -1550,74 +1770,8 @@
               "cards": [
                 {
                   "type": "custom:mushroom-title-card",
-                  "title": "Ella's Room",
-                  "subtitle": " The room is {{ states('sensor.ella_temperature') | round | int(default=0)}}°C with a humidity of {{ states('sensor.ella_humidity') | int(default=0)}}%\n",
-                  "view_layout": {
-                    "grid-column": "1 / -1"
-                  }
-                },
-                {
-                  "type": "custom:layout-card",
-                  "layout_type": "custom:grid-layout",
-                  "cards": [
-                    {
-                      "type": "custom:button-card",
-                      "variables": {
-                        "number_entity": "input_number.ella_trv",
-                        "entity": "climate.ella_trv"
-                      },
-                      "template": "climate_card"
-                    },
-                    {
-                      "type": "custom:button-card",
-                      "entity": "light.fairy_lights",
-                      "template": [
-                        "default"
-                      ],
-                      "variables": {
-                        "color": "rgb(var(--mush-rgb-orange))"
-                      }
-                    },
-                    {
-                      "type": "custom:button-card",
-                      "entity": "light.ella_lamp",
-                      "template": [
-                        "default"
-                      ],
-                      "variables": {
-                        "color": "rgb(var(--mush-rgb-orange))"
-                      }
-                    }
-                  ],
-                  "layout": {
-                    "grid-template-columns": "repeat(3, minmax(calc((100% / 3) - 12px), 1fr))",
-                    "grid-column-gap": "var(--grid-column-gap, 16px)",
-                    "grid-row-gap": "var(--grid-row-gap, 13px)",
-                    "height": "100%",
-                    "margin": 0,
-                    "card_margin": 0,
-                    "reflow": true,
-                    "grid-auto-flow": "dense",
-                    "mediaquery": {
-                      "(max-width: 1199px)": {
-                        "grid-template-columns": "repeat(3, calc((100% / 2) - 16px))",
-                        "grid-auto-flow": "column"
-                      }
-                    }
-                  },
-                  "card_mod": {
-                    "class": "scroll"
-                  }
-                }
-              ]
-            },
-            {
-              "type": "vertical-stack",
-              "cards": [
-                {
-                  "type": "custom:mushroom-title-card",
                   "title": "Kitchen",
-                  "subtitle": "The kitchen is {%if is_state('binary_sensor.kitchen_occupancy', 'on')\n%}currently occupied{% else %}empty{% endif %} and the back door is {%if is_state('binary_sensor.back_door', 'on')%}open{% else %}closed{% endif %}\n",
+                  "subtitle": "The room is {%if is_state('binary_sensor.kitchen_occupancy', 'on')\n%}currently occupied{% else %}empty{% endif %} and the back door is {%if is_state('binary_sensor.back_door', 'on')%}open{% else %}closed{% endif %}\n",
                   "view_layout": {
                     "grid-column": "1 / -1"
                   }
@@ -1776,6 +1930,20 @@
                     },
                     {
                       "type": "custom:button-card",
+                      "entity": "humidifier.dehumidifier",
+                      "template": [
+                        "default"
+                      ],
+                      "variables": {
+                        "color": "var(--secondary-accent-color)"
+                      },
+                      "tap_action": {
+                        "action": "more-info"
+                      },
+                      "label": "[[[ \n  if (entity.state == \"on\") {\n    return `${entity.attributes.current_humidity}% • ${entity.attributes.mode}`\n  } else {\n    return \"off\"\n  }\n  if(entity.attributes.mode == \"laundry\") return \"laundry\"; return\nJSON.stringify(entity.attributes) ]]]\n"
+                    },
+                    {
+                      "type": "custom:button-card",
                       "entity": "alarm_control_panel.alarm",
                       "template": [
                         "alarm_card"
@@ -1824,7 +1992,7 @@
                     "layout-overflow": "scroll",
                     "mediaquery": {
                       "(max-width: 1199px)": {
-                        "grid-template-columns": "repeat(4, minmax(calc((100% / 2) - 16px), 1fr))",
+                        "grid-template-columns": "repeat(5, minmax(calc((100% / 2) - 16px), 1fr))",
                         "grid-auto-flow": "column"
                       }
                     }
@@ -1905,7 +2073,7 @@
                       },
                       "icon": "mdi:arrow-left",
                       "card_mod": {
-                        "style": "ha-card {\n  background: none !important;\n  border:1px solid transparent !important\n}\n"
+                        "class": "bare"
                       }
                     }
                   ]
@@ -1919,25 +2087,16 @@
                   ],
                   "alignment": "start",
                   "card_mod": {
-                    "style": "ha-card {\n  # width: calc(100% - 48px);\n  overflow:scroll;\n  -ms-overflow-style: none;  /* Internet Explorer 10+ */\n  scrollbar-width: none;\n}\n::-webkit-scrollbar {\n  display: none;\n}\n.chip-container {\n  overflow:scroll;\n  flex-wrap: nowrap !important;\n}\n.chip-container > * {\n  white-space: nowrap;\n}\n"
+                    "class": "chip_rail"
                   }
                 },
                 {
-                  "type": "custom:mushroom-chips-card",
-                  "chips": [
-                    {
-                      "type": "quickbar",
-                      "card_mod": {
-                        "style": "ha-card {\n  background: none !important;\n  border:1px solid transparent !important\n}\n"
-                      }
-                    }
-                  ]
+                  "type": "custom:button-card",
+                  "template": "search"
                 }
               ],
               "card_mod": {
-                "style": {
-                  ".": "grid-layout {\n  overflow:hidden;\n}\n"
-                }
+                "class": "no_overflow"
               }
             },
             {
@@ -2078,7 +2237,6 @@
                 {
                   "cards": [
                     {
-                      "entity": "scene.evening",
                       "icon": "mdi:lightbulb-on-20",
                       "template": "large_button",
                       "tap_action": {
@@ -2309,7 +2467,7 @@
                       },
                       "icon": "mdi:arrow-left",
                       "card_mod": {
-                        "style": "ha-card {\n  background: none !important;\n  border:1px solid transparent !important\n}\n"
+                        "class": "bare"
                       }
                     }
                   ]
@@ -2323,25 +2481,16 @@
                   ],
                   "alignment": "start",
                   "card_mod": {
-                    "style": "ha-card {\n  # width: calc(100% - 48px);\n  overflow:scroll;\n  -ms-overflow-style: none;  /* Internet Explorer 10+ */\n  scrollbar-width: none;\n}\n::-webkit-scrollbar {\n  display: none;\n}\n.chip-container {\n  overflow:scroll;\n  flex-wrap: nowrap !important;\n}\n.chip-container > * {\n  white-space: nowrap;\n}\n"
+                    "class": "chip_rail"
                   }
                 },
                 {
-                  "type": "custom:mushroom-chips-card",
-                  "chips": [
-                    {
-                      "type": "quickbar",
-                      "card_mod": {
-                        "style": "ha-card {\n  background: none !important;\n  border:1px solid transparent !important\n}\n"
-                      }
-                    }
-                  ]
+                  "type": "custom:button-card",
+                  "template": "search"
                 }
               ],
               "card_mod": {
-                "style": {
-                  ".": "grid-layout {\n  overflow:hidden;\n}\n"
-                }
+                "class": "no_overflow"
               }
             },
             {
@@ -2393,7 +2542,7 @@
                     "grid-column": "1 / -1"
                   },
                   "card_mod": {
-                    "style": ".states .state .state__value {\n    font-weight: 500;\n    letter-spacing: -0.02em;\n  }\n"
+                    "class": "state_value"
                   }
                 },
                 {
@@ -2480,7 +2629,7 @@
                               "action": "call-service",
                               "service": "homeassistant.update_entity",
                               "service_data": {
-                                "entity_id": "sensor.nas_cpu_load_total"
+                                "entity_id": "sensor.nas_cpu_utilization_total"
                               }
                             }
                           },
@@ -2514,7 +2663,7 @@
                           }
                         ],
                         "card_mod": {
-                          "style": "bar-card-card {\n  --paper-item-icon-active-color: var(--accent-color)\n}\nbar-card-name {\n}\nbar-card-value {\n  font-weight:300;\n  line-height:36px;\n  padding-right:5px\n}\nbar-card-indicator {\n  margin-top:5px;\n  border-radius:0;\n}\nbar-card-backgroundbar {\n  background: var(--paper-card-background-color);\n  border-radius:5px;\n}\nbar-card-currentbar {\n  border-radius:5px\n}\n"
+                          "class": "bar_card"
                         },
                         "type": "custom:bar-card",
                         "unit_of_measurement": "%",
@@ -2535,7 +2684,6 @@
                     ],
                     "hour24": true,
                     "hours_to_show": 720,
-                    "name": "Internet Speed",
                     "points_per_hour": 0.08,
                     "show": {
                       "extrema": false,
@@ -2553,7 +2701,7 @@
                       "grid-column": "1 / -1"
                     },
                     "card_mod": {
-                      "style": ".states .state .state__value {\n    font-weight: 500;\n    letter-spacing: -0.02em;\n  }\n"
+                      "class": "state_value"
                     }
                   },
                   {
@@ -2621,7 +2769,7 @@
                       }
                     ],
                     "card_mod": {
-                      "style": "ha-icon { color: var(--secondary-text-color) !important }\nbutton:focus {\n  background: none !important;\n}\n"
+                      "class": "dim_icon"
                     },
                     "title_card": {
                       "type": "markdown",
@@ -2709,7 +2857,7 @@
                         }
                       ],
                       "card_mod": {
-                        "style": "bar-card-card {\n  --paper-item-icon-active-color: var(--accent-color)\n}\nbar-card-name {\n}\nbar-card-value {\n  font-weight:300;\n  line-height:36px;\n  padding-right:5px\n}\nbar-card-indicator {\n  margin-top:5px;\n  border-radius:0;\n}\nbar-card-backgroundbar {\n  background: var(--paper-card-background-color);\n  border-radius:5px;\n}\nbar-card-currentbar {\n  border-radius:5px\n}\n"
+                        "class": "bar_card"
                       },
                       "type": "custom:bar-card",
                       "unit_of_measurement": "%",
@@ -2774,7 +2922,7 @@
                     }
                   ],
                   "card_mod": {
-                    "style": "ha-icon { color: var(--secondary-text-color) !important }\nbutton:focus {\n  background: none !important;\n}\n"
+                    "class": "dim_icon"
                   },
                   "title_card": {
                     "type": "markdown",
@@ -2875,7 +3023,7 @@
                               }
                             ],
                             "card_mod": {
-                              "style": "bar-card-card {\n  --paper-item-icon-active-color: var(--accent-color)\n}\nbar-card-name {\n}\nbar-card-value {\n  font-weight:300;\n  line-height:36px;\n  padding-right:5px\n}\nbar-card-indicator {\n  margin-top:5px;\n  border-radius:0;\n}\nbar-card-backgroundbar {\n  background: var(--paper-card-background-color);\n  border-radius:5px;\n}\nbar-card-currentbar {\n  border-radius:5px\n}\n"
+                              "class": "bar_card"
                             },
                             "type": "custom:bar-card",
                             "unit_of_measurement": "%",
@@ -2966,7 +3114,7 @@
                       },
                       "icon": "mdi:arrow-left",
                       "card_mod": {
-                        "style": "ha-card {\n  background: none !important;\n  border:1px solid transparent !important\n}\n"
+                        "class": "bare"
                       }
                     }
                   ]
@@ -3002,27 +3150,16 @@
                   ],
                   "alignment": "start",
                   "card_mod": {
-                    "style": "ha-card {\n  # width: calc(100% - 48px);\n  overflow:scroll;\n  -ms-overflow-style: none;  /* Internet Explorer 10+ */\n  scrollbar-width: none;\n}\n::-webkit-scrollbar {\n  display: none;\n}\n.chip-container {\n  overflow:scroll;\n  flex-wrap: nowrap !important;\n}\n.chip-container > * {\n  white-space: nowrap;\n}\n"
+                    "class": "chip_rail"
                   }
                 },
                 {
-                  "type": "custom:mushroom-chips-card",
-                  "chips": [
-                    {
-                      "type": "quickbar",
-                      "mode": "command",
-                      "icon": "mdi:console",
-                      "card_mod": {
-                        "style": "ha-card {\n  background: none !important;\n  border:1px solid transparent !important\n}\n"
-                      }
-                    }
-                  ]
+                  "type": "custom:button-card",
+                  "template": "commands"
                 }
               ],
               "card_mod": {
-                "style": {
-                  ".": "grid-layout {\n  overflow:hidden;\n}\n"
-                }
+                "class": "no_overflow"
               }
             },
             {

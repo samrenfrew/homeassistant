@@ -1228,7 +1228,6 @@
                     "grid_columns": 2
                   },
                   "variables": {
-                    "temp": "sensor.kitchen_temperature",
                     "entities": [
                       "media_player.kitchen_display"
                     ]

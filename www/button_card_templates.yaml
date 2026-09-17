@@ -110,6 +110,60 @@ default:
           ]]]
       - margin: auto 0
       - align-content: center
+search:
+  icon: mdi:magnify
+  show_name: false
+  styles:
+    card:
+      - background: var(--secondary-background-color, rgba(255, 255, 255, 0.05))
+      - border-radius: 18px
+      - width: 42px
+      - height: 42px
+      - padding: 0
+      - border: none
+      - box-shadow: none
+    icon:
+      - width: 20px
+      - color: var(--primary-text-color)
+  tap_action:
+    action: javascript
+    javascript: |
+      [[[
+        function simulateKeyPressE(){
+          window.dispatchEvent(
+            new KeyboardEvent("keydown", {
+            key: "e",
+            code: "KeyE",
+            keyCode: 69,
+            charCode: 69,
+            bubbles: true,
+            cancelable: true,
+            })
+          );
+        };
+        simulateKeyPressE();
+      ]]]
+commands:
+  template: search
+  icon: mdi:console-line
+  tap_action:
+    action: javascript
+    javascript: |
+      [[[
+        function simulateKeyPressC(){
+          window.dispatchEvent(
+            new KeyboardEvent("keydown", {
+            key: "c",
+            code: "KeyC",
+            keyCode: 67,
+            charCode: 67,
+            bubbles: true,
+            cancelable: true,
+            })
+          );
+        };
+        simulateKeyPressC();
+      ]]]
 controls:
   template: default
   variables:
@@ -721,6 +775,8 @@ person_card:
   template: default
   show_entity_picture: true
   styles:
+    label:
+      - text-transform: unset
     grid:
       - grid-template-areas: '"i badge" "n badge" "l badge"'
     icon:
@@ -779,8 +835,31 @@ person_card:
       ]]]
   label: |
     [[[
-      if(entity && entity.state == "not_home") return "Away";
-      return "Home";
+      if (!entity) return "Unknown";
+      
+      const stateStr = (entity.state === "not_home") ? "Away" : "Home";
+      
+      // Calculate time difference in milliseconds
+      const lastChanged = new Date(entity.last_changed);
+      const diffMs = new Date() - lastChanged;
+      
+      // Convert to minutes, hours, and days
+      const diffMins = Math.floor(diffMs / 60000);
+      const days = Math.floor(diffMins / 1440);
+      const hours = Math.floor((diffMins % 1440) / 60);
+      const mins = diffMins % 60;
+      
+      // Format the output string
+      let timeStr = "";
+      if (days > 0) {
+        timeStr = `${days}d ${hours}h`;
+      } else if (hours > 0) {
+        timeStr = `${hours} hrs ${mins}`;
+      } else {
+        timeStr = `${mins} mins`;
+      }
+      
+      return `${stateStr} • ${timeStr}`;
     ]]]
   tap_action:
     action: more-info

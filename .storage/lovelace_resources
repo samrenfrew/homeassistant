@@ -35,7 +35,7 @@
         "id": "ea4c4aa5138a49d3896824ddaecf38d4"
       },
       {
-        "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375522",
+        "url": "/hacsfiles/lovelace-mushroom/mushroom.js?hacstag=444350375523",
         "type": "module",
         "id": "ae3513acf9db42ce971a7ffebaf670ef"
       },
@@ -66,7 +66,7 @@
       },
       {
         "id": "6235f027b66744a7852d604373a47101",
-        "url": "/hacsfiles/kiosk-mode/kiosk-mode.js?hacstag=4973191281402",
+        "url": "/hacsfiles/kiosk-mode/kiosk-mode.js?hacstag=4973191281421",
         "type": "module"
       },
       {
@@ -76,7 +76,7 @@
       },
       {
         "id": "a3b5b5139e3c485999b64be229dab099",
-        "url": "/hacsfiles/my-cards/my-cards.js?hacstag=399108901106",
+        "url": "/hacsfiles/my-cards/my-cards.js?hacstag=399108901231",
         "type": "module"
       },
       {
@@ -86,12 +86,12 @@
       },
       {
         "id": "dbcdd8f6d1114288b24487693a5beba1",
-        "url": "/hacsfiles/Bubble-Card/bubble-card.js?hacstag=680112919325",
+        "url": "/hacsfiles/Bubble-Card/bubble-card.js?hacstag=680112919330",
         "type": "module"
       },
       {
         "id": "59ecd90f8e3e4a268ed16af6c494834e",
-        "url": "/hacsfiles/advanced-camera-card/advanced-camera-card.js?hacstag=3940825527274",
+        "url": "/hacsfiles/advanced-camera-card/advanced-camera-card.js?hacstag=394082552810",
         "type": "module"
       },
       {
@@ -111,7 +111,7 @@
       },
       {
         "id": "48a3b9b1429740d8a0a491e55bae3a51",
-        "url": "/ha_washdata/ha-washdata-card.js?v=1785169104",
+        "url": "/ha_washdata/ha-washdata-card.js?v=470020eaf6",
         "type": "module"
       },
       {
@@ -161,7 +161,7 @@
       },
       {
         "id": "2fdbe9f67d0245d2b4af1cb0d0cc17e5",
-        "url": "/uix/uix.js?v=8.0.1",
+        "url": "/uix/uix.js?v=8.2.0",
         "type": "module"
       }
     ]
